@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Api } from '../../../providers/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +10,15 @@ import { NgForm } from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
-  
+
   isLogin: boolean;
   submitted: boolean;
   username: string;
   pwd: string;
   loginErrorMessage: string;
 
-  constructor() {
+  constructor(private api: Api, private router: Router) {
+
     this.isLogin = false;
     this.submitted = false;
     this.username = "";
@@ -34,8 +37,22 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     if (loginForm.valid) {
-      
-      
+
+      let endpoint = "staff/login";
+      let body = {
+        username: this.username,
+        pwd: this.pwd
+      };
+
+      this.api.post(endpoint, body).subscribe(
+        response => {
+          this.router.navigate(["/dashboard"]);
+        },
+        error => {
+          // this.messageService.add({ severity: 'Sign in failed! Incorrect username or password.', summary: 'Service Message', detail: 'Via MessageService' });
+        }
+      );
+
     }
   }
 }
