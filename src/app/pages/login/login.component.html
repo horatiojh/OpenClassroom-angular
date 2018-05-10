@@ -1,5 +1,34 @@
-<p>
-  Login
-</p>
+<body>
+	<div class="login-container">
+		<form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm)">
+			<div class="login-panel">
 
-<input type="text" pInputText [(ngModel)]="property" />
+				<h2>Staff Login</h2>
+				<input class="login-input" type="text" id="username" name="username" [(ngModel)]="username" required="true" #inusername="ngModel"
+				 placeholder="Username" style="margin-top: 5px"/>
+				<div *ngIf="inusername.invalid && (inusername.dirty || inusername.touched || submitted)">
+					<div *ngIf="inusername.errors.required">
+						<p-message severity="error" text="Username is required."></p-message>
+					</div>
+				</div>
+				<br/>
+				<input class="login-input" type="password" id="password" name="password" [(ngModel)]="pwd" required="true" #inpassword="ngModel"
+				 placeholder="Password" />
+				<div *ngIf="inpassword.invalid && (inpassword.dirty || inpassword.touched || submitted)">
+					<div *ngIf="inpassword.errors.required">
+						<p-message severity="error" text="Password is required."></p-message>
+					</div>
+				</div>
+				<br/>
+				<input class="login-button" type="submit" value="Login" />
+
+				<br />
+				<div dir="rtl" style="margin-right: 20px;">
+					<div *ngIf="loginErrorMessage" class="errorText">
+						{{loginErrorMessage}}
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>

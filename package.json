@@ -21,9 +21,11 @@
     "@angular/platform-browser-dynamic": "^6.0.0",
     "@angular/router": "^6.0.0",
     "core-js": "^2.5.4",
+    "font-awesome": "^4.7.0",
     "postcss": "^6.0.22",
     "primeng": "^5.2.6",
-    "rxjs": "^6.0.0",
+    "rxjs": "^6.1.0",
+    "rxjs-compat": "^6.1.0",
     "webpack": "^4.4.1",
     "zone.js": "^0.8.26"
   },
