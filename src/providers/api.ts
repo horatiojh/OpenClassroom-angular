@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 import { catchError, tap } from "rxjs/operators";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs/observable";
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class Api {
@@ -13,30 +13,40 @@ export class Api {
   get(endpoint: string) {
     return this.http
       .get(this.url + endpoint)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError<any>('get')));
+      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
   }
 
   post(endpoint: string, body?: any) {
     return this.http
       .post(this.url + endpoint, body)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError<any>('post')));
+      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
   }
 
   put(endpoint: string, body?: any) {
     return this.http
       .put(this.url + endpoint, body)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError<any>('put')));
+      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
   }
 
   delete(endpoint: string) {
     return this.http
       .delete(this.url + endpoint)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError<any>('delete')));
+      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      return of(result as T);
-    };
+  private handleError(error: HttpErrorResponse) {
+
+    let errMsg = error.message || 'Server error';
+
+    if (error.error instanceof ErrorEvent) {
+      console.error("An unknown error has occurred:", error.error.message);
+    } else {
+      console.error(
+        "An HTTP error has occurred: " +
+        `HTTP ${error.status}: ${error.error.message}`
+      );
+    }
+
+    return Observable.throw(errMsg);
   }
 }

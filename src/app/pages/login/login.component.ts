@@ -49,7 +49,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/dashboard"]);
         },
         error => {
-          // this.messageService.add({ severity: 'Sign in failed! Incorrect username or password.', summary: 'Service Message', detail: 'Via MessageService' });
+          let msg: string = "Sign in failed! Incorrect username or password.";
+          this.loginErrorMessage = msg;
         }
       );
     }
