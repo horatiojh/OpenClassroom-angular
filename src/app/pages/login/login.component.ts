@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/dashboard"]);
         },
         error => {
-          let msg: string = "Sign in failed! Incorrect username or password.";
+          let msg: string = "Sign in failed! Incorrect username or password";
           this.loginErrorMessage = msg;
         }
       );
