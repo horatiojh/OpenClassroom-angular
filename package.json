@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^6.0.0",
+    "@angular/animations": "^6.0.2",
     "@angular/common": "^6.0.0",
     "@angular/compiler": "^6.0.0",
     "@angular/core": "^6.0.0",
@@ -23,11 +23,12 @@
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "postcss": "^6.0.22",
-    "primeng": "^5.2.6",
+    "primeng": "^5.2.7",
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
     "webpack": "^4.4.1",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.0",
