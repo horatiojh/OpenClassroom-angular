@@ -235,7 +235,7 @@
     transform: rotate(0deg); }
   100% {
     transform: rotate(270deg); } }
-.path {
+.splash-path {
   stroke-dasharray: 187;
   stroke-dashoffset: 0;
   transform-origin: center;
@@ -522,10 +522,6 @@
   .login-panel .ui-button.secondary:focus {
     outline: 0 none;
     background-color: #ee4c83; }
-  .login-panel .ui-inputtext:focus {
-    border-width: 0 0 2px 0;
-    border-color: #3F51B5;
-    padding-bottom: 0px; }
 
 .login-footer {
   position: absolute;
@@ -1040,24 +1036,22 @@ body {
       top: -10px;
       font-size: 16px;
       background-color: transparent;
-      border-width: 0 0 1px 0;
-      padding: 2px 2px 1px 2px;
-      border-color: #ffffff;
+      background-image: linear-gradient(to bottom, #ffffff, #ffffff), linear-gradient(to bottom, #98a2db, #98a2db);
+      border-width: 0;
+      padding: 2px;
       color: #ffffff; }
       .layout-container .topbar .topbar-right .topbar-items .search-item input:focus {
-        outline: 0 none;
-        border-bottom-width: 2px; }
+        outline: 0 none; }
     .layout-container .topbar .topbar-right .topbar-items .search-item input:focus ~ label {
       top: -5px;
-      font-size: 12px;
-      color: #3F51B5; }
+      font-size: 12px; }
     .layout-container .topbar .topbar-right .topbar-items .search-item input.ui-state-filled ~ label {
       display: none; }
     .layout-container .topbar .topbar-right .topbar-items .search-item label {
       color: #ffffff;
       top: 8px; }
 .layout-container .layout-menu {
-  overflow: auto;
+  overflow: visible;
   position: fixed;
   width: 250px;
   z-index: 99;
@@ -1071,21 +1065,19 @@ body {
   -o-transition: margin-left 0.3s;
   -webkit-transition: margin-left 0.3s;
   transition: margin-left 0.3s; }
-  .layout-container .layout-menu > .nano > .nano-content.menu-scroll-content {
-    display: block;
-    height: 100%;
-    position: relative;
-    overflow: scroll;
-    overflow-x: hidden; }
-  .layout-container .layout-menu > .nano > .nano-content ul.ultima-menu.ultima-main-menu {
-    margin-top: 16px;
-    padding-bottom: 120px; }
-  .layout-container .layout-menu > .nano .nano-pane {
-    background: transparent; }
-    .layout-container .layout-menu > .nano .nano-pane .nano-slider {
+  .layout-container .layout-menu .ui-scrollpanel {
+    background: transparent;
+    border-radius: 0;
+    border: none; }
+    .layout-container .layout-menu .ui-scrollpanel .ui-scrollpanel-bar {
       background-color: #aaaaaa;
       opacity: 0.3;
       filter: alpha(opacity=30); }
+    .layout-container .layout-menu .ui-scrollpanel .ui-scrollpanel-hidden {
+      display: block;
+      visibility: hidden; }
+    .layout-container .layout-menu .ui-scrollpanel .layout-menu {
+      padding-bottom: 120px; }
   .layout-container .layout-menu .profile {
     box-sizing: border-box;
     padding-top: 2em;
@@ -1137,6 +1129,9 @@ body {
         color: #ffffff; }
     .layout-container .layout-menu.layout-menu-dark .profile-menu {
       border-bottom: 1px solid #545454; }
+    .layout-container .layout-menu.layout-menu-dark .ui-scrollpanel .ui-scrollpanel-wrapper .ui-scrollpanel-content {
+      border-radius: 0;
+      border: none; }
     .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li a {
       color: #ffffff; }
       .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li a i {
@@ -1161,7 +1156,7 @@ body {
           color: #212121; }
   .layout-container .layout-menu .menuitem-badge {
     position: absolute;
-    right: 2em;
+    right: 3.5em;
     top: .75em;
     display: inline-block;
     width: 1em;
@@ -1292,11 +1287,15 @@ body {
 .layout-container .ultima-menu {
   margin: 0;
   padding: 0;
-  list-style: none; }
+  list-style: none;
+  width: 268px; }
+  .layout-container .ultima-menu.ultima-main-menu {
+    margin-top: 16px;
+    padding-bottom: 120px; }
   .layout-container .ultima-menu li a {
     font-size: 1em;
     display: block;
-    padding: .5em 1em;
+    padding: .5em 2.5em .5em 1em;
     color: #212121;
     width: 100%;
     box-sizing: border-box;
@@ -1351,7 +1350,7 @@ body {
     list-style: none;
     overflow: hidden; }
     .layout-container .ultima-menu li ul li a {
-      padding: .5em 1em .5em 2em; }
+      padding: .5em 2.5em .5em 2em; }
       .layout-container .ultima-menu li ul li a > span {
         font-size: 15px; }
       .layout-container .ultima-menu li ul li a i:first-child {
@@ -1388,10 +1387,11 @@ body {
       display: inline-block; }
 .layout-container .layout-rightpanel {
   position: fixed;
-  top: 64px;
+  top: 75px;
   height: 100%;
   right: -240px;
   width: 240px;
+  z-index: 100;
   background-color: #ffffff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1406,21 +1406,19 @@ body {
   .layout-container .layout-rightpanel.layout-rightpanel-active {
     right: 0;
     -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
-    transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
-    z-index: 10; }
+    transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1); }
   .layout-container .layout-rightpanel .layout-rightpanel-content {
-    padding: 14px; }
-  .layout-container .layout-rightpanel .nano .right-panel-scroll-content {
-    display: block;
-    height: 100%;
-    position: relative; }
-    .layout-container .layout-rightpanel .nano .right-panel-scroll-content .layout-rightpanel-content {
-      padding-bottom: 120px; }
-  .layout-container .layout-rightpanel .nano > .nano-pane {
-    background: transparent; }
-    .layout-container .layout-rightpanel .nano > .nano-pane > .nano-slider {
-      background: #aaa;
-      opacity: .3; }
+    padding: 14px;
+    padding-bottom: 120px; }
+  .layout-container .layout-rightpanel .ui-scrollpanel {
+    border-radius: 0;
+    border: none; }
+    .layout-container .layout-rightpanel .ui-scrollpanel .ui-scrollpanel-hidden {
+      display: block;
+      visibility: hidden; }
+    .layout-container .layout-rightpanel .ui-scrollpanel .layout-rightpanel-wrapper {
+      width: 258px;
+      padding-right: 18px; }
 
 .ajax-loader {
   font-size: 2em;
@@ -1522,77 +1520,74 @@ body {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); }
-    .layout-container.menu-layout-horizontal .layout-menu > .nano {
-      overflow: visible; }
-      .layout-container.menu-layout-horizontal .layout-menu > .nano .nano-content.menu-scroll-content {
-        display: inherit;
-        height: auto;
-        position: static;
-        overflow: visible;
-        overflow-x: visible; }
-      .layout-container.menu-layout-horizontal .layout-menu > .nano .nano-content ul.ultima-menu.ultima-main-menu {
-        margin-top: 0px;
-        padding-bottom: 0px; }
-      .layout-container.menu-layout-horizontal .layout-menu > .nano .nano-pane {
-        display: none !important; }
-    .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu.ultima-main-menu {
-      margin-top: 0; }
-    .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li {
-      float: left;
-      position: relative; }
-      .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a {
-        color: #ffffff; }
-        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a i {
+    .layout-container.menu-layout-horizontal .layout-menu .ui-scrollpanel {
+      overflow: visible;
+      border: none; }
+      .layout-container.menu-layout-horizontal .layout-menu .ui-scrollpanel .ui-scrollpanel-wrapper {
+        overflow: visible; }
+        .layout-container.menu-layout-horizontal .layout-menu .ui-scrollpanel .ui-scrollpanel-wrapper .ui-scrollpanel-content {
+          overflow: visible; }
+    .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu {
+      width: 100%; }
+      .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu.ultima-main-menu {
+        margin-top: 0;
+        padding-bottom: 0; }
+      .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li {
+        float: left;
+        position: relative; }
+        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a {
+          padding: .5em 1em;
           color: #ffffff; }
-        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a:hover {
-          background-color: #e8e8e8;
-          color: #212121; }
-          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a:hover i {
+          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a i {
+            color: #ffffff; }
+          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a:hover {
+            background-color: #e8e8e8;
             color: #212121; }
-        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a.active-menuitem-routerlink {
-          color: #9fa8da; }
-          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a.active-menuitem-routerlink > i {
-            color: #9fa8da; }
-          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a.active-menuitem-routerlink:hover {
-            color: #212121; }
-            .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a.active-menuitem-routerlink:hover i {
+            .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a:hover i {
               color: #212121; }
-      .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul {
-        z-index: 100;
-        position: absolute;
-        top: 41px;
-        left: 0px;
-        width: 250px;
-        background-color: #ffffff;
-        -webkit-box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2);
-        -moz-box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2);
-        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2); }
-        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li a {
-          padding: 10px 16px; }
-        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul {
-          position: static; }
-          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul li a {
-            padding-left: 32px; }
-          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul ul li a {
-            padding-left: 48px; }
-          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul ul ul li a {
-            padding-left: 64px; }
-          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul ul ul ul li a {
-            padding-left: 80px; }
-          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul ul ul ul ul li a {
-            padding-left: 96px; }
-        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li.active-menuitem > a {
-          color: #3F51B5;
-          background-color: #e8e8e8; }
-        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li.active-menuitem > ul {
+          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a.active-menuitem-routerlink {
+            color: #9fa8da; }
+            .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a.active-menuitem-routerlink > i {
+              color: #9fa8da; }
+            .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a.active-menuitem-routerlink:hover {
+              color: #212121; }
+              .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > a.active-menuitem-routerlink:hover i {
+                color: #212121; }
+        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul {
+          position: absolute;
+          top: 41px;
+          left: 0px;
+          width: 250px;
+          background-color: #ffffff;
+          -webkit-box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+          -moz-box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2); }
+          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li a {
+            padding: 10px 16px; }
+          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul {
+            position: static; }
+            .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul li a {
+              padding-left: 32px; }
+            .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul ul li a {
+              padding-left: 48px; }
+            .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul ul ul li a {
+              padding-left: 64px; }
+            .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul ul ul ul li a {
+              padding-left: 80px; }
+            .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul ul ul ul ul li a {
+              padding-left: 96px; }
+          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li.active-menuitem > a {
+            color: #3F51B5;
+            background-color: #e8e8e8; }
+          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li.active-menuitem > ul {
+            display: block; }
+        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > a {
+          color: #ffffff;
+          background-color: #E91E63; }
+          .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > a i {
+            color: #ffffff; }
+        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > ul {
           display: block; }
-      .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > a {
-        color: #ffffff;
-        background-color: #E91E63; }
-        .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > a i {
-          color: #ffffff; }
-      .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > ul {
-        display: block; }
     .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark {
       background-color: #424242; }
       .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark ul.ultima-menu li a {
@@ -1641,15 +1636,8 @@ body {
     overflow: visible;
     z-index: 100;
     top: 0; }
-    .layout-container.menu-layout-slim .layout-menu .nano {
-      overflow: visible; }
-      .layout-container.menu-layout-slim .layout-menu .nano .nano-content {
-        overflow: visible;
-        margin-right: 0px !important; }
-      .layout-container.menu-layout-slim .layout-menu .nano .nano-pane {
-        display: none !important; }
     .layout-container.menu-layout-slim .layout-menu .profile {
-      width: 100%;
+      width: calc(100% - 18px);
       height: 74px;
       padding-top: 15px; }
       .layout-container.menu-layout-slim .layout-menu .profile > a .profile-image {
@@ -1657,8 +1645,16 @@ body {
         height: 45px; }
       .layout-container.menu-layout-slim .layout-menu .profile > a .profile-name, .layout-container.menu-layout-slim .layout-menu .profile > a i {
         display: none; }
+    .layout-container.menu-layout-slim .layout-menu .ui-scrollpanel {
+      border: none;
+      border-radius: 0; }
+      .layout-container.menu-layout-slim .layout-menu .ui-scrollpanel .ui-scrollpanel-wrapper {
+        overflow: visible; }
+        .layout-container.menu-layout-slim .layout-menu .ui-scrollpanel .ui-scrollpanel-wrapper .ui-scrollpanel-content {
+          overflow: visible; }
     .layout-container.menu-layout-slim .layout-menu .ultima-menu {
-      padding: 0; }
+      padding: 0;
+      width: calc(100% - 18px); }
       .layout-container.menu-layout-slim .layout-menu .ultima-menu > li {
         position: relative; }
         .layout-container.menu-layout-slim .layout-menu .ultima-menu > li > a {
@@ -1684,6 +1680,7 @@ body {
           -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
           -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); }
           .layout-container.menu-layout-slim .layout-menu .ultima-menu > li > ul li a {
+            padding: .5em 1em .5em 2em;
             padding-left: 16px; }
           .layout-container.menu-layout-slim .layout-menu .ultima-menu > li > ul li ul li a {
             padding-left: 32px; }
@@ -1789,6 +1786,8 @@ body {
       display: block; }
       .layout-container .topbar .topbar-right .topbar-items > li.active-top-menu > ul li a {
         padding-left: 32px; }
+    .layout-container .topbar .topbar-right .topbar-items > li.search-item input {
+      background-image: linear-gradient(to bottom, #3F51B5, #3F51B5), linear-gradient(to bottom, #aaafca, #aaafca); }
     .layout-container .topbar .topbar-right .topbar-items > li.search-item {
       text-align: center;
       width: 100%;
@@ -1805,7 +1804,6 @@ body {
         border-color: #bdbdbd;
         color: #212121; }
         .layout-container .topbar .topbar-right .topbar-items > li.search-item input:focus {
-          margin-bottom: -1px;
           border-color: #bdbdbd; }
       .layout-container .topbar .topbar-right .topbar-items > li.search-item input:focus ~ label,
       .layout-container .topbar .topbar-right .topbar-items > li.search-item input.ui-state-filled ~ label {
