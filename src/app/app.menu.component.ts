@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import {MenuItem} from 'primeng/primeng';
 import {AppComponent} from './app.component';
+import { MainComponent } from './main.component';
 
 @Component({
     selector: 'app-menu',
@@ -15,7 +16,7 @@ export class AppMenuComponent implements OnInit {
 
     model: any[];
 
-    constructor(public app: AppComponent) {}
+    constructor(public app: MainComponent) {}
 
     ngOnInit() {
         this.model = [
@@ -204,7 +205,7 @@ export class AppSubMenuComponent {
 
     activeIndex: number;
 
-    constructor(public app: AppComponent) {}
+    constructor(public app: MainComponent) {}
 
     itemClick(event: Event, item: MenuItem, index: number) {
         if (this.root) {

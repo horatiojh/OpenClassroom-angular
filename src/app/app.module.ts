@@ -25,6 +25,7 @@ import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
 import { AppBreadcrumbComponent } from './app.breadcrumb.component';
 import { BreadcrumbService } from './breadcrumb.service';
 import { AppInlineProfileComponent } from './app.profile.component';
+import { MainComponent } from './main.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AppInlineProfileComponent } from './app.profile.component';
     AppBreadcrumbComponent,
     AppInlineProfileComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

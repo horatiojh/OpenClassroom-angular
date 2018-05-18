@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppComponent } from './app.component';
 import { trigger, state, transition, style, animate } from '@angular/animations'
+import { MainComponent } from './main.component';
 
 @Component({
     selector: 'app-inline-profile',
@@ -57,7 +58,7 @@ export class AppInlineProfileComponent {
 
     active: boolean;
 
-    constructor(public app: AppComponent) { }
+    constructor(public app: MainComponent) { }
 
     onClick(event) {
         this.active = !this.active;
