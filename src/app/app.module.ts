@@ -6,40 +6,39 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MainComponent } from './main.component';
 
 import {
   InputTextModule,
   ScrollPanelModule,
   ButtonModule,
-  MessageModule
+  MessageModule,
+  FileUploadModule
 } from 'primeng/primeng';
 
 import { LoginComponent } from './pages/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { StaffInfoComponent } from './pages/staff_info/staff_info.component';
 
 import { Api } from '../providers/api';
 import { AppTopbarComponent } from './app.topbar.component';
-import { AppRightpanelComponent } from './app.rightpanel.component';
 import { AppFooterComponent } from './app.footer.component';
 import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
 import { AppBreadcrumbComponent } from './app.breadcrumb.component';
 import { BreadcrumbService } from './breadcrumb.service';
 import { AppInlineProfileComponent } from './app.profile.component';
-import { MainComponent } from './main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppTopbarComponent,
-    AppRightpanelComponent,
     AppFooterComponent,
     AppMenuComponent,
     AppSubMenuComponent,
     AppBreadcrumbComponent,
     AppInlineProfileComponent,
     LoginComponent,
-    DashboardComponent,
-    MainComponent
+    StaffInfoComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +49,8 @@ import { MainComponent } from './main.component';
     InputTextModule,
     ButtonModule,
     MessageModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    FileUploadModule
   ],
   providers: [
     Api,

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {AppComponent} from './app.component';
+import { Component } from '@angular/core';
+import { AppComponent } from './app.component';
 import { MainComponent } from './main.component';
 
 @Component({
@@ -13,10 +13,6 @@ import { MainComponent } from './main.component';
             <div class="topbar-right">
                 <a id="menu-button" href="#" (click)="app.onMenuButtonClick($event)">
                     <i></i>
-                </a>
-
-                <a id="rightpanel-menu-button" href="#" (click)="app.onRightPanelButtonClick($event)">
-                    <i class="material-icons">more_vert</i>
                 </a>
 
                 <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
@@ -178,6 +174,6 @@ import { MainComponent } from './main.component';
 })
 export class AppTopbarComponent {
 
-    constructor(public app: MainComponent) {}
+    constructor(public app: MainComponent) { }
 
 }

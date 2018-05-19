@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MainComponent } from './main.component';
+import { StaffInfoComponent } from './pages/staff_info/staff_info.component';
 
 const routes: Routes = [
 
@@ -13,7 +13,7 @@ const routes: Routes = [
         path: '',
         component: MainComponent,
         children: [
-            { path: 'dashboard', component: DashboardComponent }
+            { path: 'staffInfo', component: StaffInfoComponent }
         ]
     }
 ];
