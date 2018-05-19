@@ -13,28 +13,27 @@ import {
   ScrollPanelModule,
   ButtonModule,
   MessageModule,
-  FileUploadModule
+  FileUploadModule,
+  GrowlModule,
+  DataTableModule,
+  TableBody
 } from 'primeng/primeng';
+import { TableModule } from 'primeng/table';
 
 import { LoginComponent } from './pages/login/login.component';
 import { StaffInfoComponent } from './pages/staff_info/staff_info.component';
 
 import { Api } from '../providers/api';
 import { AppTopbarComponent } from './app.topbar.component';
-import { AppFooterComponent } from './app.footer.component';
 import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
-import { AppBreadcrumbComponent } from './app.breadcrumb.component';
-import { BreadcrumbService } from './breadcrumb.service';
 import { AppInlineProfileComponent } from './app.profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppTopbarComponent,
-    AppFooterComponent,
     AppMenuComponent,
     AppSubMenuComponent,
-    AppBreadcrumbComponent,
     AppInlineProfileComponent,
     LoginComponent,
     StaffInfoComponent,
@@ -50,11 +49,13 @@ import { AppInlineProfileComponent } from './app.profile.component';
     ButtonModule,
     MessageModule,
     ScrollPanelModule,
-    FileUploadModule
+    FileUploadModule,
+    GrowlModule,
+    DataTableModule,
+    TableModule
   ],
   providers: [
-    Api,
-    BreadcrumbService
+    Api
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageModule } from 'primeng/primeng';
+import { Api } from '../../../providers/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-staffInfo',
@@ -8,20 +9,41 @@ import { MessageModule } from 'primeng/primeng';
 })
 export class StaffInfoComponent implements OnInit {
 
-  msgs: MessageModule[];
+  msgs: any[] = [];
   uploadedFiles: any[] = [];
 
-  constructor() { }
+  constructor(private api: Api, private router: Router) { }
 
   ngOnInit() {
   }
 
   onUpload(event) {
-    for (let file of event.files) {
+    for (const file of event.files) {
       this.uploadedFiles.push(file);
     }
 
     this.msgs = [];
     this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
   }
+
+  // upload(event) {
+
+  //   let endpoint = "upload/classroom";
+  //   let body = {
+  //     file: event.file
+  //   };
+
+  //   this.api.post(endpoint, body).subscribe(
+  //     response => {
+  //       console.log("response");
+  //       this.msgs = [];
+  //       this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+  //     },
+  //     error => {
+  //       console.log("error");
+  //       this.msgs = [];
+  //       this.msgs.push({ severity: "error", summary: "HTTP " + error.status, detail: error.error.message });
+  //     }
+  //   );
+  // }
 }
