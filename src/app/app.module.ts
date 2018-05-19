@@ -13,12 +13,13 @@ import {
   ScrollPanelModule,
   ButtonModule,
   MessageModule,
-  FileUploadModule,
   GrowlModule,
   DataTableModule,
   TableBody
 } from 'primeng/primeng';
+
 import { TableModule } from 'primeng/table';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { LoginComponent } from './pages/login/login.component';
 import { StaffInfoComponent } from './pages/staff_info/staff_info.component';

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Api } from '../../../providers/api';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/primeng';
 
 @Component({
   selector: 'app-staffInfo',
@@ -9,19 +10,27 @@ import { Router } from '@angular/router';
 })
 export class StaffInfoComponent implements OnInit {
 
-  msgs: any[] = [];
+  msgs: Message[] = [];
   uploadedFiles: any[] = [];
+  isUploaded: boolean;
 
-  constructor(private api: Api, private router: Router) { }
+  constructor(private api: Api, private router: Router) {
+    this.isUploaded = false;
+  }
 
   ngOnInit() {
   }
 
-  onUpload(event) {
+  onFileUpload(event) {
+
+    this.isUploaded = true;
+
+    console.log("upload file before");
     for (const file of event.files) {
       this.uploadedFiles.push(file);
     }
 
+    console.log("upload file after")
     this.msgs = [];
     this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
   }

@@ -5,20 +5,18 @@
         <h1>Staff Information</h1>
         <p-growl [value]="msgs"></p-growl>
 
-        <p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000">
-          <ng-template pTemplate="content">
-            <ul *ngIf="uploadedFiles.length">
-              <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-            </ul>
+        <p-fileUpload name="files[]" (uploadHandler)="onFileUpload($event)" multiple="multiple" accept="text/csv" maxFileSize="1000000"
+          customUpload="true">
+          <ng-template pTemplate="toolbar">
+            <div style="margin-top: 8px">Please upload a file with csv format.</div>
           </ng-template>
         </p-fileUpload>
 
-        <br/>
         <p-table [columns]="cols" [value]="cars1" selectionMode="single" dataKey="vin" [(selection)]="selectedCar" [paginator]="true"
           [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
           <ng-template pTemplate="caption">
-            
+
           </ng-template>
 
           <ng-template pTemplate="header" let-columns>

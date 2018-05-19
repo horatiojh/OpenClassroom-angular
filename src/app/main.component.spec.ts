@@ -4,12 +4,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { AppTopbarComponent } from './app.topbar.component';
-import { AppRightpanelComponent } from './app.rightpanel.component';
 import { AppInlineProfileComponent } from './app.profile.component';
-import { AppFooterComponent } from './app.footer.component';
-import { AppBreadcrumbComponent } from './app.breadcrumb.component';
 import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
-import { BreadcrumbService } from './breadcrumb.service';
 import { ScrollPanel } from 'primeng/primeng';
 import { MainComponent } from './main.component';
 
@@ -21,14 +17,11 @@ describe('MainComponent', () => {
         AppTopbarComponent,
         AppMenuComponent,
         AppSubMenuComponent,
-        AppFooterComponent,
-        AppBreadcrumbComponent,
         AppInlineProfileComponent,
-        AppRightpanelComponent,
         ScrollPanel,
         MainComponent
       ],
-      providers: [BreadcrumbService]
+      providers: []
     });
     TestBed.compileComponents();
   });
