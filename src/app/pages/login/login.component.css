@@ -1,4 +1,4 @@
-.login-container {
+.login-container_cus {
     margin-top: 0px;
     background-size: 100%;
     height: 100%;
@@ -7,7 +7,7 @@
     overflow: scroll;
 }
 
-.login-panel {
+.login-panel_cus {
     margin: 170px auto 0 auto;
     text-align: center;
     width: 380px;
@@ -21,14 +21,15 @@
     margin-top: 40px;
 }
 
-.login-input {
+.login-input_cus {
     width: 350px;
     height: 40px;
     background-color: #ffffff;
     color: #31353D;
+    margin-top: 10px;
 }
 
-.login-button {
+.login-button_cus {
     width: 360px;
     height: 45px;
     margin-left: 2px;
@@ -37,6 +38,7 @@
     color: #ffffff;
     font-weight: bold;
     font-size: 16px;
+    margin-top: 10px;
 }
 
 ::placeholder {

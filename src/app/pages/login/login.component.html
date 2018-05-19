@@ -1,13 +1,20 @@
-<body>
-	<div class="login-container">
-		<form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm)">
-			<div class="login-panel">
+<!DOCTYPE html>
+<html>
 
-				<h2>Staff Login</h2>
+<body>
+	<div class="login-container_cus">
+		<form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm)">
+			<div class="login-panel_cus">
 
 				<div class="ui-g">
 					<div class="ui-g-12">
-						<input class="login-input" type="text" id="username" name="username" [(ngModel)]="username" required="true" #inusername="ngModel"
+						<h2>Staff Login</h2>
+					</div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12">
+						<input class="login-input_cus" type="text" id="username" name="username" [(ngModel)]="username" required="true" #inusername="ngModel"
 						 placeholder="Username" />
 						<div *ngIf="inusername.invalid && (inusername.dirty || inusername.touched || submitted)">
 							<div *ngIf="inusername.errors.required">
@@ -17,7 +24,7 @@
 					</div>
 
 					<div class="ui-g-12">
-						<input class="login-input" type="password" id="password" name="password" [(ngModel)]="pwd" required="true" #inpassword="ngModel"
+						<input class="login-input_cus" type="password" id="password" name="password" [(ngModel)]="pwd" required="true" #inpassword="ngModel"
 						 placeholder="Password" />
 						<div *ngIf="inpassword.invalid && (inpassword.dirty || inpassword.touched || submitted)">
 							<div *ngIf="inpassword.errors.required">
@@ -27,7 +34,7 @@
 					</div>
 
 					<div class="ui-g-12">
-						<input class="login-button" type="submit" value="Login" />
+						<input class="login-button_cus" type="submit" value="Login" />
 					</div>
 
 					<div dir="rtl" class="ui-g-12">
