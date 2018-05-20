@@ -28,6 +28,7 @@ import { Api } from '../providers/api';
 import { AppTopbarComponent } from './app.topbar.component';
 import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
 import { AppInlineProfileComponent } from './app.profile.component';
+import { FileUploadService } from '../providers/fileUpload';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { AppInlineProfileComponent } from './app.profile.component';
     TableModule
   ],
   providers: [
-    Api
+    Api,
+    FileUploadService
   ],
   bootstrap: [AppComponent]
 })

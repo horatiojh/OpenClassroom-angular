@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Api } from '../../../providers/api';
 import { Router } from '@angular/router';
 import { Message } from 'primeng/primeng';
+import { FileUploadService } from '../../../providers/fileUpload';
 
 @Component({
   selector: 'app-staffInfo',
@@ -11,11 +12,8 @@ import { Message } from 'primeng/primeng';
 export class StaffInfoComponent implements OnInit {
 
   msgs: Message[] = [];
-  uploadedFiles: any[] = [];
-  isUploaded: boolean;
 
-  constructor(private api: Api, private router: Router) {
-    this.isUploaded = false;
+  constructor(private fileUploadService: FileUploadService, private router: Router) {
   }
 
   ngOnInit() {
@@ -23,36 +21,21 @@ export class StaffInfoComponent implements OnInit {
 
   onFileUpload(event) {
 
-    this.isUploaded = true;
+    const data = new FormData();
 
-    console.log("upload file before");
-    for (const file of event.files) {
-      this.uploadedFiles.push(file);
-    }
+    data.append("file", event.files[0]);
 
-    console.log("upload file after")
-    this.msgs = [];
-    this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+    this.fileUploadService.createNewProduct(data).subscribe(
+      response => {
+        console.log("response");
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+      },
+      error => {
+        console.log("error");
+        this.msgs = [];
+        this.msgs.push({ severity: "error", summary: "HTTP " + error.status, detail: error.error.message });
+      }
+    );
   }
-
-  // upload(event) {
-
-  //   let endpoint = "upload/classroom";
-  //   let body = {
-  //     file: event.file
-  //   };
-
-  //   this.api.post(endpoint, body).subscribe(
-  //     response => {
-  //       console.log("response");
-  //       this.msgs = [];
-  //       this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
-  //     },
-  //     error => {
-  //       console.log("error");
-  //       this.msgs = [];
-  //       this.msgs.push({ severity: "error", summary: "HTTP " + error.status, detail: error.error.message });
-  //     }
-  //   );
-  // }
 }
