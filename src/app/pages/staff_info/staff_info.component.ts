@@ -27,13 +27,11 @@ export class StaffInfoComponent implements OnInit {
     this.fileUploadService.uploadClassroom(data).subscribe(
       response => {
         form.clear();
-        console.log("response");
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
       },
       error => {
         form.clear();
-        console.log("error");
         this.msgs = [];
         this.msgs.push({ severity: "error", summary: "HTTP " + error.status, detail: '' });
       }

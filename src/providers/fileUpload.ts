@@ -14,7 +14,7 @@ export class FileUploadService {
 
     uploadClassroom(data: FormData): Observable<any> {
         return this.httpClient
-            .post<any>(this.baseUrl + "classroom", data)
+            .post<any>(this.baseUrl + "classroom", data, )
             .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
     }
 
@@ -22,7 +22,7 @@ export class FileUploadService {
 
         let errMsg = error.message || 'Server error';
 
-        if (error.error instanceof HttpErrorResponse) {
+        if (error.error instanceof ErrorEvent) {
             console.error("An unknown error has occurred:", error.error.message);
         } else {
             console.error(
