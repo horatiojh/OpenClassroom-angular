@@ -9,11 +9,11 @@ import { ClassroomService } from '../../../providers/classroomService';
 import { Classroom } from '../../../domain/classroom';
 
 @Component({
-  selector: 'app-staffInfo',
-  templateUrl: './staff_info.component.html',
-  styleUrls: ['./staff_info.component.css']
+  selector: 'app-viewClassroom',
+  templateUrl: './view_classroom.component.html',
+  styleUrls: ['./view_classroom.component.css']
 })
-export class StaffInfoComponent implements OnInit {
+export class ViewClassroomComponent implements OnInit {
 
   // for upload file
   msgs: Message[] = [];
@@ -32,11 +32,11 @@ export class StaffInfoComponent implements OnInit {
     //for datatable
     this.cols = [
       { field: 'building', header: 'Building', width: "12%" },
-      { field: 'roomId', header: 'RoomId' , width: "12%"},
-      { field: 'venueName', header: 'Venue' , width: "25%"},
-      { field: 'deptId', header: 'DeptId' , width: "12%"},
-      { field: 'capacity', header: 'Capacity' , width: "12%"},
-      { field: 'linkCode', header: 'LinkCode' , width: "12%"}
+      { field: 'roomId', header: 'RoomId', width: "12%" },
+      { field: 'venueName', header: 'Venue', width: "28%" },
+      { field: 'deptId', header: 'DeptId', width: "12%" },
+      { field: 'capacity', header: 'Capacity', width: "12%", textAlign: "center" },
+      { field: 'linkCode', header: 'LinkCode', width: "12%" }
     ];
     this.classroomService.getAllClassrooms().subscribe(response => this.classrooms = response.classrooms);
   }
@@ -58,9 +58,5 @@ export class StaffInfoComponent implements OnInit {
         this.msgs.push({ severity: "error", summary: "HTTP " + error.status, detail: '' });
       }
     );
-  }
-
-  updateClassroom(event) {
-
   }
 }

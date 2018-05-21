@@ -23,9 +23,11 @@ import { FileUploadModule } from 'primeng/fileupload';
 
 import { LoginComponent } from './pages/login/login.component';
 import { StaffInfoComponent } from './pages/staff_info/staff_info.component';
+import { ViewClassroomComponent } from './pages/view_classroom/view_classroom.component';
 
 import { Api } from '../providers/api';
-import { FileUploadService } from '../providers/fileUpload';
+import { FileUploadService } from '../providers/fileUploadService';
+import { ClassroomService } from '../providers/classroomService';
 
 import { AppTopbarComponent } from './app.topbar.component';
 import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
@@ -41,6 +43,7 @@ import { AppInlineProfileComponent } from './app.profile.component';
     LoginComponent,
     StaffInfoComponent,
     MainComponent,
+    ViewClassroomComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { AppInlineProfileComponent } from './app.profile.component';
   ],
   providers: [
     Api,
-    FileUploadService
+    FileUploadService,
+    ClassroomService
   ],
   bootstrap: [AppComponent]
 })
