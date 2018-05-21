@@ -4993,9 +4993,9 @@ body .ui-table .ui-sortable-column {
     background-color: #e8e8e8;
     color: #000000; }
   body .ui-table .ui-sortable-column.ui-state-highlight {
-    background-color: #E91E63;
+    background-color: #FFC107;
     color: #ffffff;
-    border-top-color: #E91E63; }
+    border-top-color: #FFC107; }
     body .ui-table .ui-sortable-column.ui-state-highlight .fa {
       color: #ffffff; }
   body .ui-table .ui-sortable-column .ui-sortable-column-icon {
@@ -5007,18 +5007,18 @@ body .ui-table .ui-table-tbody > tr {
     background: inherit;
     border: 1px solid #cacaca; }
   body .ui-table .ui-table-tbody > tr.ui-state-highlight {
-    background-color: #E91E63;
+    background-color: #FFC107;
     color: #ffffff; }
   body .ui-table .ui-table-tbody > tr.ui-contextmenu-selected {
-    background-color: #E91E63;
+    background-color: #FFC107;
     color: #ffffff; }
 body .ui-table .ui-table-tbody > tr:nth-child(odd) {
   background-color: #f4f4f4; }
   body .ui-table .ui-table-tbody > tr:nth-child(odd).ui-state-highlight {
-    background-color: #E91E63;
+    background-color: #FFC107;
     color: #ffffff; }
   body .ui-table .ui-table-tbody > tr:nth-child(odd).ui-contextmenu-selected {
-    background-color: #E91E63;
+    background-color: #FFC107;
     color: #ffffff; }
 body .ui-table.ui-table-hoverable-rows .ui-table-tbody > tr:not(.ui-state-highlight):hover {
   cursor: pointer;
@@ -5029,7 +5029,7 @@ body .ui-table.ui-table-hoverable-rows .ui-table-tbody > tr:not(.ui-state-highli
     border-top: 1px solid #cacaca;
     border-bottom: 1px solid #cacaca; }
     body .ui-table-responsive .ui-table-tbody > tr.ui-state-highlight {
-      background-color: #E91E63;
+      background-color: #FFC107;
       color: #ffffff; } }
 @media screen and (max-width: 40em) {
   body .ui-table-responsive .ui-table-tbody > tr > td {
