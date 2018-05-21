@@ -19,22 +19,23 @@ export class StaffInfoComponent implements OnInit {
   ngOnInit() {
   }
 
-  onFileUpload(event) {
+  onFileUpload(event, form) {
 
-    const data = new FormData();
-
+    let data = new FormData();
     data.append("file", event.files[0]);
 
-    this.fileUploadService.createNewProduct(data).subscribe(
+    this.fileUploadService.uploadClassroom(data).subscribe(
       response => {
+        form.clear();
         console.log("response");
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
       },
       error => {
+        form.clear();
         console.log("error");
         this.msgs = [];
-        this.msgs.push({ severity: "error", summary: "HTTP " + error.status, detail: error.error.message });
+        this.msgs.push({ severity: "error", summary: "HTTP " + error.status, detail: '' });
       }
     );
   }
