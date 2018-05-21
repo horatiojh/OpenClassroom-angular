@@ -8,7 +8,7 @@ import { MainComponent } from './main.component';
     template: `
         <div class="profile" [ngClass]="{'profile-expanded':active}">
             <a href="#" (click)="onClick($event)">
-                <img class="profile-image" src="assets/layout/images/avatar.png" />
+                <img class="profile-image" [src]="imageSrc" />
                 <span class="profile-name">Jane Williams</span>
                 <i class="material-icons">keyboard_arrow_down</i>
             </a>
@@ -23,14 +23,8 @@ import { MainComponent } from './main.component';
             </li>
             <li role="menuitem">
                 <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
-                    <i class="material-icons">security</i>
-                    <span>Privacy</span>
-                </a>
-            </li>
-            <li role="menuitem">
-                <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
-                    <i class="material-icons">settings_application</i>
-                    <span>Settings</span>
+                    <i class="material-icons">star_rate</i>
+                    <span>Rate App</span>
                 </a>
             </li>
             <li role="menuitem">
@@ -57,8 +51,11 @@ import { MainComponent } from './main.component';
 export class AppInlineProfileComponent {
 
     active: boolean;
+    imageSrc: string;
 
-    constructor(public app: MainComponent) { }
+    constructor(public app: MainComponent) {
+        this.imageSrc = "assets/layout/images/male.png";
+    }
 
     onClick(event) {
         this.active = !this.active;

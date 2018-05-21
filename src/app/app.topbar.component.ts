@@ -7,7 +7,7 @@ import { MainComponent } from './main.component';
     template: `
         <div class="topbar clearfix">
             <div class="topbar-left">
-                <div class="logo"></div>
+                <div style="font-size: 24px;color: aliceblue;margin-top: 7px">Open Classroom</div>
             </div>
 
             <div class="topbar-right">
@@ -37,14 +37,8 @@ import { MainComponent } from './main.component';
                             </li>
                             <li role="menuitem">
                                 <a href="#">
-                                    <i class="material-icons">security</i>
-                                    <span>Privacy</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="material-icons">settings_applications</i>
-                                    <span>Settings</span>
+                                    <i class="material-icons">star_rate</i>
+                                    <span>Rate App</span>
                                 </a>
                             </li>
                             <li role="menuitem">
@@ -55,38 +49,7 @@ import { MainComponent } from './main.component';
                             </li>
                         </ul>
                     </li>
-                    <li #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
-                        <a href="#" (click)="app.onTopbarItemClick($event,settings)">
-                            <i class="topbar-icon material-icons">settings</i>
-                            <span class="topbar-item-name">Settings</span>
-                        </a>
-                        <ul class="ultima-menu animated fadeInDown">
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="material-icons">palette</i>
-                                    <span>Change Theme</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="material-icons">favorite_border</i>
-                                    <span>Favorites</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="material-icons">lock</i>
-                                    <span>Lock Screen</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="material-icons">wallpaper</i>
-                                    <span>Wallpaper</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    
                     <li #messages [ngClass]="{'active-top-menu':app.activeTopbarItem === messages}">
                         <a href="#" (click)="app.onTopbarItemClick($event,messages)">
                             <i class="topbar-icon material-icons animated swing">message</i>
