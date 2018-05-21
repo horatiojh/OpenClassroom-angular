@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Api } from '../../../providers/api';
 import { Router } from '@angular/router';
-import { Message } from 'primeng/primeng';
+import { Message, DataTable } from 'primeng/primeng';
 
 import { FileUploadService } from '../../../providers/fileUploadService';
 import { ClassroomService } from '../../../providers/classroomService';
@@ -41,21 +41,22 @@ export class ViewClassroomComponent implements OnInit {
     this.classroomService.getAllClassrooms().subscribe(response => this.classrooms = response.classrooms);
   }
 
-  onFileUpload(event, form) {
+  onFileUpload(event, fileUpload) {
 
     let data = new FormData();
     data.append("file", event.files[0]);
 
     this.fileUploadService.uploadClassroom(data).subscribe(
       response => {
-        form.clear();
+        fileUpload.clear();
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+        this.classroomService.getAllClassrooms().subscribe(response => this.classrooms = response.classrooms);
       },
       error => {
-        form.clear();
+        fileUpload.clear();
         this.msgs = [];
-        this.msgs.push({ severity: "error", summary: "HTTP " + error.status, detail: '' });
+        this.msgs.push({ severity: "error", summary: 'Please upload the correct file', detail: '' });
       }
     );
   }

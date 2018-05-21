@@ -2,10 +2,10 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <div class="card">
-        <h1>Staff Information</h1>
-        <p-growl [value]="msgs"></p-growl>
+        <h1>Classroom Management</h1>
+        <p-growl [value]="msgs" life="4500"></p-growl>
 
-        <p-fileUpload #form name="files[]" (uploadHandler)="onFileUpload($event,form)" multiple="multiple" accept="text/csv" maxFileSize="1000000"
+        <p-fileUpload #fileUpload name="files[]" (uploadHandler)="onFileUpload($event,fileUpload)" accept="text/csv" maxFileSize="1000000"
           customUpload="true">
           <ng-template pTemplate="toolbar">
             <div style="margin-top: 8px">Please upload a file with csv format.</div>
