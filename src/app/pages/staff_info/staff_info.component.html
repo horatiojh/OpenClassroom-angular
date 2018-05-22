@@ -25,7 +25,9 @@
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
-              <th style="width: 12%">Action</th>
+              <th style="width: 12%">View</th>
+              <th style="width: 12%">Update</th>
+              <th style="width: 12%">Delete</th>
             </tr>
           </ng-template>
 
@@ -35,14 +37,20 @@
                 {{rowData[col.field]}}
               </td>
               <td style="text-align: center">
-                <p-button label="Update" (onClick)="updateClassroom($event)"></p-button>
+                <p-button icon='fa fa-fw fa-file-text' (onClick)="viewStaffInfo($event)"></p-button>
+              </td>
+              <td style="text-align: center">
+                <p-button label="" icon="fa fa-fw fa-edit" (onClick)="updateStaffInfo($event)"></p-button>
+              </td>
+              <td style="text-align: center">
+                <p-button icon="fa fa-fw fa-trash" (onClick)="deleteStaffInfo($event)"></p-button>
               </td>
             </tr>
           </ng-template>
 
           <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-              <td [attr.colspan]="columns.length">
+              <td [attr.colspan]="columns.length+3">
                 No records found
               </td>
             </tr>

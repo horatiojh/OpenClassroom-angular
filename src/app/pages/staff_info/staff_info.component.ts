@@ -68,5 +68,13 @@ export class StaffInfoComponent implements OnInit {
     );
   }
 
-  updateClassroom(event) {}
+  viewStaffInfo(event) {
+
+  }
+  updateStaffInfo(event) {
+
+  }
+  deleteStaffInfo(event) {
+
+  }
 }
