@@ -34,6 +34,7 @@ import { StaffService } from "../providers/staffService";
 import { AppTopbarComponent } from "./app.topbar.component";
 import { AppMenuComponent, AppSubMenuComponent } from "./app.menu.component";
 import { AppInlineProfileComponent } from "./app.profile.component";
+import { CourseService } from "../providers/courseService";
 
 @NgModule({
   declarations: [
@@ -63,7 +64,13 @@ import { AppInlineProfileComponent } from "./app.profile.component";
     DataTableModule,
     TableModule
   ],
-  providers: [Api, FileUploadService, ClassroomService, StaffService],
+  providers: [
+    Api,
+    FileUploadService,
+    ClassroomService,
+    StaffService,
+    CourseService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

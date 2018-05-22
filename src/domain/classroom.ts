@@ -1,4 +1,5 @@
 export class Classroom {
+
   id: number;
   deptId: string;
   building: string;

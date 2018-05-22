@@ -1,4 +1,5 @@
 export class Staff {
+
   id: number;
   staffId: string;
   pwd: string;
