@@ -22,8 +22,9 @@ import { FileUploadModule } from "primeng/fileupload";
 import { ButtonModule } from "primeng/button";
 
 import { LoginComponent } from "./pages/login/login.component";
-import { StaffInfoComponent } from "./pages/staff_info/staff_info.component";
 import { ViewClassroomComponent } from "./pages/view_classroom/view_classroom.component";
+import { ViewStaffInfoComponent } from "./pages/view_staff_info/view_staff_info.component";
+import { ViewCourseListComponent } from "./pages/view_course_list/view_course_list.component";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -41,10 +42,11 @@ import { AppInlineProfileComponent } from "./app.profile.component";
     AppMenuComponent,
     AppSubMenuComponent,
     AppInlineProfileComponent,
-    LoginComponent,
-    StaffInfoComponent,
     MainComponent,
-    ViewClassroomComponent
+    LoginComponent,
+    ViewStaffInfoComponent,
+    ViewClassroomComponent,
+    ViewCourseListComponent
   ],
   imports: [
     BrowserModule,

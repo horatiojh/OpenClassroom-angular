@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
       this.api.post(endpoint, body).subscribe(
         response => {
-          this.router.navigate(["/staffInfo"]);
+          this.router.navigate(["/viewStaffInfo"]);
         },
         error => {
           let msg: string = "Sign in failed! Incorrect username or password";

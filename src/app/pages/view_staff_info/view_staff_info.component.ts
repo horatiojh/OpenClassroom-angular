@@ -9,11 +9,11 @@ import { StaffService } from "../../../providers/staffService";
 import { Staff } from "../../../domain/staff";
 
 @Component({
-  selector: "app-staffInfo",
-  templateUrl: "./staff_info.component.html",
-  styleUrls: ["./staff_info.component.css"]
+  selector: "app-viewStaffInfo",
+  templateUrl: "./view_staff_info.component.html",
+  styleUrls: ["./view_staff_info.component.css"]
 })
-export class StaffInfoComponent implements OnInit {
+export class ViewStaffInfoComponent implements OnInit {
   // for upload file
   msgs: Message[] = [];
 
