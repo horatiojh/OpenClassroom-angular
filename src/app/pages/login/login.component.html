@@ -14,7 +14,7 @@
 
 				<div class="ui-g">
 					<div class="ui-g-12">
-						<input class="login-input_cus" type="text" id="username" name="username" [(ngModel)]="username" required="true" #inusername="ngModel"
+						<input class="login-input_cus" type="text" id="username" name="username" [(ngModel)]="staffId" required="true" #inusername="ngModel"
 						 placeholder="Username" />
 						<div *ngIf="inusername.invalid && (inusername.dirty || inusername.touched || submitted)">
 							<div *ngIf="inusername.errors.required">

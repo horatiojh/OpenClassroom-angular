@@ -1,27 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Api } from '../../../providers/api';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Api } from "../../../providers/api";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 
 export class LoginComponent implements OnInit {
-
   isLogin: boolean;
   submitted: boolean;
-  username: string;
+  staffId: string;
   pwd: string;
   loginErrorMessage: string;
 
   constructor(private api: Api, private router: Router) {
-
     this.isLogin = false;
     this.submitted = false;
-    this.username = "";
+    this.staffId = "";
     this.pwd = "";
     this.loginErrorMessage = null;
   }
@@ -33,14 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin(loginForm: NgForm) {
-
     this.submitted = true;
 
     if (loginForm.valid) {
-
       let endpoint = "staff/login";
       let body = {
-        username: this.username,
+        staffId: this.staffId,
         pwd: this.pwd
       };
 
