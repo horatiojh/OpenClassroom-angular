@@ -1,66 +1,72 @@
-import { Component, OnInit } from '@angular/core';
-import { Api } from '../../../providers/api';
-import { Router } from '@angular/router';
-import { Message } from 'primeng/primeng';
+import { Component, OnInit } from "@angular/core";
+import { Api } from "../../../providers/api";
+import { Router } from "@angular/router";
+import { Message } from "primeng/primeng";
 
-import { FileUploadService } from '../../../providers/fileUploadService';
-import { ClassroomService } from '../../../providers/classroomService';
+import { FileUploadService } from "../../../providers/fileUploadService";
+import { StaffService } from "../../../providers/staffService";
 
-import { Classroom } from '../../../domain/classroom';
+import { Staff } from "../../../domain/staff";
 
 @Component({
-  selector: 'app-staffInfo',
-  templateUrl: './staff_info.component.html',
-  styleUrls: ['./staff_info.component.css']
+  selector: "app-staffInfo",
+  templateUrl: "./staff_info.component.html",
+  styleUrls: ["./staff_info.component.css"]
 })
 export class StaffInfoComponent implements OnInit {
-
   // for upload file
   msgs: Message[] = [];
 
   // for datatable
   cols: any[];
-  classrooms: Classroom;
+  staffs: Staff[];
 
-  constructor(private fileUploadService: FileUploadService,
+  constructor(
+    private fileUploadService: FileUploadService,
     private router: Router,
-    private classroomService: ClassroomService) {
-  }
+    private staffService: StaffService
+  ) {}
 
   ngOnInit() {
-
     //for datatable
     this.cols = [
-      { field: 'building', header: 'Building', width: "12%" },
-      { field: 'roomId', header: 'RoomId' , width: "12%"},
-      { field: 'venueName', header: 'Venue' , width: "25%"},
-      { field: 'deptId', header: 'DeptId' , width: "12%"},
-      { field: 'capacity', header: 'Capacity' , width: "12%"},
-      { field: 'linkCode', header: 'LinkCode' , width: "12%"}
+      { field: "staffName", header: "Name", width: "12%" },
+      { field: "staffId", header: "Staff Id", width: "12%" },
+      { field: "emailAddress", header: "Email", width: "25%" }
     ];
-    this.classroomService.getAllClassrooms().subscribe(response => this.classrooms = response.classrooms);
+    this.staffService
+      .getAllStaffs()
+      .subscribe(response => (this.staffs = response.staffs));
   }
 
-  onFileUpload(event, form) {
-
+  onFileUpload(event, fileUpload) {
     let data = new FormData();
     data.append("file", event.files[0]);
 
-    this.fileUploadService.uploadClassroom(data).subscribe(
+    this.fileUploadService.uploadStaffInfo(data).subscribe(
       response => {
-        form.clear();
+        fileUpload.clear();
+        this.staffService
+          .getAllStaffs()
+          .subscribe(response => (this.staffs = response.staffs));
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+        this.msgs.push({
+          severity: "info",
+          summary: "File Uploaded",
+          detail: ""
+        });
       },
       error => {
-        form.clear();
+        fileUpload.clear();
         this.msgs = [];
-        this.msgs.push({ severity: "error", summary: "HTTP " + error.status, detail: '' });
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: ""
+        });
       }
     );
   }
 
-  updateClassroom(event) {
-
-  }
+  updateClassroom(event) {}
 }

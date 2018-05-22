@@ -28,6 +28,7 @@ import { ViewClassroomComponent } from './pages/view_classroom/view_classroom.co
 import { Api } from '../providers/api';
 import { FileUploadService } from '../providers/fileUploadService';
 import { ClassroomService } from '../providers/classroomService';
+import { StaffService } from '../providers/staffService';
 
 import { AppTopbarComponent } from './app.topbar.component';
 import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
@@ -63,7 +64,8 @@ import { AppInlineProfileComponent } from './app.profile.component';
   providers: [
     Api,
     FileUploadService,
-    ClassroomService
+    ClassroomService,
+    StaffService
   ],
   bootstrap: [AppComponent]
 })

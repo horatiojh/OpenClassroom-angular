@@ -5,14 +5,14 @@
         <h1>Staff Information</h1>
         <p-growl [value]="msgs"></p-growl>
 
-        <p-fileUpload #form name="files[]" (uploadHandler)="onFileUpload($event,form)" multiple="multiple" accept="text/csv" maxFileSize="1000000"
+        <p-fileUpload #fileUpload name="files[]" (uploadHandler)="onFileUpload($event,fileUpload)" accept="text/csv" maxFileSize="1000000"
           customUpload="true">
           <ng-template pTemplate="toolbar">
             <div style="margin-top: 8px">Please upload a file with csv format.</div>
           </ng-template>
         </p-fileUpload>
 
-        <p-table [columns]="cols" [value]="classrooms" dataKey="classroomId" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+        <p-table [columns]="cols" [value]="staffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
           selectionMode="single">
 
           <ng-template pTemplate="caption">
