@@ -35,6 +35,7 @@ import { AppTopbarComponent } from "./app.topbar.component";
 import { AppMenuComponent, AppSubMenuComponent } from "./app.menu.component";
 import { AppInlineProfileComponent } from "./app.profile.component";
 import { CourseService } from "../providers/courseService";
+import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.component";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CourseService } from "../providers/courseService";
     LoginComponent,
     ViewStaffInfoComponent,
     ViewClassroomComponent,
-    ViewCourseListComponent
+    ViewCourseListComponent,
+    DataAnalyticsComponent
   ],
   imports: [
     BrowserModule,

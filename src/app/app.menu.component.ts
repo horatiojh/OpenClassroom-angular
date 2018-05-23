@@ -23,7 +23,7 @@ export class AppMenuComponent implements OnInit {
             { label: 'Staff Information', icon: 'camera', routerLink: ['/viewStaffInfo'] },
             { label: 'Classroom', icon: 'class', routerLink: ['/viewClassroom'] },
             { label: 'Course List', icon: 'list', routerLink: ['/viewCourseList'] },
-            { label: 'Data Analytics', icon: 'poll', routerLink: ['/documentation'] }
+            { label: 'Data Analytics', icon: 'poll', routerLink: ['/dataAnalytics'] }
         ];
     }
 }

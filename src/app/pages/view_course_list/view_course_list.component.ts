@@ -69,4 +69,8 @@ export class ViewCourseListComponent implements OnInit {
       }
     );
   }
+
+  viewTimetable() {
+
+  }
 }
