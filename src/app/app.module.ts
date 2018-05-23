@@ -40,6 +40,8 @@ import { TimetableService } from "../providers/timetableService";
 import { AppTopbarComponent } from "./app.topbar.component";
 import { AppMenuComponent, AppSubMenuComponent } from "./app.menu.component";
 import { AppInlineProfileComponent } from "./app.profile.component";
+import { AppBreadcrumbComponent } from "./app.breadcrumb.component";
+import { BreadcrumbService } from "./breadcrumb.service";
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { AppInlineProfileComponent } from "./app.profile.component";
     AppMenuComponent,
     AppSubMenuComponent,
     AppInlineProfileComponent,
+    AppBreadcrumbComponent,
     MainComponent,
     LoginComponent,
     ViewStaffInfoComponent,
@@ -75,6 +78,7 @@ import { AppInlineProfileComponent } from "./app.profile.component";
   ],
   providers: [
     Api,
+    BreadcrumbService,
     FileUploadService,
     ClassroomService,
     StaffService,

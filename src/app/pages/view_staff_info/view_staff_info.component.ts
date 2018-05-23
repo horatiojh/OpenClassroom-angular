@@ -4,6 +4,7 @@ import { Message } from "primeng/primeng";
 
 import { FileUploadService } from "../../../providers/fileUploadService";
 import { StaffService } from "../../../providers/staffService";
+import { BreadcrumbService } from "../../breadcrumb.service";
 
 import { Staff } from "../../../domain/staff";
 
@@ -23,8 +24,11 @@ export class ViewStaffInfoComponent implements OnInit {
   constructor(
     private fileUploadService: FileUploadService,
     private router: Router,
-    private staffService: StaffService
-  ) {}
+    private staffService: StaffService,
+    private breadcrumbService: BreadcrumbService
+  ) {
+    this.breadcrumbService.setItems([{ label: "" }]);
+  }
 
   ngOnInit() {
     //for datatable
@@ -67,13 +71,7 @@ export class ViewStaffInfoComponent implements OnInit {
     );
   }
 
-  viewStaffInfo(event) {
-
-  }
-  updateStaffInfo(event) {
-
-  }
-  deleteStaffInfo(event) {
-
-  }
+  viewStaffInfo(event) {}
+  updateStaffInfo(event) {}
+  deleteStaffInfo(event) {}
 }

@@ -5,6 +5,7 @@ import { Message, DataTable } from "primeng/primeng";
 
 import { FileUploadService } from "../../../providers/fileUploadService";
 import { ClassroomService } from "../../../providers/classroomService";
+import { BreadcrumbService } from "../../breadcrumb.service";
 
 import { Classroom } from "../../../domain/classroom";
 
@@ -24,8 +25,11 @@ export class ViewClassroomComponent implements OnInit {
   constructor(
     private fileUploadService: FileUploadService,
     private router: Router,
-    private classroomService: ClassroomService
-  ) {}
+    private classroomService: ClassroomService,
+    private breadcrumbService: BreadcrumbService
+  ) {
+    this.breadcrumbService.setItems([{ label: "" }]);
+  }
 
   ngOnInit() {
     //for datatable

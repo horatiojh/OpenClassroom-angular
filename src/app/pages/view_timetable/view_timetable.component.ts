@@ -5,6 +5,7 @@ import { Message } from "primeng/primeng";
 import { Timetable } from "../../../domain/timetable";
 
 import { TimetableService } from "../../../providers/timetableService";
+import { BreadcrumbService } from "../../breadcrumb.service";
 
 @Component({
   selector: "app-viewTimetable",
@@ -12,7 +13,6 @@ import { TimetableService } from "../../../providers/timetableService";
   styleUrls: ["./view_timetable.component.css"]
 })
 export class ViewTimetableComponent implements OnInit {
-
   // for datatable
   cols: any[];
   timetables: Timetable[];
@@ -20,8 +20,14 @@ export class ViewTimetableComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private timetableService: TimetableService
-  ) {}
+    private timetableService: TimetableService,
+    private breadcrumbService: BreadcrumbService
+  ) {
+    this.breadcrumbService.setItems([
+      { label: "Course List", routerLink: ["/viewCourseList"] },
+      { label: "View Timetable", routerLink: ["/viewTimetable"] }
+    ]);
+  }
 
   ngOnInit() {
     //for datatable
@@ -40,7 +46,7 @@ export class ViewTimetableComponent implements OnInit {
   }
 
   updateTimetable(rowData) {
-    sessionStorage.setItem("timetableId",rowData.id);
+    sessionStorage.setItem("timetableId", rowData.id);
     this.router.navigate(["/updateTimetable"]);
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { SelectItem } from "primeng/primeng";
 
+import { BreadcrumbService } from "../../breadcrumb.service";
+
 @Component({
   selector: "app-updateTimetable",
   templateUrl: "./update_timetable.component.html",
@@ -12,7 +14,16 @@ export class UpdateTimetableComponent implements OnInit {
   timetableId: number;
   weekDays: SelectItem[];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private breadcrumbService: BreadcrumbService
+  ) {
+    this.breadcrumbService.setItems([
+      { label: "Course List", routerLink: ["/viewCourseList"] },
+      { label: "View Timetable", routerLink: ["/viewTimetable"] },
+      { label: "Update Timetable", routerLink: ["/updateTimetable"] }
+    ]);
+  }
 
   ngOnInit() {
     this.timetableId = Number(sessionStorage.getItem("timetableId"));

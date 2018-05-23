@@ -6,6 +6,7 @@ import { Course } from "../../../domain/course";
 
 import { FileUploadService } from "../../../providers/fileUploadService";
 import { CourseService } from "../../../providers/courseService";
+import { BreadcrumbService } from "../../breadcrumb.service";
 
 @Component({
   selector: "app-viewCourseList",
@@ -23,8 +24,11 @@ export class ViewCourseListComponent implements OnInit {
   constructor(
     private fileUploadService: FileUploadService,
     private router: Router,
-    private courseService: CourseService
-  ) {}
+    private courseService: CourseService,
+    private breadcrumbService: BreadcrumbService
+  ) {
+    this.breadcrumbService.setItems([{ label: "" }]);
+  }
 
   ngOnInit() {
     //for datatable
@@ -44,7 +48,7 @@ export class ViewCourseListComponent implements OnInit {
     let data = new FormData();
     data.append("file", event.files[0]);
 
-    this.fileUploadService.uploadClassroom(data).subscribe(
+    this.fileUploadService.uploadCourse(data).subscribe(
       response => {
         fileUpload.clear();
         this.msgs = [];
@@ -70,7 +74,7 @@ export class ViewCourseListComponent implements OnInit {
   }
 
   viewTimetable(rowData) {
-    sessionStorage.setItem("courseId",rowData.id);
+    sessionStorage.setItem("courseId", rowData.id);
     this.router.navigate(["/viewTimetable"]);
   }
 }
