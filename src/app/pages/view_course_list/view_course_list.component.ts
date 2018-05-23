@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
 import { Api } from "../../../providers/api";
 import { Router } from "@angular/router";
 import { Message } from "primeng/primeng";
@@ -72,5 +72,7 @@ export class ViewCourseListComponent implements OnInit {
 
   viewTimetable(rowData) {
     console.log(rowData.id);
+    sessionStorage.setItem("courseId",rowData.id);
+    this.router.navigate(["/viewTimetable"]);
   }
 }

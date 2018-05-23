@@ -25,18 +25,19 @@ import { LoginComponent } from "./pages/login/login.component";
 import { ViewClassroomComponent } from "./pages/view_classroom/view_classroom.component";
 import { ViewStaffInfoComponent } from "./pages/view_staff_info/view_staff_info.component";
 import { ViewCourseListComponent } from "./pages/view_course_list/view_course_list.component";
+import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.component";
+import { ViewTimetableComponent } from "./pages/view_timetable/view_timetable.component";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
 import { ClassroomService } from "../providers/classroomService";
 import { StaffService } from "../providers/staffService";
+import { CourseService } from "../providers/courseService";
+import { TimetableService } from "../providers/timetableService";
 
 import { AppTopbarComponent } from "./app.topbar.component";
 import { AppMenuComponent, AppSubMenuComponent } from "./app.menu.component";
 import { AppInlineProfileComponent } from "./app.profile.component";
-import { CourseService } from "../providers/courseService";
-import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.component";
-import { ViewTimetableComponent } from './view-timetable/view-timetable.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,8 @@ import { ViewTimetableComponent } from './view-timetable/view-timetable.componen
     ViewStaffInfoComponent,
     ViewClassroomComponent,
     ViewCourseListComponent,
-    DataAnalyticsComponent,
-    ViewTimetableComponent
+    ViewTimetableComponent,
+    DataAnalyticsComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +74,8 @@ import { ViewTimetableComponent } from './view-timetable/view-timetable.componen
     FileUploadService,
     ClassroomService,
     StaffService,
-    CourseService
+    CourseService,
+    TimetableService
   ],
   bootstrap: [AppComponent]
 })
