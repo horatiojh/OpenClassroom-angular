@@ -20,6 +20,7 @@ import {
 import { TableModule } from "primeng/table";
 import { FileUploadModule } from "primeng/fileupload";
 import { ButtonModule } from "primeng/button";
+import { DropdownModule } from "primeng/dropdown";
 
 import { LoginComponent } from "./pages/login/login.component";
 import { ViewClassroomComponent } from "./pages/view_classroom/view_classroom.component";
@@ -69,7 +70,8 @@ import { AppInlineProfileComponent } from "./app.profile.component";
     FileUploadModule,
     GrowlModule,
     DataTableModule,
-    TableModule
+    TableModule,
+    DropdownModule
   ],
   providers: [
     Api,

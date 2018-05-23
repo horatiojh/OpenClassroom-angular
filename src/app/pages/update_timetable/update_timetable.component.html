@@ -1,3 +1,37 @@
-<p>
-  update-timetable works!
-</p>
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="card">
+        <h1 style="margin-left: 14px">Update Timetable</h1>
+        <p-growl [value]="msgs"></p-growl>
+
+        <div class="ui-g form-group">
+          <div class="ui-g-12 ui-md-12">
+            <label class="label_cus">Weeks Name:</label>
+            <input type="text" pInputText [(ngModel)]="weeksName">
+          </div>
+
+          <div class="ui-g-12 ui-md-12">
+            <label class="label_cus">Weeks:</label>
+            <input type="text" pInputText [(ngModel)]="weeks">
+          </div>
+
+          <div class="ui-g-12 ui-md-12">
+            <label class="label_cus">Week Day:</label>
+            <p-dropdown [options]="weekDays" [(ngModel)]="selectedWeekDay"></p-dropdown>
+          </div>
+
+          <div class="ui-g-12 ui-md-12">
+            <label class="label_cus">Start Time:</label>
+            <input type="text" pInputText placeholder="(hh:mm)" [(ngModel)]="weeks">
+          </div>
+
+          <div class="ui-g-12 ui-md-12">
+            <label class="label_cus">End Time:</label>
+            <input type="text" pInputText placeholder="(hh:mm)" [(ngModel)]="weeks">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
