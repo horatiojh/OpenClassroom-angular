@@ -39,7 +39,7 @@ export class ViewStaffInfoComponent implements OnInit {
     ];
     this.staffService
       .getAllStaffs()
-      .subscribe(response => (this.staffs = response.staffs));
+      .subscribe(response => {this.staffs = response.staffs});
   }
 
   onFileUpload(event, fileUpload) {
@@ -51,7 +51,7 @@ export class ViewStaffInfoComponent implements OnInit {
         fileUpload.clear();
         this.staffService
           .getAllStaffs()
-          .subscribe(response => (this.staffs = response.staffs));
+          .subscribe(response => {this.staffs = response.staffs});
         this.msgs = [];
         this.msgs.push({
           severity: "info",

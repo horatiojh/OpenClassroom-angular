@@ -48,7 +48,7 @@ export class ViewClassroomComponent implements OnInit {
     ];
     this.classroomService
       .getAllClassrooms()
-      .subscribe(response => (this.classrooms = response.classrooms));
+      .subscribe(response => {this.classrooms = response.classrooms});
   }
 
   onFileUpload(event, fileUpload) {
@@ -66,7 +66,7 @@ export class ViewClassroomComponent implements OnInit {
         });
         this.classroomService
           .getAllClassrooms()
-          .subscribe(response => (this.classrooms = response.classrooms));
+          .subscribe(response => {this.classrooms = response.classrooms});
       },
       error => {
         fileUpload.clear();

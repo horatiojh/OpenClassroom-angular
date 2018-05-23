@@ -3,6 +3,9 @@ import { Router } from "@angular/router";
 import { SelectItem } from "primeng/primeng";
 
 import { BreadcrumbService } from "../../breadcrumb.service";
+import { ClassroomService } from "../../../providers/classroomService";
+
+import { Classroom } from "../../../domain/classroom";
 
 @Component({
   selector: "app-updateTimetable",
@@ -10,13 +13,15 @@ import { BreadcrumbService } from "../../breadcrumb.service";
   styleUrls: ["./update_timetable.component.css"]
 })
 export class UpdateTimetableComponent implements OnInit {
-
   timetableId: number;
   weekDays: SelectItem[];
+  classrooms: Classroom[];
+  rooms: SelectItem[];
 
   constructor(
     private router: Router,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private classroomService: ClassroomService
   ) {
     this.breadcrumbService.setItems([
       { label: "Course List", routerLink: ["/viewCourseList"] },
@@ -36,5 +41,13 @@ export class UpdateTimetableComponent implements OnInit {
       { label: "Thursday", value: "Thu" },
       { label: "Friday", value: "Fri" }
     ];
+
+    this.classroomService.getAllClassrooms().subscribe(response => {
+      this.classrooms = response.classrooms;
+      this.rooms = [{ label: "Please Select One", value: null }];
+      for (let i = 0; i < this.classrooms.length; i++) {
+        this.rooms.push({label:this.classrooms[i].roomId,value:this.classrooms[i].roomId});
+      }
+    });
   }
 }

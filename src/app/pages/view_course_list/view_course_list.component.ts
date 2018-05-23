@@ -41,7 +41,7 @@ export class ViewCourseListComponent implements OnInit {
     ];
     this.courseService
       .getAllCourses()
-      .subscribe(response => (this.courses = response.courses));
+      .subscribe(response => {this.courses = response.courses});
   }
 
   onFileUpload(event, fileUpload) {
@@ -59,7 +59,7 @@ export class ViewCourseListComponent implements OnInit {
         });
         this.courseService
           .getAllCourses()
-          .subscribe(response => (this.courses = response.courses));
+          .subscribe(response => {this.courses = response.courses});
       },
       error => {
         fileUpload.clear();

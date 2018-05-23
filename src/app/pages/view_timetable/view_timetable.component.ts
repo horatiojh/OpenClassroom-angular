@@ -42,7 +42,7 @@ export class ViewTimetableComponent implements OnInit {
     ];
     this.timetableService
       .getTimetableByCourseId(this.courseId)
-      .subscribe(response => (this.timetables = response.timetables));
+      .subscribe(response => {this.timetables = response.timetables});
   }
 
   updateTimetable(rowData) {

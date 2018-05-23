@@ -23,15 +23,33 @@
 
           <div class="ui-g-12 ui-md-12">
             <label class="label_cus">Start Time:</label>
-            <input type="text" pInputText placeholder="(hh:mm)" [(ngModel)]="weeks">
+            <input type="text" pInputText placeholder="(hh:mm)" [(ngModel)]="startTime">
           </div>
 
           <div class="ui-g-12 ui-md-12">
             <label class="label_cus">End Time:</label>
-            <input type="text" pInputText placeholder="(hh:mm)" [(ngModel)]="weeks">
+            <input type="text" pInputText placeholder="(hh:mm)" [(ngModel)]="endTime">
           </div>
+        </div>
+
+        <div class="ui-g form-group">
+
+          <div class="ui-g-12 ui-md-12">
+            <label class="label_cus">Classroom:</label>
+            <p-dropdown [options]="rooms" [(ngModel)]="selectedRoom"></p-dropdown>
+          </div>
+
+          <div class="ui-g-12 ui-md-12">
+            <label class="label_cus">Room Part:</label>
+            <input type="text" pInputText [(ngModel)]="roomPart">
+          </div>
+
+          <div class="ui-g-12 ui-md-12">
+            <label class="label_cus">Duration:</label>
+            <input type="text" pInputText placeholder="(hh:mm)" [(ngModel)]="duration">
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-</div>
