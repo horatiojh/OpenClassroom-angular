@@ -27,6 +27,7 @@ import { ViewStaffInfoComponent } from "./pages/view_staff_info/view_staff_info.
 import { ViewCourseListComponent } from "./pages/view_course_list/view_course_list.component";
 import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.component";
 import { ViewTimetableComponent } from "./pages/view_timetable/view_timetable.component";
+import { UpdateTimetableComponent } from "./pages/update_timetable/update_timetable.component";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -52,7 +53,8 @@ import { AppInlineProfileComponent } from "./app.profile.component";
     ViewClassroomComponent,
     ViewCourseListComponent,
     ViewTimetableComponent,
-    DataAnalyticsComponent
+    DataAnalyticsComponent,
+    UpdateTimetableComponent
   ],
   imports: [
     BrowserModule,

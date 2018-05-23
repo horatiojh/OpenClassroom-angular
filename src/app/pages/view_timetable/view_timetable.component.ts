@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Api } from "../../../providers/api";
 import { Router } from "@angular/router";
 import { Message } from "primeng/primeng";
 
@@ -27,7 +26,6 @@ export class ViewTimetableComponent implements OnInit {
   ngOnInit() {
     //for datatable
     this.courseId = Number(sessionStorage.getItem("courseId"));
-    console.log(this.courseId);
     this.cols = [
       { field: "weeksName", header: "Week Name", width: "30%" },
       { field: "weeks", header: "Weeks", width: "12%" },
@@ -39,5 +37,10 @@ export class ViewTimetableComponent implements OnInit {
     this.timetableService
       .getTimetableByCourseId(this.courseId)
       .subscribe(response => (this.timetables = response.timetables));
+  }
+
+  updateTimetable(rowData) {
+    sessionStorage.setItem("timetableId",rowData.id);
+    this.router.navigate(["/updateTimetable"]);
   }
 }

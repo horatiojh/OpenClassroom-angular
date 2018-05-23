@@ -9,6 +9,7 @@ import { ViewStaffInfoComponent } from "./pages/view_staff_info/view_staff_info.
 import { ViewCourseListComponent } from "./pages/view_course_list/view_course_list.component";
 import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.component";
 import { ViewTimetableComponent } from "./pages/view_timetable/view_timetable.component";
+import { UpdateTimetableComponent } from "./pages/update_timetable/update_timetable.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: "viewClassroom", component: ViewClassroomComponent },
       { path: "viewCourseList", component: ViewCourseListComponent },
       { path: "dataAnalytics", component: DataAnalyticsComponent },
-      { path: "viewTimetable", component: ViewTimetableComponent }
+      { path: "viewTimetable", component: ViewTimetableComponent },
+      { path: "updateTimetable", component: UpdateTimetableComponent }
     ]
   }
 ];

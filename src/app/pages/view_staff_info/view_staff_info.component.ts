@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Api } from "../../../providers/api";
 import { Router } from "@angular/router";
 import { Message } from "primeng/primeng";
 
