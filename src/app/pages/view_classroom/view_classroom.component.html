@@ -12,10 +12,14 @@
           </ng-template>
         </p-fileUpload>
 
-        <p-table [columns]="cols" [value]="classrooms" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+        <p-table #dt [columns]="cols" [value]="classrooms" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
           <ng-template pTemplate="caption">
-
+            <div style="text-align: right">
+              <i class="fa fa-search" style="margin:4px 4px 0 0px"></i>
+              <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                style="width:35%;margin-left: 3px;color:aliceblue">
+            </div>
           </ng-template>
 
           <ng-template pTemplate="header" let-columns>
@@ -25,10 +29,15 @@
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
             </tr>
+            <tr style="display:none;">
+              <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                <input *ngSwitchCase="'building'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+              </th>
+            </tr>
           </ng-template>
 
           <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr [pSelectableRow]="rowData">
+            <tr [pSelectableRow]="rowData" style="height:55px">
               <td *ngFor="let col of columns" [ngStyle]="{'text-align':col.textAlign}">
                 {{rowData[col.field]}}
               </td>
