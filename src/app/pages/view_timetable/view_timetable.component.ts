@@ -31,10 +31,10 @@ export class ViewTimetableComponent implements OnInit {
     this.cols = [
       { field: "weeksName", header: "Week Name", width: "30%" },
       { field: "weeks", header: "Weeks", width: "12%" },
-      { field: "weekDay", header: "Week Day", width: "12%" },
-      { field: "startTime", header: "Start", width: "12%" },
-      { field: "endTime", header: "End", width: "12%" },
-      { field: "room", header: "Classroom", width: "12%" }
+      { field: "weekDay", header: "Week Day", width: "15%" },
+      { field: "startTime", header: "Start", width: "10%" },
+      { field: "endTime", header: "End", width: "10%" },
+      { field: "room", header: "Classroom", width: "15%" }
     ];
     this.timetableService
       .getTimetableByCourseId(this.courseId)
