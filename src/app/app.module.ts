@@ -36,7 +36,6 @@ import { AppMenuComponent, AppSubMenuComponent } from "./app.menu.component";
 import { AppInlineProfileComponent } from "./app.profile.component";
 import { CourseService } from "../providers/courseService";
 import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.component";
-import { ViewTimetableComponent } from './view-timetable/view-timetable.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +49,7 @@ import { ViewTimetableComponent } from './view-timetable/view-timetable.componen
     ViewStaffInfoComponent,
     ViewClassroomComponent,
     ViewCourseListComponent,
-    DataAnalyticsComponent,
-    ViewTimetableComponent
+    DataAnalyticsComponent
   ],
   imports: [
     BrowserModule,

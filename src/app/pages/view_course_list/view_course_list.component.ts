@@ -70,7 +70,7 @@ export class ViewCourseListComponent implements OnInit {
     );
   }
 
-  viewTimetable(rowData) {
-    console.log(rowData.id);
+  viewTimetable() {
+
   }
 }
