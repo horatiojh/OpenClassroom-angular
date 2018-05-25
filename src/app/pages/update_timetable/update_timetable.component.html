@@ -8,7 +8,7 @@
         <div class="ui-g form-group">
           <div class="ui-g-12 ui-md-12">
             <label class="label_cus">Weeks Name:</label>
-            <input type="text" pInputText [(ngModel)]="weeksName">
+            <input type="text" pInputText [(ngModel)]="weeksName" style="width:30%">
           </div>
 
           <div class="ui-g-12 ui-md-12">
@@ -49,7 +49,11 @@
             <input type="text" pInputText placeholder="(hh:mm)" [(ngModel)]="duration">
           </div>
 
+          <div class="ui-g-12 ui-md-12">
+            <p-button label="Submit" (onClick)="handleClick($event)"></p-button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>

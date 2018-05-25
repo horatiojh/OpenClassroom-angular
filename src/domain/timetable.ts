@@ -6,7 +6,9 @@ export class Timetable {
   weekDay: string;
   startTime: string;
   endTime: string;
+  roomPart: string;
   room: string;
+  duration: string;
 
   constructor() {}
 }
