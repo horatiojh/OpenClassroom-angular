@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { SelectItem } from "primeng/primeng";
 import { NgForm } from "@angular/forms";
+
+import { SelectItem } from "primeng/primeng";
+import { Message } from "primeng/primeng";
 
 import { BreadcrumbService } from "../../breadcrumb.service";
 import { ClassroomService } from "../../../providers/classroomService";
@@ -16,11 +18,11 @@ import { Timetable } from "../../../domain/timetable";
   styleUrls: ["./update_timetable.component.css"]
 })
 export class UpdateTimetableComponent implements OnInit {
-
   // for components
   weekDays: SelectItem[];
   classrooms: Classroom[];
   rooms: SelectItem[];
+  msgs: Message[] = [];
 
   // attributes
   weeksName: string;
@@ -73,9 +75,11 @@ export class UpdateTimetableComponent implements OnInit {
       }
     });
 
-    this.timetableService.getTimetableByTimetableId(this.timetableId).subscribe(
-      response => {
+    this.timetableService
+      .getTimetableByTimetableId(this.timetableId)
+      .subscribe(response => {
         this.timetable = response.timetable;
+        this.timetableId = this.timetable.id;
         this.weeksName = this.timetable.weeksName;
         this.weeks = this.timetable.weeks;
         this.startTime = this.timetable.startTime;
@@ -84,13 +88,30 @@ export class UpdateTimetableComponent implements OnInit {
         this.selectedWeekDay = this.timetable.weekDay;
         this.selectedRoom = this.timetable.room;
         this.duration = this.timetable.duration;
-
-        this.newTimetable = new Timetable();
-      }
-    )
+      });
   }
 
-  updateTimetable(timetable:Timetable) {
+  updateTimetable(timetable: Timetable) {
+    this.newTimetable = new Timetable(
+      this.timetableId,
+      this.weeksName,
+      this.weeks,
+      this.selectedWeekDay,
+      this.startTime,
+      this.endTime,
+      this.roomPart,
+      this.selectedRoom,
+      this.duration
+    );
 
+    this.timetableService
+      .updateTimetable(this.newTimetable)
+      .subscribe(response => {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Updated!",
+          detail: ""
+        });
+      });
   }
 }

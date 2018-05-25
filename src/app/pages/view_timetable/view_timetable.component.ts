@@ -17,6 +17,7 @@ export class ViewTimetableComponent implements OnInit {
   cols: any[];
   timetables: Timetable[];
   courseId: number;
+  msgs: Message[] = [];
 
   constructor(
     private router: Router,
@@ -40,9 +41,20 @@ export class ViewTimetableComponent implements OnInit {
       { field: "endTime", header: "End", width: "10%" },
       { field: "room", header: "Classroom", width: "15%" }
     ];
+
     this.timetableService
       .getTimetableByCourseId(this.courseId)
-      .subscribe(response => {this.timetables = response.timetables});
+      .subscribe(response => {
+        if (response != null && typeof response.timetables != undefined) {
+          this.timetables = response.timetables;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
   }
 
   updateTimetable(rowData) {
