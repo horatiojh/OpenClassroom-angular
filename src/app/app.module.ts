@@ -36,6 +36,7 @@ import { ClassroomService } from "../providers/classroomService";
 import { StaffService } from "../providers/staffService";
 import { CourseService } from "../providers/courseService";
 import { TimetableService } from "../providers/timetableService";
+import { ShareService } from "../providers/shareService";
 
 import { AppTopbarComponent } from "./app.topbar.component";
 import { AppMenuComponent, AppSubMenuComponent } from "./app.menu.component";
@@ -83,7 +84,8 @@ import { BreadcrumbService } from "./breadcrumb.service";
     ClassroomService,
     StaffService,
     CourseService,
-    TimetableService
+    TimetableService,
+    ShareService
   ],
   bootstrap: [AppComponent]
 })

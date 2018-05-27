@@ -9,6 +9,7 @@ import { Message } from "primeng/primeng";
 import { BreadcrumbService } from "../../breadcrumb.service";
 import { ClassroomService } from "../../../providers/classroomService";
 import { TimetableService } from "../../../providers/timetableService";
+import { ShareService } from "../../../providers/shareService";
 
 import { Classroom } from "../../../domain/classroom";
 import { Timetable } from "../../../domain/timetable";
@@ -48,7 +49,8 @@ export class UpdateTimetableComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private classroomService: ClassroomService,
     private timetableService: TimetableService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private shareService: ShareService
   ) {
     this.breadcrumbService.setItems([
       { label: "Course List", routerLink: ["/viewCourseList"] },
@@ -58,10 +60,11 @@ export class UpdateTimetableComponent implements OnInit {
   }
 
   ngOnInit() {
+
     let style = "width:200%;height:36px";
     this.buttonStyle = this.domSanitizer.bypassSecurityTrustStyle(style);
 
-    this.timetableId = Number(sessionStorage.getItem("timetableId"));
+    this.timetableId = Number(this.shareService.getValue("timetableId"));
 
     this.weekDays = [
       { label: "Please Select One", value: null },
@@ -120,6 +123,7 @@ export class UpdateTimetableComponent implements OnInit {
           summary: "Successfully Updated!",
           detail: ""
         });
+        this.router.navigate(["/viewTimetable"]);
       });
   }
 }

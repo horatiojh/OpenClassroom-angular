@@ -6,6 +6,8 @@ import { Subscription } from "rxjs";
 import { Timetable } from "../../../domain/timetable";
 
 import { TimetableService } from "../../../providers/timetableService";
+import { ShareService } from "../../../providers/shareService";
+
 import { BreadcrumbService } from "../../breadcrumb.service";
 
 @Component({
@@ -23,7 +25,8 @@ export class ViewTimetableComponent implements OnInit {
   constructor(
     private router: Router,
     private timetableService: TimetableService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private shareService: ShareService
   ) {
     this.breadcrumbService.setItems([
       { label: "Course List", routerLink: ["/viewCourseList"] },
@@ -33,7 +36,8 @@ export class ViewTimetableComponent implements OnInit {
 
   ngOnInit() {
     //for datatable
-    this.courseId = Number(sessionStorage.getItem("courseId"));
+    this.courseId = Number(this.shareService.getValue("courseId"));
+
     this.cols = [
       { field: "weeksName", header: "Week Name", width: "30%" },
       { field: "weeks", header: "Weeks", width: "12%" },
@@ -59,7 +63,7 @@ export class ViewTimetableComponent implements OnInit {
   }
 
   updateTimetable(rowData) {
-    sessionStorage.setItem("timetableId", rowData.id);
+    this.shareService.setValue("timetableId", rowData.id);
     this.router.navigate(["/updateTimetable"]);
   }
 }

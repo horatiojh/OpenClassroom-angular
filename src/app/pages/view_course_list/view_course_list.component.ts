@@ -7,6 +7,7 @@ import { Course } from "../../../domain/course";
 import { FileUploadService } from "../../../providers/fileUploadService";
 import { CourseService } from "../../../providers/courseService";
 import { BreadcrumbService } from "../../breadcrumb.service";
+import { ShareService } from "../../../providers/shareService";
 
 @Component({
   selector: "app-viewCourseList",
@@ -25,7 +26,8 @@ export class ViewCourseListComponent implements OnInit {
     private fileUploadService: FileUploadService,
     private router: Router,
     private courseService: CourseService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private shareService: ShareService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
@@ -74,7 +76,7 @@ export class ViewCourseListComponent implements OnInit {
   }
 
   viewTimetable(rowData) {
-    sessionStorage.setItem("courseId", rowData.id);
+    this.shareService.setValue("courseId",rowData.id);
     this.router.navigate(["/viewTimetable"]);
   }
 }
