@@ -33,7 +33,6 @@
         </div>
 
         <div class="ui-g form-group">
-
           <div class="ui-g-12 ui-md-12">
             <label class="label_cus">Classroom:</label>
             <p-dropdown [options]="rooms" [(ngModel)]="selectedRoom"></p-dropdown>
@@ -50,7 +49,7 @@
           </div>
 
           <div class="ui-g-12 ui-md-12">
-            <p-button label="Submit" (onClick)="updateTimetable($event)"></p-button>
+            <p-button label="Submit" [style]="buttonStyle" (onClick)="updateTimetable($event)"></p-button>
           </div>
         </div>
       </div>

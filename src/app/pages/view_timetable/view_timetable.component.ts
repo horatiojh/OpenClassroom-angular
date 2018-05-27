@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Message } from "primeng/primeng";
+import { Subscription } from "rxjs";
 
 import { Timetable } from "../../../domain/timetable";
 

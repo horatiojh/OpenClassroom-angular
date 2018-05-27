@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 import { SelectItem } from "primeng/primeng";
 import { Message } from "primeng/primeng";
@@ -39,11 +40,15 @@ export class UpdateTimetableComponent implements OnInit {
   newTimetable: Timetable;
   timetableId: number;
 
+  // css style
+  buttonStyle: SafeStyle;
+
   constructor(
     private router: Router,
     private breadcrumbService: BreadcrumbService,
     private classroomService: ClassroomService,
-    private timetableService: TimetableService
+    private timetableService: TimetableService,
+    private domSanitizer: DomSanitizer
   ) {
     this.breadcrumbService.setItems([
       { label: "Course List", routerLink: ["/viewCourseList"] },
@@ -53,6 +58,9 @@ export class UpdateTimetableComponent implements OnInit {
   }
 
   ngOnInit() {
+    let style = "width:200%;height:36px";
+    this.buttonStyle = this.domSanitizer.bypassSecurityTrustStyle(style);
+
     this.timetableId = Number(sessionStorage.getItem("timetableId"));
 
     this.weekDays = [
