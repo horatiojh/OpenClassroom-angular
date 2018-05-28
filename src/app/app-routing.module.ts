@@ -12,6 +12,8 @@ import { ViewTimetableComponent } from "./pages/view_timetable/view_timetable.co
 import { UpdateTimetableComponent } from "./pages/update_timetable/update_timetable.component";
 
 import { AuthGuard } from "./guards/auth.guard";
+import { AdminGuard } from "./guards/admin.guard";
+import { InstructorGuard } from "./guards/instructor.guard";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -19,14 +21,14 @@ const routes: Routes = [
   {
     path: "",
     component: MainComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     children: [
       { path: "viewStaffInfo", component: ViewStaffInfoComponent },
-      { path: "viewClassroom", component: ViewClassroomComponent },
-      { path: "viewCourseList", component: ViewCourseListComponent },
-      { path: "dataAnalytics", component: DataAnalyticsComponent },
-      { path: "viewTimetable", component: ViewTimetableComponent },
-      { path: "updateTimetable", component: UpdateTimetableComponent }
+      { path: "viewClassroom", component: ViewClassroomComponent, },
+      { path: "viewCourseList", component: ViewCourseListComponent, },
+      { path: "dataAnalytics", component: DataAnalyticsComponent, },
+      { path: "viewTimetable", component: ViewTimetableComponent, },
+      { path: "updateTimetable", component: UpdateTimetableComponent, }
     ]
   }
 ];

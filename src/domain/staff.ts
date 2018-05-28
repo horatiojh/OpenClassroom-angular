@@ -5,7 +5,7 @@ export class Staff {
   pwd: string;
   emailAddress: string;
   staffName: string;
-  staffRole: number;
+  staffRole: string;
   isFirstLogin: boolean;
 
   constructor() {}

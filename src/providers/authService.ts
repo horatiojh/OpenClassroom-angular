@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class AuthService {
-
   isLogin: string;
+  staffRole: string;
 
   constructor() {}
 
@@ -18,10 +18,22 @@ export class AuthService {
   }
 
   get isAdmin() {
-    return true;
+    this.staffRole = sessionStorage.getItem("staffRole");
+
+    if (this.staffRole === "admin") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   get isInstructor() {
-    return true;
+    this.staffRole = sessionStorage.getItem("staffRole");
+
+    if (this.staffRole === "instructor") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

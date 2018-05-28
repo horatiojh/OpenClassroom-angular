@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   staffId: string;
   pwd: string;
   loginErrorMessage: string;
-  staffRole: string;
+  staff: Staff;
 
   constructor(private api: Api, private router: Router) {
     this.isLogin = false;
@@ -39,10 +39,13 @@ export class LoginComponent implements OnInit {
 
       this.api.post(endpoint, body).subscribe(
         response => {
-          // this.staffRole = response.staffRole;
-          // console.log(this.staffRole);
+          this.staff = response.staff;
           sessionStorage.setItem("isLogin", "true");
-          this.router.navigate(["/viewStaffInfo"]);
+          sessionStorage.setItem("staffRole", this.staff.staffRole);
+
+          if (this.staff.staffRole === "admin") {
+            this.router.navigate(["/viewStaffInfo"]);
+          }
         },
         error => {
           let msg: string = "Sign in failed! Incorrect username or password";
