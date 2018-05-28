@@ -15,6 +15,8 @@ import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.co
 import { ViewTimetableComponent } from "./pages/view_timetable/view_timetable.component";
 import { UpdateTimetableComponent } from "./pages/update_timetable/update_timetable.component";
 import { WorkspaceComponent } from "./pages/workspace/workspace.component";
+import { ProfViewCoursesComponent } from "./pages/prof_view_courses/prof_view_courses.component";
+import { ViewVisitHistoryComponent } from "./pages/view_visit_history/view_visit_history.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -37,7 +39,9 @@ const routes: Routes = [
     component: MainComponent,
     canActivate: [AuthGuard, InstructorGuard],
     children: [
-      { path: "workspace", component: WorkspaceComponent }
+      { path: "workspace", component: WorkspaceComponent },
+      { path: "profViewCourses", component: ProfViewCoursesComponent },
+      { path: "viewVisitHistory", component: ViewVisitHistoryComponent }
     ]
   }
 ];

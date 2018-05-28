@@ -30,6 +30,8 @@ import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.co
 import { ViewTimetableComponent } from "./pages/view_timetable/view_timetable.component";
 import { UpdateTimetableComponent } from "./pages/update_timetable/update_timetable.component";
 import { WorkspaceComponent } from "./pages/workspace/workspace.component";
+import { ProfViewCoursesComponent } from "./pages/prof_view_courses/prof_view_courses.component";
+import { ViewVisitHistoryComponent } from "./pages/view_visit_history/view_visit_history.component";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -66,7 +68,9 @@ import { BreadcrumbService } from "./breadcrumb.service";
     ViewTimetableComponent,
     DataAnalyticsComponent,
     UpdateTimetableComponent,
-    WorkspaceComponent
+    WorkspaceComponent,
+    ProfViewCoursesComponent,
+    ViewVisitHistoryComponent
   ],
   imports: [
     BrowserModule,
