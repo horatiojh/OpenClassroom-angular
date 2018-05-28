@@ -123,7 +123,7 @@ export class UpdateTimetableComponent implements OnInit {
           summary: "Successfully Updated!",
           detail: ""
         });
-        this.router.navigate(["/viewTimetable"]);
+        // this.router.navigate(["/viewTimetable"]);
       });
   }
 }

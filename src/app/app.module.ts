@@ -37,6 +37,11 @@ import { StaffService } from "../providers/staffService";
 import { CourseService } from "../providers/courseService";
 import { TimetableService } from "../providers/timetableService";
 import { ShareService } from "../providers/shareService";
+import { AuthService } from "../providers/authService";
+
+import { AdminGuard } from "./guards/admin.guard";
+import { AuthGuard } from "./guards/auth.guard";
+import { InstructorGuard } from "./guards/instructor.guard";
 
 import { AppTopbarComponent } from "./app.topbar.component";
 import { AppMenuComponent, AppSubMenuComponent } from "./app.menu.component";
@@ -85,7 +90,11 @@ import { BreadcrumbService } from "./breadcrumb.service";
     StaffService,
     CourseService,
     TimetableService,
-    ShareService
+    ShareService,
+    AuthService,
+    AdminGuard,
+    AuthGuard,
+    InstructorGuard
   ],
   bootstrap: [AppComponent]
 })

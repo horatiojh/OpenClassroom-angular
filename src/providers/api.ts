@@ -1,14 +1,19 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHandler,
+  HttpHeaders
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/observable/throw';
+import "rxjs/add/observable/throw";
 
 @Injectable()
 export class Api {
   public url: string = "/api/";
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {}
 
   get(endpoint: string) {
     return this.http
@@ -16,15 +21,15 @@ export class Api {
       .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
   }
 
-  post(endpoint: string, body?: any) {
+  post(endpoint: string, body?: any): Observable<any> {
     return this.http
-      .post(this.url + endpoint, body)
+      .post<any>(this.url + endpoint, body)
       .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
   }
 
-  put(endpoint: string, body?: any) {
+  put(endpoint: string, body?: any): Observable<any> {
     return this.http
-      .put(this.url + endpoint, body)
+      .put<any>(this.url + endpoint, body)
       .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
   }
 
@@ -35,15 +40,14 @@ export class Api {
   }
 
   private handleError(error: HttpErrorResponse) {
-
-    let errMsg = error.message || 'Server error';
+    let errMsg = error.message || "Server error";
 
     if (error.error instanceof ErrorEvent) {
       console.error("An unknown error has occurred:", error.error.message);
     } else {
       console.error(
         "An HTTP error has occurred: " +
-        `HTTP ${error.status}: ${error.error.message}`
+          `HTTP ${error.status}: ${error.error.message}`
       );
     }
 

@@ -11,12 +11,15 @@ import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.co
 import { ViewTimetableComponent } from "./pages/view_timetable/view_timetable.component";
 import { UpdateTimetableComponent } from "./pages/update_timetable/update_timetable.component";
 
+import { AuthGuard } from "./guards/auth.guard";
+
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   {
     path: "",
     component: MainComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: "viewStaffInfo", component: ViewStaffInfoComponent },
       { path: "viewClassroom", component: ViewClassroomComponent },
