@@ -15,16 +15,26 @@ export class AppMenuComponent implements OnInit {
     @Input() reset: boolean;
 
     model: any[];
+    staffRole: string;
 
     constructor(public app: MainComponent) { }
 
     ngOnInit() {
+
+      this.staffRole = sessionStorage.getItem("staffRole");
+
+      if(this.staffRole === "admin") {
         this.model = [
             { label: 'Staff Information', icon: 'camera', routerLink: ['/viewStaffInfo'] },
             { label: 'Classroom', icon: 'class', routerLink: ['/viewClassroom'] },
             { label: 'Course List', icon: 'list', routerLink: ['/viewCourseList'] },
             { label: 'Data Analytics', icon: 'poll', routerLink: ['/dataAnalytics'] }
         ];
+      } else if(this.staffRole === "instructor") {
+        this.model = [
+          { label: 'Workspace', icon: 'camera', routerLink: ['/workspace'] }
+        ];
+      }
     }
 }
 
