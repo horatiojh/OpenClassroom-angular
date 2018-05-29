@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Timetable } from "../../../domain/timetable";
 import { Message } from "primeng/primeng";
 
@@ -8,6 +8,7 @@ import { TimetableService } from "../../../providers/timetableService";
 import { DateService } from "../../../providers/dateService";
 
 import { Date } from "../../../domain/date";
+import { Table } from "primeng/table";
 
 @Component({
   selector: "app-viewIndivCourseTimetable",
@@ -96,6 +97,22 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.dateStr = this.date.dateStr;
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
+
+        this.newDate = new Date(
+          this.dateId,
+          this.dateStr,
+          this.startTime,
+          this.endTime,
+          "archived"
+        );
+
+        this.dateService.updateDate(this.newDate).subscribe(response => {
+          this.msgs.push({
+            severity: "info",
+            summary: "Successfully Archived!",
+            detail: ""
+          });
+        });
       } else {
         this.msgs.push({
           severity: "error",
@@ -104,23 +121,39 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         });
       }
     });
-
-    this.newDate = new Date(
-      this.dateId,
-      this.dateStr,
-      this.startTime,
-      this.endTime,
-      "archived"
-    );
-
-    this.dateService.updateDate(this.newDate).subscribe(response => {
-      this.msgs.push({
-        severity: "info",
-        summary: "Successfully Archived!",
-        detail: ""
-      });
-    });
   }
 
-  restoreDate(rowDate) {}
+  restoreDate(rowDate) {
+    this.dateService.getDateByDateId(rowDate.id).subscribe(response => {
+      if (response != null && typeof response.date != undefined) {
+        this.date = response.date;
+        this.dateId = this.date.id;
+        this.dateStr = this.date.dateStr;
+        this.startTime = this.date.startTime;
+        this.endTime = this.date.endTime;
+
+        this.newDate = new Date(
+          this.dateId,
+          this.dateStr,
+          this.startTime,
+          this.endTime,
+          "available"
+        );
+
+        this.dateService.updateDate(this.newDate).subscribe(response => {
+          this.msgs.push({
+            severity: "info",
+            summary: "Successfully Restored!",
+            detail: ""
+          });
+        });
+      } else {
+        this.msgs.push({
+          severity: "error",
+          summary: "An error has occurred while processing the request",
+          detail: ""
+        });
+      }
+    });
+  }
 }
