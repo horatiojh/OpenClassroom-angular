@@ -17,6 +17,7 @@ import { UpdateTimetableComponent } from "./pages/update_timetable/update_timeta
 import { WorkspaceComponent } from "./pages/workspace/workspace.component";
 import { ProfViewCoursesComponent } from "./pages/prof_view_courses/prof_view_courses.component";
 import { ViewVisitHistoryComponent } from "./pages/view_visit_history/view_visit_history.component";
+import { ViewIndivCourseTimetableComponent } from "./pages/view_indiv_course_timetable/view_indiv_course_timetable.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -31,7 +32,8 @@ const routes: Routes = [
       { path: "viewCourseList", component: ViewCourseListComponent },
       { path: "dataAnalytics", component: DataAnalyticsComponent },
       { path: "viewTimetable", component: ViewTimetableComponent },
-      { path: "updateTimetable", component: UpdateTimetableComponent }
+      { path: "updateTimetable", component: UpdateTimetableComponent },
+      { path: "viewIndivCourseTimetable", component: ViewIndivCourseTimetableComponent }
     ]
   },
   {

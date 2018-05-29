@@ -1,4 +1,7 @@
+import { Date } from "./date";
+
 export class Timetable {
+
   id: number;
   weeksName: string;
   weeks: string;

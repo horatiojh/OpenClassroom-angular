@@ -8,6 +8,12 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { MainComponent } from "./main.component";
 
+import { AppTopbarComponent } from "./app.topbar.component";
+import { AppMenuComponent, AppSubMenuComponent } from "./app.menu.component";
+import { AppInlineProfileComponent } from "./app.profile.component";
+import { AppBreadcrumbComponent } from "./app.breadcrumb.component";
+import { BreadcrumbService } from "./breadcrumb.service";
+
 import {
   InputTextModule,
   ScrollPanelModule,
@@ -21,6 +27,22 @@ import { TableModule } from "primeng/table";
 import { FileUploadModule } from "primeng/fileupload";
 import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
+import { CalendarModule } from "primeng/calendar";
+import { TabViewModule } from "primeng/tabview";
+
+import { Api } from "../providers/api";
+import { FileUploadService } from "../providers/fileUploadService";
+import { ClassroomService } from "../providers/classroomService";
+import { StaffService } from "../providers/staffService";
+import { CourseService } from "../providers/courseService";
+import { TimetableService } from "../providers/timetableService";
+import { ShareService } from "../providers/shareService";
+import { AuthService } from "../providers/authService";
+import { DateService } from "../providers/dateService";
+
+import { AdminGuard } from "./guards/admin.guard";
+import { AuthGuard } from "./guards/auth.guard";
+import { InstructorGuard } from "./guards/instructor.guard";
 
 import { LoginComponent } from "./pages/login/login.component";
 import { ViewClassroomComponent } from "./pages/view_classroom/view_classroom.component";
@@ -32,25 +54,7 @@ import { UpdateTimetableComponent } from "./pages/update_timetable/update_timeta
 import { WorkspaceComponent } from "./pages/workspace/workspace.component";
 import { ProfViewCoursesComponent } from "./pages/prof_view_courses/prof_view_courses.component";
 import { ViewVisitHistoryComponent } from "./pages/view_visit_history/view_visit_history.component";
-
-import { Api } from "../providers/api";
-import { FileUploadService } from "../providers/fileUploadService";
-import { ClassroomService } from "../providers/classroomService";
-import { StaffService } from "../providers/staffService";
-import { CourseService } from "../providers/courseService";
-import { TimetableService } from "../providers/timetableService";
-import { ShareService } from "../providers/shareService";
-import { AuthService } from "../providers/authService";
-
-import { AdminGuard } from "./guards/admin.guard";
-import { AuthGuard } from "./guards/auth.guard";
-import { InstructorGuard } from "./guards/instructor.guard";
-
-import { AppTopbarComponent } from "./app.topbar.component";
-import { AppMenuComponent, AppSubMenuComponent } from "./app.menu.component";
-import { AppInlineProfileComponent } from "./app.profile.component";
-import { AppBreadcrumbComponent } from "./app.breadcrumb.component";
-import { BreadcrumbService } from "./breadcrumb.service";
+import { ViewIndivCourseTimetableComponent } from "./pages/view_indiv_course_timetable/view_indiv_course_timetable.component";
 
 @NgModule({
   declarations: [
@@ -70,7 +74,8 @@ import { BreadcrumbService } from "./breadcrumb.service";
     UpdateTimetableComponent,
     WorkspaceComponent,
     ProfViewCoursesComponent,
-    ViewVisitHistoryComponent
+    ViewVisitHistoryComponent,
+    ViewIndivCourseTimetableComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +91,9 @@ import { BreadcrumbService } from "./breadcrumb.service";
     GrowlModule,
     DataTableModule,
     TableModule,
-    DropdownModule
+    DropdownModule,
+    CalendarModule,
+    TabViewModule
   ],
   providers: [
     Api,
@@ -100,7 +107,8 @@ import { BreadcrumbService } from "./breadcrumb.service";
     AuthService,
     AdminGuard,
     AuthGuard,
-    InstructorGuard
+    InstructorGuard,
+    DateService
   ],
   bootstrap: [AppComponent]
 })

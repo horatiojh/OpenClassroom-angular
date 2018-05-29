@@ -40,11 +40,11 @@ export class ViewTimetableComponent implements OnInit {
 
     this.cols = [
       { field: "weeksName", header: "Week Name", width: "30%" },
-      { field: "weeks", header: "Weeks", width: "12%" },
-      { field: "weekDay", header: "Week Day", width: "15%" },
-      { field: "startTime", header: "Start", width: "10%" },
-      { field: "endTime", header: "End", width: "10%" },
-      { field: "room", header: "Classroom", width: "15%" }
+      { field: "weeks", header: "Weeks", width: "11%" },
+      { field: "weekDay", header: "Week Day", width: "13%" },
+      { field: "startTime", header: "Start", width: "9%" },
+      { field: "endTime", header: "End", width: "9%" },
+      { field: "room", header: "Classroom", width: "13%" }
     ];
 
     this.timetableService
@@ -65,5 +65,10 @@ export class ViewTimetableComponent implements OnInit {
   updateTimetable(rowData) {
     this.shareService.setValue("timetableId", rowData.id);
     this.router.navigate(["/updateTimetable"]);
+  }
+
+  viewIndivCourseTimetable(rowData) {
+    this.shareService.setValue("timetableId", rowData.id);
+    this.router.navigate(["/viewIndivCourseTimetable"]);
   }
 }

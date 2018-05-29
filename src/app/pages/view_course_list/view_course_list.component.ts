@@ -33,7 +33,7 @@ export class ViewCourseListComponent implements OnInit {
   }
 
   ngOnInit() {
-    //for datatable
+    // for datatable
     this.cols = [
       { field: "staffName", header: "Instructor", width: "12%" },
       { field: "dept", header: "Dept ID", width: "12%" },
