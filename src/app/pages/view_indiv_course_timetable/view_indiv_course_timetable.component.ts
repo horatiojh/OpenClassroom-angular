@@ -22,6 +22,17 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   timetableId: number;
   msgs: Message[] = [];
 
+  // attributes
+  dateId: number;
+  dateStr: string;
+  startTime: string;
+  endTime: string;
+  status: string;
+
+  // update date
+  date: Date;
+  newDate: Date;
+
   constructor(
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,
@@ -76,4 +87,40 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         }
       });
   }
+
+  archiveDate(rowDate) {
+    this.dateService.getDateByDateId(rowDate.id).subscribe(response => {
+      if (response != null && typeof response.date != undefined) {
+        this.date = response.date;
+        this.dateId = this.date.id;
+        this.dateStr = this.date.dateStr;
+        this.startTime = this.date.startTime;
+        this.endTime = this.date.endTime;
+      } else {
+        this.msgs.push({
+          severity: "error",
+          summary: "An error has occurred while processing the request",
+          detail: ""
+        });
+      }
+    });
+
+    this.newDate = new Date(
+      this.dateId,
+      this.dateStr,
+      this.startTime,
+      this.endTime,
+      "archived"
+    );
+
+    this.dateService.updateDate(this.newDate).subscribe(response => {
+      this.msgs.push({
+        severity: "info",
+        summary: "Successfully Archived!",
+        detail: ""
+      });
+    });
+  }
+
+  restoreDate(rowDate) {}
 }

@@ -19,8 +19,7 @@
                     {{col.header}}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
-                  <th>Update</th>
-                  <th>View</th>
+                  <th>Archive</th>
                 </tr>
               </ng-template>
 
@@ -30,17 +29,14 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-edit" (onClick)="updateTimetable(rowData)"></p-button>
-                  </td>
-                  <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-file-text" (onClick)="viewIndivCourseTimetable(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-trash" (onClick)="archiveDate(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>
 
               <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                  <td [attr.colspan]="columns.length+2">
+                  <td [attr.colspan]="columns.length+1">
                     No records found
                   </td>
                 </tr>
@@ -62,8 +58,7 @@
                     {{col.header}}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
-                  <th>Update</th>
-                  <th>View</th>
+                  <th>Restore</th>
                 </tr>
               </ng-template>
 
@@ -73,17 +68,14 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-edit" (onClick)="updateTimetable(rowData)"></p-button>
-                  </td>
-                  <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-file-text" (onClick)="viewIndivCourseTimetable(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-edit" (onClick)="restoreDate(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>
 
               <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                  <td [attr.colspan]="columns.length+2">
+                  <td [attr.colspan]="columns.length+1">
                     No records found
                   </td>
                 </tr>
