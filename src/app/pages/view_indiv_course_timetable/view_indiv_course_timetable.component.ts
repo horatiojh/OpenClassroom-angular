@@ -18,6 +18,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   // for datatable
   cols: any[];
   availDates: Date[];
+  archivedDates: Date[];
   timetableId: number;
   msgs: Message[] = [];
 
@@ -38,7 +39,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   }
 
   ngOnInit() {
-
     //for datatable
     this.timetableId = Number(this.shareService.getValue("timetableId"));
 
@@ -49,10 +49,24 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     ];
 
     this.dateService
-      .getDateByTimetableId(this.timetableId)
+      .getAvailDateByTimetableId(this.timetableId)
       .subscribe(response => {
         if (response != null && typeof response.dates != undefined) {
           this.availDates = response.dates;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
+
+    this.dateService
+      .getArchivedDateByTimetableId(this.timetableId)
+      .subscribe(response => {
+        if (response != null && typeof response.dates != undefined) {
+          this.archivedDates = response.dates;
         } else {
           this.msgs.push({
             severity: "error",

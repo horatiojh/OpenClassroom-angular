@@ -15,12 +15,21 @@ export class DateService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getDateByTimetableId(timetableId: number): Observable<any> {
+  getAvailDateByTimetableId(timetableId: number): Observable<any> {
     return this.httpClient
-      .get<any>(this.baseUrl + "/getDates/" + timetableId)
+      .get<any>(this.baseUrl + "/getAvailDates/" + timetableId)
       .pipe(
-        tap(_ => console.log(`getDates timetableId=${timetableId}`)),
-        catchError(this.handleError<any>(`getDates timetableId=${timetableId}`))
+        tap(_ => console.log(`getAvailDates timetableId=${timetableId}`)),
+        catchError(this.handleError<any>(`getAvailDates timetableId=${timetableId}`))
+      );
+  }
+
+  getArchivedDateByTimetableId(timetableId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getArchivedDates/" + timetableId)
+      .pipe(
+        tap(_ => console.log(`getArchivedDates timetableId=${timetableId}`)),
+        catchError(this.handleError<any>(`getArchivedDates timetableId=${timetableId}`))
       );
   }
 
