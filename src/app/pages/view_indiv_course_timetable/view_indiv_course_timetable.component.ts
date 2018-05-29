@@ -17,7 +17,7 @@ import { Date } from "../../../domain/date";
 export class ViewIndivCourseTimetableComponent implements OnInit {
   // for datatable
   cols: any[];
-  dates: Date[];
+  availDates: Date[];
   timetableId: number;
   msgs: Message[] = [];
 
@@ -38,17 +38,21 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   }
 
   ngOnInit() {
+
     //for datatable
     this.timetableId = Number(this.shareService.getValue("timetableId"));
 
-    this.cols = [{ field: "dates", header: " ", width: "30%" }];
+    this.cols = [
+      { field: "dateStr", header: "Date" },
+      { field: "startTime", header: "Start" },
+      { field: "endTime", header: "End" }
+    ];
 
     this.dateService
       .getDateByTimetableId(this.timetableId)
       .subscribe(response => {
         if (response != null && typeof response.dates != undefined) {
-          this.dates = response.dates;
-          console.log(this.dates);
+          this.availDates = response.dates;
         } else {
           this.msgs.push({
             severity: "error",
