@@ -4,6 +4,7 @@ import { Message } from "primeng/primeng";
 import { Course } from "../../../domain/course";
 
 import { CourseService } from "../../../providers/courseService";
+import { TimetableService } from "../../../providers/timetableService";
 
 @Component({
   selector: "app-workspace",
@@ -19,8 +20,12 @@ export class WorkspaceComponent implements OnInit {
   moduleCode: string;
   moduleTitle: string;
   staffName: string;
+  faculty: string;
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private timetableService: TimetableService
+  ) {}
 
   ngOnInit() {
     this.staffId = Number(sessionStorage.getItem("staffId"));
@@ -31,6 +36,7 @@ export class WorkspaceComponent implements OnInit {
         this.moduleCode = this.courses[0].moduleCode;
         this.moduleTitle = this.courses[0].moduleTitle;
         this.staffName = this.courses[0].staffName;
+        this.faculty = this.courses[0].faculty;
       } else {
         this.msgs.push({
           severity: "error",
