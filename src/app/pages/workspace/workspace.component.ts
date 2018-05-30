@@ -7,6 +7,7 @@ import { Course } from "../../../domain/course";
 
 import { CourseService } from "../../../providers/courseService";
 import { TimetableService } from "../../../providers/timetableService";
+import { BreadcrumbService } from "../../breadcrumb.service";
 
 @Component({
   selector: "app-workspace",
@@ -28,24 +29,38 @@ export class WorkspaceComponent implements OnInit {
   updateCourseBtnSytle: SafeStyle;
   viewTimetableBtnStyle: SafeStyle;
   createTagsBtnStyle: SafeStyle;
+  viewCourseBtnStyle: SafeStyle;
 
   constructor(
     private courseService: CourseService,
     private timetableService: TimetableService,
     private domSanitizer: DomSanitizer,
-    private router: Router
-  ) {}
+    private router: Router,
+    private breadcrumbService: BreadcrumbService
+  ) {
+    this.breadcrumbService.setItems([{ label: "" }]);
+  }
 
   ngOnInit() {
+    let viewCourseStyle = "margin-left:30px";
+    this.viewCourseBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      viewCourseStyle
+    );
 
-    let updateStyle = "margin-top: 10px";
-    this.updateCourseBtnSytle = this.domSanitizer.bypassSecurityTrustStyle(updateStyle);
+    let updateStyle = "margin-top: 10px;margin-left: 12px";
+    this.updateCourseBtnSytle = this.domSanitizer.bypassSecurityTrustStyle(
+      updateStyle
+    );
 
     let viewStyle = "margin-top: 10px;margin-left: 12px";
-    this.viewTimetableBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(viewStyle);
+    this.viewTimetableBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      viewStyle
+    );
 
     let createStyle = "margin-top: 10px;margin-left: 12px";
-    this.createTagsBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(createStyle);
+    this.createTagsBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      createStyle
+    );
 
     this.staffId = Number(sessionStorage.getItem("staffId"));
 
@@ -66,12 +81,14 @@ export class WorkspaceComponent implements OnInit {
     });
   }
 
-  updateCourse(event) {
-
+  viewCourse(event) {
+    sessionStorage.setItem("courseId", this.courses[0].id.toString());
+    this.router.navigate(["/profViewCourseDetails"]);
   }
 
+  updateCourse(event) {}
+
   viewTimetable(event) {
-    console.log(this.courses[0].id.toString());
     sessionStorage.setItem("courseId", this.courses[0].id.toString());
     this.router.navigate(["/profViewTimetable"]);
   }

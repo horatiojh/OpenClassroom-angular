@@ -26,6 +26,17 @@ export class CourseService {
         );
     }
 
+    getCourseByCourseId(courseId: number): Observable<any> {
+      return this.httpClient
+        .get<any>(this.baseUrl + "/getCourse/" + courseId)
+        .pipe(
+          tap(_ => console.log(`getCourse timetableId=${courseId}`)),
+          catchError(
+            this.handleError<any>(`getCourse timetableId=${courseId}`)
+          )
+        );
+    }
+
     private handleError<T>(operation = "operation", result?: T) {
       return (error: any): Observable<T> => {
         return of(result as T);

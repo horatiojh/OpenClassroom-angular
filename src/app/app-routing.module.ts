@@ -21,6 +21,7 @@ import { ViewIndivCourseTimetableComponent } from "./pages/view_indiv_course_tim
 import { ProfViewTimetableComponent } from "./pages/prof_view_timetable/prof_view_timetable.component";
 import { ProfUpdateTimetableComponent } from "./pages/prof_update_timetable/prof_update_timetable.component";
 import { ProfViewIndivCourseTimetableComponent } from "./pages/prof_view_indiv_course_timetable/prof_view_indiv_course_timetable.component";
+import { ProfViewCourseDetailsComponent } from "./pages/prof_view_course_details/prof_view_course_details.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -49,7 +50,8 @@ const routes: Routes = [
       { path: "viewVisitHistory", component: ViewVisitHistoryComponent },
       { path: "profViewTimetable", component: ProfViewTimetableComponent },
       { path: "profUpdateTimetable", component: ProfUpdateTimetableComponent },
-      { path: "profViewIndivCourseTimetable", component: ProfViewIndivCourseTimetableComponent }
+      { path: "profViewIndivCourseTimetable", component: ProfViewIndivCourseTimetableComponent },
+      { path: "profViewCourseDetails", component: ProfViewCourseDetailsComponent }
     ]
   }
 ];

@@ -60,6 +60,7 @@ import { ViewIndivCourseTimetableComponent } from "./pages/view_indiv_course_tim
 import { ProfViewTimetableComponent } from "./pages/prof_view_timetable/prof_view_timetable.component";
 import { ProfUpdateTimetableComponent } from "./pages/prof_update_timetable/prof_update_timetable.component";
 import { ProfViewIndivCourseTimetableComponent } from "./pages/prof_view_indiv_course_timetable/prof_view_indiv_course_timetable.component";
+import { ProfViewCourseDetailsComponent } from "./pages/prof_view_course_details/prof_view_course_details.component";
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { ProfViewIndivCourseTimetableComponent } from "./pages/prof_view_indiv_c
     ViewIndivCourseTimetableComponent,
     ProfViewTimetableComponent,
     ProfUpdateTimetableComponent,
-    ProfViewIndivCourseTimetableComponent
+    ProfViewIndivCourseTimetableComponent,
+    ProfViewCourseDetailsComponent
   ],
   imports: [
     BrowserModule,
