@@ -41,11 +41,11 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
     private dateService: DateService
   ) {
     this.breadcrumbService.setItems([
-      { label: "Course List", routerLink: ["/viewCourseList"] },
-      { label: "View Timetable", routerLink: ["/viewTimetable"] },
+      { label: "Course List", routerLink: ["/workspace"] },
+      { label: "View Timetable", routerLink: ["/profViewTimetable"] },
       {
         label: "View Individual Session",
-        routerLink: ["/viewIndivCourseTimetable"]
+        routerLink: ["/profViewIndivCourseTimetable"]
       }
     ]);
   }
