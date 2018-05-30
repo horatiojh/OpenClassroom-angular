@@ -42,10 +42,11 @@ export class LoginComponent implements OnInit {
           this.staff = response.staff;
           sessionStorage.setItem("isLogin", "true");
           sessionStorage.setItem("staffRole", this.staff.staffRole);
+          sessionStorage.setItem("staffId", this.staff.id.toString());
 
           if (this.staff.staffRole === "admin") {
             this.router.navigate(["/viewStaffInfo"]);
-          } else if(this.staff.staffRole === "instructor") {
+          } else if (this.staff.staffRole === "instructor") {
             this.router.navigate(["/workspace"]);
           }
         },

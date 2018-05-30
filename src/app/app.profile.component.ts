@@ -3,13 +3,17 @@ import { AppComponent } from './app.component';
 import { trigger, state, transition, style, animate } from '@angular/animations'
 import { MainComponent } from './main.component';
 
+import { StaffService } from '../providers/staffService';
+
+import { Staff } from '../domain/staff';
+
 @Component({
     selector: 'app-inline-profile',
     template: `
         <div class="profile" [ngClass]="{'profile-expanded':active}">
             <a href="#" (click)="onClick($event)">
                 <img class="profile-image" [src]="imageSrc" />
-                <span class="profile-name">Jane Williams</span>
+                <span class="profile-name">{{staffName}}</span>
                 <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
@@ -53,8 +57,23 @@ export class AppInlineProfileComponent {
     active: boolean;
     imageSrc: string;
 
-    constructor(public app: MainComponent) {
+    // for display staff name
+    staffId: number;
+    staffName: string;
+    staff: Staff;
+
+    constructor(
+      public app: MainComponent,
+      private staffService: StaffService) {
         this.imageSrc = "assets/layout/images/male.png";
+        this.staffId = Number(sessionStorage.getItem("staffId"));
+
+        this.staffService.getStaffByStaffId(this.staffId).subscribe(
+          response=>{
+            this.staff = response.staff;
+            this.staffName = this.staff.staffName;
+          }
+        )
     }
 
     onClick(event) {
