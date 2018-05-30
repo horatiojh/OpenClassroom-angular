@@ -77,6 +77,7 @@ export class ViewCourseListComponent implements OnInit {
 
   viewTimetable(rowData) {
     this.shareService.setValue("courseId",rowData.id);
+    sessionStorage.setItem("courseId", rowData.id);
     this.router.navigate(["/viewTimetable"]);
   }
 }

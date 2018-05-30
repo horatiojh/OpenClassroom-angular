@@ -36,7 +36,8 @@ export class ViewTimetableComponent implements OnInit {
 
   ngOnInit() {
     //for datatable
-    this.courseId = Number(this.shareService.getValue("courseId"));
+    // this.courseId = Number(this.shareService.getValue("courseId"));
+    this.courseId = Number(sessionStorage.getItem("courseId"));
 
     this.cols = [
       { field: "weeksName", header: "Week Name", width: "30%" },
@@ -69,6 +70,7 @@ export class ViewTimetableComponent implements OnInit {
 
   viewIndivCourseTimetable(rowData) {
     this.shareService.setValue("timetableId", rowData.id);
+    sessionStorage.setItem("timetableId", rowData.id);
     this.router.navigate(["/viewIndivCourseTimetable"]);
   }
 }

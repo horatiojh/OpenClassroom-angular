@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, OnChanges } from "@angular/core";
 import { Timetable } from "../../../domain/timetable";
 import { Message } from "primeng/primeng";
 
@@ -51,8 +51,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   }
 
   ngOnInit() {
-    //for datatable
-    this.timetableId = Number(this.shareService.getValue("timetableId"));
+    // for datatable
+    // this.timetableId = Number(this.shareService.getValue("timetableId"));
+    this.timetableId = Number(sessionStorage.getItem("timetableId"));
 
     this.cols = [
       { field: "dateStr", header: "Date" },
@@ -121,6 +122,10 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         });
       }
     });
+
+    setTimeout(function() {
+      location.reload();
+    }, 100);
   }
 
   restoreDate(rowDate) {
@@ -155,5 +160,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         });
       }
     });
+
+    setTimeout(function() {
+      location.reload();
+    }, 100);
   }
 }

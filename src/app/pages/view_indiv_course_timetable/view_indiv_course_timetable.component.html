@@ -7,7 +7,7 @@
 
         <p-tabView>
           <p-tabPanel header="Available">
-            <p-table [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+            <p-table #availDt [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
               <ng-template pTemplate="caption">
 
