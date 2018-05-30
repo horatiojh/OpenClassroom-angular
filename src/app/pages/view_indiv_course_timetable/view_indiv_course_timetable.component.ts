@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  OnChanges,
-  DoCheck
-} from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Timetable } from "../../../domain/timetable";
 import { Message } from "primeng/primeng";
 
