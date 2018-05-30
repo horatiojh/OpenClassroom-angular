@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { trigger, state, transition, style, animate } from "@angular/animations"
 import { AppComponent } from './app.component';
-import { trigger, state, transition, style, animate } from '@angular/animations'
 import { MainComponent } from './main.component';
 import { Router } from '@angular/router';
 
-import { StaffService } from '../providers/staffService';
-
 import { Staff } from '../domain/staff';
+
+import { StaffService } from '../providers/staffService';
 
 @Component({
     selector: 'app-inline-profile',
@@ -14,7 +14,7 @@ import { Staff } from '../domain/staff';
         <div class="profile" [ngClass]="{'profile-expanded':active}">
             <a href="#" (click)="onClick($event)">
                 <img class="profile-image" [src]="imageSrc" />
-                <span class="profile-name">{{staff.staffName}}</span>
+                <span class="profile-name">{{staffName}}</span>
                 <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
@@ -54,52 +54,52 @@ import { Staff } from '../domain/staff';
         ])
     ]
 })
-export class AppInlineProfileComponent {
+export class AppInlineProfileComponent implements OnInit {
 
     active: boolean;
-    imageSrc: string;
 
-    // for display staff name
-    staffId: number;
-    staffName: string;
+    // for profile display
     staff: Staff;
+    staffName: string;
     gender: string;
+    staffId: number;
+
+    // for image display
+    imageSrc: string;
 
     constructor(
       public app: MainComponent,
-      private staffService: StaffService,
-      private router: Router) {
+      private router: Router,
+      private staffService: StaffService) {
+        this.imageSrc = "";
+      }
 
-        this.staffId = Number(sessionStorage.getItem("staffId"));
+    ngOnInit() {
 
-        this.staffService.getStaffByStaffId(this.staffId).subscribe(response=>{
-          this.staff = response.staff;
-          this.staffName = this.staff.staffName;
-          this.gender = this.staff.gender;
+      this.staffId = Number(sessionStorage.getItem("staffId"));
 
-          if(this.gender === "F") {
-            this.imageSrc = "assets/layout/images/female.png";
-          } else if(this.gender === "M") {
-            this.imageSrc = "assets/layout/images/male.png";
-          }
-        })
+      this.staffService.getStaffByStaffId(this.staffId).subscribe(response=>{
+        this.staff = response.staff;
+        this.staffName = this.staff.staffName;
+        this.gender = this.staff.gender;
 
+        if(this.gender === "M") {
+          this.imageSrc = "assets/layout/images/male.png";
+        } else if(this.gender === "F") {
+          this.imageSrc = "assets/layout/images/female.png";
+        }
+      })
     }
 
     onClick(event) {
         this.active = !this.active;
         setTimeout(() => {
-            this.app.layoutMenuScrollerViewChild.moveBar();
+          this.app.layoutMenuScrollerViewChild.moveBar();
         }, 450);
         event.preventDefault();
     }
 
     doLogout(event) {
-
-      sessionStorage.removeItem("staffId");
-      sessionStorage.removeItem("staffRole");
-      sessionStorage.removeItem("isLogin");
-
       this.router.navigate(["/login"]);
     }
 }
