@@ -8,6 +8,7 @@ import { Course } from "../../../domain/course";
 import { CourseService } from "../../../providers/courseService";
 import { TimetableService } from "../../../providers/timetableService";
 import { BreadcrumbService } from "../../breadcrumb.service";
+import { ShareService } from "../../../providers/shareService";
 
 @Component({
   selector: "app-workspace",
@@ -36,7 +37,8 @@ export class WorkspaceComponent implements OnInit {
     private timetableService: TimetableService,
     private domSanitizer: DomSanitizer,
     private router: Router,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private shareService: ShareService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
@@ -82,14 +84,16 @@ export class WorkspaceComponent implements OnInit {
   }
 
   viewCourse(event) {
-    sessionStorage.setItem("courseId", this.courses[0].id.toString());
+    // sessionStorage.setItem("courseId", this.courses[0].id.toString());
+    this.shareService.setValue("courseId", this.courses[0].id.toString());
     this.router.navigate(["/profViewCourseDetails"]);
   }
 
   updateCourse(event) {}
 
   viewTimetable(event) {
-    sessionStorage.setItem("courseId", this.courses[0].id.toString());
+    // sessionStorage.setItem("courseId", this.courses[0].id.toString());
+    this.shareService.setValue("courseId", this.courses[0].id.toString());
     this.router.navigate(["/profViewTimetable"]);
   }
 

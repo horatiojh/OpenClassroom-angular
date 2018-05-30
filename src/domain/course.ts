@@ -13,6 +13,9 @@ export class Course {
   moduleTitle: string;
   groupSize: string;
   eventSize: string;
+  description: string;
+  syllabus: string;
+  blackoutDates: string;
 
   constructor() {}
 }

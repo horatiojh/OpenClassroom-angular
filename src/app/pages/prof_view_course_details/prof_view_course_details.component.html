@@ -2,10 +2,36 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <div class="card">
-        <h1>Course Details</h1>
         <p-growl [value]="msgs"></p-growl>
 
-        <h4>{{moduleCode}}</h4>
+        <div class="ui-g form-group">
+          <div class="ui-g-12">
+            <label style="font-size: 20px;font-weight: bold">{{moduleCode}} - {{moduleTitle}}</label>
+          </div>
+          <div class="ui-g-12">
+            <label>{{weeksName}}</label>
+          </div>
+          <div class="ui-g-12" style="margin-top: -10px">
+            <label>Group Size: {{groupSize}}</label>
+          </div>
+          <div class="ui-g-12" style="margin-top: -10px">
+            <label>Professor: {{staffName}}</label>
+          </div>
+
+          <div class="ui-g-12" style="margin-top: -5px;margin-left: -1px">
+            <p-accordion>
+              <p-accordionTab header="Description" [selected]="true">
+                <div style="text-align: justify;text-justify: auto">{{description}}</div>
+              </p-accordionTab>
+              <p-accordionTab header="Syllabus" [selected]="true">
+                <div style="text-align: justify;text-justify: auto">{{syllabus}}</div>
+              </p-accordionTab>
+              <p-accordionTab header="Schedule" [selected]="true">
+                <div style="text-align: justify;text-justify: auto">{{blackoutDates}}</div>
+              </p-accordionTab>
+            </p-accordion>
+          </div>
+        </div>
       </div>
     </div>
   </div>
