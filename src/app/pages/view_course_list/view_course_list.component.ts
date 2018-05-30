@@ -35,9 +35,9 @@ export class ViewCourseListComponent implements OnInit {
   ngOnInit() {
     // for datatable
     this.cols = [
-      { field: "staffName", header: "Instructor", width: "12%" },
-      { field: "dept", header: "Dept ID", width: "12%" },
-      { field: "moduleTitle", header: "Module Title", width: "12%" },
+      { field: "staffName", header: "Instructor", width: "14%" },
+      { field: "dept", header: "Dept ID", width: "10%" },
+      { field: "moduleTitle", header: "Module Title", width: "20%" },
       { field: "moduleCode", header: "Module Code", width: "12%" },
       { field: "moduleType", header: "Module Type", width: "12%" }
     ];
@@ -68,7 +68,7 @@ export class ViewCourseListComponent implements OnInit {
         this.msgs = [];
         this.msgs.push({
           severity: "error",
-          summary: "Please upload the correct file",
+          summary: "Invalid File",
           detail: ""
         });
       }

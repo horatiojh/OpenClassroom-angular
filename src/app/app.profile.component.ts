@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppComponent } from './app.component';
 import { trigger, state, transition, style, animate } from '@angular/animations'
 import { MainComponent } from './main.component';
+import { Router } from '@angular/router';
 
 import { StaffService } from '../providers/staffService';
 
@@ -32,7 +33,8 @@ import { Staff } from '../domain/staff';
                 </a>
             </li>
             <li role="menuitem">
-                <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
+                <a class="ripplelink" [attr.tabindex]="!active ? '-1' : null"
+                (click)="doLogout($event)">
                     <i class="material-icons">power_settings_new</i>
                     <span>Logout</span>
                 </a>
@@ -64,7 +66,8 @@ export class AppInlineProfileComponent {
 
     constructor(
       public app: MainComponent,
-      private staffService: StaffService) {
+      private staffService: StaffService,
+      private router: Router) {
         this.imageSrc = "assets/layout/images/male.png";
         this.staffId = Number(sessionStorage.getItem("staffId"));
 
@@ -82,5 +85,14 @@ export class AppInlineProfileComponent {
             this.app.layoutMenuScrollerViewChild.moveBar();
         }, 450);
         event.preventDefault();
+    }
+
+    doLogout(event) {
+
+      sessionStorage.removeItem("staffId");
+      sessionStorage.removeItem("staffRole");
+      sessionStorage.removeItem("isLogin");
+
+      this.router.navigate(["/login"]);
     }
 }
