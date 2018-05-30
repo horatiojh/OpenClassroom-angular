@@ -45,8 +45,7 @@ export class ProfViewCourseDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.courseId = this.shareService.getValue("courseId");
-    this.courseId = 1;
+    this.courseId = this.shareService.getValue("courseId");
 
     this.courseService
       .getCourseByCourseId(this.courseId)

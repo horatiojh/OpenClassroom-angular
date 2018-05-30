@@ -31,6 +31,8 @@ import { CalendarModule } from "primeng/calendar";
 import { TabViewModule } from "primeng/tabview";
 import { AccordionModule } from "primeng/accordion";
 import { CardModule } from "primeng/card";
+import { TooltipModule } from 'primeng/tooltip';
+import { EditorModule } from 'primeng/editor';
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -61,6 +63,7 @@ import { ProfViewTimetableComponent } from "./pages/prof_view_timetable/prof_vie
 import { ProfUpdateTimetableComponent } from "./pages/prof_update_timetable/prof_update_timetable.component";
 import { ProfViewIndivCourseTimetableComponent } from "./pages/prof_view_indiv_course_timetable/prof_view_indiv_course_timetable.component";
 import { ProfViewCourseDetailsComponent } from "./pages/prof_view_course_details/prof_view_course_details.component";
+import { ProfUpdateCourseComponent } from "./pages/prof_update_course/prof_update_course.component";
 
 @NgModule({
   declarations: [
@@ -85,7 +88,8 @@ import { ProfViewCourseDetailsComponent } from "./pages/prof_view_course_details
     ProfViewTimetableComponent,
     ProfUpdateTimetableComponent,
     ProfViewIndivCourseTimetableComponent,
-    ProfViewCourseDetailsComponent
+    ProfViewCourseDetailsComponent,
+    ProfUpdateCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +109,9 @@ import { ProfViewCourseDetailsComponent } from "./pages/prof_view_course_details
     CalendarModule,
     TabViewModule,
     AccordionModule,
-    CardModule
+    CardModule,
+    TooltipModule,
+    EditorModule
   ],
   providers: [
     Api,

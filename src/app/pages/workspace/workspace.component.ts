@@ -89,7 +89,10 @@ export class WorkspaceComponent implements OnInit {
     this.router.navigate(["/profViewCourseDetails"]);
   }
 
-  updateCourse(event) {}
+  updateCourse(event) {
+    this.shareService.setValue("courseId", this.courses[0].id.toString());
+    this.router.navigate(["/profUpdateCourse"]);
+  }
 
   viewTimetable(event) {
     // sessionStorage.setItem("courseId", this.courses[0].id.toString());
