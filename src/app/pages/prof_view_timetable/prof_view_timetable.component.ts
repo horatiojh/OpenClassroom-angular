@@ -29,7 +29,7 @@ export class ProfViewTimetableComponent implements OnInit {
     private shareService: ShareService
   ) {
     this.breadcrumbService.setItems([
-      { label: "Course List", routerLink: ["/workspace"] },
+      { label: "Workspace", routerLink: ["/workspace"] },
       { label: "View Timetable", routerLink: ["/profViewTimetable"] }
     ]);
   }
