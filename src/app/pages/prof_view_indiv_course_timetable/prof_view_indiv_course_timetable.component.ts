@@ -125,7 +125,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
 
     setTimeout(function() {
       location.reload();
-    }, 100);
+    }, 200);
   }
 
   restoreDate(rowDate) {
@@ -163,6 +163,6 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
 
     setTimeout(function() {
       location.reload();
-    }, 100);
+    }, 200);
   }
 }
