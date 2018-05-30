@@ -14,9 +14,9 @@
                       <h3 style="margin-left: 12px">{{moduleCode}} - {{moduleTitle}}</h3>
                     </div>
                     <div class="ui-grid-col-2">
-                      <button pButton type="button" icon="fa fa-fw fa-edit" style="margin-top: 10px"></button>
-                      <button pButton type="button" icon="fa fa-fw fa-calendar" style="margin-top: 10px;margin-left: 12px"></button>
-                      <button pButton type="button" icon="fa fa-fw fa-tags" style="margin-top: 10px;margin-left: 12px"></button>
+                      <p-button icon="fa fa-fw fa-edit" [style]="updateCourseBtnSytle" (onClick)="updateCourse($event)"></p-button>
+                      <p-button icon="fa fa-fw fa-calendar" [style]="viewTimetableBtnStyle" (onClick)="viewTimetable($event)"></p-button>
+                      <p-button icon="fa fa-fw fa-tags" [style]="createTagsBtnStyle" (onClick)="createTags($event)"></p-button>
                     </div>
                   </div>
                 </div>
