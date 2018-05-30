@@ -29,6 +29,8 @@ import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
 import { CalendarModule } from "primeng/calendar";
 import { TabViewModule } from "primeng/tabview";
+import { AccordionModule } from "primeng/accordion";
+import { CardModule } from "primeng/card";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -93,7 +95,9 @@ import { ViewIndivCourseTimetableComponent } from "./pages/view_indiv_course_tim
     TableModule,
     DropdownModule,
     CalendarModule,
-    TabViewModule
+    TabViewModule,
+    AccordionModule,
+    CardModule
   ],
   providers: [
     Api,
