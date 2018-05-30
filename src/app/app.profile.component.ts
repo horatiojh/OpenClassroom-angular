@@ -14,7 +14,7 @@ import { Staff } from '../domain/staff';
         <div class="profile" [ngClass]="{'profile-expanded':active}">
             <a href="#" (click)="onClick($event)">
                 <img class="profile-image" [src]="imageSrc" />
-                <span class="profile-name">{{staffName}}</span>
+                <span class="profile-name">{{staff.staffName}}</span>
                 <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
@@ -63,20 +63,27 @@ export class AppInlineProfileComponent {
     staffId: number;
     staffName: string;
     staff: Staff;
+    gender: string;
 
     constructor(
       public app: MainComponent,
       private staffService: StaffService,
       private router: Router) {
-        this.imageSrc = "assets/layout/images/male.png";
+
         this.staffId = Number(sessionStorage.getItem("staffId"));
 
-        this.staffService.getStaffByStaffId(this.staffId).subscribe(
-          response=>{
-            this.staff = response.staff;
-            this.staffName = this.staff.staffName;
+        this.staffService.getStaffByStaffId(this.staffId).subscribe(response=>{
+          this.staff = response.staff;
+          this.staffName = this.staff.staffName;
+          this.gender = this.staff.gender;
+
+          if(this.gender === "F") {
+            this.imageSrc = "assets/layout/images/female.png";
+          } else if(this.gender === "M") {
+            this.imageSrc = "assets/layout/images/male.png";
           }
-        )
+        })
+
     }
 
     onClick(event) {
