@@ -18,6 +18,9 @@ import { WorkspaceComponent } from "./pages/workspace/workspace.component";
 import { ProfViewCoursesComponent } from "./pages/prof_view_courses/prof_view_courses.component";
 import { ViewVisitHistoryComponent } from "./pages/view_visit_history/view_visit_history.component";
 import { ViewIndivCourseTimetableComponent } from "./pages/view_indiv_course_timetable/view_indiv_course_timetable.component";
+import { ProfViewTimetableComponent } from "./pages/prof_view_timetable/prof_view_timetable.component";
+import { ProfUpdateTimetableComponent } from "./pages/prof_update_timetable/prof_update_timetable.component";
+import { ProfViewIndivCourseTimetableComponent } from "./pages/prof_view_indiv_course_timetable/prof_view_indiv_course_timetable.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -43,7 +46,10 @@ const routes: Routes = [
     children: [
       { path: "workspace", component: WorkspaceComponent },
       { path: "profViewCourses", component: ProfViewCoursesComponent },
-      { path: "viewVisitHistory", component: ViewVisitHistoryComponent }
+      { path: "viewVisitHistory", component: ViewVisitHistoryComponent },
+      { path: "profViewTimetable", component: ProfViewTimetableComponent },
+      { path: "profUpdateTimetable", component: ProfUpdateTimetableComponent },
+      { path: "profViewIndivCourseTimetable", component: ProfViewIndivCourseTimetableComponent }
     ]
   }
 ];

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Message } from "primeng/primeng";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
+import { Router } from "@angular/router";
 
 import { Course } from "../../../domain/course";
 
@@ -31,7 +32,8 @@ export class WorkspaceComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private timetableService: TimetableService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -68,7 +70,11 @@ export class WorkspaceComponent implements OnInit {
 
   }
 
-  viewTimetable(event) {}
+  viewTimetable(event) {
+    console.log(this.courses[0].id.toString());
+    sessionStorage.setItem("courseId", this.courses[0].id.toString());
+    this.router.navigate(["/profViewTimetable"]);
+  }
 
   createTags(event) {}
 }
