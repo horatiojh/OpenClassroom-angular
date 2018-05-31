@@ -21,13 +21,22 @@
           <div class="ui-g-12" style="margin-top: -5px;margin-left: -1px">
             <p-accordion>
               <p-accordionTab header="Description" [selected]="true">
-                <div style="text-align: justify;text-justify: auto">{{description}}</div>
+                <div style="text-align: justify;text-justify: auto">
+                  <div [innerHTML]="description">
+                  </div>
+                </div>
               </p-accordionTab>
               <p-accordionTab header="Syllabus" [selected]="true">
-                <div style="text-align: justify;text-justify: auto">{{syllabus}}</div>
+                <div style="text-align: justify;text-justify: auto">
+                  <div [innerHTML]="syllabus">
+                  </div>
+                </div>
               </p-accordionTab>
               <p-accordionTab header="Schedule" [selected]="true">
-                <div style="text-align: justify;text-justify: auto">{{blackoutDates}}</div>
+                <div style="text-align: justify;text-justify: auto">
+                  <div [innerHTML]="blackoutDates">
+                  </div>
+                </div>
               </p-accordionTab>
             </p-accordion>
           </div>
