@@ -1,9 +1,14 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/throw';
 import { of } from "rxjs";
+import { Course } from "../domain/course";
+
+const httpOptions = {
+  headers: new HttpHeaders({ "Content-Type": "application/json" })
+};
 
 @Injectable()
 export class CourseService {
@@ -34,6 +39,21 @@ export class CourseService {
           catchError(
             this.handleError<any>(`getCourse timetableId=${courseId}`)
           )
+        );
+    }
+
+    updateCourse(course: Course): Observable<any> {
+      let updateCourseReq = { "course": course };
+
+      return this.httpClient
+        .post<any>(
+          this.baseUrl + "/updateCourse",
+          updateCourseReq,
+          httpOptions
+        )
+        .pipe(
+          tap(_ => console.log(`updateCourse id=${course.id}`)),
+          catchError(this.handleError<any>(`updateCourse id=${course.id}`))
         );
     }
 
