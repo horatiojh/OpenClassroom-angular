@@ -67,6 +67,7 @@ import { ProfViewCourseDetailsComponent } from "./pages/prof_view_course_details
 import { ProfUpdateCourseComponent } from "./pages/prof_update_course/prof_update_course.component";
 import { SearchCourseComponent } from "./pages/search_course/search_course.component";
 import { ProfSearchCourseComponent } from "./pages/prof_search_course/prof_search_course.component";
+import { ModuleCardComponent } from "./pages/module_card/module_card.component";
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { ProfSearchCourseComponent } from "./pages/prof_search_course/prof_searc
     ProfViewCourseDetailsComponent,
     ProfUpdateCourseComponent,
     SearchCourseComponent,
-    ProfSearchCourseComponent
+    ProfSearchCourseComponent,
+    ModuleCardComponent
   ],
   imports: [
     BrowserModule,
