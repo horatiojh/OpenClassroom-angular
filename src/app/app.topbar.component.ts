@@ -123,7 +123,7 @@ import { MainComponent } from "./main.component";
                         </ul>
                     </li>
                     <li #search class="search-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === search}">
-                        <a [href]="searchLink">
+                        <a [routerLink]="searchLink">
                             <i class="topbar-icon material-icons">search</i>
                         </a>
                     </li>

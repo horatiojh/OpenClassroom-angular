@@ -28,10 +28,17 @@ export class ProfViewTimetableComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService
   ) {
-    this.breadcrumbService.setItems([
-      { label: "Workspace", routerLink: ["/workspace"] },
-      { label: "View Timetable", routerLink: ["/profViewTimetable"] }
-    ]);
+    if (this.shareService.getValue("prePage") === "profViewCourseList") {
+      this.breadcrumbService.setItems([
+        { label: "Course List", routerLink: ["/profViewCourseList"] },
+        { label: "View Timetable", routerLink: ["/profViewTimetable"] }
+      ]);
+    } else if (this.shareService.getValue("prePage") === "workspace") {
+      this.breadcrumbService.setItems([
+        { label: "Workspace", routerLink: ["/workspace"] },
+        { label: "View Timetable", routerLink: ["/profViewTimetable"] }
+      ]);
+    }
   }
 
   ngOnInit() {
@@ -65,11 +72,13 @@ export class ProfViewTimetableComponent implements OnInit {
 
   updateTimetable(rowData) {
     this.shareService.setValue("timetableId", rowData.id);
+    this.shareService.setValue("prePage", "profViewCourseList");
     this.router.navigate(["/profUpdateTimetable"]);
   }
 
   viewIndivCourseTimetable(rowData) {
     this.shareService.setValue("timetableId", rowData.id);
+    this.shareService.setValue("prePage", "profViewCourseList");
     sessionStorage.setItem("timetableId", rowData.id);
     this.router.navigate(["/profViewIndivCourseTimetable"]);
   }

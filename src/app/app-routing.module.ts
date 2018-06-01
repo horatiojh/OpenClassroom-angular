@@ -15,7 +15,6 @@ import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.co
 import { ViewTimetableComponent } from "./pages/view_timetable/view_timetable.component";
 import { UpdateTimetableComponent } from "./pages/update_timetable/update_timetable.component";
 import { WorkspaceComponent } from "./pages/workspace/workspace.component";
-import { ProfViewCoursesComponent } from "./pages/prof_view_courses/prof_view_courses.component";
 import { ViewVisitHistoryComponent } from "./pages/view_visit_history/view_visit_history.component";
 import { ViewIndivCourseTimetableComponent } from "./pages/view_indiv_course_timetable/view_indiv_course_timetable.component";
 import { ProfViewTimetableComponent } from "./pages/prof_view_timetable/prof_view_timetable.component";
@@ -25,6 +24,7 @@ import { ProfViewCourseDetailsComponent } from "./pages/prof_view_course_details
 import { ProfUpdateCourseComponent } from "./pages/prof_update_course/prof_update_course.component";
 import { ProfSearchCourseComponent } from "./pages/prof_search_course/prof_search_course.component";
 import { SearchCourseComponent } from "./pages/search_course/search_course.component";
+import { ProfViewCourseListComponent } from "./pages/prof_view_course_list/prof_view_course_list.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -50,7 +50,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, InstructorGuard],
     children: [
       { path: "workspace", component: WorkspaceComponent },
-      { path: "profViewCourses", component: ProfViewCoursesComponent },
+      { path: "profViewCourseList", component: ProfViewCourseListComponent },
       { path: "viewVisitHistory", component: ViewVisitHistoryComponent },
       { path: "profViewTimetable", component: ProfViewTimetableComponent },
       { path: "profUpdateTimetable", component: ProfUpdateTimetableComponent },

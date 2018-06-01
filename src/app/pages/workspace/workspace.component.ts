@@ -95,8 +95,7 @@ export class WorkspaceComponent implements OnInit {
   }
 
   viewTimetable(event) {
-    // sessionStorage.setItem("courseId", this.courses[0].id.toString());
-    this.shareService.setValue("courseId", this.courses[0].id.toString());
+    sessionStorage.setItem("courseId", this.courses[0].id.toString());
     this.router.navigate(["/profViewTimetable"]);
   }
 

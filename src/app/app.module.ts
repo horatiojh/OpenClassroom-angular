@@ -57,7 +57,6 @@ import { DataAnalyticsComponent } from "./pages/data_analytics/data_analytics.co
 import { ViewTimetableComponent } from "./pages/view_timetable/view_timetable.component";
 import { UpdateTimetableComponent } from "./pages/update_timetable/update_timetable.component";
 import { WorkspaceComponent } from "./pages/workspace/workspace.component";
-import { ProfViewCoursesComponent } from "./pages/prof_view_courses/prof_view_courses.component";
 import { ViewVisitHistoryComponent } from "./pages/view_visit_history/view_visit_history.component";
 import { ViewIndivCourseTimetableComponent } from "./pages/view_indiv_course_timetable/view_indiv_course_timetable.component";
 import { ProfViewTimetableComponent } from "./pages/prof_view_timetable/prof_view_timetable.component";
@@ -68,6 +67,7 @@ import { ProfUpdateCourseComponent } from "./pages/prof_update_course/prof_updat
 import { SearchCourseComponent } from "./pages/search_course/search_course.component";
 import { ProfSearchCourseComponent } from "./pages/prof_search_course/prof_search_course.component";
 import { ModuleCardComponent } from "./pages/module_card/module_card.component";
+import { ProfViewCourseListComponent } from "./pages/prof_view_course_list/prof_view_course_list.component";
 
 @NgModule({
   declarations: [
@@ -86,7 +86,7 @@ import { ModuleCardComponent } from "./pages/module_card/module_card.component";
     DataAnalyticsComponent,
     UpdateTimetableComponent,
     WorkspaceComponent,
-    ProfViewCoursesComponent,
+    ProfViewCourseListComponent,
     ViewVisitHistoryComponent,
     ViewIndivCourseTimetableComponent,
     ProfViewTimetableComponent,

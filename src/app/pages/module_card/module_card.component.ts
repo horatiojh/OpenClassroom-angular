@@ -73,11 +73,13 @@ export class ModuleCardComponent implements OnInit, OnChanges {
 
   updateCourse(event) {
     this.shareService.setValue("courseId", this.course.id.toString());
+    this.shareService.setValue("prePage", "workspace");
     this.router.navigate(["/profUpdateCourse"]);
   }
 
   viewTimetable(event) {
-    this.shareService.setValue("courseId", this.course.id.toString());
+    sessionStorage.setItem("courseId", this.course.id.toString());
+    this.shareService.setValue("prePage", "workspace");
     this.router.navigate(["/profViewTimetable"]);
   }
 
