@@ -9,7 +9,6 @@ import { TimetableService } from "../../../providers/timetableService";
 import { DateService } from "../../../providers/dateService";
 
 import { Date } from "../../../domain/date";
-import { Table } from "primeng/table";
 
 @Component({
   selector: "app-viewIndivCourseTimetable",
@@ -17,6 +16,8 @@ import { Table } from "primeng/table";
   styleUrls: ["./view_indiv_course_timetable.component.css"]
 })
 export class ViewIndivCourseTimetableComponent implements OnInit {
+  timetable: Timetable;
+
   // for datatable
   cols: any[];
   availDates: Date[];
@@ -44,6 +45,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   newStartTime: string;
   newEndTime: string;
   newDateTime: string;
+  createNewDate: string;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -65,10 +67,14 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   ngOnInit() {
     // for css style
     let showDialogstyle = "margin-bottom:10px;margin-left:1px;width:100px";
-    this.showDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(showDialogstyle);
+    this.showDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      showDialogstyle
+    );
 
     let createIndivSessionStyle = "width:100px";
-    this.createIndivSessionBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(createIndivSessionStyle);
+    this.createIndivSessionBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      createIndivSessionStyle
+    );
 
     // for datatable
     // this.timetableId = Number(this.shareService.getValue("timetableId"));
@@ -107,6 +113,20 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
           });
         }
       });
+
+    this.timetableService
+      .getTimetableByTimetableId(this.timetableId)
+      .subscribe(response => {
+        if (response != null && typeof response.timetable != undefined) {
+          this.timetable = response.timetable;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
   }
 
   archiveDate(rowDate) {
@@ -118,13 +138,12 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
 
-        this.newDate = new Date(
-          this.dateId,
-          this.dateStr,
-          this.startTime,
-          this.endTime,
-          "archived"
-        );
+        this.newDate = new Date();
+        this.newDate.status = "archived";
+        this.newDate.dateStr = this.dateStr;
+        this.newDate.startTime = this.startTime;
+        this.newDate.endTime = this.endTime;
+        this.newDate.id = this.dateId;
 
         this.dateService.updateDate(this.newDate).subscribe(response => {
           this.msgs.push({
@@ -156,13 +175,12 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
 
-        this.newDate = new Date(
-          this.dateId,
-          this.dateStr,
-          this.startTime,
-          this.endTime,
-          "available"
-        );
+        this.newDate = new Date();
+        this.newDate.status = "available";
+        this.newDate.dateStr = this.dateStr;
+        this.newDate.startTime = this.startTime;
+        this.newDate.endTime = this.endTime;
+        this.newDate.id = this.dateId;
 
         this.dateService.updateDate(this.newDate).subscribe(response => {
           this.msgs.push({
@@ -190,7 +208,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   }
 
   createIndividualSession(event) {
-    console.log("hi");
     this.display = false;
   }
 }
