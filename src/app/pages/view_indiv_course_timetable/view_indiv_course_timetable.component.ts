@@ -8,7 +8,7 @@ import { ShareService } from "../../../providers/shareService";
 import { TimetableService } from "../../../providers/timetableService";
 import { DateService } from "../../../providers/dateService";
 
-import { Date } from "../../../domain/date";
+import { DateEntity } from "../../../domain/date";
 
 @Component({
   selector: "app-viewIndivCourseTimetable",
@@ -20,8 +20,8 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
 
   // for datatable
   cols: any[];
-  availDates: Date[];
-  archivedDates: Date[];
+  availDates: DateEntity[];
+  archivedDates: DateEntity[];
   timetableId: number;
   msgs: Message[] = [];
 
@@ -33,8 +33,8 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   status: string;
 
   // update date
-  date: Date;
-  newDate: Date;
+  date: DateEntity;
+  newDate: DateEntity;
 
   // css styling
   showDialogBtnStyle: SafeStyle;
@@ -45,7 +45,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   newStartTime: string;
   newEndTime: string;
   newDateTime: string;
-  createNewDate: string;
+  createNewDate: DateEntity;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -138,7 +138,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
 
-        this.newDate = new Date();
+        this.newDate = new DateEntity();
         this.newDate.status = "archived";
         this.newDate.dateStr = this.dateStr;
         this.newDate.startTime = this.startTime;
@@ -175,7 +175,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
 
-        this.newDate = new Date();
+        this.newDate = new DateEntity();
         this.newDate.status = "available";
         this.newDate.dateStr = this.dateStr;
         this.newDate.startTime = this.startTime;
@@ -208,6 +208,31 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   }
 
   createIndividualSession(event) {
+
+    this.createNewDate = new DateEntity();
+    this.createNewDate.startTime = this.newStartTime;
+    this.createNewDate.endTime = this.newEndTime;
+    this.createNewDate.dateStr = this.newDateTime;
+    this.createNewDate.timetable = this.timetable;
+    this.createNewDate.status = "available";
+
+    this.dateService.createDate(this.createNewDate).subscribe(
+      response => {
+        this.msgs.push({
+          severity: "info",
+          summary:
+            "Successfully Created!",
+          detail: ""
+        });
+      },
+      error => {
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: error.error.message
+        });
+      }
+    );
     this.display = false;
   }
 }

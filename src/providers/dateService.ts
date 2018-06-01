@@ -69,7 +69,7 @@ export class DateService {
     return this.httpClient
       .put<any>(this.baseUrl + "/createDate", createDateReq, httpOptions)
       .pipe(
-        tap(_ => console.error("createDate")),
+        tap(_ => console.log("createDate")),
         catchError(this.handleError<any>("createDate"))
       );
   }

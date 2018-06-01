@@ -7,8 +7,7 @@ import { ShareService } from "../../../providers/shareService";
 import { TimetableService } from "../../../providers/timetableService";
 import { DateService } from "../../../providers/dateService";
 
-import { Date } from "../../../domain/date";
-import { Table } from "primeng/table";
+import { DateEntity } from "../../../domain/date";
 
 @Component({
   selector: "app-profViewIndivCourseTimetable",
@@ -18,8 +17,8 @@ import { Table } from "primeng/table";
 export class ProfViewIndivCourseTimetableComponent implements OnInit {
   // for datatable
   cols: any[];
-  availDates: Date[];
-  archivedDates: Date[];
+  availDates: DateEntity[];
+  archivedDates: DateEntity[];
   timetableId: number;
   msgs: Message[] = [];
 
@@ -31,8 +30,8 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   status: string;
 
   // update date
-  date: Date;
-  newDate: Date;
+  date: DateEntity;
+  newDate: DateEntity;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -99,13 +98,13 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
 
-        this.newDate = new Date(
-          this.dateId,
-          this.dateStr,
-          this.startTime,
-          this.endTime,
-          "archived"
-        );
+        this.newDate = new DateEntity();
+        this.newDate = new DateEntity();
+        this.newDate.status = "archived";
+        this.newDate.dateStr = this.dateStr;
+        this.newDate.startTime = this.startTime;
+        this.newDate.endTime = this.endTime;
+        this.newDate.id = this.dateId;
 
         this.dateService.updateDate(this.newDate).subscribe(response => {
           this.msgs.push({
@@ -137,13 +136,13 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
 
-        this.newDate = new Date(
-          this.dateId,
-          this.dateStr,
-          this.startTime,
-          this.endTime,
-          "available"
-        );
+        this.newDate = new DateEntity();
+        this.newDate = new DateEntity();
+        this.newDate.status = "available";
+        this.newDate.dateStr = this.dateStr;
+        this.newDate.startTime = this.startTime;
+        this.newDate.endTime = this.endTime;
+        this.newDate.id = this.dateId;
 
         this.dateService.updateDate(this.newDate).subscribe(response => {
           this.msgs.push({

@@ -1,6 +1,6 @@
 import { Timetable } from "./timetable";
 
-export class Date {
+export class DateEntity {
   id: number;
   dateStr: string;
   startTime: string;
