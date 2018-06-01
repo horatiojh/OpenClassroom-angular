@@ -208,7 +208,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   }
 
   createIndividualSession(event) {
-
     this.createNewDate = new DateEntity();
     this.createNewDate.startTime = this.newStartTime;
     this.createNewDate.endTime = this.newEndTime;
@@ -220,8 +219,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       response => {
         this.msgs.push({
           severity: "info",
-          summary:
-            "Successfully Created!",
+          summary: "Successfully Created!",
           detail: ""
         });
       },

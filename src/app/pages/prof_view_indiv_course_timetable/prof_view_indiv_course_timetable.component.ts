@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Timetable } from "../../../domain/timetable";
 import { Message } from "primeng/primeng";
+import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 
 import { BreadcrumbService } from "../../breadcrumb.service";
 import { ShareService } from "../../../providers/shareService";
@@ -15,6 +16,8 @@ import { DateEntity } from "../../../domain/date";
   styleUrls: ["./prof_view_indiv_course_timetable.component.css"]
 })
 export class ProfViewIndivCourseTimetableComponent implements OnInit {
+  timetable: Timetable;
+
   // for datatable
   cols: any[];
   availDates: DateEntity[];
@@ -33,23 +36,46 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   date: DateEntity;
   newDate: DateEntity;
 
+  // css styling
+  showDialogBtnStyle: SafeStyle;
+  createIndivSessionBtnStyle: SafeStyle;
+
+  // for dialog
+  display: boolean = false;
+  newStartTime: string;
+  newEndTime: string;
+  newDateTime: string;
+  createNewDate: DateEntity;
+
   constructor(
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,
     private timetableService: TimetableService,
-    private dateService: DateService
+    private dateService: DateService,
+    private domSanitizer: DomSanitizer
   ) {
     this.breadcrumbService.setItems([
-      { label: "Workspace", routerLink: ["/workspace"] },
-      { label: "View Timetable", routerLink: ["/profViewTimetable"] },
+      { label: "Course List", routerLink: ["/viewCourseList"] },
+      { label: "View Timetable", routerLink: ["/viewTimetable"] },
       {
         label: "View Individual Session",
-        routerLink: ["/profViewIndivCourseTimetable"]
+        routerLink: ["/viewIndivCourseTimetable"]
       }
     ]);
   }
 
   ngOnInit() {
+    // for css style
+    let showDialogstyle = "margin-bottom:10px;margin-left:1px;width:100px";
+    this.showDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      showDialogstyle
+    );
+
+    let createIndivSessionStyle = "width:100px";
+    this.createIndivSessionBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      createIndivSessionStyle
+    );
+
     // for datatable
     // this.timetableId = Number(this.shareService.getValue("timetableId"));
     this.timetableId = Number(sessionStorage.getItem("timetableId"));
@@ -87,6 +113,20 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
           });
         }
       });
+
+    this.timetableService
+      .getTimetableByTimetableId(this.timetableId)
+      .subscribe(response => {
+        if (response != null && typeof response.timetable != undefined) {
+          this.timetable = response.timetable;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
   }
 
   archiveDate(rowDate) {
@@ -98,7 +138,6 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
 
-        this.newDate = new DateEntity();
         this.newDate = new DateEntity();
         this.newDate.status = "archived";
         this.newDate.dateStr = this.dateStr;
@@ -137,7 +176,6 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
         this.endTime = this.date.endTime;
 
         this.newDate = new DateEntity();
-        this.newDate = new DateEntity();
         this.newDate.status = "available";
         this.newDate.dateStr = this.dateStr;
         this.newDate.startTime = this.startTime;
@@ -163,5 +201,36 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
     setTimeout(function() {
       location.reload();
     }, 300);
+  }
+
+  showDialog() {
+    this.display = true;
+  }
+
+  createIndividualSession(event) {
+    this.createNewDate = new DateEntity();
+    this.createNewDate.startTime = this.newStartTime;
+    this.createNewDate.endTime = this.newEndTime;
+    this.createNewDate.dateStr = this.newDateTime;
+    this.createNewDate.timetable = this.timetable;
+    this.createNewDate.status = "available";
+
+    this.dateService.createDate(this.createNewDate).subscribe(
+      response => {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Created!",
+          detail: ""
+        });
+      },
+      error => {
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: error.error.message
+        });
+      }
+    );
+    this.display = false;
   }
 }
