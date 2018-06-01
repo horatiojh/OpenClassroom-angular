@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { AppComponent } from './app.component';
-import { MainComponent } from './main.component';
+import { Component, OnInit } from "@angular/core";
+import { AppComponent } from "./app.component";
+import { MainComponent } from "./main.component";
 
 @Component({
-    selector: 'app-topbar',
-    template: `
+  selector: "app-topbar",
+  template: `
         <div class="topbar clearfix">
             <div class="topbar-left">
                 <div style="font-size: 24px;color: aliceblue;margin-top: 7px">Open Classroom</div>
@@ -49,7 +49,7 @@ import { MainComponent } from './main.component';
                             </li>
                         </ul>
                     </li>
-                    
+
                     <li #messages [ngClass]="{'active-top-menu':app.activeTopbarItem === messages}">
                         <a href="#" (click)="app.onTopbarItemClick($event,messages)">
                             <i class="topbar-icon material-icons animated swing">message</i>
@@ -122,21 +122,29 @@ import { MainComponent } from './main.component';
                             </li>
                         </ul>
                     </li>
-                    <li #search class="search-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === search}"
-                        (click)="app.onTopbarItemClick($event,search)">
-                        <span class="md-inputfield">
-                            <input type="text" pInputText>
-                            <label>Search</label>
+                    <li #search class="search-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === search}">
+                        <a [href]="searchLink">
                             <i class="topbar-icon material-icons">search</i>
-                        </span>
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     `
 })
-export class AppTopbarComponent {
+export class AppTopbarComponent implements OnInit {
+  searchLink: string;
+  staffRole: string;
 
-    constructor(public app: MainComponent) { }
+  constructor(public app: MainComponent) {}
 
+  ngOnInit() {
+    this.staffRole = sessionStorage.getItem("staffRole");
+
+    if (this.staffRole === "admin") {
+      this.searchLink = "/searchCourse";
+    } else if (this.staffRole === "instructor") {
+      this.searchLink = "/profSearchCourse";
+    }
+  }
 }

@@ -9,7 +9,7 @@ import { Observable } from "rxjs/Observable";
 import { of } from "rxjs";
 import "rxjs/add/observable/throw";
 
-import { Date } from "../domain/date";
+import { DateEntity } from "../domain/date";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -52,7 +52,7 @@ export class DateService {
       );
   }
 
-  updateDate(date: Date): Observable<any> {
+  updateDate(date: DateEntity): Observable<any> {
     let updateDateReq = { date: date };
 
     return this.httpClient
@@ -63,7 +63,7 @@ export class DateService {
       );
   }
 
-  createDate(date: Date): Observable<any> {
+  createDate(date: DateEntity): Observable<any> {
     let createDateReq = { date: date };
 
     return this.httpClient

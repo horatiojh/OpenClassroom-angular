@@ -23,6 +23,8 @@ import { ProfUpdateTimetableComponent } from "./pages/prof_update_timetable/prof
 import { ProfViewIndivCourseTimetableComponent } from "./pages/prof_view_indiv_course_timetable/prof_view_indiv_course_timetable.component";
 import { ProfViewCourseDetailsComponent } from "./pages/prof_view_course_details/prof_view_course_details.component";
 import { ProfUpdateCourseComponent } from "./pages/prof_update_course/prof_update_course.component";
+import { ProfSearchCourseComponent } from "./pages/prof_search_course/prof_search_course.component";
+import { SearchCourseComponent } from "./pages/search_course/search_course.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -38,7 +40,8 @@ const routes: Routes = [
       { path: "dataAnalytics", component: DataAnalyticsComponent },
       { path: "viewTimetable", component: ViewTimetableComponent },
       { path: "updateTimetable", component: UpdateTimetableComponent },
-      { path: "viewIndivCourseTimetable", component: ViewIndivCourseTimetableComponent }
+      { path: "viewIndivCourseTimetable", component: ViewIndivCourseTimetableComponent },
+      { path: "searchCourse", component: SearchCourseComponent }
     ]
   },
   {
@@ -53,7 +56,8 @@ const routes: Routes = [
       { path: "profUpdateTimetable", component: ProfUpdateTimetableComponent },
       { path: "profViewIndivCourseTimetable", component: ProfViewIndivCourseTimetableComponent },
       { path: "profViewCourseDetails", component: ProfViewCourseDetailsComponent },
-      { path: "profUpdateCourse", component: ProfUpdateCourseComponent }
+      { path: "profUpdateCourse", component: ProfUpdateCourseComponent },
+      { path: "profSearchCourse", component: ProfSearchCourseComponent }
     ]
   }
 ];
