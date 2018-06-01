@@ -22,8 +22,6 @@ export class ModuleCardComponent implements OnInit, OnChanges {
   @Input("course") course: Course;
 
   // attributes
-  courses: Course[];
-  staffId: number;
   moduleCode: string;
   moduleTitle: string;
   staffName: string;
@@ -69,7 +67,6 @@ export class ModuleCardComponent implements OnInit, OnChanges {
   }
 
   viewCourse(event) {
-    // sessionStorage.setItem("courseId", this.courses[0].id.toString());
     this.shareService.setValue("courseId", this.course.id.toString());
     this.router.navigate(["/profViewCourseDetails"]);
   }
@@ -80,7 +77,6 @@ export class ModuleCardComponent implements OnInit, OnChanges {
   }
 
   viewTimetable(event) {
-    // sessionStorage.setItem("courseId", this.courses[0].id.toString());
     this.shareService.setValue("courseId", this.course.id.toString());
     this.router.navigate(["/profViewTimetable"]);
   }
@@ -89,9 +85,5 @@ export class ModuleCardComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.course = changes.course.currentValue;
-    // const course: SimpleChange = changes.course;
-    // console.log("prev value: ", course.previousValue);
-    // console.log("got name: ", course.currentValue);
-    // this._course = course.currentValue;
   }
 }
