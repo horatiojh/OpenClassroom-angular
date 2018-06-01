@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Timetable } from "../../../domain/timetable";
 import { Message } from "primeng/primeng";
+import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 
 import { BreadcrumbService } from "../../breadcrumb.service";
 import { ShareService } from "../../../providers/shareService";
@@ -34,11 +35,22 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   date: Date;
   newDate: Date;
 
+  // css styling
+  showDialogBtnStyle: SafeStyle;
+  createIndivSessionBtnStyle: SafeStyle;
+
+  // for dialog
+  display: boolean = false;
+  newStartTime: string;
+  newEndTime: string;
+  newDateTime: string;
+
   constructor(
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,
     private timetableService: TimetableService,
-    private dateService: DateService
+    private dateService: DateService,
+    private domSanitizer: DomSanitizer
   ) {
     this.breadcrumbService.setItems([
       { label: "Course List", routerLink: ["/viewCourseList"] },
@@ -51,6 +63,13 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   }
 
   ngOnInit() {
+    // for css style
+    let showDialogstyle = "margin-bottom:10px;margin-left:1px;width:100px";
+    this.showDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(showDialogstyle);
+
+    let createIndivSessionStyle = "width:100px";
+    this.createIndivSessionBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(createIndivSessionStyle);
+
     // for datatable
     // this.timetableId = Number(this.shareService.getValue("timetableId"));
     this.timetableId = Number(sessionStorage.getItem("timetableId"));
@@ -164,5 +183,14 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     setTimeout(function() {
       location.reload();
     }, 300);
+  }
+
+  showDialog() {
+    this.display = true;
+  }
+
+  createIndividualSession(event) {
+    console.log("hi");
+    this.display = false;
   }
 }

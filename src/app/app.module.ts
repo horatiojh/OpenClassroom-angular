@@ -33,6 +33,7 @@ import { AccordionModule } from "primeng/accordion";
 import { CardModule } from "primeng/card";
 import { TooltipModule } from 'primeng/tooltip';
 import { EditorModule } from 'primeng/editor';
+import { DialogModule } from 'primeng/dialog';
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -111,7 +112,8 @@ import { ProfUpdateCourseComponent } from "./pages/prof_update_course/prof_updat
     AccordionModule,
     CardModule,
     TooltipModule,
-    EditorModule
+    EditorModule,
+    DialogModule
   ],
   providers: [
     Api,

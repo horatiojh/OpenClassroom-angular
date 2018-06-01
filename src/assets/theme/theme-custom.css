@@ -3998,7 +3998,7 @@ body {
     -webkit-border-radius: 0;
     border-radius: 0; }
     body .ui-calendar .ui-datepicker-trigger .fa {
-      color:#ffffff; }
+      color:#757575; }
     body .ui-calendar .ui-datepicker-trigger:enabled:hover {
       background-color: transparent; }
   body .ui-fluid .ui-calendar.ui-calendar-w-btn .ui-inputtext {
@@ -6024,14 +6024,15 @@ body .ui-dialog.ui-shadow {
   -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 body .ui-dialog .ui-dialog-titlebar {
-  background-color: #ffffff;
-  color: #212121;
+  background-color: #FFC107;
+  color: #ffffff;
   padding: 0.625em 1em; }
   body .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
     font-size: 1.25em;
     letter-spacing: .005em;
     margin-top: .25em;
-    line-height: 2em; }
+    line-height: 2em;
+    font-weight: bold; }
   body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon {
     border: 0 none;
     padding: 0;
@@ -6050,8 +6051,9 @@ body .ui-dialog .ui-dialog-titlebar {
       background-color: #e8e8e8;
       color: #000000; }
     body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon .fa {
-      color: #757575;
-      display: inline-block; }
+      color: #ffffff;
+      display: inline-block;
+      margin-top: 4px; }
     body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon .fa-extlink:before {
       content: "fullscreen"; }
     body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon .fa-newwin:before {
@@ -6061,10 +6063,12 @@ body .ui-dialog .ui-dialog-content {
 body .ui-dialog .ui-dialog-footer {
   text-align: right;
   border: 0 none;
-  border-top: 1px solid #bdbdbd; }
+  /* border-top: 1px solid #bdbdbd;  */
+}
   body .ui-dialog .ui-dialog-footer .ui-button {
-    background-color: #ffffff;
-    color: #212121;
+    background-color: #FFC107;
+    color: #ffffff;
+    font-weight: bold;
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -6072,8 +6076,8 @@ body .ui-dialog .ui-dialog-footer {
     body .ui-dialog .ui-dialog-footer .ui-button .fa {
       color: #757575; }
     body .ui-dialog .ui-dialog-footer .ui-button:hover {
-      background-color: #e8e8e8;
-      color: #000000; }
+      background-color: #FF8F00;
+      color: #ffffff; }
 body .ui-dialog .ui-confirm-dialog-severity {
   margin: 0px .75em; }
 body .ui-lightbox.ui-shadow {
