@@ -54,8 +54,8 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
     private dateService: DateService,
     private domSanitizer: DomSanitizer
   ) {
+    this.shareService.setValue("prePage", "workspace");
     this.breadcrumbService.setItems([
-      { label: "Workspace", routerLink: ["/workspace"] },
       { label: "View Timetable", routerLink: ["/profViewTimetable"] },
       {
         label: "View Individual Session",

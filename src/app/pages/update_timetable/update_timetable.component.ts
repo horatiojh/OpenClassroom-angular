@@ -53,7 +53,6 @@ export class UpdateTimetableComponent implements OnInit {
     private shareService: ShareService
   ) {
     this.breadcrumbService.setItems([
-      { label: "Course List", routerLink: ["/viewCourseList"] },
       { label: "View Timetable", routerLink: ["/viewTimetable"] },
       { label: "Update Timetable", routerLink: ["/updateTimetable"] }
     ]);

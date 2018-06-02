@@ -29,7 +29,6 @@ export class ViewTimetableComponent implements OnInit {
     private shareService: ShareService
   ) {
     this.breadcrumbService.setItems([
-      { label: "Course List", routerLink: ["/viewCourseList"] },
       { label: "View Timetable", routerLink: ["/viewTimetable"] }
     ]);
   }

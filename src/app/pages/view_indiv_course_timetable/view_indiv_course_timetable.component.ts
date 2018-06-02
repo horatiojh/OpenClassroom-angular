@@ -55,7 +55,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     private domSanitizer: DomSanitizer
   ) {
     this.breadcrumbService.setItems([
-      { label: "Course List", routerLink: ["/viewCourseList"] },
       { label: "View Timetable", routerLink: ["/viewTimetable"] },
       {
         label: "View Individual Session",

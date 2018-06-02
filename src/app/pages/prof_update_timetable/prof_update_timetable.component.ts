@@ -52,21 +52,10 @@ export class ProfUpdateTimetableComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private shareService: ShareService
   ) {
-    if (this.shareService.getValue("prePage") === "workspace") {
-      this.shareService.setValue("prePage", "workspace");
-      this.breadcrumbService.setItems([
-        { label: "Workspace", routerLink: ["/workspace"] },
-        { label: "View Timetable", routerLink: ["/profViewTimetable"] },
-        { label: "Update Timetable", routerLink: ["/profUpdateTimetable"] }
-      ]);
-    } else if (this.shareService.getValue("prePage") === "profViewCourseList") {
-      this.shareService.setValue("prePage", "profViewCourseList");
-      this.breadcrumbService.setItems([
-        { label: "Course List", routerLink: ["/profViewCourseList"] },
-        { label: "View Timetable", routerLink: ["/profViewTimetable"] },
-        { label: "Update Timetable", routerLink: ["/profUpdateTimetable"] }
-      ]);
-    }
+    this.breadcrumbService.setItems([
+      { label: "View Timetable", routerLink: ["/profViewTimetable"] },
+      { label: "Update Timetable", routerLink: ["/profUpdateTimetable"] }
+    ]);
   }
 
   ngOnInit() {
