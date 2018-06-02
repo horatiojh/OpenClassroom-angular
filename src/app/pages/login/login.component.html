@@ -2,48 +2,54 @@
 <html>
 
 <body>
-	<div class="login-container_cus">
-		<form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm)">
-			<div class="login-panel_cus">
+  <div class="login-container_cus">
+    <form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm)">
+      <div class="login-panel_cus">
 
-				<div class="ui-g">
-					<div class="ui-g-12">
-						<h2>Staff Login</h2>
-					</div>
-				</div>
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <h2>Staff Login</h2>
+          </div>
+        </div>
 
-				<div class="ui-g">
-					<div class="ui-g-12">
-						<input class="login-input_cus" type="text" id="username" name="username" [(ngModel)]="staffId" required="true" #inusername="ngModel"
-						 placeholder="Username" />
-						<div *ngIf="inusername.invalid && (inusername.dirty || inusername.touched || submitted)">
-							<div *ngIf="inusername.errors.required">
-								<p-message severity="error" text="Username is required."></p-message>
-							</div>
-						</div>
-					</div>
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <input class="login-input_cus ng-dirty ng-invalid" type="text" id="username" name="username" [(ngModel)]="staffId" required="true"
+              #inusername="ngModel" placeholder="Username" />
+            <div *ngIf="inusername.invalid && (inusername.dirty || inusername.touched || submitted)">
+              <div *ngIf="inusername.errors.required">
+                <!-- <p-message severity="error" text="Please enter valid username." class="error_message_cus"></p-message> -->
+                <div class="ui-message ui-messages-error ui-corner-all error_message_cus">
+                  Please enter your username.
+                </div>
+              </div>
+            </div>
+          </div>
 
-					<div class="ui-g-12">
-						<input class="login-input_cus" type="password" id="password" name="password" [(ngModel)]="pwd" required="true" #inpassword="ngModel"
-						 placeholder="Password" />
-						<div *ngIf="inpassword.invalid && (inpassword.dirty || inpassword.touched || submitted)">
-							<div *ngIf="inpassword.errors.required">
-								<p-message severity="error" text="Password is required."></p-message>
-							</div>
-						</div>
-					</div>
+          <div class="ui-g-12">
+            <input class="login-input_cus" type="password" id="password" name="password" [(ngModel)]="pwd" required="true" #inpassword="ngModel"
+              placeholder="Password" />
+            <div *ngIf="inpassword.invalid && (inpassword.dirty || inpassword.touched || submitted)">
+              <div *ngIf="inpassword.errors.required">
+                <!-- <p-message severity="error" text="Please enter valid password." class="error_message_cus"></p-message> -->
+                <div class="ui-message ui-messages-error ui-corner-all error_message_cus">
+                  Please enter your password.
+                </div>
+              </div>
+            </div>
+          </div>
 
-					<div class="ui-g-12">
-						<input class="login-button_cus" type="submit" value="Login" />
-					</div>
+          <div class="ui-g-12">
+            <input class="login-button_cus" type="submit" value="Login" />
+          </div>
 
-					<div dir="rtl" class="ui-g-12">
-						<div *ngIf="loginErrorMessage" class="errorText">
-							{{loginErrorMessage}}
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
+          <div dir="rtl" class="ui-g-12">
+            <div *ngIf="loginErrorMessage" class="errorText">
+              {{loginErrorMessage}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </body>

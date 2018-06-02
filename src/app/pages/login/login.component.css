@@ -26,7 +26,6 @@
     height: 40px;
     background-color: #ffffff;
     color: #042D58;
-    margin-top: 10px;
 }
 
 .login-button_cus {
@@ -38,7 +37,6 @@
     color: #ffffff;
     font-weight: bold;
     font-size: 16px;
-    margin-top: 10px;
 }
 
 ::placeholder {
@@ -53,4 +51,11 @@ body {
     color: #042D58;
     margin: 0;
     font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+}
+
+.error_message_cus{
+  width: 340px;
+  float: left;
+  text-align: left;
+  margin-left: 5px;
 }
