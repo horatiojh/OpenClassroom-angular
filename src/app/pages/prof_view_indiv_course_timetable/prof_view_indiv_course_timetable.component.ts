@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Timetable } from "../../../domain/timetable";
 import { Message } from "primeng/primeng";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
+import { NgForm } from "@angular/forms";
 
 import { BreadcrumbService } from "../../breadcrumb.service";
 import { ShareService } from "../../../providers/shareService";
@@ -17,6 +18,7 @@ import { DateEntity } from "../../../domain/date";
 })
 export class ProfViewIndivCourseTimetableComponent implements OnInit {
   timetable: Timetable;
+  submitted: boolean;
 
   // for datatable
   cols: any[];
@@ -54,12 +56,12 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
     private dateService: DateService,
     private domSanitizer: DomSanitizer
   ) {
-    this.shareService.setValue("prePage", "workspace");
+    this.submitted = false;
     this.breadcrumbService.setItems([
       { label: "View Timetable", routerLink: ["/profViewTimetable"] },
       {
         label: "View Individual Session",
-        routerLink: ["/viewIndivCourseTimetable"]
+        routerLink: ["/profViewIndivCourseTimetable"]
       }
     ]);
   }
@@ -207,30 +209,34 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
     this.display = true;
   }
 
-  createIndividualSession(event) {
-    this.createNewDate = new DateEntity();
-    this.createNewDate.startTime = this.newStartTime;
-    this.createNewDate.endTime = this.newEndTime;
-    this.createNewDate.dateStr = this.newDateTime;
-    this.createNewDate.timetable = this.timetable;
-    this.createNewDate.status = "available";
+  createIndividualSession(dialogForm: NgForm) {
+    this.submitted = true;
 
-    this.dateService.createDate(this.createNewDate).subscribe(
-      response => {
-        this.msgs.push({
-          severity: "info",
-          summary: "Successfully Created!",
-          detail: ""
-        });
-      },
-      error => {
-        this.msgs.push({
-          severity: "error",
-          summary: "HTTP " + error.status,
-          detail: error.error.message
-        });
-      }
-    );
-    this.display = false;
+    if (dialogForm.valid) {
+      this.createNewDate = new DateEntity();
+      this.createNewDate.startTime = this.newStartTime;
+      this.createNewDate.endTime = this.newEndTime;
+      this.createNewDate.dateStr = this.newDateTime;
+      this.createNewDate.timetable = this.timetable;
+      this.createNewDate.status = "available";
+
+      this.dateService.createDate(this.createNewDate).subscribe(
+        response => {
+          this.msgs.push({
+            severity: "info",
+            summary: "Successfully Created!",
+            detail: ""
+          });
+        },
+        error => {
+          this.msgs.push({
+            severity: "error",
+            summary: "HTTP " + error.status,
+            detail: error.error.message
+          });
+        }
+      );
+      this.display = false;
+    }
   }
 }

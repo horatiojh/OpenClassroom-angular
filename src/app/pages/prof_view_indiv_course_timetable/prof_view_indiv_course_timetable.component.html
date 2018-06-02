@@ -7,60 +7,85 @@
 
         <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showDialog()"></p-button>
 
-        <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto" [contentStyle]="{'overflow':'visible'}">
+        <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
 
           <p-header>New Session</p-header>
 
-          <div style="margin-top: 15px">
-            <div class="ui-g-18 ui-md-12">
-              <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                  <label>Date:</label>
+          <form #dialogForm="ngForm" (ngSubmit)="createIndividualSession(dialogForm)">
+
+            <div style="margin-top: 15px">
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Date:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <p-calendar id="showIcon" [showIcon]="true" [(ngModel)]="newDateTime" required="true" #indate="ngModel" name="dateStr"></p-calendar>
+                    <div *ngIf="indate.invalid && (indate.dirty || indate.touched || submitted)">
+                      <div *ngIf="indate.errors.required">
+                        <div class="ui-message ui-messages-error ui-corner-all">
+                          This field is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="ui-grid-col-9">
-                  <p-calendar id="showIcon" [showIcon]="true" [(ngModel)]="newDateTime"></p-calendar>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Start:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <input type="text" pInputText [(ngModel)]="newStartTime" style="width:95%" required="true" #instarttime="ngModel" name="startTime">
+                    <div *ngIf="instarttime.invalid && (instarttime.dirty || instarttime.touched || submitted)">
+                      <div *ngIf="instarttime.errors.required">
+                        <div class="ui-message ui-messages-error ui-corner-all">
+                          This field is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>End:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <input type="text" pInputText [(ngModel)]="newEndTime" style="width:95%" required="true" #inendtime="ngModel" name="endTime">
+                    <div *ngIf="inendtime.invalid && (inendtime.dirty || inendtime.touched || submitted)">
+                      <div *ngIf="inendtime.errors.required">
+                        <div class="ui-message ui-messages-error ui-corner-all">
+                          This field is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="ui-g-18 ui-md-12">
-              <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                  <label>Start:</label>
-                </div>
-                <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="newStartTime" style="width:95%">
-                </div>
-              </div>
-            </div>
-
-            <div class="ui-g-18 ui-md-12">
-              <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                  <label>End:</label>
-                </div>
-                <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="newEndTime" style="width:95%">
+            <p-footer>
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <p-button label="Submit" (onClick)="createIndividualSession($event)" [style]="createIndivSessionBtnStyle"></p-button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <p-footer>
-            <div class="ui-g-18 ui-md-12">
-              <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                  <p-button label="Submit" (onClick)="createIndividualSession($event)" [style]="createIndivSessionBtnStyle"></p-button>
-                </div>
-              </div>
-            </div>
-          </p-footer>
+            </p-footer>
+          </form>
         </p-dialog>
 
         <p-tabView>
           <p-tabPanel header="Available">
             <p-table #availDt [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-            sortField="dateStr" [sortOrder]="1">
+              sortField="dateStr" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
 
