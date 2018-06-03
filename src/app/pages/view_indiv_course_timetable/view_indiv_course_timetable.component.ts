@@ -212,6 +212,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
 
   createIndividualSession(event) {
     this.validationMsgs = [];
+    this.msgs = [];
 
     if (this.newDateTime == null) {
       this.validationMsgs.push({
@@ -221,7 +222,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       });
     }
 
-    if (this.newStartTime == undefined) {
+    if (this.newStartTime == undefined || this.newStartTime == "") {
       this.validationMsgs.push({
         severity: "error",
         summary: "Please enter the start time.",
@@ -229,7 +230,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       });
     }
 
-    if (this.newEndTime == undefined) {
+    if (this.newEndTime == undefined || this.newEndTime == "") {
       this.validationMsgs.push({
         severity: "error",
         summary: "Please enter the end time.",
@@ -240,7 +241,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     if (
       this.newDateTime != null &&
       this.newStartTime != undefined &&
-      this.newEndTime != undefined
+      this.newEndTime != undefined &&
+      this.newStartTime != "" &&
+      this.newEndTime != ""
     ) {
       this.createNewDate = new DateEntity();
       this.createNewDate.startTime = this.newStartTime;
