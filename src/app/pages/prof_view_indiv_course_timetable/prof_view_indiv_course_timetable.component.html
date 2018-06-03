@@ -1,18 +1,17 @@
 <div class="container">
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <div class="card">
-        <h1>Individual Session</h1>
-        <p-growl [value]="msgs"></p-growl>
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <div class="card">
+          <h1>Individual Session</h1>
+          <p-growl [value]="msgs" life="4500"></p-growl>
+          <p-growl [value]="validationMsgs" life="4500"></p-growl>
 
-        <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showDialog()"></p-button>
+          <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showDialog()"></p-button>
 
-        <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto" [contentStyle]="{'overflow':'visible'}"
-          modal="true">
+          <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+            modal="true">
 
-          <p-header>New Session</p-header>
-
-          <form #dialogForm="ngForm" (ngSubmit)="createIndividualSession(dialogForm)">
+            <p-header>New Session</p-header>
 
             <div style="margin-top: 15px">
               <div class="ui-g-18 ui-md-12">
@@ -21,14 +20,7 @@
                     <label>Date:</label>
                   </div>
                   <div class="ui-grid-col-9">
-                    <p-calendar id="showIcon" [showIcon]="true" [(ngModel)]="newDateTime" required="true" #indate="ngModel" name="dateStr"></p-calendar>
-                    <div *ngIf="indate.invalid && (indate.dirty || indate.touched || submitted)">
-                      <div *ngIf="indate.errors.required">
-                        <div class="ui-message ui-messages-error ui-corner-all">
-                          This field is required
-                        </div>
-                      </div>
-                    </div>
+                    <p-calendar id="showIcon" [showIcon]="true" [(ngModel)]="newDateTime" name="dateStr"></p-calendar>
                   </div>
                 </div>
               </div>
@@ -39,14 +31,7 @@
                     <label>Start:</label>
                   </div>
                   <div class="ui-grid-col-9">
-                    <input type="text" pInputText [(ngModel)]="newStartTime" style="width:95%" required="true" #instarttime="ngModel" name="startTime">
-                    <div *ngIf="instarttime.invalid && (instarttime.dirty || instarttime.touched || submitted)">
-                      <div *ngIf="instarttime.errors.required">
-                        <div class="ui-message ui-messages-error ui-corner-all">
-                          This field is required
-                        </div>
-                      </div>
-                    </div>
+                    <input type="text" pInputText [(ngModel)]="newStartTime" style="width:95%" name="startTime">
                   </div>
                 </div>
               </div>
@@ -57,14 +42,7 @@
                     <label>End:</label>
                   </div>
                   <div class="ui-grid-col-9">
-                    <input type="text" pInputText [(ngModel)]="newEndTime" style="width:95%" required="true" #inendtime="ngModel" name="endTime">
-                    <div *ngIf="inendtime.invalid && (inendtime.dirty || inendtime.touched || submitted)">
-                      <div *ngIf="inendtime.errors.required">
-                        <div class="ui-message ui-messages-error ui-corner-all">
-                          This field is required
-                        </div>
-                      </div>
-                    </div>
+                    <input type="text" pInputText [(ngModel)]="newEndTime" style="width:95%" name="endTime">
                   </div>
                 </div>
               </div>
@@ -79,90 +57,89 @@
                 </div>
               </div>
             </p-footer>
-          </form>
-        </p-dialog>
+          </p-dialog>
 
-        <p-tabView>
-          <p-tabPanel header="Available">
-            <p-table #availDt [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-              sortField="dateStr" [sortOrder]="1">
+          <p-tabView>
+            <p-tabPanel header="Available">
+              <p-table #availDt [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+                sortField="dateStr" [sortOrder]="1">
 
-              <ng-template pTemplate="caption">
+                <ng-template pTemplate="caption">
 
-              </ng-template>
+                </ng-template>
 
-              <ng-template pTemplate="header" let-columns>
-                <tr>
-                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                    {{col.header}}
-                    <p-sortIcon [field]="col.field"></p-sortIcon>
-                  </th>
-                  <th>Archive</th>
-                </tr>
-              </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th>Archive</th>
+                  </tr>
+                </ng-template>
 
-              <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr [pSelectableRow]="rowData">
-                  <td *ngFor="let col of columns">
-                    {{rowData[col.field]}}
-                  </td>
-                  <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-trash" (onClick)="archiveDate(rowData)"></p-button>
-                  </td>
-                </tr>
-              </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr [pSelectableRow]="rowData">
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                    <td style="text-align: center">
+                      <p-button icon="fa fa-fw fa-trash" (onClick)="archiveDate(rowData)"></p-button>
+                    </td>
+                  </tr>
+                </ng-template>
 
-              <ng-template pTemplate="emptymessage" let-columns>
-                <tr>
-                  <td [attr.colspan]="columns.length+1">
-                    No records found
-                  </td>
-                </tr>
-              </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                  <tr>
+                    <td [attr.colspan]="columns.length+1">
+                      No records found
+                    </td>
+                  </tr>
+                </ng-template>
 
-            </p-table>
-          </p-tabPanel>
+              </p-table>
+            </p-tabPanel>
 
-          <p-tabPanel header="Archived">
-            <p-table [columns]="cols" [value]="archivedDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+            <p-tabPanel header="Archived">
+              <p-table [columns]="cols" [value]="archivedDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
-              <ng-template pTemplate="caption">
+                <ng-template pTemplate="caption">
 
-              </ng-template>
+                </ng-template>
 
-              <ng-template pTemplate="header" let-columns>
-                <tr>
-                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                    {{col.header}}
-                    <p-sortIcon [field]="col.field"></p-sortIcon>
-                  </th>
-                  <th>Restore</th>
-                </tr>
-              </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th>Restore</th>
+                  </tr>
+                </ng-template>
 
-              <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr [pSelectableRow]="rowData">
-                  <td *ngFor="let col of columns">
-                    {{rowData[col.field]}}
-                  </td>
-                  <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-edit" (onClick)="restoreDate(rowData)"></p-button>
-                  </td>
-                </tr>
-              </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr [pSelectableRow]="rowData">
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                    <td style="text-align: center">
+                      <p-button icon="fa fa-fw fa-edit" (onClick)="restoreDate(rowData)"></p-button>
+                    </td>
+                  </tr>
+                </ng-template>
 
-              <ng-template pTemplate="emptymessage" let-columns>
-                <tr>
-                  <td [attr.colspan]="columns.length+1">
-                    No records found
-                  </td>
-                </tr>
-              </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                  <tr>
+                    <td [attr.colspan]="columns.length+1">
+                      No records found
+                    </td>
+                  </tr>
+                </ng-template>
 
-            </p-table>
-          </p-tabPanel>
-        </p-tabView>
+              </p-table>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
       </div>
     </div>
   </div>
-</div>

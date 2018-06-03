@@ -48,6 +48,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   newEndTime: string;
   newDateTime: string;
   createNewDate: DateEntity;
+  validationMsgs: Message[] = [];
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -209,10 +210,38 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
     this.display = true;
   }
 
-  createIndividualSession(dialogForm: NgForm) {
-    this.submitted = true;
+  createIndividualSession(event) {
+    this.validationMsgs = [];
 
-    if (dialogForm.valid) {
+    if (this.newDateTime == null) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please choose the date.",
+        detail: ""
+      });
+    }
+
+    if (this.newStartTime == undefined) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please enter the start time.",
+        detail: ""
+      });
+    }
+
+    if (this.newEndTime == undefined) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please enter the end time.",
+        detail: ""
+      });
+    }
+
+    if (
+      this.newDateTime != null &&
+      this.newStartTime != undefined &&
+      this.newEndTime != undefined
+    ) {
       this.createNewDate = new DateEntity();
       this.createNewDate.startTime = this.newStartTime;
       this.createNewDate.endTime = this.newEndTime;
