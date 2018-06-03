@@ -209,34 +209,30 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     this.display = true;
   }
 
-  createIndividualSession(dialogForm: NgForm) {
-    this.submitted = true;
+  createIndividualSession(event) {
+    this.createNewDate = new DateEntity();
+    this.createNewDate.startTime = this.newStartTime;
+    this.createNewDate.endTime = this.newEndTime;
+    this.createNewDate.dateStr = this.newDateTime;
+    this.createNewDate.timetable = this.timetable;
+    this.createNewDate.status = "available";
 
-    if (dialogForm.valid) {
-      this.createNewDate = new DateEntity();
-      this.createNewDate.startTime = this.newStartTime;
-      this.createNewDate.endTime = this.newEndTime;
-      this.createNewDate.dateStr = this.newDateTime;
-      this.createNewDate.timetable = this.timetable;
-      this.createNewDate.status = "available";
-
-      this.dateService.createDate(this.createNewDate).subscribe(
-        response => {
-          this.msgs.push({
-            severity: "info",
-            summary: "Successfully Created!",
-            detail: ""
-          });
-        },
-        error => {
-          this.msgs.push({
-            severity: "error",
-            summary: "HTTP " + error.status,
-            detail: error.error.message
-          });
-        }
-      );
-      this.display = false;
-    }
+    this.dateService.createDate(this.createNewDate).subscribe(
+      response => {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Created!",
+          detail: ""
+        });
+      },
+      error => {
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: error.error.message
+        });
+      }
+    );
+    this.display = false;
   }
 }
