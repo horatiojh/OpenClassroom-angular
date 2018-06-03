@@ -269,5 +269,9 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       );
       this.display = false;
     }
+
+    setTimeout(function() {
+      location.reload();
+    }, 300);
   }
 }
