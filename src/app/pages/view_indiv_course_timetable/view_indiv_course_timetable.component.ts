@@ -48,6 +48,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   newEndTime: string;
   newDateTime: string;
   createNewDate: DateEntity;
+  validationMsgs: Message[] = [];
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -210,29 +211,61 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   }
 
   createIndividualSession(event) {
-    this.createNewDate = new DateEntity();
-    this.createNewDate.startTime = this.newStartTime;
-    this.createNewDate.endTime = this.newEndTime;
-    this.createNewDate.dateStr = this.newDateTime;
-    this.createNewDate.timetable = this.timetable;
-    this.createNewDate.status = "available";
+    this.validationMsgs = [];
 
-    this.dateService.createDate(this.createNewDate).subscribe(
-      response => {
-        this.msgs.push({
-          severity: "info",
-          summary: "Successfully Created!",
-          detail: ""
-        });
-      },
-      error => {
-        this.msgs.push({
-          severity: "error",
-          summary: "HTTP " + error.status,
-          detail: error.error.message
-        });
-      }
-    );
-    this.display = false;
+    if (this.newDateTime == null) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please choose the date.",
+        detail: ""
+      });
+    }
+
+    if (this.newStartTime == undefined) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please enter the start time.",
+        detail: ""
+      });
+    }
+
+    if (this.newEndTime == undefined) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please enter the end time.",
+        detail: ""
+      });
+    }
+
+    if (
+      this.newDateTime != null &&
+      this.newStartTime != undefined &&
+      this.newEndTime != undefined
+    ) {
+      this.createNewDate = new DateEntity();
+      this.createNewDate.startTime = this.newStartTime;
+      this.createNewDate.endTime = this.newEndTime;
+      this.createNewDate.dateStr = this.newDateTime;
+      this.createNewDate.timetable = this.timetable;
+      this.createNewDate.status = "available";
+
+      this.dateService.createDate(this.createNewDate).subscribe(
+        response => {
+          this.msgs.push({
+            severity: "info",
+            summary: "Successfully Created!",
+            detail: ""
+          });
+        },
+        error => {
+          this.msgs.push({
+            severity: "error",
+            summary: "HTTP " + error.status,
+            detail: error.error.message
+          });
+        }
+      );
+      this.display = false;
+    }
   }
 }
