@@ -31,10 +31,10 @@ import { CalendarModule } from "primeng/calendar";
 import { TabViewModule } from "primeng/tabview";
 import { AccordionModule } from "primeng/accordion";
 import { CardModule } from "primeng/card";
-import { TooltipModule } from 'primeng/tooltip';
-import { EditorModule } from 'primeng/editor';
-import { DialogModule } from 'primeng/dialog';
-import { SplitButtonModule } from 'primeng/splitbutton';
+import { TooltipModule } from "primeng/tooltip";
+import { EditorModule } from "primeng/editor";
+import { DialogModule } from "primeng/dialog";
+import { SplitButtonModule } from "primeng/splitbutton";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -69,6 +69,8 @@ import { SearchCourseComponent } from "./pages/search_course/search_course.compo
 import { ProfSearchCourseComponent } from "./pages/prof_search_course/prof_search_course.component";
 import { ModuleCardComponent } from "./pages/module_card/module_card.component";
 import { ProfViewCourseListComponent } from "./pages/prof_view_course_list/prof_view_course_list.component";
+import { ViewRequestCourseComponent } from "./pages/view_request_course/view_request_course.component";
+import { ProfViewRequestCourseComponent } from "./pages/prof_view_request_course/prof_view_request_course.component";
 
 @NgModule({
   declarations: [
@@ -97,7 +99,9 @@ import { ProfViewCourseListComponent } from "./pages/prof_view_course_list/prof_
     ProfUpdateCourseComponent,
     SearchCourseComponent,
     ProfSearchCourseComponent,
-    ModuleCardComponent
+    ModuleCardComponent,
+    ProfViewRequestCourseComponent,
+    ViewRequestCourseComponent
   ],
   imports: [
     BrowserModule,
