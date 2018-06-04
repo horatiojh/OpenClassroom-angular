@@ -52,7 +52,7 @@ export class ProfUpdateCourseComponent implements OnInit {
   }
 
   ngOnInit() {
-    let style = "width:200%;height:36px";
+    let style = "width:180%;height:34px";
     this.buttonStyle = this.domSanitizer.bypassSecurityTrustStyle(style);
 
     this.courseId = this.shareService.getValue("courseId");

@@ -1,3 +1,49 @@
-<p>
-  prof-search-course works!
-</p>
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="card">
+        <h1 style="margin-left: 14px">Search Courses</h1>
+        <p-growl [value]="msgs" life="4500"></p-growl>
+
+        <div class="ui-g form-group">
+          <div class="ui-g-12 ui-md-12">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-2">
+                <label class="label_cus">Week Day:</label>
+              </div>
+              <div class="ui-grid-col-10">
+                <p-dropdown [options]="weekDays" [(ngModel)]="selectedWeekDay"></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-12">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-2">
+                <label class="label_cus">Preferred Start Time:</label>
+              </div>
+              <div class="ui-grid-col-6">
+                <input type="text" pInputText [(ngModel)]="preferStartTime">
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-12">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-2">
+                <label class="label_cus">Preferred End Time:</label>
+              </div>
+              <div class="ui-grid-col-6">
+                <input type="text" pInputText [(ngModel)]="preferEndTime">
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-grid-row" style="margin-top: 12px">
+            <p-button label="Submit" [style]="buttonStyle" (onClick)="searchCourse($event)"></p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

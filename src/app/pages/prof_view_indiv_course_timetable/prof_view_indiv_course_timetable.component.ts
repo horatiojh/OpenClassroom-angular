@@ -212,6 +212,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
 
   createIndividualSession(event) {
     this.validationMsgs = [];
+    this.msgs = [];
 
     if (this.newDateTime == null) {
       this.validationMsgs.push({
