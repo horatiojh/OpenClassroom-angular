@@ -6,6 +6,8 @@ export class DateEntity {
   startTime: string;
   endTime: string;
   status: string;
+  isExpired: string;
+  isBooked: string;
   timetable: Timetable;
 
   constructor() {}
