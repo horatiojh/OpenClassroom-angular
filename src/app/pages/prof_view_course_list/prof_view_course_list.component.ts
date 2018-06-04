@@ -35,11 +35,11 @@ export class ProfViewCourseListComponent implements OnInit {
   ngOnInit() {
     // for datatable
     this.cols = [
-      { field: "staffName", header: "Instructor", width: "14%" },
-      { field: "dept", header: "Dept ID", width: "10%" },
-      { field: "moduleTitle", header: "Module Title", width: "20%" },
-      { field: "moduleCode", header: "Module Code", width: "12%" },
-      { field: "moduleType", header: "Module Type", width: "12%" }
+      { field: "staffName", header: "Instructor", width: "16%" },
+      { field: "dept", header: "Dept ID", width: "12%" },
+      { field: "moduleTitle", header: "Module Title", width: "16%" },
+      { field: "moduleCode", header: "Module Code", width: "14%" },
+      { field: "moduleType", header: "Module Type", width: "14%" }
     ];
     this.courseService.getAllCourses().subscribe(response => {
       this.courses = response.courses;
@@ -48,11 +48,11 @@ export class ProfViewCourseListComponent implements OnInit {
 
   viewTimetable(rowData) {
     sessionStorage.setItem("courseId", rowData.id);
-    this.shareService.setValue("prePage","profViewCourseList");
+    this.shareService.setValue("prePage", "profViewCourseList");
     this.router.navigate(["/profViewTimetable"]);
   }
 
-  updateTimetable(rowData) {
+  updateCourse(rowData) {}
 
-  }
+  requestClassroomVisit(rowDate) {}
 }

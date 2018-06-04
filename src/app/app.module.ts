@@ -34,6 +34,7 @@ import { CardModule } from "primeng/card";
 import { TooltipModule } from 'primeng/tooltip';
 import { EditorModule } from 'primeng/editor';
 import { DialogModule } from 'primeng/dialog';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -119,7 +120,8 @@ import { ProfViewCourseListComponent } from "./pages/prof_view_course_list/prof_
     CardModule,
     TooltipModule,
     EditorModule,
-    DialogModule
+    DialogModule,
+    SplitButtonModule
   ],
   providers: [
     Api,
