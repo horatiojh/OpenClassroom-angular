@@ -25,8 +25,8 @@ import { ProfUpdateCourseComponent } from "./pages/prof_update_course/prof_updat
 import { ProfSearchCourseComponent } from "./pages/prof_search_course/prof_search_course.component";
 import { SearchCourseComponent } from "./pages/search_course/search_course.component";
 import { ProfViewCourseListComponent } from "./pages/prof_view_course_list/prof_view_course_list.component";
-import { ProfViewRequestCourseComponent } from "./pages/pro_view_request_course/prof_view_request_course.component";
 import { ViewRequestCourseComponent } from "./pages/view_request_course/view_request_course.component";
+import { ProfViewRequestCourseComponent } from "./pages/prof_view_request_course/prof_view_request_course.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },

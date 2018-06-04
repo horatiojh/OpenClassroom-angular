@@ -35,15 +35,15 @@ export class ViewCourseListComponent implements OnInit {
   ngOnInit() {
     // for datatable
     this.cols = [
-      { field: "staffName", header: "Instructor", width: "14%" },
-      { field: "dept", header: "Dept ID", width: "10%" },
-      { field: "moduleTitle", header: "Module Title", width: "20%" },
-      { field: "moduleCode", header: "Module Code", width: "12%" },
-      { field: "moduleType", header: "Module Type", width: "12%" }
+      { field: "staffName", header: "Instructor", width: "16%" },
+      { field: "dept", header: "Dept ID", width: "12%" },
+      { field: "moduleTitle", header: "Module Title", width: "16%" },
+      { field: "moduleCode", header: "Module Code", width: "14%" },
+      { field: "moduleType", header: "Module Type", width: "14%" }
     ];
-    this.courseService
-      .getAllCourses()
-      .subscribe(response => {this.courses = response.courses});
+    this.courseService.getAllCourses().subscribe(response => {
+      this.courses = response.courses;
+    });
   }
 
   onFileUpload(event, fileUpload) {
@@ -59,9 +59,9 @@ export class ViewCourseListComponent implements OnInit {
           summary: "File Uploaded",
           detail: ""
         });
-        this.courseService
-          .getAllCourses()
-          .subscribe(response => {this.courses = response.courses});
+        this.courseService.getAllCourses().subscribe(response => {
+          this.courses = response.courses;
+        });
       },
       error => {
         fileUpload.clear();
