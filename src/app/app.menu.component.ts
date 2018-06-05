@@ -25,16 +25,16 @@ export class AppMenuComponent implements OnInit {
 
       if(this.staffRole === "admin") {
         this.model = [
-            { label: 'Staff Information', icon: 'camera', routerLink: ['/viewStaffInfo'] },
-            { label: 'Classroom', icon: 'class', routerLink: ['/viewClassroom'] },
-            { label: 'Course List', icon: 'list', routerLink: ['/viewCourseList'] },
+            { label: 'Staff Management', icon: 'camera', routerLink: ['/viewStaffInfo'] },
+            { label: 'Classroom Management', icon: 'class', routerLink: ['/viewClassroom'] },
+            { label: 'Course Management', icon: 'list', routerLink: ['/viewCourseList'] },
             { label: 'Data Analytics', icon: 'poll', routerLink: ['/dataAnalytics'] }
         ];
       } else if(this.staffRole === "instructor") {
         this.model = [
           { label: 'Workspace', icon: 'class', routerLink: ['/workspace'] },
-          { label: 'Course List', icon: 'list', routerLink: ['/profViewCourseList'] },
-          { label: 'Classroom Visit', icon: 'public', routerLink: ['/viewVisitHistory'] }
+          { label: 'All Courses', icon: 'list', routerLink: ['/profViewCourseList'] },
+          { label: 'Visit History', icon: 'public', routerLink: ['/viewVisitHistory'] }
         ];
       }
     }

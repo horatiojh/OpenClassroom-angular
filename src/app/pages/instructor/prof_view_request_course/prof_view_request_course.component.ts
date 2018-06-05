@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 import { Message } from "primeng/primeng";
 
@@ -27,7 +28,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
 
   constructor(
     private shareService: ShareService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -62,5 +64,10 @@ export class ProfViewRequestCourseComponent implements OnInit {
         });
       }
     });
+  }
+
+  viewRequestTimetable(rowData) {
+    sessionStorage.setItem("courseId", rowData.id);
+    this.router.navigate(["/profViewRequestTimetable"]);
   }
 }
