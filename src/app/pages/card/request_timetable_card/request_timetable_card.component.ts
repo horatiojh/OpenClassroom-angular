@@ -1,19 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DateEntity } from '../../../../domain/date';
+import { Component, OnInit, Input } from "@angular/core";
+import { Message } from "primeng/primeng";
+
+import { DateEntity } from "../../../../domain/date";
+import { Timetable } from "../../../../domain/timetable";
+
+import { TimetableService } from "../../../../providers/timetableService";
 
 @Component({
-  selector: 'app-requestTimetableCard',
-  templateUrl: './request_timetable_card.component.html',
-  styleUrls: ['./request_timetable_card.component.css']
+  selector: "app-requestTimetableCard",
+  templateUrl: "./request_timetable_card.component.html",
+  styleUrls: ["./request_timetable_card.component.css"]
 })
 export class RequestTimetableCardComponent implements OnInit {
-
   @Input("dates") dates: DateEntity[];
 
   // for component
   cols: any[];
+  msgs: Message[] = [];
 
-  constructor() { }
+  // for attributes
+  classroom: string;
+
+  constructor(private timetableService: TimetableService) {}
 
   ngOnInit() {
     this.cols = [

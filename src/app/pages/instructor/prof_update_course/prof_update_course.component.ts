@@ -47,7 +47,6 @@ export class ProfUpdateCourseComponent implements OnInit {
     private domSanitizer: DomSanitizer
   ) {
     this.breadcrumbService.setItems([
-      { label: "Workspace", routerLink: ["/workspace"] },
       { label: "Update Course", routerLink: ["/profUpdateCourse"] }
     ]);
   }

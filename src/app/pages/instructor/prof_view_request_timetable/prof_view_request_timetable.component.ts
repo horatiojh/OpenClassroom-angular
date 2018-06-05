@@ -16,6 +16,7 @@ import { DateService } from "../../../../providers/dateService";
 export class ProfViewRequestTimetableComponent implements OnInit {
   courseId: number;
   timetables: Timetable[];
+  timetableId: number;
 
   // for component
   displayTimetables: string[] = [];
@@ -41,24 +42,21 @@ export class ProfViewRequestTimetableComponent implements OnInit {
           this.timetables = response.timetables;
 
           for (let i = 0; i < this.timetables.length; i++) {
-
             this.displayTimetables.push(
               this.timetables[i].weekDay +
                 ", " +
                 this.timetables[i].startTime +
                 " - " +
-                this.timetables[i].endTime
+                this.timetables[i].endTime +
+                " @ " +
+                this.timetables[i].room
             );
 
             this.dateService
               .getAvailDateByTimetableId(this.timetables[i].id)
               .subscribe(response => {
-                if (
-                  response != null &&
-                  typeof response.dates != undefined
-                ) {
+                if (response != null && typeof response.dates != undefined) {
                   this.dates = response.dates;
-                  console.log(this.dates);
                 } else {
                   this.msgs.push({
                     severity: "error",
@@ -68,6 +66,8 @@ export class ProfViewRequestTimetableComponent implements OnInit {
                   });
                 }
               });
+
+            this.timetableId = this.timetables[i].id;
           }
         } else {
           this.msgs.push({

@@ -39,7 +39,6 @@ export class ProfViewCourseDetailsComponent implements OnInit {
     private timetableService: TimetableService
   ) {
     this.breadcrumbService.setItems([
-      { label: "Workspace", routerLink: ["/workspace"] },
       { label: "Course Details", routerLink: ["/profViewCourseDetails"] }
     ]);
   }
