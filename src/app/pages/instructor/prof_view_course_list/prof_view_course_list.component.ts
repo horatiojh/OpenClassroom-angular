@@ -6,8 +6,10 @@ import { FileUploadService } from "../../../../providers/fileUploadService";
 import { CourseService } from "../../../../providers/courseService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { ShareService } from "../../../../providers/shareService";
+import { DateService } from "../../../../providers/dateService";
 
 import { Course } from "../../../../domain/course";
+import { DateEntity } from "../../../../domain/date";
 
 @Component({
   selector: "app-profViewCourseList",
@@ -41,6 +43,7 @@ export class ProfViewCourseListComponent implements OnInit {
       { field: "moduleCode", header: "Module Code", width: "14%" },
       { field: "moduleType", header: "Module Type", width: "14%" }
     ];
+
     this.courseService.getAllCourses().subscribe(response => {
       this.courses = response.courses;
     });
