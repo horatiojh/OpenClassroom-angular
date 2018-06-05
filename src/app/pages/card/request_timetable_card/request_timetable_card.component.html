@@ -1,8 +1,12 @@
-<p-table #availDt [columns]="cols" [value]="dates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+<p-table #dt [columns]="cols" [value]="dates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
   sortField="dateStr" [sortOrder]="1">
 
   <ng-template pTemplate="caption">
-
+    <div style="text-align: right">
+      <i class="fa fa-search" style="margin:4px 4px 0 0px"></i>
+      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+        style="width:35%;margin-left: 3px;color:aliceblue">
+    </div>
   </ng-template>
 
   <ng-template pTemplate="header" let-columns>

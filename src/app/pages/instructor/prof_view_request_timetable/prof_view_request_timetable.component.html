@@ -2,10 +2,11 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <div class="card">
+        <h1>Timetable</h1>
         <p-growl [value]="msgs" life="4500"></p-growl>
 
         <p-accordion>
-          <p-accordionTab *ngFor="let displayTimetable of displayTimetables" [header]="displayTimetable" [selected]="true">
+          <p-accordionTab *ngFor="let displayTimetable of displayTimetables" [header]="displayTimetable">
             <app-requestTimetableCard [dates]="dates"></app-requestTimetableCard>
           </p-accordionTab>
         </p-accordion>
