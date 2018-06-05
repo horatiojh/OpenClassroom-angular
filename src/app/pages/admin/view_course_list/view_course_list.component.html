@@ -30,7 +30,6 @@
               </th>
               <th style="width: 9%">Timetable</th>
               <th style="width: 9%">Update</th>
-              <th style="width: 9%">Request</th>
             </tr>
             <tr style="display:none;">
               <th *ngFor="let col of columns" [ngSwitch]="col.field">
@@ -49,9 +48,6 @@
               </td>
               <td style="text-align: center">
                 <p-button icon='fa fa-fw fa-edit' (onClick)="updateCourse(rowData)"></p-button>
-              </td>
-              <td style="text-align: center">
-                <p-button icon='fa fa-fw fa-send' (onClick)="requestClassroomVisit(rowData)"></p-button>
               </td>
             </tr>
           </ng-template>
