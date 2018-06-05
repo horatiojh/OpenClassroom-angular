@@ -50,6 +50,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   createNewDate: DateEntity;
   validationMsgs: Message[] = [];
 
+
   constructor(
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,

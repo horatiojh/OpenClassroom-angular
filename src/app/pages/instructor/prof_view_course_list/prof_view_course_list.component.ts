@@ -50,6 +50,4 @@ export class ProfViewCourseListComponent implements OnInit {
     sessionStorage.setItem("courseId", rowData.id);
     this.router.navigate(["/profViewRequestTimetable"]);
   }
-
-  requestClassroomVisit(rowDate) {}
 }
