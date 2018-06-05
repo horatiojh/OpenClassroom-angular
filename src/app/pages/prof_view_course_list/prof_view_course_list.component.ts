@@ -48,7 +48,6 @@ export class ProfViewCourseListComponent implements OnInit {
 
   viewTimetable(rowData) {
     sessionStorage.setItem("courseId", rowData.id);
-    this.shareService.setValue("prePage", "profViewCourseList");
     this.router.navigate(["/profViewTimetable"]);
   }
 

@@ -3,6 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { SelectItem, Message } from "primeng/primeng";
 import { SafeScript, DomSanitizer } from "@angular/platform-browser";
 import { BreadcrumbService } from "../../breadcrumb.service";
+import { ShareService } from "../../../providers/shareService";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-profSearchCourse",
@@ -24,11 +26,17 @@ export class ProfSearchCourseComponent implements OnInit {
 
   constructor(
     private domSanitizer: DomSanitizer,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private shareService: ShareService,
+    private router: Router
   ) {
     this.breadcrumbService.setItems([
       { label: "Search Courses", routerLink: ["/profSearchCourse"] }
     ]);
+
+    this.selectedWeekDay = "";
+    this.preferEndTime = "";
+    this.preferStartTime = "";
   }
 
   ngOnInit() {
@@ -45,5 +53,10 @@ export class ProfSearchCourseComponent implements OnInit {
     ];
   }
 
-  searchCourse(event) {}
+  searchCourse(event) {
+    this.shareService.setValue("weekDay", this.selectedWeekDay);
+    this.shareService.setValue("startTime", this.preferStartTime);
+    this.shareService.setValue("endTime", this.preferEndTime);
+    this.router.navigate(["/profViewRequestCourse"]);
+  }
 }
