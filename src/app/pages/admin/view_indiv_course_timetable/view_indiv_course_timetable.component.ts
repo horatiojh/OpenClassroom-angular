@@ -34,6 +34,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   startTime: string;
   endTime: string;
   status: string;
+  weekDay: string;
 
   // update date
   date: DateEntity;
@@ -144,6 +145,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.dateStr = this.date.dateStr;
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
+        this.weekDay = this.date.weekDay;
 
         this.newDate = new DateEntity();
         this.newDate.status = "archived";
@@ -151,6 +153,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.newDate.startTime = this.startTime;
         this.newDate.endTime = this.endTime;
         this.newDate.id = this.dateId;
+        this.newDate.weekDay = this.weekDay;
 
         this.dateService.updateDate(this.newDate).subscribe(response => {
           this.msgs.push({
@@ -181,6 +184,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.dateStr = this.date.dateStr;
         this.startTime = this.date.startTime;
         this.endTime = this.date.endTime;
+        this.weekDay = this.date.weekDay;
 
         this.newDate = new DateEntity();
         this.newDate.status = "available";
@@ -188,6 +192,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.newDate.startTime = this.startTime;
         this.newDate.endTime = this.endTime;
         this.newDate.id = this.dateId;
+        this.newDate.weekDay = this.weekDay;
 
         this.dateService.updateDate(this.newDate).subscribe(response => {
           this.msgs.push({
