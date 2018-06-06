@@ -35,10 +35,10 @@ export class ViewRequestCourseComponent implements OnInit {
   ngOnInit() {
     this.cols = [
       { field: "staffName", header: "Instructor", width: "16%" },
-      { field: "dept", header: "Dept ID", width: "12%" },
+      { field: "dept", header: "Dept ID", width: "10%" },
       { field: "moduleTitle", header: "Module Title", width: "16%" },
-      { field: "moduleCode", header: "Module Code", width: "14%" },
-      { field: "moduleType", header: "Module Type", width: "14%" }
+      { field: "moduleCode", header: "Module Code", width: "12%" },
+      { field: "moduleGroup", header: "Group", width: "9%" }
     ];
 
     this.weekDay = this.shareService.getValue("weekDay");
@@ -55,7 +55,6 @@ export class ViewRequestCourseComponent implements OnInit {
     this.courseService.getRequestCourses(endpoint, body).subscribe(response => {
       if (response != null && typeof response.courses != undefined) {
         this.courses = response.courses;
-        console.log(this.courses);
       } else {
         this.msgs.push({
           severity: "error",

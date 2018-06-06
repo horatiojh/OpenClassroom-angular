@@ -39,7 +39,7 @@ export class ViewCourseListComponent implements OnInit {
       { field: "dept", header: "Dept ID", width: "11%" },
       { field: "moduleTitle", header: "Module Title", width: "15%" },
       { field: "moduleCode", header: "Module Code", width: "13%" },
-      { field: "moduleType", header: "Module Type", width: "13%" }
+      { field: "moduleGroup", header: "Group", width: "9%" }
     ];
     this.courseService.getAllCourses().subscribe(response => {
       this.courses = response.courses;
