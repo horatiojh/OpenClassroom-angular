@@ -89,7 +89,8 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     this.cols = [
       { field: "dateStr", header: "Date" },
       { field: "startTime", header: "Start" },
-      { field: "endTime", header: "End" }
+      { field: "endTime", header: "End" },
+      { field: "weekDay", header: "WeekDay" }
     ];
 
     this.dateService

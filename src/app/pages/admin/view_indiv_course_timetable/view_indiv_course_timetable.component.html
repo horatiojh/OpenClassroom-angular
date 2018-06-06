@@ -107,7 +107,8 @@
           </p-tabPanel>
 
           <p-tabPanel header="Archived">
-            <p-table [columns]="cols" [value]="archivedDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+            <p-table [columns]="cols" [value]="archivedDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+              sortField="dateStr" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
 
