@@ -35,6 +35,8 @@ import { TooltipModule } from "primeng/tooltip";
 import { EditorModule } from "primeng/editor";
 import { DialogModule } from "primeng/dialog";
 import { SplitButtonModule } from "primeng/splitbutton";
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -134,7 +136,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     TooltipModule,
     EditorModule,
     DialogModule,
-    SplitButtonModule
+    SplitButtonModule,
+    ConfirmDialogModule
   ],
   providers: [
     Api,
@@ -149,7 +152,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     AdminGuard,
     AuthGuard,
     InstructorGuard,
-    DateService
+    DateService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

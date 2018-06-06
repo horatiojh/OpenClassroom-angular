@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Message } from "primeng/primeng";
+import { Message, ConfirmationService } from "primeng/primeng";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 import { NgForm } from "@angular/forms";
 
@@ -50,13 +50,13 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   createNewDate: DateEntity;
   validationMsgs: Message[] = [];
 
-
   constructor(
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,
     private timetableService: TimetableService,
     private dateService: DateService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private confirmationService: ConfirmationService
   ) {
     this.submitted = false;
     this.breadcrumbService.setItems([
@@ -275,5 +275,31 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
     setTimeout(function() {
       location.reload();
     }, 300);
+  }
+
+  confirmArchive(rowDate) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to archive it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.archiveDate(rowDate);
+      },
+      reject: () => {}
+    });
+  }
+
+  confirmRestore(rowDate) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to restore it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.restoreDate(rowDate);
+      },
+      reject: () => {}
+    });
   }
 }

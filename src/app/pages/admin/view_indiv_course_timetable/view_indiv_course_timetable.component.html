@@ -6,6 +6,8 @@
         <p-growl [value]="msgs" life="4500"></p-growl>
         <p-growl [value]="validationMsgs" life="4500"></p-growl>
 
+        <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
+
         <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showDialog()"></p-button>
 
         <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto" [contentStyle]="{'overflow':'visible'}"
@@ -85,7 +87,7 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-trash" (onClick)="archiveDate(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-trash" (onClick)="confirmArchive(rowData)"></p-button>
                   </td>
                   <td style="text-align: center">
                     <p-button icon='fa fa-fw fa-send' (onClick)="requestClassroomVisit(rowData)"></p-button>
@@ -128,7 +130,7 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-edit" (onClick)="restoreDate(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-edit" (onClick)="confirmRestore(rowData)"></p-button>
                   </td>
                   <td style="text-align: center">
                     <p-button icon='fa fa-fw fa-send' (onClick)="requestClassroomVisit(rowData)"></p-button>
