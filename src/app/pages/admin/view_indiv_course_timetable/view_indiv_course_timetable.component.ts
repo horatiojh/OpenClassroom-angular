@@ -25,6 +25,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   availDates: DateEntity[];
   archivedDates: DateEntity[];
   timetableId: number;
+  courseId: number;
   msgs: Message[] = [];
 
   // attributes
@@ -83,6 +84,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     // for datatable
     // this.timetableId = Number(this.shareService.getValue("timetableId"));
     this.timetableId = Number(sessionStorage.getItem("timetableId"));
+    this.courseId = Number(sessionStorage.getItem("courseId"));
 
     this.cols = [
       { field: "dateStr", header: "Date" },
@@ -91,7 +93,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     ];
 
     this.dateService
-      .getAvailDateByTimetableId(this.timetableId)
+      .getAvailDateByCourseId(this.courseId)
       .subscribe(response => {
         if (response != null && typeof response.dates != undefined) {
           this.availDates = response.dates;
@@ -105,7 +107,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       });
 
     this.dateService
-      .getArchivedDateByTimetableId(this.timetableId)
+      .getArchivedDateByCourseId(this.courseId)
       .subscribe(response => {
         if (response != null && typeof response.dates != undefined) {
           this.archivedDates = response.dates;

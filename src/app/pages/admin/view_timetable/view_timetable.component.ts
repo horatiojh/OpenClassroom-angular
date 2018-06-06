@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Message } from "primeng/primeng";
 import { Subscription } from "rxjs";
+import { SafeScript, DomSanitizer } from "@angular/platform-browser";
 
 import { TimetableService } from "../../../../providers/timetableService";
 import { ShareService } from "../../../../providers/shareService";
@@ -20,12 +21,14 @@ export class ViewTimetableComponent implements OnInit {
   timetables: Timetable[];
   courseId: number;
   msgs: Message[] = [];
+  viewSessionBtnStyle: SafeScript;
 
   constructor(
     private router: Router,
     private timetableService: TimetableService,
     private breadcrumbService: BreadcrumbService,
-    private shareService: ShareService
+    private shareService: ShareService,
+    private domSanitizer: DomSanitizer
   ) {
     this.breadcrumbService.setItems([
       { label: "View Timetable", routerLink: ["/viewTimetable"] }
@@ -33,6 +36,12 @@ export class ViewTimetableComponent implements OnInit {
   }
 
   ngOnInit() {
+    // for css style
+    let viewSessionStyle = "margin-bottom:10px;margin-left:1px;width:100px";
+    this.viewSessionBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      viewSessionStyle
+    );
+
     //for datatable
     // this.courseId = Number(this.shareService.getValue("courseId"));
     this.courseId = Number(sessionStorage.getItem("courseId"));
@@ -66,9 +75,8 @@ export class ViewTimetableComponent implements OnInit {
     this.router.navigate(["/updateTimetable"]);
   }
 
-  viewIndivCourseTimetable(rowData) {
-    this.shareService.setValue("timetableId", rowData.id);
-    sessionStorage.setItem("timetableId", rowData.id);
+  viewIndivCourseTimetable(event) {
+    sessionStorage.setItem("courseId", String(this.courseId));
     this.router.navigate(["/viewIndivCourseTimetable"]);
   }
 }

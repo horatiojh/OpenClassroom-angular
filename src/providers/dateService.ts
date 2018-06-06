@@ -44,12 +44,10 @@ export class DateService {
   }
 
   getDateByDateId(dateId: number): Observable<any> {
-    return this.httpClient
-      .get<any>(this.baseUrl + "/getDate/" + dateId)
-      .pipe(
-        tap(_ => console.log(`getDate dateId=${dateId}`)),
-        catchError(this.handleError<any>(`getDate dateId=${dateId}`))
-      );
+    return this.httpClient.get<any>(this.baseUrl + "/getDate/" + dateId).pipe(
+      tap(_ => console.log(`getDate dateId=${dateId}`)),
+      catchError(this.handleError<any>(`getDate dateId=${dateId}`))
+    );
   }
 
   updateDate(date: DateEntity): Observable<any> {
@@ -71,6 +69,28 @@ export class DateService {
       .pipe(
         tap(_ => console.log("createDate")),
         catchError(this.handleError<any>("createDate"))
+      );
+  }
+
+  getAvailDateByCourseId(courseId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getAvailDatesByCID/" + courseId)
+      .pipe(
+        tap(_ => console.log(`getAvailDatesByCID courseId=${courseId}`)),
+        catchError(
+          this.handleError<any>(`getAvailDatesByCID courseId=${courseId}`)
+        )
+      );
+  }
+
+  getArchivedDateByCourseId(courseId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getArchivedDatesByCID/" + courseId)
+      .pipe(
+        tap(_ => console.log(`getArchivedDatesByCID courseId=${courseId}`)),
+        catchError(
+          this.handleError<any>(`getArchivedDatesByCID courseId=${courseId}`)
+        )
       );
   }
 
