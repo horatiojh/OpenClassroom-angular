@@ -268,6 +268,10 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
             summary: "Successfully Created!",
             detail: ""
           });
+
+          setTimeout(function() {
+            location.reload();
+          }, 300);
         },
         error => {
           this.msgs.push({
@@ -279,10 +283,6 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       );
       this.display = false;
     }
-
-    setTimeout(function() {
-      location.reload();
-    }, 300);
   }
 
   confirmArchive(rowDate) {
