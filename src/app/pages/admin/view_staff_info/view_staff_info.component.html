@@ -28,9 +28,9 @@
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
-              <th style="width: 12%">View</th>
-              <th style="width: 12%">Update</th>
-              <th style="width: 12%">Delete</th>
+              <th style="width: 9%">View</th>
+              <th style="width: 9%">Update</th>
+              <th style="width: 9%">Delete</th>
             </tr>
             <tr style="display:none;">
               <th *ngFor="let col of columns" [ngSwitch]="col.field">
