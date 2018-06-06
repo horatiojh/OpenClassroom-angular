@@ -13,7 +13,6 @@ import { Course } from "../../../../domain/course";
 
 import { ShareService } from "../../../../providers/shareService";
 
-
 @Component({
   selector: "app-moduleCard",
   templateUrl: "./module_card.component.html",
@@ -27,6 +26,7 @@ export class ModuleCardComponent implements OnInit, OnChanges {
   moduleTitle: string;
   staffName: string;
   faculty: string;
+  moduleGroup: string;
 
   // css style
   updateCourseBtnSytle: SafeStyle;
@@ -65,6 +65,7 @@ export class ModuleCardComponent implements OnInit, OnChanges {
     this.moduleTitle = this.course.moduleTitle;
     this.staffName = this.course.staffName;
     this.faculty = this.course.faculty;
+    this.moduleGroup = this.course.moduleGroup;
   }
 
   viewCourse(event) {
