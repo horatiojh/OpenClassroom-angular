@@ -5,9 +5,11 @@ import { CourseService } from "../../../../providers/courseService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
+import { CourseInfoService } from "../../../../providers/courseInfoService";
 
 import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
+import { CourseInfo } from "../../../../domain/courseInfo";
 
 @Component({
   selector: "app-profViewCourseDetails",
@@ -24,9 +26,12 @@ export class ProfViewCourseDetailsComponent implements OnInit {
   moduleTitle: string;
   groupSize: string;
   staffName: string;
-  description: string;
   syllabus: string;
   blackoutDates: string;
+
+  // for course info attributes
+  description: string;
+  courseInfo: CourseInfo;
 
   // for display timetable
   timetables: Timetable[];
@@ -36,7 +41,8 @@ export class ProfViewCourseDetailsComponent implements OnInit {
     private courseService: CourseService,
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,
-    private timetableService: TimetableService
+    private timetableService: TimetableService,
+    private courseInfoService: CourseInfoService
   ) {
     this.breadcrumbService.setItems([
       { label: "Course Details", routerLink: ["/profViewCourseDetails"] }
@@ -57,7 +63,6 @@ export class ProfViewCourseDetailsComponent implements OnInit {
           this.moduleTitle = this.course.moduleTitle;
           this.groupSize = this.course.groupSize;
           this.staffName = this.course.staffName;
-          this.description = this.course.description;
           this.syllabus = this.course.syllabus;
           this.blackoutDates = this.course.blackoutDates;
 
@@ -67,6 +72,21 @@ export class ProfViewCourseDetailsComponent implements OnInit {
               this.timetables = response.timetables;
 
               this.weeksName = this.timetables[0].weeksName;
+            });
+
+          this.courseInfoService
+            .getCourseInfoByModuleCode(this.moduleCode)
+            .subscribe(response => {
+              if (response != null && typeof response.courseInfo != undefined) {
+                this.courseInfo = response.courseInfo;
+                this.description = this.courseInfo.description;
+              } else {
+                this.msgs.push({
+                  severity: "error",
+                  summary: "An error has occurred while processing the request",
+                  detail: ""
+                });
+              }
             });
         } else {
           this.msgs.push({

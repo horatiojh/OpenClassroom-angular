@@ -12,7 +12,6 @@ export class Course {
   moduleTitle: string;
   groupSize: string;
   eventSize: string;
-  description: string;
   syllabus: string;
   blackoutDates: string;
 
@@ -47,7 +46,6 @@ export class Course {
     this.moduleTitle = moduleTitle;
     this.groupSize = groupSize;
     this.eventSize = eventSize;
-    this.description = description;
     this.syllabus = syllabus;
     this.blackoutDates = blackoutDates;
   }

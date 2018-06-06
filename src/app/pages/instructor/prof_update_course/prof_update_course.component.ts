@@ -6,8 +6,10 @@ import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { CourseService } from "../../../../providers/courseService";
 import { ShareService } from "../../../../providers/shareService";
+import { CourseInfoService } from "../../../../providers/courseInfoService";
 
 import { Course } from "../../../../domain/course";
+import { CourseInfo } from "../../../../domain/courseInfo";
 
 @Component({
   selector: "app-profUpdateCourse",
@@ -32,23 +34,30 @@ export class ProfUpdateCourseComponent implements OnInit {
   moduleTitle: string;
   groupSize: string;
   eventSize: string;
-  description: string;
   syllabus: string;
   blackoutDates: string;
+
+  // course info attributes
+  description: string;
 
   // for update course
   course: Course;
   newCourse: Course;
+  courseInfo: CourseInfo;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
     private courseService: CourseService,
     private shareService: ShareService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private courseInfoService: CourseInfoService
   ) {
     this.breadcrumbService.setItems([
       { label: "Update Course", routerLink: ["/profUpdateCourse"] }
     ]);
+
+    this.description = "";
+    this.moduleCode = "";
   }
 
   ngOnInit() {
@@ -65,7 +74,6 @@ export class ProfUpdateCourseComponent implements OnInit {
         this.courseId = this.course.id;
         this.blackoutDates = this.course.blackoutDates;
         this.dept = this.course.dept;
-        this.description = this.course.description;
         this.eventId = this.course.eventId;
         this.eventSize = this.course.eventSize;
         this.faculty = this.course.faculty;
@@ -78,6 +86,21 @@ export class ProfUpdateCourseComponent implements OnInit {
         this.moduleType = this.course.moduleType;
         this.staffName = this.course.staffName;
         this.syllabus = this.course.syllabus;
+
+        this.courseInfoService
+          .getCourseInfoByModuleCode(this.moduleCode)
+          .subscribe(response => {
+            if (response != null && typeof response.courseInfo != undefined) {
+              this.courseInfo = response.courseInfo;
+              this.description = this.courseInfo.description;
+            } else {
+              this.msgs.push({
+                severity: "error",
+                summary: "An error has occurred while processing the request",
+                detail: ""
+              });
+            }
+          });
       });
   }
 

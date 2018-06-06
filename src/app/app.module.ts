@@ -35,8 +35,8 @@ import { TooltipModule } from "primeng/tooltip";
 import { EditorModule } from "primeng/editor";
 import { DialogModule } from "primeng/dialog";
 import { SplitButtonModule } from "primeng/splitbutton";
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { ConfirmationService } from "primeng/api";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -47,6 +47,7 @@ import { TimetableService } from "../providers/timetableService";
 import { ShareService } from "../providers/shareService";
 import { AuthService } from "../providers/authService";
 import { DateService } from "../providers/dateService";
+import { CourseInfoService } from "../providers/courseInfoService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -153,7 +154,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     AuthGuard,
     InstructorGuard,
     DateService,
-    ConfirmationService
+    ConfirmationService,
+    CourseInfoService
   ],
   bootstrap: [AppComponent]
 })

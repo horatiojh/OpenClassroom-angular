@@ -37,8 +37,8 @@ export class CourseService {
     return this.httpClient
       .get<any>(this.baseUrl + "/getCourse/" + courseId)
       .pipe(
-        tap(_ => console.log(`getCourse timetableId=${courseId}`)),
-        catchError(this.handleError<any>(`getCourse timetableId=${courseId}`))
+        tap(_ => console.log(`getCourse courseId=${courseId}`)),
+        catchError(this.handleError<any>(`getCourse courseId=${courseId}`))
       );
   }
 
