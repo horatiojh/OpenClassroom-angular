@@ -28,6 +28,7 @@ export class ProfViewCourseDetailsComponent implements OnInit {
   staffName: string;
   syllabus: string;
   blackoutDates: string;
+  moduleGroup: string;
 
   // for course info attributes
   description: string;
@@ -65,6 +66,7 @@ export class ProfViewCourseDetailsComponent implements OnInit {
           this.staffName = this.course.staffName;
           this.syllabus = this.course.syllabus;
           this.blackoutDates = this.course.blackoutDates;
+          this.moduleGroup = this.course.moduleGroup;
 
           this.timetableService
             .getTimetableByCourseId(this.courseId)

@@ -28,6 +28,12 @@ export class FileUploadService {
       .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
   }
 
+  uploadCourseInfo(data: FormData): Observable<any> {
+    return this.httpClient
+      .post<any>(this.baseUrl + "courseInfo", data)
+      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errMsg = error.message || "Server error";
 

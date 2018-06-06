@@ -5,10 +5,17 @@
         <h1>Course Management</h1>
         <p-growl [value]="msgs" life="4500"></p-growl>
 
-        <p-fileUpload #fileUpload name="files[]" (uploadHandler)="onFileUpload($event,fileUpload)" accept="text/csv" maxFileSize="1000000"
+        <p-fileUpload #uploadCourse name="courseFiles[]" (uploadHandler)="onFileUploadCourse($event,uploadCourse)" accept="text/csv" maxFileSize="1000000"
           customUpload="true">
           <ng-template pTemplate="toolbar">
-            <div style="margin-top: 8px">Please upload a file with csv format.</div>
+            <div style="margin-top: 8px">Please upload a file with csv format. (all courses information)</div>
+          </ng-template>
+        </p-fileUpload>
+
+        <p-fileUpload #uploadCourseInfo name="courseInfoFiles[]" (uploadHandler)="onFileUploadCourseInfo($event,uploadCourseInfo)" accept="text/csv"
+          maxFileSize="1000000" customUpload="true">
+          <ng-template pTemplate="toolbar">
+            <div style="margin-top: 8px">Please upload a file with csv format. (description for a specific course)</div>
           </ng-template>
         </p-fileUpload>
 
@@ -28,8 +35,8 @@
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
-              <th style="width: 9%">Timetable</th>
-              <th style="width: 9%">Update</th>
+              <th style="width: 8%">Timetable</th>
+              <th style="width: 8%">Update</th>
             </tr>
             <tr style="display:none;">
               <th *ngFor="let col of columns" [ngSwitch]="col.field">

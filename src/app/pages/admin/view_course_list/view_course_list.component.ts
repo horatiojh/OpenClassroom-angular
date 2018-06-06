@@ -35,24 +35,24 @@ export class ViewCourseListComponent implements OnInit {
   ngOnInit() {
     // for datatable
     this.cols = [
-      { field: "staffName", header: "Instructor", width: "16%" },
-      { field: "dept", header: "Dept ID", width: "12%" },
-      { field: "moduleTitle", header: "Module Title", width: "16%" },
-      { field: "moduleCode", header: "Module Code", width: "14%" },
-      { field: "moduleType", header: "Module Type", width: "14%" }
+      { field: "staffName", header: "Instructor", width: "18%" },
+      { field: "dept", header: "Dept ID", width: "11%" },
+      { field: "moduleTitle", header: "Module Title", width: "15%" },
+      { field: "moduleCode", header: "Module Code", width: "13%" },
+      { field: "moduleType", header: "Module Type", width: "13%" }
     ];
     this.courseService.getAllCourses().subscribe(response => {
       this.courses = response.courses;
     });
   }
 
-  onFileUpload(event, fileUpload) {
+  onFileUploadCourse(event, uploadCourse) {
     let data = new FormData();
     data.append("file", event.files[0]);
 
     this.fileUploadService.uploadCourse(data).subscribe(
       response => {
-        fileUpload.clear();
+        uploadCourse.clear();
         this.msgs = [];
         this.msgs.push({
           severity: "info",
@@ -64,7 +64,36 @@ export class ViewCourseListComponent implements OnInit {
         });
       },
       error => {
-        fileUpload.clear();
+        uploadCourse.clear();
+        this.msgs = [];
+        this.msgs.push({
+          severity: "error",
+          summary: "Invalid File",
+          detail: ""
+        });
+      }
+    );
+  }
+
+  onFileUploadCourseInfo(event, uploadCourseInfo) {
+    let data = new FormData();
+    data.append("file", event.files[0]);
+
+    this.fileUploadService.uploadCourseInfo(data).subscribe(
+      response => {
+        uploadCourseInfo.clear();
+        this.msgs = [];
+        this.msgs.push({
+          severity: "info",
+          summary: "File Uploaded",
+          detail: ""
+        });
+        this.courseService.getAllCourses().subscribe(response => {
+          this.courses = response.courses;
+        });
+      },
+      error => {
+        uploadCourseInfo.clear();
         this.msgs = [];
         this.msgs.push({
           severity: "error",

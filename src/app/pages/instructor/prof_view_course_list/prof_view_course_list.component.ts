@@ -37,11 +37,11 @@ export class ProfViewCourseListComponent implements OnInit {
   ngOnInit() {
     // for datatable
     this.cols = [
-      { field: "staffName", header: "Instructor", width: "16%" },
-      { field: "dept", header: "Dept ID", width: "12%" },
-      { field: "moduleTitle", header: "Module Title", width: "16%" },
-      { field: "moduleCode", header: "Module Code", width: "14%" },
-      { field: "moduleType", header: "Module Type", width: "14%" }
+      { field: "staffName", header: "Instructor", width: "18%" },
+      { field: "dept", header: "Dept ID", width: "11%" },
+      { field: "moduleTitle", header: "Module Title", width: "15%" },
+      { field: "moduleCode", header: "Module Code", width: "13%" },
+      { field: "moduleType", header: "Module Type", width: "13%" }
     ];
 
     this.courseService.getAllCourses().subscribe(response => {
