@@ -27,6 +27,7 @@ import { ViewIndivCourseTimetableComponent } from "./pages/admin/view_indiv_cour
 import { SearchCourseComponent } from "./pages/admin/search_course/search_course.component";
 import { ViewRequestCourseComponent } from "./pages/admin/view_request_course/view_request_course.component";
 import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analytics.component";
+import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/view_course_details.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
 
@@ -46,7 +47,8 @@ const routes: Routes = [
       { path: "updateTimetable", component: UpdateTimetableComponent },
       { path: "viewIndivCourseTimetable", component: ViewIndivCourseTimetableComponent },
       { path: "searchCourse", component: SearchCourseComponent },
-      { path: "viewRequestCourse", component: ViewRequestCourseComponent }
+      { path: "viewRequestCourse", component: ViewRequestCourseComponent },
+      { path: "viewCourseDetails", component: ViewCourseDetailsComponent }
     ]
   },
   {
