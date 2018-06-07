@@ -6,10 +6,12 @@ import { BreadcrumbService } from "../../../breadcrumb.service";
 import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
 import { CourseInfoService } from "../../../../providers/courseInfoService";
+import { DateService } from "../../../../providers/dateService";
 
 import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
 import { CourseInfo } from "../../../../domain/courseInfo";
+import { DateEntity } from "../../../../domain/date";
 
 @Component({
   selector: "app-profViewCourseDetails",
@@ -37,13 +39,15 @@ export class ProfViewCourseDetailsComponent implements OnInit {
   // for display timetable
   timetables: Timetable[];
   weeksName: string;
+  dates: DateEntity[];
 
   constructor(
     private courseService: CourseService,
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,
     private timetableService: TimetableService,
-    private courseInfoService: CourseInfoService
+    private courseInfoService: CourseInfoService,
+    private dateService: DateService
   ) {
     this.breadcrumbService.setItems([
       { label: "Course Details", routerLink: ["/profViewCourseDetails"] }
@@ -97,6 +101,12 @@ export class ProfViewCourseDetailsComponent implements OnInit {
             detail: ""
           });
         }
+      });
+
+    this.dateService
+      .getAvailDateByCourseId(this.courseId)
+      .subscribe(response => {
+        this.dates = response.dates;
       });
   }
 }

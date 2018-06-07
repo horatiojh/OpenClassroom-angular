@@ -65,7 +65,7 @@ export class ViewRequestCourseComponent implements OnInit {
     });
   }
 
-  viewRequestTimetable(rowData) {
+  viewCourseDetails(rowData) {
     sessionStorage.setItem("courseId", rowData.id);
     this.router.navigate(["/viewRequestTimetable"]);
   }

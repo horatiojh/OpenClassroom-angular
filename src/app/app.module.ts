@@ -61,7 +61,6 @@ import { ProfViewCourseDetailsComponent } from "./pages/instructor/prof_view_cou
 import { ProfUpdateCourseComponent } from "./pages/instructor/prof_update_course/prof_update_course.component";
 import { ProfSearchCourseComponent } from "./pages/instructor/prof_search_course/prof_search_course.component";
 import { ProfViewRequestCourseComponent } from "./pages/instructor/prof_view_request_course/prof_view_request_course.component";
-import { ProfViewRequestTimetableComponent } from "./pages/instructor/prof_view_request_timetable/prof_view_request_timetable.component";
 import { ViewVisitHistoryComponent } from "./pages/instructor/view_visit_history/view_visit_history.component";
 import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.component";
 
@@ -74,7 +73,6 @@ import { ViewIndivCourseTimetableComponent } from "./pages/admin/view_indiv_cour
 import { SearchCourseComponent } from "./pages/admin/search_course/search_course.component";
 import { ViewRequestCourseComponent } from "./pages/admin/view_request_course/view_request_course.component";
 import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analytics.component";
-import { ViewRequestTimetableComponent } from "./pages/admin/view_request_timetable/view_request_timetable.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
 
@@ -111,9 +109,7 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     ModuleCardComponent,
     ProfViewRequestCourseComponent,
     ViewRequestCourseComponent,
-    ProfViewRequestTimetableComponent,
-    RequestTimetableCardComponent,
-    ViewRequestTimetableComponent
+    RequestTimetableCardComponent
   ],
   imports: [
     BrowserModule,

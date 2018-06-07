@@ -21,7 +21,6 @@
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
-              <th style="width: 8%">Timetable</th>
               <th style="width: 8%">View</th>
             </tr>
             <tr style="display:none;">
@@ -37,9 +36,6 @@
                 {{rowData[col.field]}}
               </td>
               <td style="text-align: center">
-                <p-button icon='fa fa-fw fa-calendar' (onClick)="viewTimetable(rowData)"></p-button>
-              </td>
-              <td style="text-align: center">
                 <p-button icon='fa fa-fw fa-file-text' (onClick)="viewCourseDetails(rowData)"></p-button>
               </td>
             </tr>
@@ -47,7 +43,7 @@
 
           <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-              <td [attr.colspan]="columns.length+2">
+              <td [attr.colspan]="columns.length+1">
                 No records found
               </td>
             </tr>

@@ -15,7 +15,6 @@ import { ProfViewCourseDetailsComponent } from "./pages/instructor/prof_view_cou
 import { ProfUpdateCourseComponent } from "./pages/instructor/prof_update_course/prof_update_course.component";
 import { ProfSearchCourseComponent } from "./pages/instructor/prof_search_course/prof_search_course.component";
 import { ProfViewRequestCourseComponent } from "./pages/instructor/prof_view_request_course/prof_view_request_course.component";
-import { ProfViewRequestTimetableComponent } from "./pages/instructor/prof_view_request_timetable/prof_view_request_timetable.component";
 import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.component";
 import { ViewVisitHistoryComponent } from "./pages/instructor/view_visit_history/view_visit_history.component";
 
@@ -30,7 +29,6 @@ import { ViewRequestCourseComponent } from "./pages/admin/view_request_course/vi
 import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analytics.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
-import { ViewRequestTimetableComponent } from "./pages/admin/view_request_timetable/view_request_timetable.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -48,8 +46,7 @@ const routes: Routes = [
       { path: "updateTimetable", component: UpdateTimetableComponent },
       { path: "viewIndivCourseTimetable", component: ViewIndivCourseTimetableComponent },
       { path: "searchCourse", component: SearchCourseComponent },
-      { path: "viewRequestCourse", component: ViewRequestCourseComponent },
-      { path: "viewRequestTimetable", component: ViewRequestTimetableComponent }
+      { path: "viewRequestCourse", component: ViewRequestCourseComponent }
     ]
   },
   {
@@ -66,8 +63,7 @@ const routes: Routes = [
       { path: "profViewCourseDetails", component: ProfViewCourseDetailsComponent },
       { path: "profUpdateCourse", component: ProfUpdateCourseComponent },
       { path: "profSearchCourse", component: ProfSearchCourseComponent },
-      { path: "profViewRequestCourse", component: ProfViewRequestCourseComponent },
-      { path: "profViewRequestTimetable", component: ProfViewRequestTimetableComponent }
+      { path: "profViewRequestCourse", component: ProfViewRequestCourseComponent }
     ]
   }
 ];

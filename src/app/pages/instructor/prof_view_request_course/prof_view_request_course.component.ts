@@ -55,7 +55,6 @@ export class ProfViewRequestCourseComponent implements OnInit {
     this.courseService.getRequestCourses(endpoint, body).subscribe(response => {
       if (response != null && typeof response.courses != undefined) {
         this.courses = response.courses;
-        console.log(this.courses);
       } else {
         this.msgs.push({
           severity: "error",
@@ -66,8 +65,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
     });
   }
 
-  viewRequestTimetable(rowData) {
-    sessionStorage.setItem("courseId", rowData.id);
-    this.router.navigate(["/profViewRequestTimetable"]);
+  viewCourseDetails(rowData) {
+    this.shareService.setValue("courseId",rowData.id);
+    this.router.navigate(["/profViewCourseDetails"]);
   }
 }

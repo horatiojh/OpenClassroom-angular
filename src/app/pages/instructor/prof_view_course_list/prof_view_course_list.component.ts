@@ -49,11 +49,6 @@ export class ProfViewCourseListComponent implements OnInit {
     });
   }
 
-  viewTimetable(rowData) {
-    sessionStorage.setItem("courseId", rowData.id);
-    this.router.navigate(["/profViewRequestTimetable"]);
-  }
-
   viewCourseDetails(rowData) {
     this.shareService.setValue("courseId", rowData.id);
     this.router.navigate(["/profViewCourseDetails"]);

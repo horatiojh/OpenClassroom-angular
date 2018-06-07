@@ -11,11 +11,11 @@
 
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="text-align: center">
         {{col.header}}
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
-      <th>Request</th>
+      <th style="text-align: center">Request</th>
     </tr>
   </ng-template>
 
