@@ -17,7 +17,7 @@ import { Timetable } from "../../../../domain/timetable";
   styleUrls: ["./prof_view_indiv_course_timetable.component.css"]
 })
 export class ProfViewIndivCourseTimetableComponent implements OnInit {
-  timetable: Timetable;
+  timetables: Timetable[];
   submitted: boolean;
 
   // for datatable
@@ -51,6 +51,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   newDateTime: string;
   createNewDate: DateEntity;
   validationMsgs: Message[] = [];
+  newWeekDay: string;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -123,10 +124,10 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       });
 
     this.timetableService
-      .getTimetableByTimetableId(this.timetableId)
+      .getTimetableByCourseId(this.courseId)
       .subscribe(response => {
-        if (response != null && typeof response.timetable != undefined) {
-          this.timetable = response.timetable;
+        if (response != null && typeof response.timetables != undefined) {
+          this.timetables = response.timetables;
         } else {
           this.msgs.push({
             severity: "error",
@@ -255,11 +256,16 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       this.newEndTime != ""
     ) {
       this.createNewDate = new DateEntity();
+
       this.createNewDate.startTime = this.newStartTime;
       this.createNewDate.endTime = this.newEndTime;
       this.createNewDate.dateStr = this.newDateTime;
-      this.createNewDate.timetable = this.timetable;
+      this.createNewDate.timetable = this.timetables[0];
       this.createNewDate.status = "available";
+      this.createNewDate.isBooked = "vacate";
+      this.createNewDate.isExpired = "new";
+      this.createNewDate.weekDay = String(this.newDateTime).substr(0, 3);
+
 
       this.dateService.createDate(this.createNewDate).subscribe(
         response => {
