@@ -53,7 +53,6 @@ import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
 import { InstructorGuard } from "./guards/instructor.guard";
 
-import { ProfViewCourseListComponent } from "./pages/instructor/prof_view_course_list/prof_view_course_list.component";
 import { ProfViewTimetableComponent } from "./pages/instructor/prof_view_timetable/prof_view_timetable.component";
 import { ProfUpdateTimetableComponent } from "./pages/instructor/prof_update_timetable/prof_update_timetable.component";
 import { ProfViewIndivCourseTimetableComponent } from "./pages/instructor/prof_view_indiv_course_timetable/prof_view_indiv_course_timetable.component";
@@ -63,7 +62,6 @@ import { ProfSearchCourseComponent } from "./pages/instructor/prof_search_course
 import { ProfViewRequestCourseComponent } from "./pages/instructor/prof_view_request_course/prof_view_request_course.component";
 import { ViewVisitHistoryComponent } from "./pages/instructor/view_visit_history/view_visit_history.component";
 import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.component";
-import { ProfViewCourseDetailsWoTimetableComponent } from "./pages/instructor/prof_view_course_details_wo_timetable/prof_view_course_details_wo_timetable.component";
 
 import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff_info.component";
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
@@ -98,7 +96,6 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     DataAnalyticsComponent,
     UpdateTimetableComponent,
     WorkspaceComponent,
-    ProfViewCourseListComponent,
     ViewVisitHistoryComponent,
     ViewIndivCourseTimetableComponent,
     ProfViewTimetableComponent,
@@ -112,8 +109,7 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     ProfViewRequestCourseComponent,
     ViewRequestCourseComponent,
     RequestTimetableCardComponent,
-    ViewCourseDetailsComponent,
-    ProfViewCourseDetailsWoTimetableComponent
+    ViewCourseDetailsComponent
   ],
   imports: [
     BrowserModule,
