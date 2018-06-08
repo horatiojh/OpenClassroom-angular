@@ -77,7 +77,7 @@ import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/vi
 import { LoginComponent } from "./pages/common/login/login.component";
 
 import { ModuleCardComponent } from "./pages/card/module_card/module_card.component";
-import { RequestTimetableCardComponent } from "./pages/card/request_timetable_card/request_timetable_card.component";
+import { RequestDateCardComponent } from "./pages/card/request_date_card/request_date_card.component";
 
 @NgModule({
   declarations: [
@@ -108,7 +108,7 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     ModuleCardComponent,
     ProfViewRequestCourseComponent,
     ViewRequestCourseComponent,
-    RequestTimetableCardComponent,
+    RequestDateCardComponent,
     ViewCourseDetailsComponent
   ],
   imports: [

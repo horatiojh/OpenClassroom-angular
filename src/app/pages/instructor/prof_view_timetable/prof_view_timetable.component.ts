@@ -51,10 +51,10 @@ export class ProfViewTimetableComponent implements OnInit {
     this.cols = [
       { field: "weeksName", header: "Week Name", width: "30%" },
       { field: "weeks", header: "Weeks", width: "11%" },
-      { field: "weekDay", header: "Week Day", width: "13%" },
+      { field: "weekDay", header: "Day", width: "13%" },
       { field: "startTime", header: "Start", width: "9%" },
       { field: "endTime", header: "End", width: "9%" },
-      { field: "room", header: "Classroom", width: "13%" }
+      { field: "room", header: "Room", width: "13%" }
     ];
 
     this.timetableService

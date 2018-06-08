@@ -7,11 +7,11 @@ import { Timetable } from "../../../../domain/timetable";
 import { TimetableService } from "../../../../providers/timetableService";
 
 @Component({
-  selector: "app-requestTimetableCard",
-  templateUrl: "./request_timetable_card.component.html",
-  styleUrls: ["./request_timetable_card.component.css"]
+  selector: "app-requestDateCard",
+  templateUrl: "./request_date_card.component.html",
+  styleUrls: ["./request_date_card.component.css"]
 })
-export class RequestTimetableCardComponent implements OnInit {
+export class RequestDateCardComponent implements OnInit {
   @Input("dates") dates: DateEntity[];
 
   // for component
