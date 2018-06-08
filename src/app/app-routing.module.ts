@@ -30,6 +30,7 @@ import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analyt
 import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/view_course_details.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
+import { ProfViewCourseDetailsWoTimetableComponent } from "./pages/instructor/prof_view_course_details_wo_timetable/prof_view_course_details_wo_timetable.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -65,7 +66,8 @@ const routes: Routes = [
       { path: "profViewCourseDetails", component: ProfViewCourseDetailsComponent },
       { path: "profUpdateCourse", component: ProfUpdateCourseComponent },
       { path: "profSearchCourse", component: ProfSearchCourseComponent },
-      { path: "profViewRequestCourse", component: ProfViewRequestCourseComponent }
+      { path: "profViewRequestCourse", component: ProfViewRequestCourseComponent },
+      { path: "profViewCourseDetailsWoTimetable", component: ProfViewCourseDetailsWoTimetableComponent }
     ]
   }
 ];
