@@ -41,6 +41,11 @@
                   </div>
                 </div>
               </p-accordionTab>
+              <p-accordionTab header="Timetable" [selected]="true">
+                <div style="text-align: justify;text-justify: auto">
+                  <app-requestTimetableCard [timetables]="timetables"></app-requestTimetableCard>
+                </div>
+              </p-accordionTab>
             </p-accordion>
           </div>
         </div>
