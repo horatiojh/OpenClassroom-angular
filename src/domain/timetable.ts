@@ -1,5 +1,6 @@
-export class Timetable {
+import { Course } from "./course";
 
+export class Timetable {
   id: number;
   weeksName: string;
   weeks: string;
@@ -9,6 +10,13 @@ export class Timetable {
   roomPart: string;
   room: string;
   duration: string;
+
+  course: Course;
+
+  staffName: string;
+  moduleCode: string;
+  moduleTitle: string;
+  moduleGroup: string;
 
   constructor(
     id: number,

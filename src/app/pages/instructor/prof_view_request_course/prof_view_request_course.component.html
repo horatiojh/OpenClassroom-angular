@@ -5,7 +5,7 @@
         <h1>Search Results</h1>
         <p-growl [value]="msgs" life="4500"></p-growl>
 
-        <p-table #dt [columns]="cols" [value]="courses" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+        <p-table #dt [columns]="cols" [value]="timetables" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
           <ng-template pTemplate="caption">
             <div style="text-align: right">
@@ -22,6 +22,7 @@
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
               <th style="width: 8%">View</th>
+              <th style="width: 8%">Request</th>
             </tr>
             <tr style="display:none;">
               <th *ngFor="let col of columns" [ngSwitch]="col.field">
@@ -38,12 +39,15 @@
               <td style="text-align: center">
                 <p-button icon='fa fa-fw fa-file-text' (onClick)="viewCourseDetails(rowData)"></p-button>
               </td>
+              <td style="text-align: center">
+                <p-button icon='fa fa-fw fa-send' (onClick)="viewCourseDetails(rowData)"></p-button>
+              </td>
             </tr>
           </ng-template>
 
           <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-              <td [attr.colspan]="columns.length+1">
+              <td [attr.colspan]="columns.length+2">
                 No records found
               </td>
             </tr>

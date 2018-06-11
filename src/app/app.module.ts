@@ -19,8 +19,7 @@ import {
   ScrollPanelModule,
   MessageModule,
   GrowlModule,
-  DataTableModule,
-  TableBody
+  DataTableModule
 } from "primeng/primeng";
 
 import { TableModule } from "primeng/table";
@@ -62,6 +61,7 @@ import { ProfSearchCourseComponent } from "./pages/instructor/prof_search_course
 import { ProfViewRequestCourseComponent } from "./pages/instructor/prof_view_request_course/prof_view_request_course.component";
 import { ViewVisitHistoryComponent } from "./pages/instructor/view_visit_history/view_visit_history.component";
 import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.component";
+import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
 
 import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff_info.component";
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
@@ -111,7 +111,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     ViewRequestCourseComponent,
     RequestDateCardComponent,
     ViewCourseDetailsComponent,
-    RequestTimetableCardComponent
+    RequestTimetableCardComponent,
+    ProfViewRequestCourseDetailsComponent
   ],
   imports: [
     BrowserModule,

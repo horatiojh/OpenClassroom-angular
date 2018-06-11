@@ -1,3 +1,5 @@
+import { Timetable } from "./timetable";
+
 export class Course {
   id: number;
   instructorId: string;
@@ -14,6 +16,8 @@ export class Course {
   eventSize: string;
   syllabus: string;
   blackoutDates: string;
+
+  timetables: Timetable[];
 
   constructor(
     id: number,

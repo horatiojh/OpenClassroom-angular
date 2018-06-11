@@ -29,6 +29,7 @@ import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analyt
 import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/view_course_details.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
+import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -63,7 +64,8 @@ const routes: Routes = [
       { path: "profViewCourseDetails", component: ProfViewCourseDetailsComponent },
       { path: "profUpdateCourse", component: ProfUpdateCourseComponent },
       { path: "profSearchCourse", component: ProfSearchCourseComponent },
-      { path: "profViewRequestCourse", component: ProfViewRequestCourseComponent }
+      { path: "profViewRequestCourse", component: ProfViewRequestCourseComponent },
+      { path: "profViewRequestCourseDetails", component: ProfViewRequestCourseDetailsComponent }
     ]
   }
 ];
