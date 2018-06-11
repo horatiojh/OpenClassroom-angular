@@ -75,6 +75,7 @@ import { SearchCourseComponent } from "./pages/admin/search_course/search_course
 import { ViewRequestCourseComponent } from "./pages/admin/view_request_course/view_request_course.component";
 import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analytics.component";
 import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/view_course_details.component";
+import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_course_details/view_request_course_details.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
 
@@ -115,7 +116,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     ViewCourseDetailsComponent,
     RequestTimetableCardComponent,
     ProfViewRequestCourseDetailsComponent,
-    ProfChangePasswordComponent
+    ProfChangePasswordComponent,
+    ViewRequestCourseDetailsComponent
   ],
   imports: [
     BrowserModule,

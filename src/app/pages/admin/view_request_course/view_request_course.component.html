@@ -78,7 +78,7 @@
           </p-footer>
         </p-dialog>
 
-        <p-table #dt [columns]="cols" [value]="courses" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+        <p-table #dt [columns]="cols" [value]="timetables" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
           <ng-template pTemplate="caption">
             <div style="text-align: right">
@@ -120,7 +120,7 @@
 
           <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-              <td [attr.colspan]="columns.length+1">
+              <td [attr.colspan]="columns.length+2">
                 No records found
               </td>
             </tr>

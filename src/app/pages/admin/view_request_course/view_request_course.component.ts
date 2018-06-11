@@ -8,11 +8,14 @@ import { ShareService } from "../../../../providers/shareService";
 import { CourseService } from "../../../../providers/courseService";
 import { DateService } from "../../../../providers/dateService";
 import { VisitService } from "../../../../providers/visitService";
+import { BreadcrumbService } from "../../../breadcrumb.service";
+import { TimetableService } from "../../../../providers/timetableService";
 
 import { Course } from "../../../../domain/course";
 import { DateEntity } from "../../../../domain/date";
 import { Staff } from "../../../../domain/staff";
 import { Visit } from "../../../../domain/visit";
+import { Timetable } from "../../../../domain/timetable";
 
 @Component({
   selector: "app-viewRequestCourse",
@@ -48,23 +51,35 @@ export class ViewRequestCourseComponent implements OnInit {
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
 
+  // for search courses
+  timetables: Timetable[];
+
   constructor(
     private shareService: ShareService,
     private courseService: CourseService,
     private router: Router,
     private dateService: DateService,
     private visitService: VisitService,
-    private domSanitizer: DomSanitizer
-  ) {}
+    private domSanitizer: DomSanitizer,
+    private breadcrumbService: BreadcrumbService,
+    private timetableService: TimetableService
+  ) {
+    this.breadcrumbService.setItems([
+      { label: "Search Courses", routerLink: ["/searchCourse"] },
+      { label: "Search Results", routerLink: ["/viewRequestCourse"] }
+    ]);
+  }
 
   ngOnInit() {
     // for datatable
     this.cols = [
       { field: "staffName", header: "Instructor", width: "16%" },
-      { field: "dept", header: "Dept ID", width: "10%" },
       { field: "moduleTitle", header: "Module Title", width: "16%" },
-      { field: "moduleCode", header: "Module Code", width: "12%" },
-      { field: "moduleGroup", header: "Group", width: "9%" }
+      { field: "moduleCode", header: "Code", width: "9%" },
+      { field: "moduleGroup", header: "Group", width: "9%" },
+      { field: "weekDay", header: "Day", width: "8%" },
+      { field: "startTime", header: "Start", width: "8%" },
+      { field: "endTime", header: "End", width: "8%" }
     ];
 
     // for search courses
@@ -72,24 +87,39 @@ export class ViewRequestCourseComponent implements OnInit {
     this.startTime = this.shareService.getValue("startTime");
     this.endTime = this.shareService.getValue("endTime");
 
-    let endpoint = "/getRequestCourses";
+    let endpoint = "/getRequestTimetables";
     let body = {
       weekDay: this.weekDay,
       startTime: this.startTime,
       endTime: this.endTime
     };
 
-    this.courseService.getRequestCourses(endpoint, body).subscribe(response => {
-      if (response != null && typeof response.courses != undefined) {
-        this.courses = response.courses;
-      } else {
-        this.msgs.push({
-          severity: "error",
-          summary: "An error has occurred while processing the request",
-          detail: ""
-        });
-      }
-    });
+    this.timetableService
+      .getRequestTimetables(endpoint, body)
+      .subscribe(response => {
+        if (response != null && typeof response.timetables != undefined) {
+          this.timetables = response.timetables;
+
+          for (let i = 0; i < this.timetables.length; i++) {
+            this.timetables[i].moduleCode = this.timetables[
+              i
+            ].course.moduleCode;
+            this.timetables[i].moduleGroup = this.timetables[
+              i
+            ].course.moduleGroup;
+            this.timetables[i].moduleTitle = this.timetables[
+              i
+            ].course.moduleTitle;
+            this.timetables[i].staffName = this.timetables[i].course.staffName;
+          }
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
 
     // for dialog css
     let requestClassroomVisitStyle = "width:120px";
@@ -100,7 +130,7 @@ export class ViewRequestCourseComponent implements OnInit {
 
   viewCourseDetails(rowData) {
     this.shareService.setValue("courseId", rowData.id);
-    this.router.navigate(["/viewCourseDetails"]);
+    this.router.navigate(["/viewRequestCourseDetails"]);
   }
 
   showDialog(rowData) {

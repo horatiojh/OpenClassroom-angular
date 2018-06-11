@@ -31,6 +31,7 @@ import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/vi
 import { LoginComponent } from "./pages/common/login/login.component";
 import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
 import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
+import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_course_details/view_request_course_details.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -50,7 +51,8 @@ const routes: Routes = [
       { path: "viewIndivCourseTimetable", component: ViewIndivCourseTimetableComponent },
       { path: "searchCourse", component: SearchCourseComponent },
       { path: "viewRequestCourse", component: ViewRequestCourseComponent },
-      { path: "viewCourseDetails", component: ViewCourseDetailsComponent }
+      { path: "viewCourseDetails", component: ViewCourseDetailsComponent },
+      { path: "viewRequestCourseDetails", component: ViewRequestCourseDetailsComponent }
     ]
   },
   {
