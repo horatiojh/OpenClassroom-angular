@@ -265,7 +265,6 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       this.createNewDate.isExpired = "new";
       this.createNewDate.weekDay = String(this.newDateTime).substr(0, 3);
 
-
       this.dateService.createDate(this.createNewDate).subscribe(
         response => {
           this.msgs.push({
@@ -277,6 +276,8 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
           setTimeout(function() {
             location.reload();
           }, 300);
+
+          this.display = false;
         },
         error => {
           this.msgs.push({
@@ -286,7 +287,6 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
           });
         }
       );
-      this.display = false;
     }
   }
 

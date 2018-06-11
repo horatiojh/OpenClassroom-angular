@@ -47,6 +47,7 @@ import { ShareService } from "../providers/shareService";
 import { AuthService } from "../providers/authService";
 import { DateService } from "../providers/dateService";
 import { CourseInfoService } from "../providers/courseInfoService";
+import { VisitService } from "../providers/visitService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -156,7 +157,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     InstructorGuard,
     DateService,
     ConfirmationService,
-    CourseInfoService
+    CourseInfoService,
+    VisitService
   ],
   bootstrap: [AppComponent]
 })

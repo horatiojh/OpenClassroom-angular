@@ -9,11 +9,13 @@ import { TimetableService } from "../../../../providers/timetableService";
 import { DateService } from "../../../../providers/dateService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { StaffService } from "../../../../providers/staffService";
+import { VisitService } from "../../../../providers/visitService";
 
 import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
 import { DateEntity } from "../../../../domain/date";
 import { Staff } from "../../../../domain/staff";
+import { Visit } from "../../../../domain/visit";
 
 @Component({
   selector: "app-profViewRequestCourse",
@@ -39,10 +41,14 @@ export class ProfViewRequestCourseComponent implements OnInit {
   dialogDateTime: string;
   dialogStartTime: string;
   dialogEndTime: string;
+  dialogWeekDay: string;
   date: DateEntity;
   staffName: string;
   staffId: number;
   staff: Staff;
+
+  // for request classroom visit
+  newVisit: Visit;
 
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
@@ -54,7 +60,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private dateService: DateService,
     private domSanitizer: DomSanitizer,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private visitService: VisitService
   ) {
     this.breadcrumbService.setItems([
       { label: "Search Courses", routerLink: ["/profSearchCourse"] },
@@ -142,8 +149,36 @@ export class ProfViewRequestCourseComponent implements OnInit {
       this.dialogDateTime = this.date.dateStr;
       this.dialogStartTime = this.date.startTime;
       this.dialogEndTime = this.date.endTime;
+      this.dialogWeekDay = this.date.weekDay;
     });
   }
 
-  requestClassroomVisit(event) {}
+  requestClassroomVisit(event) {
+    this.newVisit = new Visit();
+    this.newVisit.startTime = this.dialogStartTime;
+    this.newVisit.endTime = this.dialogEndTime;
+    this.newVisit.visitDate = this.dialogDateTime;
+    this.newVisit.visitDay = this.dialogWeekDay;
+    this.newVisit.visitorName = this.staffName;
+    this.newVisit.date = this.date;
+
+    this.visitService.createVisit(this.newVisit).subscribe(
+      response => {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Created!",
+          detail: ""
+        });
+
+        this.display = false;
+      },
+      error => {
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: error.error.message
+        });
+      }
+    );
+  }
 }
