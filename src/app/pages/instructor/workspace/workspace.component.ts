@@ -24,11 +24,7 @@ export class WorkspaceComponent implements OnInit {
 
   constructor(
     private courseService: CourseService,
-    private timetableService: TimetableService,
-    private domSanitizer: DomSanitizer,
-    private router: Router,
     private breadcrumbService: BreadcrumbService,
-    private shareService: ShareService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }

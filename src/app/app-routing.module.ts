@@ -30,10 +30,12 @@ import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/vi
 
 import { LoginComponent } from "./pages/common/login/login.component";
 import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
+import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
+  { path: "profChangePassword", component: ProfChangePasswordComponent },
   {
     path: "",
     component: MainComponent,

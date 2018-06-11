@@ -46,7 +46,7 @@ export class ProfViewRequestCourseComponent implements OnInit {
     this.cols = [
       { field: "staffName", header: "Instructor", width: "16%" },
       { field: "moduleTitle", header: "Module Title", width: "16%" },
-      { field: "moduleCode", header: "Code", width: "10%" },
+      { field: "moduleCode", header: "Code", width: "9%" },
       { field: "moduleGroup", header: "Group", width: "9%" },
       { field: "weekDay", header: "Day", width: "8%" },
       { field: "startTime", header: "Start", width: "8%" },
