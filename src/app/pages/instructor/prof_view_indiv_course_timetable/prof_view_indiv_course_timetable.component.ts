@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Message, ConfirmationService } from "primeng/primeng";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
-import { NgForm } from "@angular/forms";
 
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { ShareService } from "../../../../providers/shareService";
