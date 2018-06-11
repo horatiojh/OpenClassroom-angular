@@ -8,7 +8,7 @@
 
         <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
 
-        <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showDialog()"></p-button>
+        <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showNewSessionDialog()"></p-button>
 
         <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto" [contentStyle]="{'overflow':'visible'}"
           modal="true">
@@ -61,6 +61,79 @@
           </p-footer>
         </p-dialog>
 
+        <p-dialog [(visible)]="requestCVDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>Request Classroom Visit</p-header>
+
+          <div style="margin-top: 15px">
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Date:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <label>{{dialogDateTime}}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Day:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <label>{{dialogWeekDay}}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Start:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <label>{{dialogStartTime}}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>End:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <label>{{dialogEndTime}}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Visitor:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <input type="text" pInputText [(ngModel)]="staffName" style="width:95%" name="staffName">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p-footer>
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <p-button label="Submit" (onClick)="requestClassroomVisit($event)" [style]="requestClassroomVisitBtnStyle"></p-button>
+                </div>
+              </div>
+            </div>
+          </p-footer>
+        </p-dialog>
+
         <p-tabView>
           <p-tabPanel header="Available">
             <p-table #availDt [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
@@ -90,7 +163,7 @@
                     <p-button icon="fa fa-fw fa-trash" (onClick)="confirmArchive(rowData)"></p-button>
                   </td>
                   <td style="text-align: center">
-                    <p-button icon='fa fa-fw fa-send' (onClick)="requestClassroomVisit(rowData)"></p-button>
+                    <p-button icon='fa fa-fw fa-send' (onClick)="showRequestCVDialog(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>

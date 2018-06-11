@@ -7,9 +7,12 @@ import { BreadcrumbService } from "../../../breadcrumb.service";
 import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
 import { DateService } from "../../../../providers/dateService";
+import { VisitService } from "../../../../providers/visitService";
 
 import { Timetable } from "../../../../domain/timetable";
 import { DateEntity } from "../../../../domain/date";
+import { Staff } from "../../../../domain/staff";
+import { Visit } from "../../../../domain/visit";
 
 @Component({
   selector: "app-viewIndivCourseTimetable",
@@ -43,8 +46,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   // css styling
   showDialogBtnStyle: SafeStyle;
   createIndivSessionBtnStyle: SafeStyle;
+  requestClassroomVisitBtnStyle: SafeStyle;
 
-  // for dialog
+  // for create new session dialog
   display: boolean = false;
   newStartTime: string;
   newEndTime: string;
@@ -53,13 +57,27 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   validationMsgs: Message[] = [];
   newWeekDay: string;
 
+  // for request classroom visit dialog
+  requestCVDisplay: boolean = false;
+  dialogDateTime: string;
+  dialogStartTime: string;
+  dialogEndTime: string;
+  dialogWeekDay: string;
+  staffName: string;
+  staffId: number;
+  staff: Staff;
+
+  // for request classroom visit
+  newVisit: Visit;
+
   constructor(
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,
     private timetableService: TimetableService,
     private dateService: DateService,
     private domSanitizer: DomSanitizer,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private visitService: VisitService
   ) {
     this.submitted = false;
     this.breadcrumbService.setItems([
@@ -136,6 +154,12 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
           });
         }
       });
+
+    // for dialog css
+    let requestClassroomVisitStyle = "width:120px";
+    this.requestClassroomVisitBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      requestClassroomVisitStyle
+    );
   }
 
   archiveDate(rowDate) {
@@ -216,7 +240,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     }, 300);
   }
 
-  showDialog() {
+  showNewSessionDialog() {
     this.display = true;
   }
 
@@ -290,29 +314,72 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     }
   }
 
-  confirmArchive(rowDate) {
+  confirmArchive(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
       message: "Are you sure that you want to archive it?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
-        this.archiveDate(rowDate);
+        this.archiveDate(rowData);
       },
       reject: () => {}
     });
   }
 
-  confirmRestore(rowDate) {
+  confirmRestore(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
       message: "Are you sure that you want to restore it?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
-        this.restoreDate(rowDate);
+        this.restoreDate(rowData);
       },
       reject: () => {}
     });
+  }
+
+  showRequestCVDialog(rowData) {
+    this.requestCVDisplay = true;
+
+    this.dateService.getDateByDateId(rowData.id).subscribe(response => {
+      this.date = response.date;
+
+      this.dialogDateTime = this.date.dateStr;
+      this.dialogStartTime = this.date.startTime;
+      this.dialogEndTime = this.date.endTime;
+      this.dialogWeekDay = this.date.weekDay;
+    });
+  }
+
+  requestClassroomVisit(event) {
+    this.msgs = [];
+    this.newVisit = new Visit();
+    this.newVisit.startTime = this.dialogStartTime;
+    this.newVisit.endTime = this.dialogEndTime;
+    this.newVisit.visitDate = this.dialogDateTime;
+    this.newVisit.visitDay = this.dialogWeekDay;
+    this.newVisit.visitorName = this.staffName;
+    this.newVisit.date = this.date;
+
+    this.visitService.createVisit(this.newVisit).subscribe(
+      response => {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Created!",
+          detail: ""
+        });
+
+        this.requestCVDisplay = false;
+      },
+      error => {
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: error.error.message
+        });
+      }
+    );
   }
 }

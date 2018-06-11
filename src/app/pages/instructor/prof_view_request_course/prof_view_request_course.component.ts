@@ -154,6 +154,7 @@ export class ProfViewRequestCourseComponent implements OnInit {
   }
 
   requestClassroomVisit(event) {
+    this.msgs = [];
     this.newVisit = new Visit();
     this.newVisit.startTime = this.dialogStartTime;
     this.newVisit.endTime = this.dialogEndTime;
