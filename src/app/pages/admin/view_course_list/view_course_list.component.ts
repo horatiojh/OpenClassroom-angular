@@ -36,7 +36,6 @@ export class ViewCourseListComponent implements OnInit {
     // for datatable
     this.cols = [
       { field: "staffName", header: "Instructor", width: "18%" },
-      { field: "dept", header: "Dept ID", width: "11%" },
       { field: "moduleTitle", header: "Module Title", width: "16%" },
       { field: "moduleCode", header: "Module Code", width: "12%" },
       { field: "moduleGroup", header: "Group", width: "8%" }

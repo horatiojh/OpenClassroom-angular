@@ -112,6 +112,28 @@ export class DateService {
     );
   }
 
+  getBookedDateByTimetableId(timetableId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getBookedDates/" + timetableId)
+      .pipe(
+        tap(_ => console.log(`getBookedDates timetableId=${timetableId}`)),
+        catchError(
+          this.handleError<any>(`getBookedDates timetableId=${timetableId}`)
+        )
+      );
+  }
+
+  getBookedDateByCourseId(courseId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getBookedDatesByCID/" + courseId)
+      .pipe(
+        tap(_ => console.log(`getBookedDatesByCID courseId=${courseId}`)),
+        catchError(
+          this.handleError<any>(`getBookedDatesByCID courseId=${courseId}`)
+        )
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

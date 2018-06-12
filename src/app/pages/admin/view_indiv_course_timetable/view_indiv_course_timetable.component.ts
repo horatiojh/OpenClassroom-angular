@@ -25,9 +25,10 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
 
   // for datatable
   cols: any[];
+  bookedDatesCols: any[];
   availDates: DateEntity[];
   archivedDates: DateEntity[];
-  timetableId: number;
+  bookedDates: DateEntity[];
   courseId: number;
   msgs: Message[] = [];
 
@@ -102,11 +103,16 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     );
 
     // for datatable
-    // this.timetableId = Number(this.shareService.getValue("timetableId"));
-    this.timetableId = Number(sessionStorage.getItem("timetableId"));
     this.courseId = Number(sessionStorage.getItem("courseId"));
 
     this.cols = [
+      { field: "dateStr", header: "Date" },
+      { field: "startTime", header: "Start" },
+      { field: "endTime", header: "End" },
+      { field: "weekDay", header: "WeekDay" }
+    ];
+
+    this.bookedDatesCols = [
       { field: "dateStr", header: "Date" },
       { field: "startTime", header: "Start" },
       { field: "endTime", header: "End" },
@@ -132,6 +138,20 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       .subscribe(response => {
         if (response != null && typeof response.dates != undefined) {
           this.archivedDates = response.dates;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
+
+    this.dateService
+      .getBookedDateByCourseId(this.courseId)
+      .subscribe(response => {
+        if (response != null && typeof response.dates != undefined) {
+          this.bookedDates = response.dates;
         } else {
           this.msgs.push({
             severity: "error",

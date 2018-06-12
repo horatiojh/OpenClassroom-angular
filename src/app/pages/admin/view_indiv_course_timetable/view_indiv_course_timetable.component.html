@@ -155,7 +155,7 @@
               </ng-template>
 
               <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr [pSelectableRow]="rowData">
+                <tr [pSelectableRow]="rowData" style="height:55px">
                   <td *ngFor="let col of columns" style="text-align: center">
                     {{rowData[col.field]}}
                   </td>
@@ -194,27 +194,59 @@
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
                   <th>Restore</th>
-                  <th>Request</th>
                 </tr>
               </ng-template>
 
               <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr [pSelectableRow]="rowData">
+                <tr [pSelectableRow]="rowData" style="height:55px">
                   <td *ngFor="let col of columns" style="text-align: center">
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
                     <p-button icon="fa fa-fw fa-edit" (onClick)="confirmRestore(rowData)"></p-button>
                   </td>
-                  <td style="text-align: center">
-                    <p-button icon='fa fa-fw fa-send' (onClick)="requestClassroomVisit(rowData)"></p-button>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length+1">
+                    No records found
+                  </td>
+                </tr>
+              </ng-template>
+
+            </p-table>
+          </p-tabPanel>
+
+          <p-tabPanel header="Booked">
+            <p-table #bookedDt [columns]="bookedDatesCols" [value]="bookedDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+              sortField="dateStr" [sortOrder]="1">
+
+              <ng-template pTemplate="caption">
+
+              </ng-template>
+
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData" style="height:55px">
+                  <td *ngFor="let col of columns" style="text-align: center">
+                    {{rowData[col.field]}}
                   </td>
                 </tr>
               </ng-template>
 
               <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                  <td [attr.colspan]="columns.length+2">
+                  <td [attr.colspan]="columns.length">
                     No records found
                   </td>
                 </tr>
