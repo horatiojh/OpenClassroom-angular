@@ -10,6 +10,7 @@ import { DateService } from "../../../../providers/dateService";
 import { VisitService } from "../../../../providers/visitService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { TimetableService } from "../../../../providers/timetableService";
+import { StaffService } from "../../../../providers/staffService";
 
 import { Course } from "../../../../domain/course";
 import { DateEntity } from "../../../../domain/date";
@@ -47,6 +48,8 @@ export class ViewRequestCourseComponent implements OnInit {
   staffName: string;
   staffId: number;
   vacateDatesItems: SelectItem[];
+  staffItems: SelectItem[];
+  staffs: Staff[];
 
   // for request classroom visit
   newVisit: Visit;
@@ -65,7 +68,8 @@ export class ViewRequestCourseComponent implements OnInit {
     private visitService: VisitService,
     private domSanitizer: DomSanitizer,
     private breadcrumbService: BreadcrumbService,
-    private timetableService: TimetableService
+    private timetableService: TimetableService,
+    private staffService: StaffService
   ) {
     this.breadcrumbService.setItems([
       { label: "Search Courses", routerLink: ["/searchCourse"] },
@@ -133,6 +137,18 @@ export class ViewRequestCourseComponent implements OnInit {
     this.requestClassroomVisitBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       requestClassroomVisitStyle
     );
+
+    // for request classroom visit
+    this.staffService.getAllInstructors().subscribe(response => {
+      this.staffs = response.staffs;
+      this.staffItems = [{ label: "Please Select One", value: null }];
+      for (let i = 0; i < this.staffs.length; i++) {
+        this.staffItems.push({
+          label: this.staffs[i].staffName,
+          value: this.staffs[i].staffName
+        });
+      }
+    });
   }
 
   viewCourseDetails(rowData) {
@@ -168,6 +184,7 @@ export class ViewRequestCourseComponent implements OnInit {
     this.newVisit.visitDate = this.dialogDateTime;
     this.newVisit.weekDay = this.dialogWeekDay;
     this.newVisit.visitorName = this.staffName;
+    this.newVisit.visitorId = this.staffId;
     this.newVisit.date = this.date;
 
     this.visitService.createVisit(this.newVisit).subscribe(
@@ -215,6 +232,16 @@ export class ViewRequestCourseComponent implements OnInit {
           this.dialogWeekDay = this.vacateDates[i].weekDay;
           this.date = this.vacateDates[i];
         }
+      }
+    }
+  }
+
+  staffNameChange(event) {
+    this.staffName = event.value;
+
+    for (let i = 0; i < this.staffs.length; i++) {
+      if (this.staffs[i].staffName == this.staffName) {
+        this.staffId = this.staffs[i].id;
       }
     }
   }

@@ -61,7 +61,7 @@
                   <label>Visitor:</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="staffName" style="width:95%" name="staffName">
+                  <p-dropdown [options]="staffItems" [(ngModel)]="staffName" [style]="{'width':'250px'}" (onChange)="staffNameChange($event)"></p-dropdown>
                 </div>
               </div>
             </div>

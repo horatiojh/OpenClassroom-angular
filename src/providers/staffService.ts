@@ -15,6 +15,10 @@ export class StaffService {
     return this.httpClient.get<any>(this.baseUrl + "/getAllRecords");
   }
 
+  getAllInstructors(): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getAllInstructors");
+  }
+
   getStaffByStaffId(staffId: number): Observable<any> {
     return this.httpClient.get<any>(this.baseUrl + "/getStaff/" + staffId).pipe(
       tap(_ => console.log(`getStaff staffId=${staffId}`)),

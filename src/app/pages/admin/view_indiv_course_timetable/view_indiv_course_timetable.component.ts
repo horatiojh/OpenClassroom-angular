@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Message, ConfirmationService } from "primeng/primeng";
+import { Component, OnInit } from "@angular/core";
+import { Message, ConfirmationService, SelectItem } from "primeng/primeng";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
-import { NgForm } from "@angular/forms";
 
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { ShareService } from "../../../../providers/shareService";
@@ -13,6 +12,7 @@ import { Timetable } from "../../../../domain/timetable";
 import { DateEntity } from "../../../../domain/date";
 import { Staff } from "../../../../domain/staff";
 import { Visit } from "../../../../domain/visit";
+import { StaffService } from "../../../../providers/staffService";
 
 @Component({
   selector: "app-viewIndivCourseTimetable",
@@ -67,9 +67,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   staffName: string;
   staffId: number;
   staff: Staff;
-
-  // for request classroom visit
   newVisit: Visit;
+  staffItems: SelectItem[];
+  staffs: Staff[];
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -78,9 +78,11 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     private dateService: DateService,
     private domSanitizer: DomSanitizer,
     private confirmationService: ConfirmationService,
-    private visitService: VisitService
+    private visitService: VisitService,
+    private staffService: StaffService
   ) {
     this.submitted = false;
+
     this.breadcrumbService.setItems([
       { label: "View Timetable", routerLink: ["/viewTimetable"] },
       {
@@ -180,6 +182,18 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     this.requestClassroomVisitBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       requestClassroomVisitStyle
     );
+
+    // for request classroom visit
+    this.staffService.getAllInstructors().subscribe(response => {
+      this.staffs = response.staffs;
+      this.staffItems = [{ label: "Please Select One", value: null }];
+      for (let i = 0; i < this.staffs.length; i++) {
+        this.staffItems.push({
+          label: this.staffs[i].staffName,
+          value: this.staffs[i].staffName
+        });
+      }
+    });
   }
 
   archiveDate(rowDate) {
@@ -381,6 +395,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     this.newVisit.visitDate = this.dialogDateTime;
     this.newVisit.weekDay = this.dialogWeekDay;
     this.newVisit.visitorName = this.staffName;
+    this.newVisit.visitorId = this.staffId;
     this.newVisit.date = this.date;
 
     this.visitService.createVisit(this.newVisit).subscribe(
@@ -415,5 +430,15 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         });
       }
     );
+  }
+
+  staffNameChange(event) {
+    this.staffName = event.value;
+
+    for (let i = 0; i < this.staffs.length; i++) {
+      if (this.staffs[i].staffName == this.staffName) {
+        this.staffId = this.staffs[i].id;
+      }
+    }
   }
 }
