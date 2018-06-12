@@ -42,6 +42,8 @@ export class ViewRequestCourseComponent implements OnInit {
   dialogEndTime: string;
   dialogWeekDay: string;
   date: DateEntity;
+  timetable: Timetable;
+  dates: DateEntity[];
   staffName: string;
   staffId: number;
 
@@ -136,6 +138,13 @@ export class ViewRequestCourseComponent implements OnInit {
   showDialog(rowData) {
     this.display = true;
 
+    this.timetableService
+      .getTimetableByTimetableId(rowData.id)
+      .subscribe(response => {
+        this.timetable = response.timetable;
+
+        this.dates = this.timetable
+      });
     this.dateService.getDateByDateId(rowData.id).subscribe(response => {
       this.date = response.date;
 
