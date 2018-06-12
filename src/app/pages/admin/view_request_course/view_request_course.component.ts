@@ -158,10 +158,6 @@ export class ViewRequestCourseComponent implements OnInit {
           });
         }
       });
-
-    this.dateService.getDateByDateId(rowData.id).subscribe(response => {
-      this.date = response.date;
-    });
   }
 
   requestClassroomVisit(event) {
@@ -183,6 +179,16 @@ export class ViewRequestCourseComponent implements OnInit {
         });
 
         this.display = false;
+        let isBooked = "booked";
+        let endpoint = "/updateIsBooked";
+        let body = {
+          dateId: String(this.date.id),
+          isBooked: isBooked
+        };
+
+        this.dateService
+          .updateIsBooked(endpoint, body)
+          .subscribe(response => {});
       },
       error => {
         this.msgs.push({
@@ -207,6 +213,7 @@ export class ViewRequestCourseComponent implements OnInit {
           this.dialogEndTime = this.vacateDates[i].endTime;
           this.dialogStartTime = this.vacateDates[i].startTime;
           this.dialogWeekDay = this.vacateDates[i].weekDay;
+          this.date = this.vacateDates[i];
         }
       }
     }

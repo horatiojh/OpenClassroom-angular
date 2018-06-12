@@ -372,6 +372,16 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         });
 
         this.requestCVDisplay = false;
+        let isBooked = "booked";
+        let endpoint = "/updateIsBooked";
+        let body = {
+          dateId: String(this.date.id),
+          isBooked: isBooked
+        };
+
+        this.dateService
+          .updateIsBooked(endpoint, body)
+          .subscribe(response => {});
       },
       error => {
         this.msgs.push({
