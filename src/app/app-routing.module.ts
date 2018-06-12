@@ -15,7 +15,7 @@ import { ProfUpdateCourseComponent } from "./pages/instructor/prof_update_course
 import { ProfSearchCourseComponent } from "./pages/instructor/prof_search_course/prof_search_course.component";
 import { ProfViewRequestCourseComponent } from "./pages/instructor/prof_view_request_course/prof_view_request_course.component";
 import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.component";
-import { ViewVisitHistoryComponent } from "./pages/instructor/view_visit_history/view_visit_history.component";
+import { ProfViewVisitHistoryComponent } from "./pages/instructor/prof_view_visit_history/prof_view_visit_history.component";
 
 import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff_info.component";
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
@@ -48,11 +48,17 @@ const routes: Routes = [
       { path: "dataAnalytics", component: DataAnalyticsComponent },
       { path: "viewTimetable", component: ViewTimetableComponent },
       { path: "updateTimetable", component: UpdateTimetableComponent },
-      { path: "viewIndivCourseTimetable", component: ViewIndivCourseTimetableComponent },
+      {
+        path: "viewIndivCourseTimetable",
+        component: ViewIndivCourseTimetableComponent
+      },
       { path: "searchCourse", component: SearchCourseComponent },
       { path: "viewRequestCourse", component: ViewRequestCourseComponent },
       { path: "viewCourseDetails", component: ViewCourseDetailsComponent },
-      { path: "viewRequestCourseDetails", component: ViewRequestCourseDetailsComponent }
+      {
+        path: "viewRequestCourseDetails",
+        component: ViewRequestCourseDetailsComponent
+      }
     ]
   },
   {
@@ -61,15 +67,30 @@ const routes: Routes = [
     canActivate: [AuthGuard, InstructorGuard],
     children: [
       { path: "workspace", component: WorkspaceComponent },
-      { path: "viewVisitHistory", component: ViewVisitHistoryComponent },
+      {
+        path: "profViewVisitHistory",
+        component: ProfViewVisitHistoryComponent
+      },
       { path: "profViewTimetable", component: ProfViewTimetableComponent },
       { path: "profUpdateTimetable", component: ProfUpdateTimetableComponent },
-      { path: "profViewIndivCourseTimetable", component: ProfViewIndivCourseTimetableComponent },
-      { path: "profViewCourseDetails", component: ProfViewCourseDetailsComponent },
+      {
+        path: "profViewIndivCourseTimetable",
+        component: ProfViewIndivCourseTimetableComponent
+      },
+      {
+        path: "profViewCourseDetails",
+        component: ProfViewCourseDetailsComponent
+      },
       { path: "profUpdateCourse", component: ProfUpdateCourseComponent },
       { path: "profSearchCourse", component: ProfSearchCourseComponent },
-      { path: "profViewRequestCourse", component: ProfViewRequestCourseComponent },
-      { path: "profViewRequestCourseDetails", component: ProfViewRequestCourseDetailsComponent }
+      {
+        path: "profViewRequestCourse",
+        component: ProfViewRequestCourseComponent
+      },
+      {
+        path: "profViewRequestCourseDetails",
+        component: ProfViewRequestCourseDetailsComponent
+      }
     ]
   }
 ];
@@ -79,5 +100,4 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: []
 })
-
 export class AppRoutingModule {}

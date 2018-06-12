@@ -33,7 +33,7 @@ export class AppMenuComponent implements OnInit {
       } else if(this.staffRole === "instructor") {
         this.model = [
           { label: 'Workspace', icon: 'class', routerLink: ['/workspace'] },
-          { label: 'Visit History', icon: 'public', routerLink: ['/viewVisitHistory'] }
+          { label: 'Visit History', icon: 'public', routerLink: ['/profViewVisitHistory'] }
         ];
       }
     }

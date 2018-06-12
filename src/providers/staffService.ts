@@ -16,11 +16,18 @@ export class StaffService {
   }
 
   getStaffByStaffId(staffId: number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getStaff/" + staffId).pipe(
+      tap(_ => console.log(`getStaff staffId=${staffId}`)),
+      catchError(this.handleError<any>(`getStaff staffId=${staffId}`))
+    );
+  }
+
+  getStaffByStaffIdStr(staffId: string): Observable<any> {
     return this.httpClient
-      .get<any>(this.baseUrl + "/getStaff/" + staffId)
+      .get<any>(this.baseUrl + "/getStaffBySIDStr/" + staffId)
       .pipe(
-        tap(_ => console.log(`getStaff staffId=${staffId}`)),
-        catchError(this.handleError<any>(`getStaff staffId=${staffId}`))
+        tap(_ => console.log(`getStaffBySIDStr staffId=${staffId}`)),
+        catchError(this.handleError<any>(`getStaffBySIDStr staffId=${staffId}`))
       );
   }
 

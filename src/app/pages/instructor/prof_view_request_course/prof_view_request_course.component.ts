@@ -172,8 +172,9 @@ export class ProfViewRequestCourseComponent implements OnInit {
     this.newVisit.startTime = this.dialogStartTime;
     this.newVisit.endTime = this.dialogEndTime;
     this.newVisit.visitDate = this.dialogDateTime;
-    this.newVisit.visitDay = this.dialogWeekDay;
+    this.newVisit.weekDay = this.dialogWeekDay;
     this.newVisit.visitorName = this.staffName;
+    this.newVisit.visitorId = this.staffId;
     this.newVisit.date = this.date;
 
     this.visitService.createVisit(this.newVisit).subscribe(

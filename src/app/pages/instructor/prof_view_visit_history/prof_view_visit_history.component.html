@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="card">
+        <h1>Visit History</h1>
+        <p-growl [value]="msgs" life="4500"></p-growl>
+
+        <p-tabView>
+          <p-tabPanel header="As Instructor">
+            <p-table #iDt [columns]="iCols" [value]="iVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+
+              <ng-template pTemplate="caption">
+
+              </ng-template>
+
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                  <th style="width: 10%">Confirm</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData" style="height:55px">
+                  <td *ngFor="let col of columns" style="text-align: center">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td style="text-align: center">
+                    <p-button icon="fa fa-fw fa-gittip" (onClick)="confirmVisit(rowData)"></p-button>
+                  </td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length+1">
+                    No records found
+                  </td>
+                </tr>
+              </ng-template>
+
+            </p-table>
+          </p-tabPanel>
+
+          <p-tabPanel header="As Visitor">
+            <p-table #vDt [columns]="vCols" [value]="vVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+
+              <ng-template pTemplate="caption">
+
+              </ng-template>
+
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                  <th style="width: 10%">Confirm</th>
+                  <th style="width: 10%">Cancel</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData" style="height:55px">
+                  <td *ngFor="let col of columns" style="text-align: center">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td style="text-align: center">
+                    <p-button icon="fa fa-fw fa-gittip" (onClick)="confirmVisit(rowData)"></p-button>
+                  </td>
+                  <td style="text-align: center">
+                    <p-button icon="fa fa-fw fa-gittip" (onClick)="confirmVisit(rowData)"></p-button>
+                  </td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length+2">
+                    No records found
+                  </td>
+                </tr>
+              </ng-template>
+
+            </p-table>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

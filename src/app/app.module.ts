@@ -60,10 +60,10 @@ import { ProfViewCourseDetailsComponent } from "./pages/instructor/prof_view_cou
 import { ProfUpdateCourseComponent } from "./pages/instructor/prof_update_course/prof_update_course.component";
 import { ProfSearchCourseComponent } from "./pages/instructor/prof_search_course/prof_search_course.component";
 import { ProfViewRequestCourseComponent } from "./pages/instructor/prof_view_request_course/prof_view_request_course.component";
-import { ViewVisitHistoryComponent } from "./pages/instructor/view_visit_history/view_visit_history.component";
 import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.component";
 import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
 import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
+import { ProfViewVisitHistoryComponent } from "./pages/instructor/prof_view_visit_history/prof_view_visit_history.component";
 
 import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff_info.component";
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
@@ -100,7 +100,7 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     DataAnalyticsComponent,
     UpdateTimetableComponent,
     WorkspaceComponent,
-    ViewVisitHistoryComponent,
+    ProfViewVisitHistoryComponent,
     ViewIndivCourseTimetableComponent,
     ProfViewTimetableComponent,
     ProfUpdateTimetableComponent,

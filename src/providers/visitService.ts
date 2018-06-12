@@ -32,6 +32,15 @@ export class VisitService {
       );
   }
 
+  getVisitByStaffId(staffId: string): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getVisitsBySID/" + staffId)
+      .pipe(
+        tap(_ => console.log(`getVisitsBySID staffId=${staffId}`)),
+        catchError(this.handleError<any>(`getVisitsBySID staffId=${staffId}`))
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
