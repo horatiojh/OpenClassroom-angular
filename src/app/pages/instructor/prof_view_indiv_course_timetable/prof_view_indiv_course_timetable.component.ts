@@ -21,8 +21,10 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
 
   // for datatable
   cols: any[];
+  bookedDatesCols: any[];
   availDates: DateEntity[];
   archivedDates: DateEntity[];
+  bookedDates: DateEntity[];
   timetableId: number;
   courseId: number;
   msgs: Message[] = [];
@@ -94,6 +96,13 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       { field: "weekDay", header: "WeekDay" }
     ];
 
+    this.bookedDatesCols = [
+      { field: "dateStr", header: "Date" },
+      { field: "startTime", header: "Start" },
+      { field: "endTime", header: "End" },
+      { field: "weekDay", header: "WeekDay" }
+    ];
+
     this.dateService
       .getAvailDateByCourseId(this.courseId)
       .subscribe(response => {
@@ -113,6 +122,20 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       .subscribe(response => {
         if (response != null && typeof response.dates != undefined) {
           this.archivedDates = response.dates;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
+
+    this.dateService
+      .getBookedDateByCourseId(this.courseId)
+      .subscribe(response => {
+        if (response != null && typeof response.dates != undefined) {
+          this.bookedDates = response.dates;
         } else {
           this.msgs.push({
             severity: "error",
@@ -162,6 +185,10 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
             detail: ""
           });
         });
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
       } else {
         this.msgs.push({
           severity: "error",
@@ -170,10 +197,6 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
         });
       }
     });
-
-    setTimeout(function() {
-      location.reload();
-    }, 300);
   }
 
   restoreDate(rowDate) {
@@ -201,6 +224,10 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
             detail: ""
           });
         });
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
       } else {
         this.msgs.push({
           severity: "error",
@@ -209,10 +236,6 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
         });
       }
     });
-
-    setTimeout(function() {
-      location.reload();
-    }, 300);
   }
 
   showDialog() {

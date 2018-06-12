@@ -207,6 +207,10 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
             detail: ""
           });
         });
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
       } else {
         this.msgs.push({
           severity: "error",
@@ -215,10 +219,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         });
       }
     });
-
-    setTimeout(function() {
-      location.reload();
-    }, 300);
   }
 
   restoreDate(rowDate) {
@@ -246,6 +246,10 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
             detail: ""
           });
         });
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
       } else {
         this.msgs.push({
           severity: "error",
@@ -254,10 +258,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         });
       }
     });
-
-    setTimeout(function() {
-      location.reload();
-    }, 300);
   }
 
   showNewSessionDialog() {
@@ -387,7 +387,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       response => {
         this.msgs.push({
           severity: "info",
-          summary: "Successfully Created!",
+          summary: "Successfully Submitted!",
           detail: ""
         });
 
@@ -402,6 +402,10 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.dateService
           .updateIsBooked(endpoint, body)
           .subscribe(response => {});
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
       },
       error => {
         this.msgs.push({

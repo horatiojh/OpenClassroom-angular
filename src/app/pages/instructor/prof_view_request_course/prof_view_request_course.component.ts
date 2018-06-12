@@ -180,7 +180,7 @@ export class ProfViewRequestCourseComponent implements OnInit {
       response => {
         this.msgs.push({
           severity: "info",
-          summary: "Successfully Created!",
+          summary: "Successfully Submitted!",
           detail: ""
         });
 
