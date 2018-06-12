@@ -10,5 +10,9 @@ export class Visit {
   weekDay: string;
   date: DateEntity;
 
+  moduleCode: string;
+  moduleTitle: string;
+  moduleGroup: string;
+
   constructor() {}
 }

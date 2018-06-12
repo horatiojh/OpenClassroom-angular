@@ -41,6 +41,17 @@ export class VisitService {
       );
   }
 
+  getMyVisitHistory(staffId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getMyVisitHistory/" + staffId)
+      .pipe(
+        tap(_ => console.log(`getMyVisitHistory staffId=${staffId}`)),
+        catchError(
+          this.handleError<any>(`getMyVisitHistory staffId=${staffId}`)
+        )
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

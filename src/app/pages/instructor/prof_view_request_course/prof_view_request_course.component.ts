@@ -10,6 +10,7 @@ import { DateService } from "../../../../providers/dateService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { StaffService } from "../../../../providers/staffService";
 import { VisitService } from "../../../../providers/visitService";
+import { CourseService } from "../../../../providers/courseService";
 
 import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
@@ -48,6 +49,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
   staff: Staff;
   vacateDatesItems: SelectItem[];
   vacateDates: DateEntity[];
+  courseId: number;
+  course: Course;
 
   // for request classroom visit
   newVisit: Visit;
@@ -63,7 +66,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
     private dateService: DateService,
     private domSanitizer: DomSanitizer,
     private staffService: StaffService,
-    private visitService: VisitService
+    private visitService: VisitService,
+    private courseService: CourseService
   ) {
     this.breadcrumbService.setItems([
       { label: "Search Courses", routerLink: ["/profSearchCourse"] },
@@ -148,6 +152,13 @@ export class ProfViewRequestCourseComponent implements OnInit {
 
   showDialog(rowData) {
     this.display = true;
+    this.courseId = rowData.id;
+
+    this.courseService
+      .getCourseByCourseId(this.courseId)
+      .subscribe(response => {
+        this.course = response.course;
+      });
 
     this.dateService
       .getVacateDateByTimetableId(rowData.id)
@@ -175,6 +186,9 @@ export class ProfViewRequestCourseComponent implements OnInit {
     this.newVisit.weekDay = this.dialogWeekDay;
     this.newVisit.visitorName = this.staffName;
     this.newVisit.visitorId = this.staffId;
+    this.newVisit.moduleCode = this.course.moduleCode;
+    this.newVisit.moduleTitle = this.course.moduleTitle;
+    this.newVisit.moduleGroup = this.course.moduleGroup;
     this.newVisit.date = this.date;
 
     this.visitService.createVisit(this.newVisit).subscribe(

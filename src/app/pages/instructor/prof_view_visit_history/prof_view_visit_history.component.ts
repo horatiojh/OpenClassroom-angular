@@ -39,7 +39,9 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     this.staffId = Number(sessionStorage.getItem("staffId"));
 
     this.iCols = [
-      { field: "visitorName", header: "Visitor", width: "30%" },
+      { field: "visitorName", header: "Visitor", width: "20%" },
+      { field: "moduleCode", header: "Code", width: "10%" },
+      { field: "moduleGroup", header: "Group", width: "10%" },
       { field: "visitDate", header: "Date", width: "10%" },
       { field: "startTime", header: "Start", width: "10%" },
       { field: "endTime", header: "End", width: "10%" },
@@ -47,7 +49,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     ];
 
     this.vCols = [
-      { field: "visitorName", header: "Visitor", width: "30%" },
+      { field: "moduleTitle", header: "Module Title", width: "20%" },
+      { field: "moduleGroup", header: "Group", width: "10%" },
       { field: "visitDate", header: "Date", width: "10%" },
       { field: "startTime", header: "Start", width: "10%" },
       { field: "endTime", header: "End", width: "10%" },
@@ -63,7 +66,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
         this.visitService
           .getVisitByStaffId(this.staffIdStr)
           .subscribe(response => {
-            if (response != null && typeof response.staff != undefined) {
+            if (response != null && typeof response.visits != undefined) {
               this.iVisit = response.visits;
             } else {
               this.msgs.push({
@@ -73,6 +76,18 @@ export class ProfViewVisitHistoryComponent implements OnInit {
               });
             }
           });
+      } else {
+        this.msgs.push({
+          severity: "error",
+          summary: "An error has occurred while processing the request",
+          detail: ""
+        });
+      }
+    });
+
+    this.visitService.getMyVisitHistory(this.staffId).subscribe(response => {
+      if (response != null && typeof response.visits != undefined) {
+        this.vVisit = response.visits;
       } else {
         this.msgs.push({
           severity: "error",

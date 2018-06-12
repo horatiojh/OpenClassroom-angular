@@ -50,9 +50,9 @@ export class ViewRequestCourseComponent implements OnInit {
   vacateDatesItems: SelectItem[];
   staffItems: SelectItem[];
   staffs: Staff[];
-
-  // for request classroom visit
   newVisit: Visit;
+  courseId: number;
+  course: Course;
 
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
@@ -159,6 +159,14 @@ export class ViewRequestCourseComponent implements OnInit {
   showDialog(rowData) {
     this.display = true;
 
+    this.courseId = rowData.id;
+
+    this.courseService
+      .getCourseByCourseId(this.courseId)
+      .subscribe(response => {
+        this.course = response.course;
+      });
+
     this.dateService
       .getVacateDateByTimetableId(rowData.id)
       .subscribe(response => {
@@ -185,6 +193,9 @@ export class ViewRequestCourseComponent implements OnInit {
     this.newVisit.weekDay = this.dialogWeekDay;
     this.newVisit.visitorName = this.staffName;
     this.newVisit.visitorId = this.staffId;
+    this.newVisit.moduleCode = this.course.moduleCode;
+    this.newVisit.moduleGroup = this.course.moduleGroup;
+    this.newVisit.moduleTitle = this.course.moduleTitle;
     this.newVisit.date = this.date;
 
     this.visitService.createVisit(this.newVisit).subscribe(

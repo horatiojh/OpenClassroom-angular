@@ -7,12 +7,14 @@ import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
 import { DateService } from "../../../../providers/dateService";
 import { VisitService } from "../../../../providers/visitService";
+import { StaffService } from "../../../../providers/staffService";
+import { CourseService } from "../../../../providers/courseService";
 
 import { Timetable } from "../../../../domain/timetable";
 import { DateEntity } from "../../../../domain/date";
 import { Staff } from "../../../../domain/staff";
 import { Visit } from "../../../../domain/visit";
-import { StaffService } from "../../../../providers/staffService";
+import { Course } from "../../../../domain/course";
 
 @Component({
   selector: "app-viewIndivCourseTimetable",
@@ -70,6 +72,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   newVisit: Visit;
   staffItems: SelectItem[];
   staffs: Staff[];
+  course: Course;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -79,7 +82,8 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private confirmationService: ConfirmationService,
     private visitService: VisitService,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private courseService: CourseService
   ) {
     this.submitted = false;
 
@@ -106,6 +110,12 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
 
     // for datatable
     this.courseId = Number(sessionStorage.getItem("courseId"));
+
+    this.courseService
+      .getCourseByCourseId(this.courseId)
+      .subscribe(response => {
+        this.course = response.course;
+      });
 
     this.cols = [
       { field: "dateStr", header: "Date" },
@@ -396,6 +406,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     this.newVisit.weekDay = this.dialogWeekDay;
     this.newVisit.visitorName = this.staffName;
     this.newVisit.visitorId = this.staffId;
+    this.newVisit.moduleCode = this.course.moduleCode;
+    this.newVisit.moduleGroup = this.course.moduleGroup;
+    this.newVisit.moduleTitle = this.course.moduleTitle;
     this.newVisit.date = this.date;
 
     this.visitService.createVisit(this.newVisit).subscribe(
