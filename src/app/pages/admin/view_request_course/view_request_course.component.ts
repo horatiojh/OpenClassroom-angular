@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 
-import { Message } from "primeng/primeng";
+import { Message, SelectItem } from "primeng/primeng";
 
 import { ShareService } from "../../../../providers/shareService";
 import { CourseService } from "../../../../providers/courseService";
@@ -43,9 +43,10 @@ export class ViewRequestCourseComponent implements OnInit {
   dialogWeekDay: string;
   date: DateEntity;
   timetable: Timetable;
-  dates: DateEntity[];
+  vacateDates: DateEntity[];
   staffName: string;
   staffId: number;
+  vacateDatesItems: SelectItem[];
 
   // for request classroom visit
   newVisit: Visit;
@@ -70,6 +71,10 @@ export class ViewRequestCourseComponent implements OnInit {
       { label: "Search Courses", routerLink: ["/searchCourse"] },
       { label: "Search Results", routerLink: ["/viewRequestCourse"] }
     ]);
+
+    this.dialogEndTime = "";
+    this.dialogStartTime = "";
+    this.dialogWeekDay = "";
   }
 
   ngOnInit() {
@@ -138,20 +143,21 @@ export class ViewRequestCourseComponent implements OnInit {
   showDialog(rowData) {
     this.display = true;
 
-    this.timetableService
-      .getTimetableByTimetableId(rowData.id)
+    this.dateService
+      .getVacateDateByTimetableId(rowData.id)
       .subscribe(response => {
-        this.timetable = response.timetable;
-
-        this.dates = this.timetable
+        this.vacateDates = response.dates;
+        this.vacateDatesItems = [{ label: "Please Select One", value: null }];
+        for (let i = 0; i < this.vacateDates.length; i++) {
+          this.vacateDatesItems.push({
+            label: this.vacateDates[i].dateStr,
+            value: this.vacateDates[i].dateStr
+          });
+        }
       });
+
     this.dateService.getDateByDateId(rowData.id).subscribe(response => {
       this.date = response.date;
-
-      this.dialogDateTime = this.date.dateStr;
-      this.dialogStartTime = this.date.startTime;
-      this.dialogEndTime = this.date.endTime;
-      this.dialogWeekDay = this.date.weekDay;
     });
   }
 
@@ -183,5 +189,23 @@ export class ViewRequestCourseComponent implements OnInit {
         });
       }
     );
+  }
+
+  dateTimeChange(event) {
+    let dateStr = event.value;
+
+    if (dateStr == null) {
+      this.dialogEndTime = "";
+      this.dialogStartTime = "";
+      this.dialogWeekDay = "";
+    } else {
+      for (let i = 0; i < this.vacateDates.length; i++) {
+        if (this.vacateDates[i].dateStr == dateStr) {
+          this.dialogEndTime = this.vacateDates[i].endTime;
+          this.dialogStartTime = this.vacateDates[i].startTime;
+          this.dialogWeekDay = this.vacateDates[i].weekDay;
+        }
+      }
+    }
   }
 }

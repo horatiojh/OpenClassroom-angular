@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 
-import { Message } from "primeng/primeng";
+import { Message, SelectItem } from "primeng/primeng";
 
 import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
@@ -46,6 +46,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
   staffName: string;
   staffId: number;
   staff: Staff;
+  vacateDatesItems: SelectItem[];
+  vacateDates: DateEntity[];
 
   // for request classroom visit
   newVisit: Visit;
@@ -75,6 +77,10 @@ export class ProfViewRequestCourseComponent implements OnInit {
 
       this.staffName = this.staff.staffName;
     });
+
+    this.dialogEndTime = "";
+    this.dialogStartTime = "";
+    this.dialogWeekDay = "";
   }
 
   ngOnInit() {
@@ -143,13 +149,21 @@ export class ProfViewRequestCourseComponent implements OnInit {
   showDialog(rowData) {
     this.display = true;
 
+    this.dateService
+      .getVacateDateByTimetableId(rowData.id)
+      .subscribe(response => {
+        this.vacateDates = response.dates;
+        this.vacateDatesItems = [{ label: "Please Select One", value: null }];
+        for (let i = 0; i < this.vacateDates.length; i++) {
+          this.vacateDatesItems.push({
+            label: this.vacateDates[i].dateStr,
+            value: this.vacateDates[i].dateStr
+          });
+        }
+      });
+
     this.dateService.getDateByDateId(rowData.id).subscribe(response => {
       this.date = response.date;
-
-      this.dialogDateTime = this.date.dateStr;
-      this.dialogStartTime = this.date.startTime;
-      this.dialogEndTime = this.date.endTime;
-      this.dialogWeekDay = this.date.weekDay;
     });
   }
 
@@ -181,5 +195,23 @@ export class ProfViewRequestCourseComponent implements OnInit {
         });
       }
     );
+  }
+
+  dateTimeChange(event) {
+    let dateStr = event.value;
+
+    if (dateStr == null) {
+      this.dialogEndTime = "";
+      this.dialogStartTime = "";
+      this.dialogWeekDay = "";
+    } else {
+      for (let i = 0; i < this.vacateDates.length; i++) {
+        if (this.vacateDates[i].dateStr == dateStr) {
+          this.dialogEndTime = this.vacateDates[i].endTime;
+          this.dialogStartTime = this.vacateDates[i].startTime;
+          this.dialogWeekDay = this.vacateDates[i].weekDay;
+        }
+      }
+    }
   }
 }

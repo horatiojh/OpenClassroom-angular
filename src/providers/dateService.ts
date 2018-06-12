@@ -94,6 +94,17 @@ export class DateService {
       );
   }
 
+  getVacateDateByTimetableId(timetableId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getVacateDates/" + timetableId)
+      .pipe(
+        tap(_ => console.log(`getVacateDates timetableId=${timetableId}`)),
+        catchError(
+          this.handleError<any>(`getVacateDates timetableId=${timetableId}`)
+        )
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
