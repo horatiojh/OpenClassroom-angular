@@ -147,6 +147,9 @@ export class ViewRequestCourseComponent implements OnInit {
       .getVacateDateByTimetableId(rowData.id)
       .subscribe(response => {
         this.vacateDates = response.dates;
+        this.vacateDates = this.vacateDates.sort((a, b) =>
+          a.dateStr.localeCompare(b.dateStr)
+        );
         this.vacateDatesItems = [{ label: "Please Select One", value: null }];
         for (let i = 0; i < this.vacateDates.length; i++) {
           this.vacateDatesItems.push({
