@@ -52,6 +52,7 @@ export class ViewRequestCourseComponent implements OnInit {
   staffs: Staff[];
   newVisit: Visit;
   courseId: number;
+  timetableId: number;
   course: Course;
 
   // for css
@@ -158,17 +159,16 @@ export class ViewRequestCourseComponent implements OnInit {
 
   showDialog(rowData) {
     this.display = true;
-
-    this.courseId = rowData.id;
+    this.timetableId = rowData.id;
 
     this.courseService
-      .getCourseByCourseId(this.courseId)
+      .getCourseByTimetableId(this.timetableId)
       .subscribe(response => {
         this.course = response.course;
       });
 
     this.dateService
-      .getVacateDateByTimetableId(rowData.id)
+      .getVacateDateByTimetableId(this.timetableId)
       .subscribe(response => {
         this.vacateDates = response.dates;
         this.vacateDates = this.vacateDates.sort((a, b) =>
