@@ -215,9 +215,9 @@ export class ViewRequestCourseComponent implements OnInit {
           isBooked: isBooked
         };
 
-        this.dateService
-          .updateIsBooked(endpoint, body)
-          .subscribe(response => {});
+        this.dateService.updateIsBooked(endpoint, body).subscribe(response => {
+          console.log("update isBooked");
+        });
       },
       error => {
         this.msgs.push({

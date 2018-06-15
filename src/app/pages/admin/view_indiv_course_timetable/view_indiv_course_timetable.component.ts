@@ -428,9 +428,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
           isBooked: isBooked
         };
 
-        this.dateService
-          .updateIsBooked(endpoint, body)
-          .subscribe(response => {});
+        this.dateService.updateIsBooked(endpoint, body).subscribe(response => {
+          console.log("update isBooked");
+        });
 
         setTimeout(function() {
           location.reload();

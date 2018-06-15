@@ -23,6 +23,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   staff: Staff;
   staffIdStr: string;
   staffId: number;
+  visitId: number;
 
   // for components
   msgs: Message[] = [];
@@ -137,7 +138,34 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     });
   }
 
-  instructorConfirm(rowData) {}
+  instructorConfirm(rowData) {
+    let endpoint = "/updateStatus";
+    let body = {
+      visitId: String(rowData.id),
+      status: "confirmed"
+    };
+
+    this.visitService.updateStatus(endpoint, body).subscribe(
+      response => {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Confirmed!",
+          detail: ""
+        });
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
+      },
+      error => {
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: error.error.message
+        });
+      }
+    );
+  }
 
   instructorCancel(rowData) {}
 
