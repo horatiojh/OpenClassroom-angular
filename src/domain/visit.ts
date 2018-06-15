@@ -8,6 +8,11 @@ export class Visit {
   endTime: string;
   visitDate: string;
   weekDay: string;
+  isVCanceled: boolean;
+  isICanceled: boolean;
+  isVConfirmed: boolean;
+  isIConfirmed: boolean;
+
   date: DateEntity;
 
   moduleCode: string;

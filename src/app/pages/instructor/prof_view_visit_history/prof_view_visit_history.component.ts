@@ -40,7 +40,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     this.iCols = [
       { field: "visitorName", header: "Visitor", width: "20%" },
-      { field: "moduleCode", header: "Code", width: "10%" },
       { field: "moduleGroup", header: "Group", width: "10%" },
       { field: "visitDate", header: "Date", width: "10%" },
       { field: "startTime", header: "Start", width: "10%" },

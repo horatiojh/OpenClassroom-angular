@@ -190,6 +190,10 @@ export class ProfViewRequestCourseComponent implements OnInit {
     this.newVisit.moduleCode = this.course.moduleCode;
     this.newVisit.moduleTitle = this.course.moduleTitle;
     this.newVisit.moduleGroup = this.course.moduleGroup;
+    this.newVisit.isICanceled = false;
+    this.newVisit.isIConfirmed = false;
+    this.newVisit.isVCanceled = false;
+    this.newVisit.isVConfirmed = false;
     this.newVisit.date = this.date;
 
     this.visitService.createVisit(this.newVisit).subscribe(

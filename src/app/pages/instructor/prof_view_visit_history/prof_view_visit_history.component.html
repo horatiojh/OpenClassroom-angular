@@ -20,6 +20,7 @@
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
                   <th style="width: 10%">Confirm</th>
+                  <th style="width: 10%">Cancel</th>
                 </tr>
               </ng-template>
 
@@ -29,14 +30,17 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-gittip" (onClick)="confirmVisit(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-gittip" (onClick)="confirmVisit(rowData)" [disabled]="rowData.isIConfirmed"></p-button>
+                  </td>
+                  <td style="text-align: center">
+                    <p-button icon="fa fa-fw fa-trash" (onClick)="confirmVisit(rowData)" [disabled]="rowData.isICanceled"></p-button>
                   </td>
                 </tr>
               </ng-template>
 
               <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                  <td [attr.colspan]="columns.length+1">
+                  <td [attr.colspan]="columns.length+2">
                     No records found
                   </td>
                 </tr>
@@ -69,10 +73,10 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-gittip" (onClick)="confirmVisit(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-gittip" (onClick)="confirmVisit(rowData)" [disabled]="rowData.isVConfirmed"></p-button>
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-trash" (onClick)="confirmVisit(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-trash" (onClick)="confirmVisit(rowData)" [disabled]="rowData.isVCanceled"></p-button>
                   </td>
                 </tr>
               </ng-template>
