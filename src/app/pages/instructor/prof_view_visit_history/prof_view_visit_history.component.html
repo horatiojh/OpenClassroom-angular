@@ -5,6 +5,8 @@
         <h1>Visit History</h1>
         <p-growl [value]="msgs" life="4500"></p-growl>
 
+        <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
+
         <p-tabView>
           <p-tabPanel header="As Instructor">
             <p-table #iDt [columns]="iCols" [value]="iVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
@@ -30,10 +32,10 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-gittip" (onClick)="confirmVisit(rowData)" [disabled]="rowData.isIConfirmed"></p-button>
+                    <p-button icon="fa fa-fw fa-gittip" (onClick)="instructorConfirmDialog(rowData)"></p-button>
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-trash" (onClick)="confirmVisit(rowData)" [disabled]="rowData.isICanceled"></p-button>
+                    <p-button icon="fa fa-fw fa-trash" (onClick)="instructorCancelDialog(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>
@@ -62,7 +64,6 @@
                     {{col.header}}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
-                  <th style="width: 10%">Confirm</th>
                   <th style="width: 10%">Cancel</th>
                 </tr>
               </ng-template>
@@ -73,17 +74,14 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-gittip" (onClick)="confirmVisit(rowData)" [disabled]="rowData.isVConfirmed"></p-button>
-                  </td>
-                  <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-trash" (onClick)="confirmVisit(rowData)" [disabled]="rowData.isVCanceled"></p-button>
+                    <p-button icon="fa fa-fw fa-trash" (onClick)="visitorCancelDialog(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>
 
               <ng-template pTemplate="emptymessage" let-columns>
                 <tr>
-                  <td [attr.colspan]="columns.length+2">
+                  <td [attr.colspan]="columns.length+1">
                     No records found
                   </td>
                 </tr>

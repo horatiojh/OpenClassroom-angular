@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Message } from "primeng/primeng";
+import { Message, ConfirmationService } from "primeng/primeng";
 
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { VisitService } from "../../../../providers/visitService";
@@ -30,7 +30,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   constructor(
     private breadcrumbService: BreadcrumbService,
     private visitService: VisitService,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private confirmationService: ConfirmationService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
@@ -96,4 +97,49 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       }
     });
   }
+
+  instructorConfirmDialog(rowDate) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to confirm it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.instructorConfirm(rowDate);
+      },
+      reject: () => {}
+    });
+  }
+
+  instructorCancelDialog(rowDate) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to cancel it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.instructorCancel(rowDate);
+      },
+      reject: () => {}
+    });
+  }
+
+  visitorCancelDialog(rowDate) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to cancel it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.visitorCancel(rowDate);
+      },
+      reject: () => {}
+    });
+  }
+
+  instructorConfirm(rowData) {}
+
+  instructorCancel(rowData) {}
+
+  visitorCancel(rowData) {}
 }
