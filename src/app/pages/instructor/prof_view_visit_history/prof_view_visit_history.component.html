@@ -11,7 +11,7 @@
           <p-tabPanel header="As Instructor">
             <p-accordion>
               <p-accordionTab header="Pending" [selected]="true">
-                <p-table #iDt [columns]="iCols" [value]="iVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+                <p-table #iDt [columns]="iCols" [value]="iPendingVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
                   <ng-template pTemplate="caption">
 
@@ -54,7 +54,7 @@
               </p-accordionTab>
 
               <p-accordionTab header="Confirmed" [selected]="true">
-                <p-table #iDt [columns]="iCols" [value]="iVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+                <p-table #iDt [columns]="iCols" [value]="iConfirmedVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
                   <ng-template pTemplate="caption">
 
@@ -93,7 +93,7 @@
           <p-tabPanel header="As Visitor">
             <p-accordion>
               <p-accordionTab header="Pending" [selected]="true">
-                <p-table #vDt [columns]="vCols" [value]="vVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+                <p-table #vDt [columns]="vCols" [value]="vPendingVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
                   <ng-template pTemplate="caption">
 
@@ -132,7 +132,7 @@
               </p-accordionTab>
 
               <p-accordionTab header="Confirmed" [selected]="true">
-                <p-table #vDt [columns]="vCols" [value]="vVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+                <p-table #vDt [columns]="vCols" [value]="vConfirmedVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
                   <ng-template pTemplate="caption">
 

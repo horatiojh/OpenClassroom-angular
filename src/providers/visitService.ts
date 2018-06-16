@@ -32,22 +32,46 @@ export class VisitService {
       );
   }
 
-  getVisitByStaffId(staffId: string): Observable<any> {
+  getPendingVisitByStaffId(staffId: string): Observable<any> {
     return this.httpClient
-      .get<any>(this.baseUrl + "/getVisitsBySID/" + staffId)
+      .get<any>(this.baseUrl + "/getPendingVisitsBySID/" + staffId)
       .pipe(
-        tap(_ => console.log(`getVisitsBySID staffId=${staffId}`)),
-        catchError(this.handleError<any>(`getVisitsBySID staffId=${staffId}`))
+        tap(_ => console.log(`getPendingVisitsBySID staffId=${staffId}`)),
+        catchError(
+          this.handleError<any>(`getPendingVisitsBySID staffId=${staffId}`)
+        )
       );
   }
 
-  getMyVisitHistory(staffId: number): Observable<any> {
+  getConfirmedVisitByStaffId(staffId: string): Observable<any> {
     return this.httpClient
-      .get<any>(this.baseUrl + "/getMyVisitHistory/" + staffId)
+      .get<any>(this.baseUrl + "/getConfirmedVisitsBySID/" + staffId)
       .pipe(
-        tap(_ => console.log(`getMyVisitHistory staffId=${staffId}`)),
+        tap(_ => console.log(`getConfirmedVisitsBySID staffId=${staffId}`)),
         catchError(
-          this.handleError<any>(`getMyVisitHistory staffId=${staffId}`)
+          this.handleError<any>(`getConfirmedVisitsBySID staffId=${staffId}`)
+        )
+      );
+  }
+
+  getMyPendingVisitHistory(staffId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getMyPendingVisitHistory/" + staffId)
+      .pipe(
+        tap(_ => console.log(`getMyPendingVisitHistory staffId=${staffId}`)),
+        catchError(
+          this.handleError<any>(`getMyPendingVisitHistory staffId=${staffId}`)
+        )
+      );
+  }
+
+  getMyConfirmedVisitHistory(staffId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getMyConfirmedVisitHistory/" + staffId)
+      .pipe(
+        tap(_ => console.log(`getMyConfirmedVisitHistory staffId=${staffId}`)),
+        catchError(
+          this.handleError<any>(`getMyConfirmedVisitHistory staffId=${staffId}`)
         )
       );
   }

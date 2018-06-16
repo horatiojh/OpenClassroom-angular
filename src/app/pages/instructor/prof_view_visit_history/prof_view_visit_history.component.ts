@@ -18,8 +18,10 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   // for datatable
   iCols: any[];
   vCols: any[];
-  iVisit: Visit[];
-  vVisit: Visit[];
+  iConfirmedVisit: Visit[];
+  iPendingVisit: Visit[];
+  vConfirmedVisit: Visit[];
+  vPendingVisit: Visit[];
   staff: Staff;
   staffIdStr: string;
   staffId: number;
@@ -65,10 +67,24 @@ export class ProfViewVisitHistoryComponent implements OnInit {
         this.staffIdStr = this.staff.staffId;
 
         this.visitService
-          .getVisitByStaffId(this.staffIdStr)
+          .getPendingVisitByStaffId(this.staffIdStr)
           .subscribe(response => {
             if (response != null && typeof response.visits != undefined) {
-              this.iVisit = response.visits;
+              this.iPendingVisit = response.visits;
+            } else {
+              this.msgs.push({
+                severity: "error",
+                summary: "An error has occurred while processing the request",
+                detail: ""
+              });
+            }
+          });
+
+        this.visitService
+          .getConfirmedVisitByStaffId(this.staffIdStr)
+          .subscribe(response => {
+            if (response != null && typeof response.visits != undefined) {
+              this.iConfirmedVisit = response.visits;
             } else {
               this.msgs.push({
                 severity: "error",
@@ -86,17 +102,33 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       }
     });
 
-    this.visitService.getMyVisitHistory(this.staffId).subscribe(response => {
-      if (response != null && typeof response.visits != undefined) {
-        this.vVisit = response.visits;
-      } else {
-        this.msgs.push({
-          severity: "error",
-          summary: "An error has occurred while processing the request",
-          detail: ""
-        });
-      }
-    });
+    this.visitService
+      .getMyPendingVisitHistory(this.staffId)
+      .subscribe(response => {
+        if (response != null && typeof response.visits != undefined) {
+          this.vPendingVisit = response.visits;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
+
+    this.visitService
+      .getMyConfirmedVisitHistory(this.staffId)
+      .subscribe(response => {
+        if (response != null && typeof response.visits != undefined) {
+          this.vConfirmedVisit = response.visits;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
   }
 
   instructorConfirmDialog(rowDate) {
