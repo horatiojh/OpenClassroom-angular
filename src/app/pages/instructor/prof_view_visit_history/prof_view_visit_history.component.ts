@@ -233,6 +233,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   }
 
   instructorCancel() {
+    this.msgs = [];
+
     this.visitService
       .getVisitByVisitId(this.dialogVisitId)
       .subscribe(response => {
@@ -261,6 +263,29 @@ export class ProfViewVisitHistoryComponent implements OnInit {
               });
           });
       });
+
+    let endpoint = "/updateStatus";
+    let body = {
+      visitId: String(this.dialogVisitId),
+      status: "cancelled"
+    };
+
+    this.visitService.updateStatus(endpoint, body).subscribe(
+      response => {
+        setTimeout(function() {
+          location.reload();
+        }, 300);
+      },
+      error => {
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: error.error.message
+        });
+      }
+    );
+
+    this.display = false;
   }
 
   visitorCancel(rowData) {}

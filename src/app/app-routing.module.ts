@@ -7,6 +7,8 @@ import { AuthGuard } from "./guards/auth.guard";
 import { AdminGuard } from "./guards/admin.guard";
 import { InstructorGuard } from "./guards/instructor.guard";
 
+import { LoginComponent } from "./pages/common/login/login.component";
+
 import { ProfViewTimetableComponent } from "./pages/instructor/prof_view_timetable/prof_view_timetable.component";
 import { ProfUpdateTimetableComponent } from "./pages/instructor/prof_update_timetable/prof_update_timetable.component";
 import { ProfViewIndivCourseTimetableComponent } from "./pages/instructor/prof_view_indiv_course_timetable/prof_view_indiv_course_timetable.component";
@@ -16,6 +18,9 @@ import { ProfSearchCourseComponent } from "./pages/instructor/prof_search_course
 import { ProfViewRequestCourseComponent } from "./pages/instructor/prof_view_request_course/prof_view_request_course.component";
 import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.component";
 import { ProfViewVisitHistoryComponent } from "./pages/instructor/prof_view_visit_history/prof_view_visit_history.component";
+import { ProfViewNotificationsComponent } from "./pages/instructor/prof_view_notification/prof_view_notification.component";
+import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
+import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
 
 import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff_info.component";
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
@@ -27,10 +32,6 @@ import { SearchCourseComponent } from "./pages/admin/search_course/search_course
 import { ViewRequestCourseComponent } from "./pages/admin/view_request_course/view_request_course.component";
 import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analytics.component";
 import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/view_course_details.component";
-
-import { LoginComponent } from "./pages/common/login/login.component";
-import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
-import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
 import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_course_details/view_request_course_details.component";
 
 const routes: Routes = [
@@ -90,6 +91,10 @@ const routes: Routes = [
       {
         path: "profViewRequestCourseDetails",
         component: ProfViewRequestCourseDetailsComponent
+      },
+      {
+        path: "profViewNotification",
+        component: ProfViewNotificationsComponent
       }
     ]
   }

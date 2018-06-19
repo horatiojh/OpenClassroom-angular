@@ -97,27 +97,9 @@ import { MainComponent } from "./main.component";
                         </a>
                         <ul class="ultima-menu animated fadeInDown">
                             <li role="menuitem">
-                                <a href="#">
+                                <a routerLink="/profViewNotification">
                                     <i class="material-icons">bug_report</i>
                                     <span>Pending tasks</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="material-icons">event</i>
-                                    <span>Meeting today at 3pm</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="material-icons">file_download</i>
-                                    <span>Download documents</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="material-icons">flight</i>
-                                    <span>Book flight</span>
                                 </a>
                             </li>
                         </ul>

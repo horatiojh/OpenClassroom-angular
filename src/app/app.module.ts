@@ -37,6 +37,7 @@ import { SplitButtonModule } from "primeng/splitbutton";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService } from "primeng/api";
 import { InputTextareaModule } from "primeng/inputtextarea";
+import { DataViewModule } from 'primeng/dataview';
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -66,6 +67,7 @@ import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.compo
 import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
 import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
 import { ProfViewVisitHistoryComponent } from "./pages/instructor/prof_view_visit_history/prof_view_visit_history.component";
+import { ProfViewNotificationsComponent } from "./pages/instructor/prof_view_notification/prof_view_notification.component";
 
 import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff_info.component";
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
@@ -119,7 +121,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     RequestTimetableCardComponent,
     ProfViewRequestCourseDetailsComponent,
     ProfChangePasswordComponent,
-    ViewRequestCourseDetailsComponent
+    ViewRequestCourseDetailsComponent,
+    ProfViewNotificationsComponent
   ],
   imports: [
     BrowserModule,
@@ -145,7 +148,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     DialogModule,
     SplitButtonModule,
     ConfirmDialogModule,
-    InputTextareaModule
+    InputTextareaModule,
+    DataViewModule
   ],
   providers: [
     Api,

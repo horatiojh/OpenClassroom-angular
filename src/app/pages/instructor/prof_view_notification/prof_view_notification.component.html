@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="card">
+        <h1>Notifications</h1>
+        <p-growl [value]="msgs" life="4500"></p-growl>
+
+        <p-dataView [value]="messages" [paginator]="true" [rows]="10" paginatorPosition="bottom">
+          <ng-template let-message pTemplate="listItem">
+            <div>
+              <div class="ui-g-12 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-1">
+                    <i class="material-icons" style="font-size:28px; color:#757575; margin-left: 15px; margin-top: 9px;">email</i>
+                  </div>
+                  <div class="ui-grid-col-8">
+                    <p>{{message.title}}</p>
+                  </div>
+                  <div class="ui-grid-col-1">
+                      <p>{{message.messageDate}}</p>
+                    </div>
+                  <div class="ui-grid-col-1">
+                    <p-button style="margin-top: 6px;margin-left: 50px;" icon="fa fa-fw fa-file-text" (onClick)="confirmArchive(rowData)"></p-button>
+                  </div>
+                  <div class="ui-grid-col-1">
+                    <p-button style="margin-top: 6px;margin-left: 30px;" icon="fa fa-fw fa-trash" (onClick)="confirmArchive(rowData)"></p-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-dataView>
+      </div>
+    </div>
+  </div>
+</div>
