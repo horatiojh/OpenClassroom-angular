@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { AppComponent } from "./app.component";
 import { MainComponent } from "./main.component";
+import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 @Component({
   selector: "app-topbar",
@@ -89,20 +89,13 @@ import { MainComponent } from "./main.component";
                             </li>
                         </ul>
                     </li>
-                    <li #notifications [ngClass]="{'active-top-menu':app.activeTopbarItem === notifications}">
-                        <a href="#" (click)="app.onTopbarItemClick($event,notifications)">
+                    <li #notifications [ngClass]="{'active-top-menu':app.activeTopbarItem === notifications}"
+                    [style]="notificationStyle">
+                        <a routerLink="/profViewNotification">
                             <i class="topbar-icon material-icons">timer</i>
                             <span class="topbar-badge animated rubberBand">4</span>
                             <span class="topbar-item-name">Notifications</span>
                         </a>
-                        <ul class="ultima-menu animated fadeInDown">
-                            <li role="menuitem">
-                                <a routerLink="/profViewNotification">
-                                    <i class="material-icons">bug_report</i>
-                                    <span>Pending tasks</span>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li #search class="search-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === search}">
                         <a [routerLink]="searchLink">
@@ -117,16 +110,25 @@ import { MainComponent } from "./main.component";
 export class AppTopbarComponent implements OnInit {
   searchLink: string;
   staffRole: string;
+  notificationStyle: SafeStyle;
 
-  constructor(public app: MainComponent) {}
+  constructor(public app: MainComponent, private domSanitizer: DomSanitizer) {}
 
   ngOnInit() {
     this.staffRole = sessionStorage.getItem("staffRole");
 
     if (this.staffRole === "admin") {
       this.searchLink = "/searchCourse";
+      let style = "display:none";
+      this.notificationStyle = this.domSanitizer.bypassSecurityTrustStyle(
+        style
+      );
     } else if (this.staffRole === "instructor") {
       this.searchLink = "/profSearchCourse";
+      let style = "";
+      this.notificationStyle = this.domSanitizer.bypassSecurityTrustStyle(
+        style
+      );
     }
   }
 }
