@@ -1,13 +1,16 @@
 import { Component, OnInit } from "@angular/core";
+import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 import { Message, ConfirmationService } from "primeng/primeng";
 
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { VisitService } from "../../../../providers/visitService";
 import { StaffService } from "../../../../providers/staffService";
+import { MessageService } from "../../../../providers/messageService";
 
 import { Visit } from "../../../../domain/visit";
 import { Staff } from "../../../../domain/staff";
+import { MessageEntity } from "../../../../domain/message";
 
 @Component({
   selector: "app-profViewVisitHistory",
@@ -30,16 +33,39 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   // for components
   msgs: Message[] = [];
 
+  // for dialog
+  display: boolean = false;
+  msgContent: string;
+  msgTitle: string;
+  msgDate: string = "";
+  dialogVisitId: number;
+  instructorCancelMsg: MessageEntity;
+  iVisit: Visit;
+  iStaffId: number;
+  iStaff: Staff;
+
+  // for css
+  instructorCancelDialogBtnStyle: SafeStyle;
+
   constructor(
     private breadcrumbService: BreadcrumbService,
     private visitService: VisitService,
     private staffService: StaffService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private domSanitizer: DomSanitizer,
+    private messageService: MessageService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
 
   ngOnInit() {
+    // for dialog css
+    let instructorCancelDialogStyle = "width:120px";
+    this.instructorCancelDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      instructorCancelDialogStyle
+    );
+
+    // for datatable
     this.staffId = Number(sessionStorage.getItem("staffId"));
 
     this.iCols = [
@@ -131,40 +157,40 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       });
   }
 
-  instructorConfirmDialog(rowDate) {
+  instructorConfirmDialog(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
       message: "Are you sure that you want to confirm it?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
-        this.instructorConfirm(rowDate);
+        this.instructorConfirm(rowData);
       },
       reject: () => {}
     });
   }
 
-  instructorCancelDialog(rowDate) {
+  instructorCancelDialog(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
       message: "Are you sure that you want to cancel it?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
-        this.instructorCancel(rowDate);
+        this.showInstructorCancelDialog(rowData);
       },
       reject: () => {}
     });
   }
 
-  visitorCancelDialog(rowDate) {
+  visitorCancelDialog(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
       message: "Are you sure that you want to cancel it?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
-        this.visitorCancel(rowDate);
+        this.visitorCancel(rowData);
       },
       reject: () => {}
     });
@@ -199,7 +225,41 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     );
   }
 
-  instructorCancel(rowData) {}
+  showInstructorCancelDialog(rowData) {
+    this.display = true;
+    this.dialogVisitId = rowData.id;
+  }
+
+  instructorCancel() {
+    this.visitService
+      .getVisitByVisitId(this.dialogVisitId)
+      .subscribe(response => {
+        this.iVisit = response.visit;
+        this.iStaffId = this.iVisit.visitorId;
+
+        this.staffService
+          .getStaffByStaffId(this.iStaffId)
+          .subscribe(response => {
+            this.iStaff = response.staff;
+
+            this.instructorCancelMsg = new MessageEntity();
+            this.instructorCancelMsg.messageDate = this.msgDate;
+            this.instructorCancelMsg.title = this.msgTitle;
+            this.instructorCancelMsg.content = this.msgContent;
+            this.instructorCancelMsg.staff = this.iStaff;
+
+            this.messageService
+              .createMessage(this.instructorCancelMsg)
+              .subscribe(response => {
+                this.msgs.push({
+                  severity: "info",
+                  summary: "Successfully Cancelled!",
+                  detail: ""
+                });
+              });
+          });
+      });
+  }
 
   visitorCancel(rowData) {}
 }

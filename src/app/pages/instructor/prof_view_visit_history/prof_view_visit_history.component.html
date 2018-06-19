@@ -5,6 +5,46 @@
         <h1>Visit History</h1>
         <p-growl [value]="msgs" life="4500"></p-growl>
 
+        <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>Cancellation Form</p-header>
+
+          <div style="margin-top: 15px">
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Title:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <input type="text" pInputText [(ngModel)]="msgTitle" style="width:95%" name="msgTitle">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Content:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <textarea rows="5" cols="29" pInputTextarea [(ngModel)]="msgContent" class="text_area_cus"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p-footer>
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <p-button label="Submit" (onClick)="instructorCancel($event)" [style]="instructorCancelDialogBtnStyle"></p-button>
+                </div>
+              </div>
+            </div>
+          </p-footer>
+        </p-dialog>
+
         <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
 
         <p-tabView>
@@ -157,7 +197,7 @@
 
                   <ng-template pTemplate="emptymessage" let-columns>
                     <tr>
-                      <td [attr.colspan]="columns.length+1">
+                      <td [attr.colspan]="columns.length">
                         No records found
                       </td>
                     </tr>

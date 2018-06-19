@@ -83,6 +83,13 @@ export class VisitService {
     );
   }
 
+  getVisitByVisitId(visitId: number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getVisit/" + visitId).pipe(
+      tap(_ => console.log(`getVisit visitId=${visitId}`)),
+      catchError(this.handleError<any>(`getVisit visitId=${visitId}`))
+    );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

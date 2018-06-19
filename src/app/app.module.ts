@@ -36,6 +36,7 @@ import { DialogModule } from "primeng/dialog";
 import { SplitButtonModule } from "primeng/splitbutton";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService } from "primeng/api";
+import { InputTextareaModule } from "primeng/inputtextarea";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -48,6 +49,7 @@ import { AuthService } from "../providers/authService";
 import { DateService } from "../providers/dateService";
 import { CourseInfoService } from "../providers/courseInfoService";
 import { VisitService } from "../providers/visitService";
+import { MessageService } from "../providers/messageService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -142,7 +144,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     EditorModule,
     DialogModule,
     SplitButtonModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputTextareaModule
   ],
   providers: [
     Api,
@@ -160,7 +163,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     DateService,
     ConfirmationService,
     CourseInfoService,
-    VisitService
+    VisitService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
