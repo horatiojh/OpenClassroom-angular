@@ -127,6 +127,41 @@
 
                 </p-table>
               </p-accordionTab>
+
+              <p-accordionTab header="Cancelled" [selected]="true">
+                <p-table #iDt [columns]="iCols" [value]="iCancelledVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+
+                  <ng-template pTemplate="caption">
+
+                  </ng-template>
+
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                      </th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="rowData" style="height:55px">
+                      <td *ngFor="let col of columns" style="text-align: center">
+                        {{rowData[col.field]}}
+                      </td>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                      <td [attr.colspan]="columns.length">
+                        No records found
+                      </td>
+                    </tr>
+                  </ng-template>
+
+                </p-table>
+              </p-accordionTab>
             </p-accordion>
           </p-tabPanel>
 
@@ -173,6 +208,41 @@
 
               <p-accordionTab header="Confirmed" [selected]="true">
                 <p-table #vDt [columns]="vCols" [value]="vConfirmedVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+
+                  <ng-template pTemplate="caption">
+
+                  </ng-template>
+
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                      </th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="rowData" style="height:55px">
+                      <td *ngFor="let col of columns" style="text-align: center">
+                        {{rowData[col.field]}}
+                      </td>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                      <td [attr.colspan]="columns.length">
+                        No records found
+                      </td>
+                    </tr>
+                  </ng-template>
+
+                </p-table>
+              </p-accordionTab>
+
+              <p-accordionTab header="Cancelled" [selected]="true">
+                <p-table #vDt [columns]="vCols" [value]="vCancelledVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
                   <ng-template pTemplate="caption">
 

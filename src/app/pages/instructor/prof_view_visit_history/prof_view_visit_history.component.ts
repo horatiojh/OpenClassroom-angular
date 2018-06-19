@@ -23,8 +23,10 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   vCols: any[];
   iConfirmedVisit: Visit[];
   iPendingVisit: Visit[];
+  iCancelledVisit: Visit[];
   vConfirmedVisit: Visit[];
   vPendingVisit: Visit[];
+  vCancelledVisit: Visit[];
   staff: Staff;
   staffIdStr: string;
   staffId: number;

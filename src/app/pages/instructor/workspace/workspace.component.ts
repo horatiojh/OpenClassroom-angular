@@ -1,12 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Message } from "primeng/primeng";
-import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
-import { Router } from "@angular/router";
 
 import { CourseService } from "../../../../providers/courseService";
-import { TimetableService } from "../../../../providers/timetableService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
-import { ShareService } from "../../../../providers/shareService";
 
 import { Course } from "../../../../domain/course";
 
