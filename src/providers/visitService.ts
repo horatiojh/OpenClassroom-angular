@@ -54,6 +54,17 @@ export class VisitService {
       );
   }
 
+  getCancelledVisitByStaffId(staffId: string): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getCancelledVisitsBySID/" + staffId)
+      .pipe(
+        tap(_ => console.log(`getCancelledVisitsBySID staffId=${staffId}`)),
+        catchError(
+          this.handleError<any>(`getCancelledVisitsBySID staffId=${staffId}`)
+        )
+      );
+  }
+
   getMyPendingVisitHistory(staffId: number): Observable<any> {
     return this.httpClient
       .get<any>(this.baseUrl + "/getMyPendingVisitHistory/" + staffId)
@@ -72,6 +83,17 @@ export class VisitService {
         tap(_ => console.log(`getMyConfirmedVisitHistory staffId=${staffId}`)),
         catchError(
           this.handleError<any>(`getMyConfirmedVisitHistory staffId=${staffId}`)
+        )
+      );
+  }
+
+  getMyCancelledVisitHistory(staffId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getMyCancelledVisitHistory/" + staffId)
+      .pipe(
+        tap(_ => console.log(`getMyCancelledVisitHistory staffId=${staffId}`)),
+        catchError(
+          this.handleError<any>(`getMyCancelledVisitHistory staffId=${staffId}`)
         )
       );
   }

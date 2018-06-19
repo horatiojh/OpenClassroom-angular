@@ -121,6 +121,20 @@ export class ProfViewVisitHistoryComponent implements OnInit {
               });
             }
           });
+
+        this.visitService
+          .getCancelledVisitByStaffId(this.staffIdStr)
+          .subscribe(response => {
+            if (response != null && typeof response.visits != undefined) {
+              this.iCancelledVisit = response.visits;
+            } else {
+              this.msgs.push({
+                severity: "error",
+                summary: "An error has occurred while processing the request",
+                detail: ""
+              });
+            }
+          });
       } else {
         this.msgs.push({
           severity: "error",
@@ -149,6 +163,20 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       .subscribe(response => {
         if (response != null && typeof response.visits != undefined) {
           this.vConfirmedVisit = response.visits;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
+
+    this.visitService
+      .getMyCancelledVisitHistory(this.staffId)
+      .subscribe(response => {
+        if (response != null && typeof response.visits != undefined) {
+          this.vCancelledVisit = response.visits;
         } else {
           this.msgs.push({
             severity: "error",
