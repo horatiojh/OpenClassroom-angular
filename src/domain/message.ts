@@ -5,6 +5,7 @@ export class MessageEntity {
   messageDate: string;
   content: string;
   title: string;
+  isClicked: boolean;
 
   staff: Staff;
 
