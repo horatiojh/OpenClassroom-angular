@@ -36,18 +36,29 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   msgs: Message[] = [];
 
   // for dialog
-  display: boolean = false;
-  msgContent: string;
-  msgTitle: string;
-  msgDate: string = "";
-  dialogVisitId: number;
-  instructorCancelMsg: MessageEntity;
+  iMsgContent: string;
+  iMsgTitle: string;
+  iMsgDate: string = "";
+  iDisplay: boolean = false;
+  iDialogVisitId: number;
+  iCancelMsg: MessageEntity;
   iVisit: Visit;
   iStaffId: number;
   iStaff: Staff;
 
+  vMsgContent: string;
+  vMsgTitle: string;
+  vMsgDate: string = "";
+  vDisplay: boolean = false;
+  vDialogVisitId: number;
+  vCancelMsg: MessageEntity;
+  vVisit: Visit;
+  vStaffId: number;
+  vStaff: Staff;
+
   // for css
   instructorCancelDialogBtnStyle: SafeStyle;
+  visitorCancelDialogBtnStyle: SafeStyle;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -65,6 +76,11 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     let instructorCancelDialogStyle = "width:120px";
     this.instructorCancelDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       instructorCancelDialogStyle
+    );
+
+    let visitorCancelDialogStyle = "width:120px";
+    this.visitorCancelDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      visitorCancelDialogStyle
     );
 
     // for datatable
@@ -220,13 +236,14 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
-        this.visitorCancel(rowData);
+        this.showVisitorCancelDialog(rowData);
       },
       reject: () => {}
     });
   }
 
   instructorConfirm(rowData) {
+    this.msgs = [];
     let endpoint = "/updateStatus";
     let body = {
       visitId: String(rowData.id),
@@ -256,15 +273,19 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   }
 
   showInstructorCancelDialog(rowData) {
-    this.display = true;
-    this.dialogVisitId = rowData.id;
+    this.iDisplay = true;
+    this.iDialogVisitId = rowData.id;
+  }
+
+  showVisitorCancelDialog(rowData) {
+    this.vDisplay = true;
+    this.vDialogVisitId = rowData.id;
   }
 
   instructorCancel() {
     this.msgs = [];
-
     this.visitService
-      .getVisitByVisitId(this.dialogVisitId)
+      .getVisitByVisitId(this.iDialogVisitId)
       .subscribe(response => {
         this.iVisit = response.visit;
         this.iStaffId = this.iVisit.visitorId;
@@ -274,14 +295,14 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           .subscribe(response => {
             this.iStaff = response.staff;
 
-            this.instructorCancelMsg = new MessageEntity();
-            this.instructorCancelMsg.messageDate = this.msgDate;
-            this.instructorCancelMsg.title = this.msgTitle;
-            this.instructorCancelMsg.content = this.msgContent;
-            this.instructorCancelMsg.staff = this.iStaff;
+            this.iCancelMsg = new MessageEntity();
+            this.iCancelMsg.messageDate = this.iMsgDate;
+            this.iCancelMsg.title = this.iMsgTitle;
+            this.iCancelMsg.content = this.iMsgContent;
+            this.iCancelMsg.staff = this.iStaff;
 
             this.messageService
-              .createMessage(this.instructorCancelMsg)
+              .createMessage(this.iCancelMsg)
               .subscribe(response => {
                 this.msgs.push({
                   severity: "info",
@@ -294,7 +315,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     let endpoint = "/updateStatus";
     let body = {
-      visitId: String(this.dialogVisitId),
+      visitId: String(this.iDialogVisitId),
       status: "cancelled"
     };
 
@@ -313,8 +334,61 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       }
     );
 
-    this.display = false;
+    this.iDisplay = false;
   }
 
-  visitorCancel(rowData) {}
+  visitorCancel(rowData) {
+    this.msgs = [];
+    this.visitService
+      .getVisitByVisitId(this.vDialogVisitId)
+      .subscribe(response => {
+        this.vVisit = response.visit;
+        this.vStaffId = this.vVisit.instructorId;
+
+        this.staffService
+          .getStaffByStaffId(this.vStaffId)
+          .subscribe(response => {
+            this.vStaff = response.staff;
+
+            this.vCancelMsg = new MessageEntity();
+            this.vCancelMsg.messageDate = this.vMsgDate;
+            this.vCancelMsg.title = this.vMsgTitle;
+            this.vCancelMsg.content = this.vMsgContent;
+            this.vCancelMsg.staff = this.vStaff;
+
+            this.messageService
+              .createMessage(this.vCancelMsg)
+              .subscribe(response => {
+                this.msgs.push({
+                  severity: "info",
+                  summary: "Successfully Cancelled!",
+                  detail: ""
+                });
+              });
+          });
+      });
+
+    let endpoint = "/updateStatus";
+    let body = {
+      visitId: String(this.vDialogVisitId),
+      status: "cancelled"
+    };
+
+    this.visitService.updateStatus(endpoint, body).subscribe(
+      response => {
+        setTimeout(function() {
+          location.reload();
+        }, 300);
+      },
+      error => {
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: error.error.message
+        });
+      }
+    );
+
+    this.vDisplay = false;
+  }
 }
