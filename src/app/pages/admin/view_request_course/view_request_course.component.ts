@@ -54,6 +54,7 @@ export class ViewRequestCourseComponent implements OnInit {
   courseId: number;
   timetableId: number;
   course: Course;
+  instructorId: number;
 
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
@@ -165,6 +166,8 @@ export class ViewRequestCourseComponent implements OnInit {
       .getCourseByTimetableId(this.timetableId)
       .subscribe(response => {
         this.course = response.course;
+
+        this.instructorId = this.course.id;
       });
 
     this.dateService
@@ -198,6 +201,7 @@ export class ViewRequestCourseComponent implements OnInit {
     this.newVisit.moduleTitle = this.course.moduleTitle;
     this.newVisit.status = "pending";
     this.newVisit.date = this.date;
+    this.newVisit.instructorId = this.instructorId;
 
     this.visitService.createVisit(this.newVisit).subscribe(
       response => {
