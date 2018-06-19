@@ -53,6 +53,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
   timetableId: number;
   course: Course;
   instructorId: number;
+  instructorIdStr: string;
+  instructor: Staff;
 
   // for request classroom visit
   newVisit: Visit;
@@ -161,7 +163,13 @@ export class ProfViewRequestCourseComponent implements OnInit {
       .subscribe(response => {
         this.course = response.course;
 
-        this.instructorId = Number(this.course.id);
+        this.instructorIdStr = this.course.instructorId;
+        this.staffService
+          .getStaffByStaffIdStr(this.instructorIdStr)
+          .subscribe(response => {
+            this.instructor = response.staff;
+            this.instructorId = Number(this.instructor.id);
+          });
       });
 
     this.dateService

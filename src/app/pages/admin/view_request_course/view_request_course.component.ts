@@ -55,6 +55,8 @@ export class ViewRequestCourseComponent implements OnInit {
   timetableId: number;
   course: Course;
   instructorId: number;
+  instructorIdStr: string;
+  instructor: Staff;
 
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
@@ -167,7 +169,13 @@ export class ViewRequestCourseComponent implements OnInit {
       .subscribe(response => {
         this.course = response.course;
 
-        this.instructorId = this.course.id;
+        this.instructorIdStr = this.course.instructorId;
+        this.staffService
+          .getStaffByStaffIdStr(this.instructorIdStr)
+          .subscribe(response => {
+            this.instructor = response.staff;
+            this.instructorId = Number(this.instructor.id);
+          });
       });
 
     this.dateService

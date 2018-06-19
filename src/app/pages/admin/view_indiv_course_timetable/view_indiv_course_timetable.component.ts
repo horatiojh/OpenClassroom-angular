@@ -74,6 +74,8 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   staffs: Staff[];
   course: Course;
   instructorId: number;
+  instructorIdStr: string;
+  instructor: Staff;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -117,7 +119,13 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       .subscribe(response => {
         this.course = response.course;
 
-        this.instructorId = this.course.id;
+        this.instructorIdStr = this.course.instructorId;
+        this.staffService
+          .getStaffByStaffIdStr(this.instructorIdStr)
+          .subscribe(response => {
+            this.instructor = response.staff;
+            this.instructorId = Number(this.instructor.id);
+          });
       });
 
     this.cols = [
