@@ -10,7 +10,8 @@ import { MessageService } from "../../../../providers/messageService";
 })
 export class ProfViewNotificationsComponent implements OnInit {
   staffId: number;
-  messages: MessageEntity[];
+  unReadMessages: MessageEntity[];
+  readMessages: MessageEntity[];
 
   constructor(private messageService: MessageService) {}
 
@@ -18,9 +19,15 @@ export class ProfViewNotificationsComponent implements OnInit {
     this.staffId = Number(sessionStorage.getItem("staffId"));
 
     this.messageService
-      .getMessagesByStaffId(this.staffId)
+      .getUnreadMessagesByStaffId(this.staffId)
       .subscribe(response => {
-        this.messages = response.messages;
+        this.unReadMessages = response.messages;
+      });
+
+    this.messageService
+      .getReadMessagesByStaffId(this.staffId)
+      .subscribe(response => {
+        this.readMessages = response.messages;
       });
   }
 }

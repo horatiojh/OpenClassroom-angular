@@ -69,6 +69,9 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
+
+    this.iMsgTitle = "Observation Cancelled";
+    this.vMsgTitle = "Observation Cancelled";
   }
 
   ngOnInit() {

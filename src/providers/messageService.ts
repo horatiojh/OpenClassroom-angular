@@ -32,12 +32,23 @@ export class MessageService {
       );
   }
 
-  getMessagesByStaffId(staffId: number): Observable<any> {
+  getUnreadMessagesByStaffId(staffId: number): Observable<any> {
     return this.httpClient
-      .get<any>(this.baseUrl + "/getMessages/" + staffId)
+      .get<any>(this.baseUrl + "/getUnreadMessages/" + staffId)
       .pipe(
-        tap(_ => console.log(`getMessages staffId=${staffId}`)),
-        catchError(this.handleError<any>(`getMessages staffId=${staffId}`))
+        tap(_ => console.log(`getUnreadMessages staffId=${staffId}`)),
+        catchError(
+          this.handleError<any>(`getUnreadMessages staffId=${staffId}`)
+        )
+      );
+  }
+
+  getReadMessagesByStaffId(staffId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getReadMessages/" + staffId)
+      .pipe(
+        tap(_ => console.log(`getReadMessages staffId=${staffId}`)),
+        catchError(this.handleError<any>(`getReadMessages staffId=${staffId}`))
       );
   }
 

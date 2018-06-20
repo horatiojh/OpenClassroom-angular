@@ -5,31 +5,63 @@
         <h1>Notifications</h1>
         <p-growl [value]="msgs" life="4500"></p-growl>
 
-        <p-dataView [value]="messages" [paginator]="true" [rows]="10" paginatorPosition="bottom">
-          <ng-template let-message pTemplate="listItem">
-            <div style="border-bottom: 1px solid #bdbdbd">
-              <div class="ui-g-12 ui-md-12">
-                <div class="ui-grid-row">
-                  <div class="ui-grid-col-1">
-                    <i class="material-icons" style="font-size:28px; color:#757575; margin-left: 15px; margin-top: 9px;">email</i>
-                  </div>
-                  <div class="ui-grid-col-7">
-                    <p>{{message.title}}</p>
-                  </div>
-                  <div class="ui-grid-col-2">
-                      <p>{{message.messageDate}}</p>
+        <p-tabView>
+          <p-tabPanel header="Unread">
+            <p-dataView [value]="unReadMessages" [paginator]="true" [rows]="10" paginatorPosition="bottom">
+              <ng-template let-message pTemplate="listItem">
+                <div style="border-bottom: 1px solid #bdbdbd">
+                  <div class="ui-g-12 ui-md-12">
+                    <div class="ui-grid-row">
+                      <div class="ui-grid-col-1">
+                        <i class="material-icons" style="font-size:28px; color:#757575; margin-left: 15px; margin-top: 9px;">email</i>
+                      </div>
+                      <div class="ui-grid-col-6">
+                        <p>{{message.title}}</p>
+                      </div>
+                      <div class="ui-grid-col-3">
+                        <p style="margin-left: 60px">{{message.messageDate}}</p>
+                      </div>
+                      <div class="ui-grid-col-1">
+                        <p-button style="margin-top: 6px;margin-left: 50px;" icon="fa fa-fw fa-file-text" (onClick)="confirmArchive(rowData)"></p-button>
+                      </div>
+                      <div class="ui-grid-col-1">
+                        <p-button style="margin-top: 6px;margin-left: 30px;" icon="fa fa-fw fa-trash" (onClick)="confirmArchive(rowData)"></p-button>
+                      </div>
                     </div>
-                  <div class="ui-grid-col-1">
-                    <p-button style="margin-top: 6px;margin-left: 50px;" icon="fa fa-fw fa-file-text" (onClick)="confirmArchive(rowData)"></p-button>
-                  </div>
-                  <div class="ui-grid-col-1">
-                    <p-button style="margin-top: 6px;margin-left: 30px;" icon="fa fa-fw fa-trash" (onClick)="confirmArchive(rowData)"></p-button>
                   </div>
                 </div>
-              </div>
-            </div>
-          </ng-template>
-        </p-dataView>
+              </ng-template>
+            </p-dataView>
+          </p-tabPanel>
+
+          <p-tabPanel header="Read">
+            <p-dataView [value]="readMessages" [paginator]="true" [rows]="10" paginatorPosition="bottom">
+              <ng-template let-message pTemplate="listItem">
+                <div style="border-bottom: 1px solid #bdbdbd">
+                  <div class="ui-g-12 ui-md-12">
+                    <div class="ui-grid-row">
+                      <div class="ui-grid-col-1">
+                        <i class="material-icons" style="font-size:28px; color:#757575; margin-left: 15px; margin-top: 9px;">email</i>
+                      </div>
+                      <div class="ui-grid-col-6">
+                        <p>{{message.title}}</p>
+                      </div>
+                      <div class="ui-grid-col-3">
+                        <p style="margin-left: 60px">{{message.messageDate}}</p>
+                      </div>
+                      <div class="ui-grid-col-1">
+                        <p-button style="margin-top: 6px;margin-left: 50px;" icon="fa fa-fw fa-file-text" (onClick)="confirmArchive(rowData)"></p-button>
+                      </div>
+                      <div class="ui-grid-col-1">
+                        <p-button style="margin-top: 6px;margin-left: 30px;" icon="fa fa-fw fa-trash" (onClick)="confirmArchive(rowData)"></p-button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-dataView>
+          </p-tabPanel>
+        </p-tabView>
       </div>
     </div>
   </div>
