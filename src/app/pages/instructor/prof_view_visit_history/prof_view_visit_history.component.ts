@@ -303,6 +303,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
             this.iCancelMsg.title = this.iMsgTitle;
             this.iCancelMsg.content = this.iMsgContent;
             this.iCancelMsg.staff = this.iStaff;
+            this.iCancelMsg.visitId = this.iDialogVisitId;
 
             this.messageService
               .createMessage(this.iCancelMsg)
@@ -358,6 +359,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
             this.vCancelMsg.title = this.vMsgTitle;
             this.vCancelMsg.content = this.vMsgContent;
             this.vCancelMsg.staff = this.vStaff;
+            this.vCancelMsg.visitId = this.vDialogVisitId;
 
             this.messageService
               .createMessage(this.vCancelMsg)

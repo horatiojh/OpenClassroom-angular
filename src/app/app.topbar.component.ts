@@ -2,6 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { MainComponent } from "./main.component";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
+import { MessageService } from "../providers/messageService";
+
+import { MessageEntity } from "../domain/message";
+
 @Component({
   selector: "app-topbar",
   template: `
@@ -93,7 +97,7 @@ import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
                     [style]="notificationStyle">
                         <a routerLink="/profViewNotification">
                             <i class="topbar-icon material-icons">timer</i>
-                            <span class="topbar-badge animated rubberBand">4</span>
+                            <span class="topbar-badge animated rubberBand">{{numOfNewMsg}}</span>
                             <span class="topbar-item-name">Notifications</span>
                         </a>
                     </li>
@@ -112,7 +116,16 @@ export class AppTopbarComponent implements OnInit {
   staffRole: string;
   notificationStyle: SafeStyle;
 
-  constructor(public app: MainComponent, private domSanitizer: DomSanitizer) {}
+  // notification
+  numOfNewMsg: number;
+  staffId: number;
+  newMsgs: MessageEntity[];
+
+  constructor(
+    public app: MainComponent,
+    private domSanitizer: DomSanitizer,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {
     this.staffRole = sessionStorage.getItem("staffRole");
@@ -130,5 +143,15 @@ export class AppTopbarComponent implements OnInit {
         style
       );
     }
+
+    // for notification
+    this.staffId = Number(sessionStorage.getItem("staffId"));
+
+    this.messageService
+      .getUnreadMessagesByStaffId(this.staffId)
+      .subscribe(response => {
+        this.newMsgs = response.messages;
+        this.numOfNewMsg = this.newMsgs.length;
+      });
   }
 }

@@ -6,6 +6,7 @@ export class MessageEntity {
   content: string;
   title: string;
   isClicked: boolean;
+  visitId: number;
 
   staff: Staff;
 
