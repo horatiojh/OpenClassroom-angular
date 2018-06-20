@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, transition, style, animate } from "@angular/animations"
-import { AppComponent } from './app.component';
 import { MainComponent } from './main.component';
 import { Router } from '@angular/router';
 
@@ -21,7 +20,7 @@ import { StaffService } from '../providers/staffService';
 
         <ul class="ultima-menu profile-menu" [@menu]="active ? 'visible' : 'hidden'">
             <li role="menuitem">
-                <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
+                <a routerLink="/profUpdateProfile" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
                     <i class="material-icons">person</i>
                     <span>Profile</span>
                 </a>

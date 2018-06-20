@@ -22,6 +22,7 @@ import { ProfViewNotificationsComponent } from "./pages/instructor/prof_view_not
 import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
 import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
 import { ProfViewNotificationContentComponent } from "./pages/instructor/prof_view_notification_content/prof_view_notification_content.component";
+import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profile/prof_update_profile.component";
 
 import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff_info.component";
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
@@ -100,6 +101,10 @@ const routes: Routes = [
       {
         path: "profViewNotificationContent",
         component: ProfViewNotificationContentComponent
+      },
+      {
+        path: "profUpdateProfile",
+        component: ProfUpdateProfileComponent
       }
     ]
   }

@@ -87,6 +87,7 @@ import { LoginComponent } from "./pages/common/login/login.component";
 import { ModuleCardComponent } from "./pages/card/module_card/module_card.component";
 import { RequestDateCardComponent } from "./pages/card/request_date_card/request_date_card.component";
 import { RequestTimetableCardComponent } from "./pages/card/request_timetable_card/request_timetable_card.component";
+import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profile/prof_update_profile.component";
 
 @NgModule({
   declarations: [
@@ -124,7 +125,8 @@ import { RequestTimetableCardComponent } from "./pages/card/request_timetable_ca
     ProfChangePasswordComponent,
     ViewRequestCourseDetailsComponent,
     ProfViewNotificationsComponent,
-    ProfViewNotificationContentComponent
+    ProfViewNotificationContentComponent,
+    ProfUpdateProfileComponent
   ],
   imports: [
     BrowserModule,
