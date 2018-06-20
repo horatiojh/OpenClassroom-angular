@@ -74,7 +74,6 @@ export class ProfViewRequestCourseComponent implements OnInit {
     private courseService: CourseService
   ) {
     this.breadcrumbService.setItems([
-      { label: "Search Courses", routerLink: ["/profSearchCourse"] },
       { label: "Search Results", routerLink: ["/profViewRequestCourse"] }
     ]);
 

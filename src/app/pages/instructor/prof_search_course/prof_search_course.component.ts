@@ -31,9 +31,7 @@ export class ProfSearchCourseComponent implements OnInit {
     private shareService: ShareService,
     private router: Router
   ) {
-    this.breadcrumbService.setItems([
-      { label: "Search Courses", routerLink: ["/profSearchCourse"] }
-    ]);
+    this.breadcrumbService.setItems([{ label: "" }]);
 
     this.selectedWeekDay = "";
     this.preferEndTime = "";

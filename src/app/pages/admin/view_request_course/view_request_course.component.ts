@@ -76,7 +76,6 @@ export class ViewRequestCourseComponent implements OnInit {
     private staffService: StaffService
   ) {
     this.breadcrumbService.setItems([
-      { label: "Search Courses", routerLink: ["/searchCourse"] },
       { label: "Search Results", routerLink: ["/viewRequestCourse"] }
     ]);
 
