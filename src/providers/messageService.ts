@@ -66,6 +66,13 @@ export class MessageService {
     );
   }
 
+  getMessageByMessageId(messageId: number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getMessage/" + messageId).pipe(
+      tap(_ => console.log(`getMessage messageId=${messageId}`)),
+      catchError(this.handleError<any>(`getMessage messageId=${messageId}`))
+    );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

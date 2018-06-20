@@ -1,11 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
+import { Router } from "@angular/router";
 
 import { Message } from "primeng/primeng";
 
 import { MessageEntity } from "../../../../domain/message";
 
 import { MessageService } from "../../../../providers/messageService";
+import { ShareService } from "../../../../providers/shareService";
+import { BreadcrumbService } from "../../../breadcrumb.service";
 
 @Component({
   selector: "app-profViewNotification",
@@ -27,8 +30,13 @@ export class ProfViewNotificationsComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private domSanitizer: DomSanitizer
-  ) {}
+    private domSanitizer: DomSanitizer,
+    private shareService: ShareService,
+    private router: Router,
+    private breadcrumbService: BreadcrumbService
+  ) {
+    this.breadcrumbService.setItems([{ label: "" }]);
+  }
 
   ngOnInit() {
     // css style
@@ -63,7 +71,10 @@ export class ProfViewNotificationsComponent implements OnInit {
       });
   }
 
-  viewUnreadMessage(event: Event, msg: MessageEntity) {}
+  viewUnreadMessage(event: Event, msg: MessageEntity) {
+    this.shareService.setValue("messageId", msg.id);
+    this.router.navigate(["/profViewNotificationContent"]);
+  }
 
   deleteUnreadMessage(event: Event, msg: MessageEntity) {}
 
@@ -89,7 +100,10 @@ export class ProfViewNotificationsComponent implements OnInit {
     });
   }
 
-  viewReadMessage(event: Event, msg: MessageEntity) {}
+  viewReadMessage(event: Event, msg: MessageEntity) {
+    this.shareService.setValue("messageId", msg.id);
+    this.router.navigate(["/profViewNotificationContent"]);
+  }
 
   deleteReadMessage(event: Event, msg: MessageEntity) {}
 
