@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 
+import { Message, ConfirmationService } from "primeng/primeng";
+
 import { ShareService } from "../../../../providers/shareService";
 import { MessageService } from "../../../../providers/messageService";
 import { VisitService } from "../../../../providers/visitService";
@@ -34,6 +36,9 @@ export class ProfViewNotificationContentComponent implements OnInit {
 
   // css style
   backButtonStyle: SafeStyle;
+
+  // for components
+  msgs: Message[] = [];
 
   constructor(
     private shareService: ShareService,

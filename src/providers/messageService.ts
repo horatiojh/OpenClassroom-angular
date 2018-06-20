@@ -67,10 +67,23 @@ export class MessageService {
   }
 
   getMessageByMessageId(messageId: number): Observable<any> {
-    return this.httpClient.get<any>(this.baseUrl + "/getMessage/" + messageId).pipe(
-      tap(_ => console.log(`getMessage messageId=${messageId}`)),
-      catchError(this.handleError<any>(`getMessage messageId=${messageId}`))
-    );
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getMessage/" + messageId)
+      .pipe(
+        tap(_ => console.log(`getMessage messageId=${messageId}`)),
+        catchError(this.handleError<any>(`getMessage messageId=${messageId}`))
+      );
+  }
+
+  deleteMessage(messageId: number): Observable<any> {
+    return this.httpClient
+      .delete<any>(this.baseUrl + "/deleteMessage/" + "?messageId=" + messageId)
+      .pipe(
+        tap(_ => console.error(`deleteMessage messageId=${messageId}`)),
+        catchError(
+          this.handleError<any>(`deleteMessage messageId=${messageId}`)
+        )
+      );
   }
 
   private handleError<T>(operation = "operation", result?: T) {

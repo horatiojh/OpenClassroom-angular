@@ -5,6 +5,8 @@
         <h1>Notifications</h1>
         <p-growl [value]="msgs" life="4500"></p-growl>
 
+        <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
+
         <p-tabView>
           <p-tabPanel header="Unread">
             <p-dataView [value]="unReadMessages" [paginator]="true" [rows]="10" paginatorPosition="bottom">
@@ -28,7 +30,7 @@
                         <p-button [style]="viewButtonStyle" icon="fa fa-fw fa-file-text" (onClick)="viewUnreadMessage($event, umessage)"></p-button>
                       </div>
                       <div class="ui-grid-col-1">
-                        <p-button [style]="deleteButtonStyle" icon="fa fa-fw fa-trash" (onClick)="deleteUnreadMessage($event, umessage)"></p-button>
+                        <p-button [style]="deleteButtonStyle" icon="fa fa-fw fa-trash" (onClick)="deleteUnreadMessageConfirmDialog($event, umessage)"></p-button>
                       </div>
                     </div>
                   </div>
@@ -59,7 +61,7 @@
                         <p-button [style]="viewButtonStyle" icon="fa fa-fw fa-file-text" (onClick)="viewReadMessage($event, rmessage)"></p-button>
                       </div>
                       <div class="ui-grid-col-1">
-                        <p-button [style]="deleteButtonStyle" icon="fa fa-fw fa-trash" (onClick)="deleteReadMessage($event, rmessage)"></p-button>
+                        <p-button [style]="deleteButtonStyle" icon="fa fa-fw fa-trash" (onClick)="deleteReadMessageConfirmDialog($event, rmessage)"></p-button>
                       </div>
                     </div>
                   </div>

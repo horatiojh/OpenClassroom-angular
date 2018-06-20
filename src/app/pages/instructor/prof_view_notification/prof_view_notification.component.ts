@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 
-import { Message } from "primeng/primeng";
+import { Message, ConfirmationService } from "primeng/primeng";
 
 import { MessageEntity } from "../../../../domain/message";
 
@@ -33,7 +33,8 @@ export class ProfViewNotificationsComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private shareService: ShareService,
     private router: Router,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private confirmationService: ConfirmationService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
@@ -76,7 +77,22 @@ export class ProfViewNotificationsComponent implements OnInit {
     this.router.navigate(["/profViewNotificationContent"]);
   }
 
-  deleteUnreadMessage(event: Event, msg: MessageEntity) {}
+  deleteUnreadMessage(messageId: number) {
+    this.msgs = [];
+
+    this.messageService.deleteMessage(messageId).subscribe(response => {
+      console.log("delete unread message");
+      this.msgs.push({
+        severity: "info",
+        summary: "Successfully Deleted!",
+        detail: ""
+      });
+
+      setTimeout(function() {
+        location.reload();
+      }, 300);
+    });
+  }
 
   markReadMessage(event: Event, msg: MessageEntity) {
     this.msgs = [];
@@ -105,7 +121,22 @@ export class ProfViewNotificationsComponent implements OnInit {
     this.router.navigate(["/profViewNotificationContent"]);
   }
 
-  deleteReadMessage(event: Event, msg: MessageEntity) {}
+  deleteReadMessage(messageId: number) {
+    this.msgs = [];
+
+    this.messageService.deleteMessage(messageId).subscribe(response => {
+      console.log("delete unread message");
+      this.msgs.push({
+        severity: "info",
+        summary: "Successfully Deleted!",
+        detail: ""
+      });
+
+      setTimeout(function() {
+        location.reload();
+      }, 300);
+    });
+  }
 
   markUnreadMessage(event: Event, msg: MessageEntity) {
     this.msgs = [];
@@ -126,6 +157,32 @@ export class ProfViewNotificationsComponent implements OnInit {
       setTimeout(function() {
         location.reload();
       }, 300);
+    });
+  }
+
+  deleteUnreadMessageConfirmDialog(event: Event, msg: MessageEntity) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to delete it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.deleteUnreadMessage(msg.id);
+      },
+      reject: () => {}
+    });
+  }
+
+  deleteReadMessageConfirmDialog(event: Event, msg: MessageEntity) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to delete it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.deleteReadMessage(msg.id);
+      },
+      reject: () => {}
     });
   }
 }
