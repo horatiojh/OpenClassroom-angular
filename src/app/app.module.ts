@@ -51,6 +51,8 @@ import { DateService } from "../providers/dateService";
 import { CourseInfoService } from "../providers/courseInfoService";
 import { VisitService } from "../providers/visitService";
 import { MessageService } from "../providers/messageService";
+import { ChatService } from "../providers/chatService";
+import { WebsocketService } from "../providers/websocketService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -172,7 +174,9 @@ import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profi
     ConfirmationService,
     CourseInfoService,
     VisitService,
-    MessageService
+    MessageService,
+    ChatService,
+    WebsocketService
   ],
   bootstrap: [AppComponent]
 })

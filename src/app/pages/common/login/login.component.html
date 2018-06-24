@@ -2,6 +2,8 @@
 <html>
 
 <body>
+  <button (click)="sendMsg()">Send Message</button>
+
   <div class="login-container_cus">
     <form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm)">
       <div class="login-panel_cus">
