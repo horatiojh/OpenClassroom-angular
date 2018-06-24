@@ -16,7 +16,7 @@ const httpOptions = {
 };
 
 @Injectable()
-export class MessageService {
+export class MsgService {
   baseUrl = "/api/message";
 
   constructor(private httpClient: HttpClient) {}

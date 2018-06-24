@@ -16,6 +16,7 @@ import { Classroom } from "../../../../domain/classroom";
 export class ViewClassroomComponent implements OnInit {
   // for upload file
   msgs: Message[] = [];
+  notificationMsgs: Message[] = [];
 
   // for datatable
   cols: any[];
@@ -23,7 +24,6 @@ export class ViewClassroomComponent implements OnInit {
 
   constructor(
     private fileUploadService: FileUploadService,
-    private router: Router,
     private classroomService: ClassroomService,
     private breadcrumbService: BreadcrumbService
   ) {
@@ -45,9 +45,16 @@ export class ViewClassroomComponent implements OnInit {
       },
       { field: "linkCode", header: "LinkCode", width: "12%" }
     ];
-    this.classroomService
-      .getAllClassrooms()
-      .subscribe(response => {this.classrooms = response.classrooms});
+
+    this.classroomService.getAllClassrooms().subscribe(response => {
+      this.classrooms = response.classrooms;
+    });
+
+    this.notificationMsgs.push({
+      severity: "info",
+      summary: "Test",
+      detail: ""
+    });
   }
 
   onFileUpload(event, fileUpload) {
@@ -63,9 +70,9 @@ export class ViewClassroomComponent implements OnInit {
           summary: "File Uploaded",
           detail: ""
         });
-        this.classroomService
-          .getAllClassrooms()
-          .subscribe(response => {this.classrooms = response.classrooms});
+        this.classroomService.getAllClassrooms().subscribe(response => {
+          this.classrooms = response.classrooms;
+        });
       },
       error => {
         fileUpload.clear();

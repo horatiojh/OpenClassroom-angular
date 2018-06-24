@@ -6,9 +6,9 @@ import { Message, ConfirmationService } from "primeng/primeng";
 
 import { MessageEntity } from "../../../../domain/message";
 
-import { MessageService } from "../../../../providers/messageService";
 import { ShareService } from "../../../../providers/shareService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
+import { MsgService } from "../../../../providers/msgService";
 
 @Component({
   selector: "app-profViewNotification",
@@ -29,7 +29,7 @@ export class ProfViewNotificationsComponent implements OnInit {
   markButtonStyle: SafeStyle;
 
   constructor(
-    private messageService: MessageService,
+    private msgService: MsgService,
     private domSanitizer: DomSanitizer,
     private shareService: ShareService,
     private router: Router,
@@ -59,13 +59,13 @@ export class ProfViewNotificationsComponent implements OnInit {
     // data view
     this.staffId = Number(sessionStorage.getItem("staffId"));
 
-    this.messageService
+    this.msgService
       .getUnreadMessagesByStaffId(this.staffId)
       .subscribe(response => {
         this.unReadMessages = response.messages;
       });
 
-    this.messageService
+    this.msgService
       .getReadMessagesByStaffId(this.staffId)
       .subscribe(response => {
         this.readMessages = response.messages;
@@ -80,7 +80,7 @@ export class ProfViewNotificationsComponent implements OnInit {
   deleteUnreadMessage(messageId: number) {
     this.msgs = [];
 
-    this.messageService.deleteMessage(messageId).subscribe(response => {
+    this.msgService.deleteMessage(messageId).subscribe(response => {
       console.log("delete unread message");
       this.msgs.push({
         severity: "info",
@@ -102,7 +102,7 @@ export class ProfViewNotificationsComponent implements OnInit {
       messageId: String(msg.id)
     };
 
-    this.messageService.markRead(endpoint, body).subscribe(response => {
+    this.msgService.markRead(endpoint, body).subscribe(response => {
       console.log("mark as read");
       this.msgs.push({
         severity: "info",
@@ -124,7 +124,7 @@ export class ProfViewNotificationsComponent implements OnInit {
   deleteReadMessage(messageId: number) {
     this.msgs = [];
 
-    this.messageService.deleteMessage(messageId).subscribe(response => {
+    this.msgService.deleteMessage(messageId).subscribe(response => {
       console.log("delete unread message");
       this.msgs.push({
         severity: "info",
@@ -146,7 +146,7 @@ export class ProfViewNotificationsComponent implements OnInit {
       messageId: String(msg.id)
     };
 
-    this.messageService.markRead(endpoint, body).subscribe(response => {
+    this.msgService.markRead(endpoint, body).subscribe(response => {
       console.log("mark as unread");
       this.msgs.push({
         severity: "info",

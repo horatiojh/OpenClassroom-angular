@@ -6,7 +6,8 @@ import { Message, ConfirmationService } from "primeng/primeng";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { VisitService } from "../../../../providers/visitService";
 import { StaffService } from "../../../../providers/staffService";
-import { MessageService } from "../../../../providers/messageService";
+import { MsgService } from "../../../../providers/msgService";
+import { ChatService } from "../../../../providers/chatService";
 
 import { Visit } from "../../../../domain/visit";
 import { Staff } from "../../../../domain/staff";
@@ -66,7 +67,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     private staffService: StaffService,
     private confirmationService: ConfirmationService,
     private domSanitizer: DomSanitizer,
-    private messageService: MessageService
+    private msgService: MsgService,
+    private chatService: ChatService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
 
@@ -305,7 +307,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
             this.iCancelMsg.staff = this.iStaff;
             this.iCancelMsg.visitId = this.iDialogVisitId;
 
-            this.messageService
+            this.msgService
               .createMessage(this.iCancelMsg)
               .subscribe(response => {
                 this.msgs.push({
@@ -361,7 +363,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
             this.vCancelMsg.staff = this.vStaff;
             this.vCancelMsg.visitId = this.vDialogVisitId;
 
-            this.messageService
+            this.msgService
               .createMessage(this.vCancelMsg)
               .subscribe(response => {
                 this.msgs.push({

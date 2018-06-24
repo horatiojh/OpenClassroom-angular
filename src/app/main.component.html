@@ -8,24 +8,26 @@
           'layout-menu-static-inactive': staticMenuDesktopInactive,
           'layout-menu-static-active': staticMenuMobileActive}">
 
-      <app-topbar></app-topbar>
+    <app-topbar></app-topbar>
 
-      <div class="layout-menu" [ngClass]="{'layout-menu-dark':darkMenu}" (click)="onMenuClick($event)">
-          <p-scrollPanel #scrollPanel [style]="{height: '100%'}">
-              <app-inline-profile *ngIf="profileMode=='inline'&&!isHorizontal()"></app-inline-profile>
-              <app-menu [reset]="resetMenu"></app-menu>
-          </p-scrollPanel>
+    <div class="layout-menu" [ngClass]="{'layout-menu-dark':darkMenu}" (click)="onMenuClick($event)">
+      <p-scrollPanel #scrollPanel [style]="{height: '100%'}">
+        <app-inline-profile *ngIf="profileMode=='inline'&&!isHorizontal()"></app-inline-profile>
+        <app-menu [reset]="resetMenu"></app-menu>
+      </p-scrollPanel>
+    </div>
+
+    <div class="layout-main">
+      <app-breadcrumb></app-breadcrumb>
+
+      <div class="layout-content">
+        <p-growl [(value)]="notificationMsgs"></p-growl>
+
+        <router-outlet></router-outlet>
       </div>
+    </div>
 
-      <div class="layout-main">
-          <app-breadcrumb></app-breadcrumb>
-
-          <div class="layout-content">
-              <router-outlet></router-outlet>
-          </div>
-      </div>
-
-      <div class="layout-mask"></div>
+    <div class="layout-mask"></div>
   </div>
 
 </div>

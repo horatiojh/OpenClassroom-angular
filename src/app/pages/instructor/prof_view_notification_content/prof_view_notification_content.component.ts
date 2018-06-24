@@ -5,9 +5,9 @@ import { Router } from "@angular/router";
 import { Message, ConfirmationService } from "primeng/primeng";
 
 import { ShareService } from "../../../../providers/shareService";
-import { MessageService } from "../../../../providers/messageService";
 import { VisitService } from "../../../../providers/visitService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
+import { MsgService } from "../../../../providers/msgService";
 
 import { MessageEntity } from "../../../../domain/message";
 import { Visit } from "../../../../domain/visit";
@@ -42,7 +42,7 @@ export class ProfViewNotificationContentComponent implements OnInit {
 
   constructor(
     private shareService: ShareService,
-    private messageService: MessageService,
+    private msgService: MsgService,
     private visitService: VisitService,
     private domSanitizer: DomSanitizer,
     private router: Router,
@@ -65,7 +65,7 @@ export class ProfViewNotificationContentComponent implements OnInit {
 
     // for display message details
     this.messageId = this.shareService.getValue("messageId");
-    this.messageService
+    this.msgService
       .getMessageByMessageId(this.messageId)
       .subscribe(response => {
         this.message = response.message;

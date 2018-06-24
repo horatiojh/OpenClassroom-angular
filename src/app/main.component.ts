@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ElementRef, Renderer, ViewChild, OnDestroy, OnInit, NgZone } from '@angular/core';
-import { ScrollPanel } from 'primeng/primeng';
+import { ScrollPanel, Message } from 'primeng/primeng';
 
 enum MenuOrientation {
     STATIC,
@@ -51,6 +51,8 @@ export class MainComponent implements AfterViewInit, OnDestroy, OnInit {
     resetMenu: boolean;
 
     menuHoverActive: boolean;
+
+    notificationMsgs: Message[] = [];
 
     @ViewChild('layoutContainer') layourContainerViewChild: ElementRef;
 

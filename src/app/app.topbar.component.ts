@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { MainComponent } from "./main.component";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
-import { MessageService } from "../providers/messageService";
-
 import { MessageEntity } from "../domain/message";
+
+import { MsgService } from "../providers/msgService";
 
 @Component({
   selector: "app-topbar",
@@ -124,7 +124,7 @@ export class AppTopbarComponent implements OnInit {
   constructor(
     public app: MainComponent,
     private domSanitizer: DomSanitizer,
-    private messageService: MessageService
+    private msgService: MsgService
   ) {}
 
   ngOnInit() {
@@ -147,7 +147,7 @@ export class AppTopbarComponent implements OnInit {
     // for notification
     this.staffId = Number(sessionStorage.getItem("staffId"));
 
-    this.messageService
+    this.msgService
       .getUnreadMessagesByStaffId(this.staffId)
       .subscribe(response => {
         this.newMsgs = response.messages;
