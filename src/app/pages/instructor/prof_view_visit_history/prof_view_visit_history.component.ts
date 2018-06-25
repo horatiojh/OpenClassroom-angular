@@ -7,11 +7,11 @@ import { BreadcrumbService } from "../../../breadcrumb.service";
 import { VisitService } from "../../../../providers/visitService";
 import { StaffService } from "../../../../providers/staffService";
 import { MsgService } from "../../../../providers/msgService";
-import { ChatService } from "../../../../providers/chatService";
 
 import { Visit } from "../../../../domain/visit";
 import { Staff } from "../../../../domain/staff";
 import { MessageEntity } from "../../../../domain/message";
+import { FeedbackTag } from "../../../../wrapper/feedbackTag";
 
 @Component({
   selector: "app-profViewVisitHistory",
@@ -36,7 +36,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   // for components
   msgs: Message[] = [];
 
-  // for dialog
+  // for cancellation form dialog
   iMsgContent: string;
   iMsgTitle: string;
   iMsgDate: string = "";
@@ -60,6 +60,14 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   // for css
   instructorCancelDialogBtnStyle: SafeStyle;
   visitorCancelDialogBtnStyle: SafeStyle;
+  visitorLeaveDialogBtnStyle: SafeStyle;
+
+  // for feedback form dialog
+  fDisplay: boolean = false;
+  fDialogVisitId: number;
+  tags: FeedbackTag[];
+  selectedTags: FeedbackTag[];
+  fContent: string;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -67,8 +75,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     private staffService: StaffService,
     private confirmationService: ConfirmationService,
     private domSanitizer: DomSanitizer,
-    private msgService: MsgService,
-    private chatService: ChatService
+    private msgService: MsgService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
 
@@ -77,7 +84,19 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    // for dialog css
+    // for feedback form dialog
+    this.tags = [
+      { label: "Helpful", value: "Helpful" },
+      { label: "Interesting", value: "Interesting" }
+    ];
+
+    // for feedback form dialog css
+    let visitorLeaveDialogStyle = "width:120px";
+    this.visitorLeaveDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      visitorLeaveDialogStyle
+    );
+
+    // for cancel visit dialog css
     let instructorCancelDialogStyle = "width:120px";
     this.instructorCancelDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       instructorCancelDialogStyle
@@ -343,7 +362,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     this.iDisplay = false;
   }
 
-  visitorCancel(rowData) {
+  visitorCancel() {
     this.msgs = [];
     this.visitService
       .getVisitByVisitId(this.vDialogVisitId)
@@ -399,7 +418,12 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     this.vDisplay = false;
   }
 
-  visitorLeaveFeedback(rowData) {}
+  showFeedbackFormDialog(rowData) {
+    this.fDisplay = true;
+    this.fDialogVisitId = rowData.id;
+  }
+
+  visitorLeaveFeedback() {}
 
   instructorViewFeedback(rowData) {}
 }

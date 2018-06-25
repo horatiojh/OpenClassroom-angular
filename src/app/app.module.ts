@@ -38,6 +38,7 @@ import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService } from "primeng/api";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { DataViewModule } from "primeng/dataview";
+import { ListboxModule } from "primeng/listbox";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -156,7 +157,8 @@ import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profi
     SplitButtonModule,
     ConfirmDialogModule,
     InputTextareaModule,
-    DataViewModule
+    DataViewModule,
+    ListboxModule
   ],
   providers: [
     Api,
