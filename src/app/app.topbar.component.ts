@@ -172,7 +172,7 @@ export class AppTopbarComponent implements OnInit {
           this.newMsgs = response.messages;
           this.numOfNewMsg = this.newMsgs.length;
 
-          if (this.preNumOfNewMsg !== this.numOfNewMsg) {
+          if (this.numOfNewMsg - this.preNumOfNewMsg === 1) {
             this.messageService.add({
               severity: "warn",
               summary: "You have a new message",
@@ -182,7 +182,7 @@ export class AppTopbarComponent implements OnInit {
             this.preNumOfNewMsg = this.numOfNewMsg;
           }
         });
-    }, 5000);
+    }, 500);
   }
 
   growlOnClick(event) {

@@ -73,6 +73,15 @@ export class ProfViewNotificationsComponent implements OnInit {
   }
 
   viewUnreadMessage(event: Event, msg: MessageEntity) {
+    let endpoint = "/markRead";
+    let body = {
+      messageId: String(msg.id)
+    };
+
+    this.msgService.markRead(endpoint, body).subscribe(response => {
+      console.log("mark as unread, view unread message");
+    });
+
     this.shareService.setValue("messageId", msg.id);
     this.router.navigate(["/profViewNotificationContent"]);
   }
