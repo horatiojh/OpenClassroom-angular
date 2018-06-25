@@ -102,11 +102,11 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     this.vCols = [
       { field: "moduleTitle", header: "Module Title", width: "20%" },
-      { field: "instructorName", header: "Instructor", width: "10%" },
+      { field: "instructorName", header: "Instructor", width: "20%" },
       { field: "visitDate", header: "Date", width: "9%" },
-      { field: "startTime", header: "Start", width: "9%" },
-      { field: "endTime", header: "End", width: "9%" },
-      { field: "weekDay", header: "Day", width: "9%" }
+      { field: "startTime", header: "Start", width: "8%" },
+      { field: "endTime", header: "End", width: "7%" },
+      { field: "weekDay", header: "Day", width: "7%" }
     ];
 
     this.staffService.getStaffByStaffId(this.staffId).subscribe(response => {
