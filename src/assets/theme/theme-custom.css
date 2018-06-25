@@ -5933,7 +5933,7 @@ body {
         font-feature-settings: 'liga';
         font-size: 1.75em; }
         body .ui-growl .ui-growl-item .ui-growl-image.fa-exclamation-circle:before {
-          content: "warning"; }
+          content: "info"; }
       body .ui-growl .ui-growl-item .ui-growl-image.fa-close {
         font-family: 'Material Icons';
         font-weight: normal;

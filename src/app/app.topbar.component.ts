@@ -1,14 +1,19 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnChanges, Input } from "@angular/core";
 import { MainComponent } from "./main.component";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 import { MessageEntity } from "../domain/message";
 
 import { MsgService } from "../providers/msgService";
+import { MessageService } from "primeng/components/common/messageservice";
+import { Router } from "@angular/router";
+import { Message } from "primeng/api";
 
 @Component({
   selector: "app-topbar",
   template: `
+        <p-growl [(value)]="notificationMsgs" sticky="true" (onClick)="growlOnClick($event)"></p-growl>
+
         <div class="topbar clearfix">
             <div class="topbar-left">
                 <div style="font-size: 24px;color: aliceblue;margin-top: 7px">Open Classroom</div>
@@ -119,13 +124,17 @@ export class AppTopbarComponent implements OnInit {
 
   // notification
   numOfNewMsg: number;
+  preNumOfNewMsg: number;
   staffId: number;
   newMsgs: MessageEntity[];
+  notificationMsgs: Message[] = [];
 
   constructor(
     public app: MainComponent,
     private domSanitizer: DomSanitizer,
-    private msgService: MsgService
+    private msgService: MsgService,
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -153,6 +162,7 @@ export class AppTopbarComponent implements OnInit {
       .subscribe(response => {
         this.newMsgs = response.messages;
         this.numOfNewMsg = this.newMsgs.length;
+        this.preNumOfNewMsg = this.numOfNewMsg;
       });
 
     this.interval = setInterval(() => {
@@ -161,7 +171,22 @@ export class AppTopbarComponent implements OnInit {
         .subscribe(response => {
           this.newMsgs = response.messages;
           this.numOfNewMsg = this.newMsgs.length;
+
+          if (this.preNumOfNewMsg !== this.numOfNewMsg) {
+            this.messageService.add({
+              severity: "warn",
+              summary: "You have a new message",
+              detail: ""
+            });
+
+            this.preNumOfNewMsg = this.numOfNewMsg;
+          }
         });
     }, 5000);
+  }
+
+  growlOnClick(event) {
+    this.messageService.clear();
+    this.router.navigate(["/profViewNotification"]);
   }
 }

@@ -107,7 +107,6 @@ export class DateService {
 
   updateIsBooked(endpoint: string, body?: any): Observable<any> {
     return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
-      tap(resp => console.log(resp)),
       catchError(this.handleErrorApi)
     );
   }
