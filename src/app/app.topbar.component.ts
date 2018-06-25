@@ -148,6 +148,13 @@ export class AppTopbarComponent implements OnInit {
     // for notification
     this.staffId = Number(sessionStorage.getItem("staffId"));
 
+    this.msgService
+      .getUnreadMessagesByStaffId(this.staffId)
+      .subscribe(response => {
+        this.newMsgs = response.messages;
+        this.numOfNewMsg = this.newMsgs.length;
+      });
+
     this.interval = setInterval(() => {
       this.msgService
         .getUnreadMessagesByStaffId(this.staffId)
