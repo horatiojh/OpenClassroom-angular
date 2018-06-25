@@ -41,6 +41,11 @@ export class ProfViewNotificationsComponent implements OnInit {
 
   ngOnInit() {
     // css style
+    let markBtnStyle = "margin-top: 6px";
+    this.markButtonStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      markBtnStyle
+    );
+
     let viewBtnStyle = "margin-top: 6px;margin-left:20px";
     this.viewButtonStyle = this.domSanitizer.bypassSecurityTrustStyle(
       viewBtnStyle

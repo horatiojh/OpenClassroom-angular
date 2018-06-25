@@ -6,10 +6,10 @@
           <h3 style="margin-left: 12px">{{moduleCode}} - {{moduleTitle}}</h3>
         </div>
         <div style="float: right;">
-          <p-button icon="fa fa-fw fa-file-text" (onClick)="viewCourse($event)"></p-button>
-          <p-button icon="fa fa-fw fa-edit" [style]="updateCourseBtnSytle" (onClick)="updateCourse($event)"></p-button>
-          <p-button icon="fa fa-fw fa-calendar" [style]="viewTimetableBtnStyle" (onClick)="viewTimetable($event)"></p-button>
-          <p-button icon="fa fa-fw fa-tags" [style]="createTagsBtnStyle" (onClick)="createTags($event)"></p-button>
+          <p-button icon="fa fa-fw fa-file-text" [style]="viewCourseBtnStyle" (onClick)="viewCourse($event)" tooltipPosition="top" pTooltip="View"></p-button>
+          <p-button icon="fa fa-fw fa-edit" [style]="updateCourseBtnSytle" (onClick)="updateCourse($event)" tooltipPosition="top" pTooltip="Update"></p-button>
+          <p-button icon="fa fa-fw fa-calendar" [style]="viewTimetableBtnStyle" (onClick)="viewTimetable($event)" tooltipPosition="top" pTooltip="Timetable"></p-button>
+          <p-button icon="fa fa-fw fa-tags" [style]="createTagsBtnStyle" (onClick)="createTags($event)" tooltipPosition="top" pTooltip="Tags"></p-button>
         </div>
       </div>
     </div>

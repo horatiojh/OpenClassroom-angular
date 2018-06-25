@@ -6149,7 +6149,8 @@ body .ui-tooltip {
   opacity: 0.9;
   filter: alpha(opacity=90); }
   body .ui-tooltip .ui-tooltip-text {
-    background-color: #323232; }
+    background-color: #323232;
+    font-size: 12px; }
   body .ui-tooltip.ui-tooltip-top .ui-tooltip-arrow {
     border-top-color: #323232; }
   body .ui-tooltip.ui-tooltip-bottom .ui-tooltip-arrow {

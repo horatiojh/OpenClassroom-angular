@@ -41,14 +41,19 @@ export class ModuleCardComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
+    let viewCourseStyle = "margin-top: 10px";
+    this.viewCourseBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      viewCourseStyle
+    );
+
     let updateStyle = "margin-top: 10px;margin-left: 12px";
     this.updateCourseBtnSytle = this.domSanitizer.bypassSecurityTrustStyle(
       updateStyle
     );
 
-    let viewStyle = "margin-top: 10px;margin-left: 12px";
+    let viewTimetableStyle = "margin-top: 10px;margin-left: 12px";
     this.viewTimetableBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
-      viewStyle
+      viewTimetableStyle
     );
 
     let createStyle = "margin-top: 10px;margin-left: 12px;margin-right:20px";

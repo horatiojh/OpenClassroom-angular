@@ -24,9 +24,9 @@
                         <p style="font-weight: 550">{{umessage.messageDate}}</p>
                       </div>
                       <div style="float: right;">
-                        <p-button icon="fa fa-fw fa-heart" (onClick)="markReadMessage($event, umessage)"></p-button>
-                        <p-button [style]="viewButtonStyle" icon="fa fa-fw fa-file-text" (onClick)="viewUnreadMessage($event, umessage)"></p-button>
-                        <p-button [style]="deleteButtonStyle" icon="fa fa-fw fa-trash" (onClick)="deleteUnreadMessageConfirmDialog($event, umessage)"></p-button>
+                        <p-button [style]="markButtonStyle" icon="fa fa-fw fa-heart" (onClick)="markReadMessage($event, umessage)" tooltipPosition="top" pTooltip="Mark as read"></p-button>
+                        <p-button [style]="viewButtonStyle" icon="fa fa-fw fa-file-text" (onClick)="viewUnreadMessage($event, umessage)" tooltipPosition="top" pTooltip="View"></p-button>
+                        <p-button [style]="deleteButtonStyle" icon="fa fa-fw fa-trash" (onClick)="deleteUnreadMessageConfirmDialog($event, umessage)" tooltipPosition="top" pTooltip="Delete"></p-button>
                       </div>
                     </div>
                   </div>
@@ -51,9 +51,9 @@
                         <p>{{rmessage.messageDate}}</p>
                       </div>
                       <div style="float: right;">
-                        <p-button icon="fa fa-fw fa-heart-o" (onClick)="markUnreadMessage($event, rmessage)"></p-button>
-                        <p-button [style]="viewButtonStyle" icon="fa fa-fw fa-file-text" (onClick)="viewReadMessage($event, rmessage)"></p-button>
-                        <p-button [style]="deleteButtonStyle" icon="fa fa-fw fa-trash" (onClick)="deleteReadMessageConfirmDialog($event, rmessage)"></p-button>
+                        <p-button [style]="markButtonStyle" icon="fa fa-fw fa-heart-o" (onClick)="markUnreadMessage($event, rmessage)" tooltipPosition="top" pTooltip="Mark as unread"></p-button>
+                        <p-button [style]="viewButtonStyle" icon="fa fa-fw fa-file-text" (onClick)="viewReadMessage($event, rmessage)" tooltipPosition="top" pTooltip="View"></p-button>
+                        <p-button [style]="deleteButtonStyle" icon="fa fa-fw fa-trash" (onClick)="deleteReadMessageConfirmDialog($event, rmessage)" tooltipPosition="top" pTooltip="Delete"></p-button>
                       </div>
                     </div>
                   </div>
