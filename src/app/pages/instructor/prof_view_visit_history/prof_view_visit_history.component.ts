@@ -398,4 +398,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     this.vDisplay = false;
   }
+
+  visitorLeaveFeedback(rowData) {}
+
+  instructorViewFeedback(rowData) {}
 }
