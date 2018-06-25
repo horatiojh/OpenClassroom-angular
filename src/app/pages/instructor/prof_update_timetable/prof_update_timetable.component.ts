@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { NgForm } from "@angular/forms";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 import { SelectItem } from "primeng/primeng";
@@ -45,7 +43,6 @@ export class ProfUpdateTimetableComponent implements OnInit {
   buttonStyle: SafeStyle;
 
   constructor(
-    private router: Router,
     private breadcrumbService: BreadcrumbService,
     private classroomService: ClassroomService,
     private timetableService: TimetableService,
@@ -121,7 +118,6 @@ export class ProfUpdateTimetableComponent implements OnInit {
           summary: "Successfully Updated!",
           detail: ""
         });
-        // this.router.navigate(["/viewTimetable"]);
       });
   }
 }

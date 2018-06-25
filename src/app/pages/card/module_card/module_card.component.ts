@@ -41,11 +41,6 @@ export class ModuleCardComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    let viewCourseStyle = "margin-left:30px";
-    this.viewCourseBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
-      viewCourseStyle
-    );
-
     let updateStyle = "margin-top: 10px;margin-left: 12px";
     this.updateCourseBtnSytle = this.domSanitizer.bypassSecurityTrustStyle(
       updateStyle
@@ -56,7 +51,7 @@ export class ModuleCardComponent implements OnInit, OnChanges {
       viewStyle
     );
 
-    let createStyle = "margin-top: 10px;margin-left: 12px";
+    let createStyle = "margin-top: 10px;margin-left: 12px;margin-right:20px";
     this.createTagsBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       createStyle
     );

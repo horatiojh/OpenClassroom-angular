@@ -41,19 +41,14 @@ export class ProfViewNotificationsComponent implements OnInit {
 
   ngOnInit() {
     // css style
-    let viewBtnStyle = "margin-top: 6px;margin-left:50px";
+    let viewBtnStyle = "margin-top: 6px;margin-left:20px";
     this.viewButtonStyle = this.domSanitizer.bypassSecurityTrustStyle(
       viewBtnStyle
     );
 
-    let deleteBtnStyle = "margin-top: 6px;margin-left:30px";
+    let deleteBtnStyle = "margin-top: 6px;margin-left:20px;margin-right:10px";
     this.deleteButtonStyle = this.domSanitizer.bypassSecurityTrustStyle(
       deleteBtnStyle
-    );
-
-    let martBtnStyle = "margin-top: 6px;margin-left:70px";
-    this.markButtonStyle = this.domSanitizer.bypassSecurityTrustStyle(
-      martBtnStyle
     );
 
     // data view
