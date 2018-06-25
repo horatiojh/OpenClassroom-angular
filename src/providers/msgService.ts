@@ -36,7 +36,6 @@ export class MsgService {
     return this.httpClient
       .get<any>(this.baseUrl + "/getUnreadMessages/" + staffId)
       .pipe(
-        tap(_ => console.log(`getUnreadMessages staffId=${staffId}`)),
         catchError(
           this.handleError<any>(`getUnreadMessages staffId=${staffId}`)
         )

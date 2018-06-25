@@ -16,6 +16,7 @@ export class Visit {
   moduleCode: string;
   moduleTitle: string;
   moduleGroup: string;
+  instructorName: string;
 
   constructor() {}
 }
