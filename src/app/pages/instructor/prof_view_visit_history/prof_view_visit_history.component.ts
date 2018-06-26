@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
-import { Message, ConfirmationService } from "primeng/primeng";
+import { Message, ConfirmationService, MenuItem } from "primeng/primeng";
 
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { VisitService } from "../../../../providers/visitService";
@@ -37,6 +37,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
   // for components
   msgs: Message[] = [];
+  items: MenuItem[];
 
   // for cancellation form dialog
   iMsgContent: string;
@@ -434,13 +435,14 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     this.vDisplay = false;
   }
 
-  showFeedbackFormDialog(rowData) {
+  showVisitorFeedbackFormDialog(rowData) {
     this.vfDisplay = true;
     this.vfDialogVisitId = rowData.id;
-    console.log(rowData.vfeedbackSubmitted);
   }
 
   visitorLeaveFeedback() {
+    this.msgs = [];
+
     for (let i = 0; i < this.questionRatings.length; i++) {
       this.questions.push(this.questionRatings[i].question);
       this.qRatings.push(String(this.questionRatings[i].rating));
@@ -468,9 +470,48 @@ export class ProfViewVisitHistoryComponent implements OnInit {
             });
 
             this.vfDisplay = false;
+
+            let endpoint = "/updateVFeedbackSubmitted";
+            let body = {
+              visitId: String(this.vfDialogVisitId),
+              vFeedbackSubmitted: true
+            };
+
+            this.visitService
+              .updateVFeedbackSubmitted(endpoint, body)
+              .subscribe(response => {
+                setTimeout(function() {
+                  location.reload();
+                }, 300);
+              });
           });
       });
   }
 
-  instructorViewFeedback(rowData) {}
+  instructorLeaveFeedback() {}
+
+  iActionList(rowData) {
+    let visitId = rowData.id;
+    let visit: Visit;
+
+    this.visitService.getVisitByVisitId(visitId).subscribe(response => {
+      visit = response.visit;
+
+      this.items = [
+        {
+          disabled: visit.vfeedbackSubmitted,
+          icon: "fa-envelope",
+          command: () => {
+            this.showVisitorFeedbackFormDialog(rowData);
+          }
+        },
+        {
+          icon: "fa-comments",
+          command: () => {
+            this.showVisitorFeedbackFormDialog(rowData);
+          }
+        }
+      ];
+    });
+  }
 }

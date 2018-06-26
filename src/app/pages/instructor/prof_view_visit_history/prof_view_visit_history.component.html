@@ -190,7 +190,7 @@
                         {{col.header}}
                         <p-sortIcon [field]="col.field"></p-sortIcon>
                       </th>
-                      <th style="width: 8%">View</th>
+                      <th style="width: 8%">Actions</th>
                     </tr>
                   </ng-template>
 
@@ -200,7 +200,7 @@
                         {{rowData[col.field]}}
                       </td>
                       <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-file-text" (onClick)="instructorViewFeedback(rowData)"></p-button>
+                        <p-splitButton label=" " (onClick)="iActionList(rowData)" [model]="items" (onDropdownClick)="iActionList(rowData)"></p-splitButton>
                       </td>
                     </tr>
                   </ng-template>
@@ -307,7 +307,7 @@
                         {{col.header}}
                         <p-sortIcon [field]="col.field"></p-sortIcon>
                       </th>
-                      <th style="width: 8%">Feedback</th>
+                      <th style="width: 8%">Actions</th>
                     </tr>
                   </ng-template>
 
@@ -317,7 +317,7 @@
                         {{rowData[col.field]}}
                       </td>
                       <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-envelope" (onClick)="showFeedbackFormDialog(rowData)" [disabled]="rowData['vfeedbackSubmitted']"></p-button>
+                        <p-splitButton label=" " (onClick)="iActionList(rowData)" [model]="items" (onDropdownClick)="iActionList(rowData)"></p-splitButton>
                       </td>
                     </tr>
                   </ng-template>
