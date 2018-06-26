@@ -10,6 +10,7 @@ export class Visit {
   visitDate: string;
   weekDay: string;
   status: string;
+  feedbackSubmitted: boolean;
 
   date: DateEntity;
 

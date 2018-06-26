@@ -204,6 +204,7 @@ export class ProfViewRequestCourseComponent implements OnInit {
     this.newVisit.status = "pending";
     this.newVisit.date = this.date;
     this.newVisit.instructorId = this.instructorId;
+    this.newVisit.feedbackSubmitted = false;
 
     this.visitService.createVisit(this.newVisit).subscribe(
       response => {
