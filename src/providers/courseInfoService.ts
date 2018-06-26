@@ -1,17 +1,9 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders
-} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/throw";
 import { of } from "rxjs";
-
-const httpOptions = {
-  headers: new HttpHeaders({ "Content-Type": "application/json" })
-};
 
 @Injectable()
 export class CourseInfoService {
@@ -24,7 +16,9 @@ export class CourseInfoService {
       .get<any>(this.baseUrl + "/getCourseInfo/" + moduleCode)
       .pipe(
         tap(_ => console.log(`getCourseInfo moduleCode=${moduleCode}`)),
-        catchError(this.handleError<any>(`getCourseInfo moduleCode=${moduleCode}`))
+        catchError(
+          this.handleError<any>(`getCourseInfo moduleCode=${moduleCode}`)
+        )
       );
   }
 

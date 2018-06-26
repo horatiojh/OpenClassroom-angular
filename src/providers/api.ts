@@ -1,9 +1,4 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHandler,
-  HttpHeaders
-} from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
@@ -16,27 +11,31 @@ export class Api {
   constructor(public http: HttpClient) {}
 
   get(endpoint: string) {
-    return this.http
-      .get(this.url + endpoint)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
+    return this.http.get(this.url + endpoint).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleError)
+    );
   }
 
   post(endpoint: string, body?: any): Observable<any> {
-    return this.http
-      .post<any>(this.url + endpoint, body)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
+    return this.http.post<any>(this.url + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleError)
+    );
   }
 
   put(endpoint: string, body?: any): Observable<any> {
-    return this.http
-      .put<any>(this.url + endpoint, body)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
+    return this.http.put<any>(this.url + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleError)
+    );
   }
 
   delete(endpoint: string) {
-    return this.http
-      .delete(this.url + endpoint)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
+    return this.http.delete(this.url + endpoint).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
