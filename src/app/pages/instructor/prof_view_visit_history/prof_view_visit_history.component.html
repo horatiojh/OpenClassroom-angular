@@ -85,7 +85,7 @@
           </p-footer>
         </p-dialog>
 
-        <p-dialog [(visible)]="fDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+        <p-dialog [(visible)]="vfDisplay" [draggable]="false" [resizable]="false" [width]="680" [height]="auto" [contentStyle]="{'overflow':'visible'}"
           modal="true">
 
           <p-header>Feedback Form</p-header>
@@ -94,11 +94,14 @@
 
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                  <label>Tags:</label>
-                </div>
+                <div class="ui-grid-col-3">Questions:</div>
                 <div class="ui-grid-col-9">
-                  <p-listbox [options]="tags" [(ngModel)]="selectedTags" [style]="{'width':'95%'}" multiple="true" [metaKeySelection]="false"></p-listbox>
+                  <div *ngFor="let questionRating of questionRatings" style="margin-top: -5px;margin-left: -8px">
+                    <div class="ui-g-8">{{questionRating.question}}</div>
+                    <div class="ui-g-4">
+                      <p-rating [(ngModel)]="questionRating.rating" (onRate)="onRateEvent($event)"></p-rating>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -106,10 +109,10 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div class="ui-grid-col-3">
-                  <label>Details:</label>
+                  <label>Comments:</label>
                 </div>
-                <div class="ui-grid-col-9">
-                  <textarea rows="5" cols="29" pInputTextarea [(ngModel)]="fContent" class="text_area_cus" name="fContent"></textarea>
+                <div class="ui-grid-col-9" style="margin-top: 5px">
+                  <textarea rows="6" cols="53" pInputTextarea [(ngModel)]="vfComments" class="text_area_cus" name="vfComments"></textarea>
                 </div>
               </div>
             </div>
@@ -250,7 +253,7 @@
             </p-accordion>
           </p-tabPanel>
 
-          <p-tabPanel header="As Visitor">
+          <p-tabPanel header="As Observer">
             <p-accordion>
               <p-accordionTab header="Pending" [selected]="true">
                 <p-table #vDt [columns]="vCols" [value]="vPendingVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">

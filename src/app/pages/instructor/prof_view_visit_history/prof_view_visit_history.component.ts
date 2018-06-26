@@ -11,7 +11,7 @@ import { MsgService } from "../../../../providers/msgService";
 import { Visit } from "../../../../domain/visit";
 import { Staff } from "../../../../domain/staff";
 import { MessageEntity } from "../../../../domain/message";
-import { FeedbackTag } from "../../../../wrapper/feedbackTag";
+import { QuestionRating } from "../../../../wrapper/questionRating";
 
 @Component({
   selector: "app-profViewVisitHistory",
@@ -63,11 +63,12 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   visitorLeaveDialogBtnStyle: SafeStyle;
 
   // for feedback form dialog
-  fDisplay: boolean = false;
-  fDialogVisitId: number;
-  tags: FeedbackTag[];
-  selectedTags: FeedbackTag[];
-  fContent: string;
+  vfDisplay: boolean = false;
+  vfDialogVisitId: number;
+  questions: string[];
+  qRatings: string[];
+  vfComments: string;
+  questionRatings: QuestionRating[] = [];
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -85,13 +86,23 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
   ngOnInit() {
     // for feedback form dialog
-    this.tags = [
-      { label: "Helpful", value: "Helpful" },
-      { label: "Interesting", value: "Interesting" }
-    ];
+    this.questionRatings.push({
+      question: "I learnt something about the classroom climate.",
+      rating: 0
+    });
+
+    this.questionRatings.push({
+      question: "I learnt something about the course content.",
+      rating: 0
+    });
+
+    this.questionRatings.push({
+      question: "I learnt something about the professor’s teaching methods.",
+      rating: 0
+    });
 
     // for feedback form dialog css
-    let visitorLeaveDialogStyle = "width:120px";
+    let visitorLeaveDialogStyle = "width:160px;height:35px";
     this.visitorLeaveDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       visitorLeaveDialogStyle
     );
@@ -111,7 +122,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     this.staffId = Number(sessionStorage.getItem("staffId"));
 
     this.iCols = [
-      { field: "visitorName", header: "Visitor", width: "20%" },
+      { field: "visitorName", header: "Observer", width: "20%" },
       { field: "moduleGroup", header: "Group", width: "10%" },
       { field: "visitDate", header: "Date", width: "10%" },
       { field: "startTime", header: "Start", width: "10%" },
@@ -419,11 +430,17 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   }
 
   showFeedbackFormDialog(rowData) {
-    this.fDisplay = true;
-    this.fDialogVisitId = rowData.id;
+    this.vfDisplay = true;
+    this.vfDialogVisitId = rowData.id;
   }
 
-  visitorLeaveFeedback() {}
+  visitorLeaveFeedback() {
+    console.log(this.questionRatings);
+  }
 
   instructorViewFeedback(rowData) {}
+
+  onRateEvent(event) {
+    console.log(event.value);
+  }
 }
