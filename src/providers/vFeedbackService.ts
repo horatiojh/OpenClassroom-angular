@@ -12,7 +12,7 @@ const httpOptions = {
 
 @Injectable()
 export class VFeedbackService {
-  baseUrl = "/api/feedback";
+  baseUrl = "/api/vFeedback";
 
   constructor(private httpClient: HttpClient) {}
 

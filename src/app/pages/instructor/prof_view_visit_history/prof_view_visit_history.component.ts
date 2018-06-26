@@ -7,11 +7,13 @@ import { BreadcrumbService } from "../../../breadcrumb.service";
 import { VisitService } from "../../../../providers/visitService";
 import { StaffService } from "../../../../providers/staffService";
 import { MsgService } from "../../../../providers/msgService";
+import { VFeedbackService } from "../../../../providers/vFeedbackService";
 
 import { Visit } from "../../../../domain/visit";
 import { Staff } from "../../../../domain/staff";
 import { MessageEntity } from "../../../../domain/message";
 import { QuestionRating } from "../../../../wrapper/questionRating";
+import { VFeedback } from "../../../../domain/vFeedback";
 
 @Component({
   selector: "app-profViewVisitHistory",
@@ -65,10 +67,12 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   // for feedback form dialog
   vfDisplay: boolean = false;
   vfDialogVisitId: number;
-  questions: string[];
-  qRatings: string[];
-  vfComments: string;
+  questions: string[] = [];
+  qRatings: string[] = [];
+  vfComment: string;
   questionRatings: QuestionRating[] = [];
+  vFeedback: VFeedback;
+  vfVisit: Visit;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -76,7 +80,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     private staffService: StaffService,
     private confirmationService: ConfirmationService,
     private domSanitizer: DomSanitizer,
-    private msgService: MsgService
+    private msgService: MsgService,
+    private vFeedbackService: VFeedbackService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
 
@@ -432,15 +437,40 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   showFeedbackFormDialog(rowData) {
     this.vfDisplay = true;
     this.vfDialogVisitId = rowData.id;
+    console.log(rowData.vfeedbackSubmitted);
   }
 
   visitorLeaveFeedback() {
-    console.log(this.questionRatings);
+    for (let i = 0; i < this.questionRatings.length; i++) {
+      this.questions.push(this.questionRatings[i].question);
+      this.qRatings.push(String(this.questionRatings[i].rating));
+    }
+
+    this.vFeedback = new VFeedback();
+
+    this.vFeedback.questions = this.questions;
+    this.vFeedback.qRating = this.qRatings;
+    this.vFeedback.comment = this.vfComment;
+
+    this.visitService
+      .getVisitByVisitId(this.vfDialogVisitId)
+      .subscribe(response => {
+        this.vfVisit = response.visit;
+        this.vFeedback.visit = this.vfVisit;
+
+        this.vFeedbackService
+          .createVFeedback(this.vFeedback)
+          .subscribe(response => {
+            this.msgs.push({
+              severity: "info",
+              summary: "Successfully Submitted!",
+              detail: ""
+            });
+
+            this.vfDisplay = false;
+          });
+      });
   }
 
   instructorViewFeedback(rowData) {}
-
-  onRateEvent(event) {
-    console.log(event.value);
-  }
 }
