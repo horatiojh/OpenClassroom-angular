@@ -57,6 +57,7 @@ import { WebsocketService } from "../providers/websocketService";
 import { MsgService } from "../providers/msgService";
 import { MessageService } from "primeng/components/common/messageservice";
 import { VFeedbackService } from "../providers/vFeedbackService";
+import { IFeedbackService } from "../providers/iFeedbackService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -184,7 +185,8 @@ import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profi
     ChatService,
     WebsocketService,
     MessageService,
-    VFeedbackService
+    VFeedbackService,
+    IFeedbackService
   ],
   bootstrap: [AppComponent]
 })

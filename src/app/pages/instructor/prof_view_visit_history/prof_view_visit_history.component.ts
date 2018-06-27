@@ -8,6 +8,7 @@ import { VisitService } from "../../../../providers/visitService";
 import { StaffService } from "../../../../providers/staffService";
 import { MsgService } from "../../../../providers/msgService";
 import { VFeedbackService } from "../../../../providers/vFeedbackService";
+import { IFeedbackService } from "../../../../providers/iFeedbackService";
 
 import { Visit } from "../../../../domain/visit";
 import { Staff } from "../../../../domain/staff";
@@ -67,16 +68,27 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   instructorCancelDialogBtnStyle: SafeStyle;
   visitorCancelDialogBtnStyle: SafeStyle;
   visitorLeaveDialogBtnStyle: SafeStyle;
+  instructorLeaveDialogBtnStyle: SafeStyle;
 
-  // for feedback form dialog
+  // for visitor feedback form dialog
   vfDisplay: boolean = false;
   vfDialogVisitId: number;
-  questions: string[] = [];
-  qRatings: string[] = [];
+  vfQuestions: string[] = [];
+  vfQRatings: string[] = [];
   vfComment: string;
-  questionRatings: QuestionRating[] = [];
+  vfQuestionRatings: QuestionRating[] = [];
   vFeedback: VFeedback;
   vfVisit: Visit;
+
+  // for instructor feedback form dialog
+  ifDisplay: boolean = false;
+  ifDialogVisitId: number;
+  ifQuestions: string[] = [];
+  ifQRatings: string[] = [];
+  ifComment: string;
+  ifQuestionRatings: QuestionRating[] = [];
+  iFeedback: VFeedback;
+  ifVisit: Visit;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -85,7 +97,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private domSanitizer: DomSanitizer,
     private msgService: MsgService,
-    private vFeedbackService: VFeedbackService
+    private vFeedbackService: VFeedbackService,
+    private iFeedbackService: IFeedbackService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
 
@@ -95,18 +108,33 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
   ngOnInit() {
     // for feedback form dialog
-    this.questionRatings.push({
+    this.vfQuestionRatings.push({
       question: "I learnt something about the classroom climate.",
       rating: 0
     });
 
-    this.questionRatings.push({
+    this.vfQuestionRatings.push({
       question: "I learnt something about the course content.",
       rating: 0
     });
 
-    this.questionRatings.push({
+    this.vfQuestionRatings.push({
       question: "I learnt something about the professor’s teaching methods.",
+      rating: 0
+    });
+
+    this.ifQuestionRatings.push({
+      question: "Dummy Question 1",
+      rating: 0
+    });
+
+    this.ifQuestionRatings.push({
+      question: "Dummy Question 2",
+      rating: 0
+    });
+
+    this.ifQuestionRatings.push({
+      question: "Dummy Question 3",
       rating: 0
     });
 
@@ -114,6 +142,11 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     let visitorLeaveDialogStyle = "width:160px;height:35px";
     this.visitorLeaveDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       visitorLeaveDialogStyle
+    );
+
+    let instructorLeaveDialogStyle = "width:160px;height:35px";
+    this.instructorLeaveDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      instructorLeaveDialogStyle
     );
 
     // for cancel visit dialog css
@@ -521,18 +554,23 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     this.vfDialogVisitId = rowData.id;
   }
 
+  showInstructorFeedbackFormDialog(rowData) {
+    this.ifDisplay = true;
+    this.ifDialogVisitId = rowData.id;
+  }
+
   visitorLeaveFeedback() {
     this.msgs = [];
 
-    for (let i = 0; i < this.questionRatings.length; i++) {
-      this.questions.push(this.questionRatings[i].question);
-      this.qRatings.push(String(this.questionRatings[i].rating));
+    for (let i = 0; i < this.vfQuestionRatings.length; i++) {
+      this.vfQuestions.push(this.vfQuestionRatings[i].question);
+      this.vfQRatings.push(String(this.vfQuestionRatings[i].rating));
     }
 
     this.vFeedback = new VFeedback();
 
-    this.vFeedback.questions = this.questions;
-    this.vFeedback.qRating = this.qRatings;
+    this.vFeedback.questions = this.vfQuestions;
+    this.vFeedback.qRating = this.vfQRatings;
     this.vFeedback.comment = this.vfComment;
 
     this.visitService
@@ -569,7 +607,53 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       });
   }
 
-  instructorLeaveFeedback() {}
+  instructorLeaveFeedback() {
+    this.msgs = [];
+
+    for (let i = 0; i < this.ifQuestionRatings.length; i++) {
+      this.ifQuestions.push(this.ifQuestionRatings[i].question);
+      this.ifQRatings.push(String(this.ifQuestionRatings[i].rating));
+    }
+
+    this.iFeedback = new VFeedback();
+
+    this.iFeedback.questions = this.ifQuestions;
+    this.iFeedback.qRating = this.ifQRatings;
+    this.iFeedback.comment = this.ifComment;
+
+    this.visitService
+      .getVisitByVisitId(this.ifDialogVisitId)
+      .subscribe(response => {
+        this.ifVisit = response.visit;
+        this.iFeedback.visit = this.ifVisit;
+
+        this.iFeedbackService
+          .createIFeedback(this.iFeedback)
+          .subscribe(response => {
+            this.msgs.push({
+              severity: "info",
+              summary: "Successfully Submitted!",
+              detail: ""
+            });
+
+            this.ifDisplay = false;
+
+            let endpoint = "/updateIFeedbackSubmitted";
+            let body = {
+              visitId: String(this.ifDialogVisitId),
+              iFeedbackSubmitted: true
+            };
+
+            this.visitService
+              .updateVFeedbackSubmitted(endpoint, body)
+              .subscribe(response => {
+                setTimeout(function() {
+                  location.reload();
+                }, 300);
+              });
+          });
+      });
+  }
 
   VCActionList(rowData) {
     let visitId = rowData.id;
@@ -639,16 +723,16 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
       this.ICItems = [
         {
-          disabled: visit.vfeedbackSubmitted,
+          disabled: visit.ifeedbackSubmitted,
           icon: "fa-thumbs-up",
           command: () => {
-            this.showVisitorFeedbackFormDialog(rowData);
+            this.showInstructorFeedbackFormDialog(rowData);
           }
         },
         {
           icon: "fa-envelope",
           command: () => {
-            this.showVisitorFeedbackFormDialog(rowData);
+            this.showInstructorFeedbackFormDialog(rowData);
           }
         }
       ];

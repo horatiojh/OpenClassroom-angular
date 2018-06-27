@@ -96,10 +96,10 @@
               <div class="ui-grid-row">
                 <div class="ui-grid-col-3">Questions:</div>
                 <div class="ui-grid-col-9">
-                  <div *ngFor="let questionRating of questionRatings" style="margin-top: -5px;margin-left: -8px">
-                    <div class="ui-g-8">{{questionRating.question}}</div>
+                  <div *ngFor="let vfQuestionRating of vfQuestionRatings" style="margin-top: -5px;margin-left: -8px">
+                    <div class="ui-g-8">{{vfQuestionRating.question}}</div>
                     <div class="ui-g-4">
-                      <p-rating [(ngModel)]="questionRating.rating"></p-rating>
+                      <p-rating [(ngModel)]="vfQuestionRating.rating"></p-rating>
                     </div>
                   </div>
                 </div>
@@ -112,7 +112,7 @@
                   <label>Comments:</label>
                 </div>
                 <div class="ui-grid-col-9" style="margin-top: 5px">
-                  <textarea rows="6" cols="53" pInputTextarea [(ngModel)]="vfComment" class="text_area_cus" name="vfComments"></textarea>
+                  <textarea rows="6" cols="53" pInputTextarea [(ngModel)]="vfComment" class="text_area_cus" name="vfComment"></textarea>
                 </div>
               </div>
             </div>
@@ -123,6 +123,50 @@
               <div class="ui-grid-row">
                 <div class="ui-grid-col-3">
                   <p-button label="Submit" (onClick)="visitorLeaveFeedback($event)" [style]="visitorLeaveDialogBtnStyle"></p-button>
+                </div>
+              </div>
+            </div>
+          </p-footer>
+        </p-dialog>
+
+        <p-dialog [(visible)]="ifDisplay" [draggable]="false" [resizable]="false" [width]="680" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>Feedback Form</p-header>
+
+          <div style="margin-top: 15px">
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">Questions:</div>
+                <div class="ui-grid-col-9">
+                  <div *ngFor="let ifQuestionRating of ifQuestionRatings" style="margin-top: -5px;margin-left: -8px">
+                    <div class="ui-g-8">{{ifQuestionRating.question}}</div>
+                    <div class="ui-g-4">
+                      <p-rating [(ngModel)]="ifQuestionRating.rating"></p-rating>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Comments:</label>
+                </div>
+                <div class="ui-grid-col-9" style="margin-top: 5px">
+                  <textarea rows="6" cols="53" pInputTextarea [(ngModel)]="ifComment" class="text_area_cus" name="ifComment"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p-footer>
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <p-button label="Submit" (onClick)="instructorLeaveFeedback($event)" [style]="instructorLeaveDialogBtnStyle"></p-button>
                 </div>
               </div>
             </div>

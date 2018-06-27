@@ -5,40 +5,40 @@ import { Observable } from "rxjs/Observable";
 import { of } from "rxjs";
 import "rxjs/add/observable/throw";
 
-import { VFeedback } from "../domain/vFeedback";
+import { IFeedback } from "../domain/iFeedback";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
 };
 
 @Injectable()
-export class VFeedbackService {
-  baseUrl = "/api/vFeedback";
+export class IFeedbackService {
+  baseUrl = "/api/iFeedback";
 
   constructor(private httpClient: HttpClient) {}
 
-  createVFeedback(vFeedback: VFeedback): Observable<any> {
-    let createVFeedbackReq = { vFeedback: vFeedback };
+  createIFeedback(iFeedback: IFeedback): Observable<any> {
+    let createIFeedbackReq = { iFeedback: iFeedback };
 
     return this.httpClient
       .put<any>(
-        this.baseUrl + "/createVFeedback",
-        createVFeedbackReq,
+        this.baseUrl + "/createIFeedback",
+        createIFeedbackReq,
         httpOptions
       )
       .pipe(
-        tap(_ => console.log("createVFeedback")),
-        catchError(this.handleError<any>("createVFeedback"))
+        tap(_ => console.log("createIFeedback")),
+        catchError(this.handleError<any>("createIFeedback"))
       );
   }
 
-  getVFeedbackByVFeedbackId(vFeedbackId: number): Observable<any> {
+  getIFeedbackByIFeedbackId(iFeedbackId: number): Observable<any> {
     return this.httpClient
-      .get<any>(this.baseUrl + "/getVFeedback/" + vFeedbackId)
+      .get<any>(this.baseUrl + "/getIFeedback/" + iFeedbackId)
       .pipe(
-        tap(_ => console.log(`getVFeedback vFeedbackId=${vFeedbackId}`)),
+        tap(_ => console.log(`getIFeedback iFeedbackId=${iFeedbackId}`)),
         catchError(
-          this.handleError<any>(`getVFeedback vFeedbackId=${vFeedbackId}`)
+          this.handleError<any>(`getIFeedback iFeedbackId=${iFeedbackId}`)
         )
       );
   }
