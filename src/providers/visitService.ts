@@ -98,7 +98,14 @@ export class VisitService {
       );
   }
 
-  updateStatus(endpoint: string, body?: any): Observable<any> {
+  updateVStatus(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
+  }
+
+  updateIStatus(endpoint: string, body?: any): Observable<any> {
     return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
       tap(resp => console.log(resp)),
       catchError(this.handleErrorApi)

@@ -9,7 +9,8 @@ export class Visit {
   endTime: string;
   visitDate: string;
   weekDay: string;
-  status: string;
+  vStatus: string;
+  iStatus: string;
   vfeedbackSubmitted: boolean;
   ifeedbackSubmitted: boolean;
 

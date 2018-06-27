@@ -37,7 +37,10 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
   // for components
   msgs: Message[] = [];
-  items: MenuItem[];
+  ICItems: MenuItem[];
+  IPItems: MenuItem[];
+  VCItems: MenuItem[];
+  VPItems: MenuItem[];
 
   // for cancellation form dialog
   iMsgContent: string;
@@ -129,11 +132,12 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     this.iCols = [
       { field: "visitorName", header: "Observer", width: "20%" },
-      { field: "moduleGroup", header: "Group", width: "10%" },
+      { field: "moduleCode", header: "Code", width: "9%" },
+      { field: "moduleGroup", header: "Group", width: "9%" },
       { field: "visitDate", header: "Date", width: "10%" },
-      { field: "startTime", header: "Start", width: "10%" },
-      { field: "endTime", header: "End", width: "10%" },
-      { field: "weekDay", header: "Day", width: "10%" }
+      { field: "startTime", header: "Start", width: "9%" },
+      { field: "endTime", header: "End", width: "8%" },
+      { field: "weekDay", header: "Day", width: "8%" }
     ];
 
     this.vCols = [
@@ -270,6 +274,19 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     });
   }
 
+  visitorConfirmDialog(rowData) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to confirm it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.visitorConfirm(rowData);
+      },
+      reject: () => {}
+    });
+  }
+
   visitorCancelDialog(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
@@ -285,13 +302,43 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
   instructorConfirm(rowData) {
     this.msgs = [];
-    let endpoint = "/updateStatus";
+    let endpoint = "/updateIStatus";
     let body = {
       visitId: String(rowData.id),
-      status: "confirmed"
+      iStatus: "confirmed"
     };
 
-    this.visitService.updateStatus(endpoint, body).subscribe(
+    this.visitService.updateIStatus(endpoint, body).subscribe(
+      response => {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Confirmed!",
+          detail: ""
+        });
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
+      },
+      error => {
+        this.msgs.push({
+          severity: "error",
+          summary: "HTTP " + error.status,
+          detail: error.error.message
+        });
+      }
+    );
+  }
+
+  visitorConfirm(rowData) {
+    this.msgs = [];
+    let endpoint = "/updateVStatus";
+    let body = {
+      visitId: String(rowData.id),
+      vStatus: "confirmed"
+    };
+
+    this.visitService.updateVStatus(endpoint, body).subscribe(
       response => {
         this.msgs.push({
           severity: "info",
@@ -355,14 +402,31 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           });
       });
 
-    let endpoint = "/updateStatus";
-    let body = {
+    let iendpoint = "/updateIStatus";
+    let ibody = {
       visitId: String(this.iDialogVisitId),
-      status: "cancelled"
+      iStatus: "cancelled"
     };
 
-    this.visitService.updateStatus(endpoint, body).subscribe(
+    this.visitService.updateIStatus(iendpoint, ibody).subscribe(
       response => {
+        let vendpoint = "/updateVStatus";
+        let vbody = {
+          visitId: String(this.iDialogVisitId),
+          vStatus: "cancelled"
+        };
+
+        this.visitService.updateVStatus(vendpoint, vbody).subscribe(
+          response => {},
+          error => {
+            this.msgs.push({
+              severity: "error",
+              summary: "HTTP " + error.status,
+              detail: error.error.message
+            });
+          }
+        );
+
         setTimeout(function() {
           location.reload();
         }, 300);
@@ -411,14 +475,31 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           });
       });
 
-    let endpoint = "/updateStatus";
-    let body = {
+    let iendpoint = "/updateIStatus";
+    let ibody = {
       visitId: String(this.vDialogVisitId),
-      status: "cancelled"
+      iStatus: "cancelled"
     };
 
-    this.visitService.updateStatus(endpoint, body).subscribe(
+    this.visitService.updateIStatus(iendpoint, ibody).subscribe(
       response => {
+        let vendpoint = "/updateVStatus";
+        let vbody = {
+          visitId: String(this.vDialogVisitId),
+          vStatus: "cancelled"
+        };
+
+        this.visitService.updateVStatus(vendpoint, vbody).subscribe(
+          response => {},
+          error => {
+            this.msgs.push({
+              severity: "error",
+              summary: "HTTP " + error.status,
+              detail: error.error.message
+            });
+          }
+        );
+
         setTimeout(function() {
           location.reload();
         }, 300);
@@ -490,23 +571,82 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
   instructorLeaveFeedback() {}
 
-  iActionList(rowData) {
+  VCActionList(rowData) {
     let visitId = rowData.id;
     let visit: Visit;
 
     this.visitService.getVisitByVisitId(visitId).subscribe(response => {
       visit = response.visit;
 
-      this.items = [
+      this.VCItems = [
         {
           disabled: visit.vfeedbackSubmitted,
-          icon: "fa-envelope",
+          icon: "fa-thumbs-up",
           command: () => {
             this.showVisitorFeedbackFormDialog(rowData);
           }
         },
         {
-          icon: "fa-comments",
+          icon: "fa-envelope",
+          command: () => {
+            this.showVisitorFeedbackFormDialog(rowData);
+          }
+        }
+      ];
+    });
+  }
+
+  VPActionList(rowData) {
+    this.VPItems = [
+      {
+        icon: "fa-gittip",
+        command: () => {
+          this.visitorConfirmDialog(rowData);
+        }
+      },
+      {
+        icon: "fa-trash",
+        command: () => {
+          this.visitorCancelDialog(rowData);
+        }
+      }
+    ];
+  }
+
+  IPActionList(rowData) {
+    this.IPItems = [
+      {
+        icon: "fa-gittip",
+        command: () => {
+          this.instructorConfirmDialog(rowData);
+        }
+      },
+      {
+        icon: "fa-trash",
+        command: () => {
+          this.instructorCancelDialog(rowData);
+        }
+      }
+    ];
+  }
+
+  ICActionList(rowData) {
+    let visitId = rowData.id;
+    let visit: Visit;
+
+    this.visitService.getVisitByVisitId(visitId).subscribe(response => {
+      visit = response.visit;
+
+      this.ICItems = [
+        {
+          disabled: visit.vfeedbackSubmitted,
+          icon: "fa-thumbs-up",
+          command: () => {
+            this.showVisitorFeedbackFormDialog(rowData);
+          }
+        },
+        {
+          icon: "fa-envelope",
           command: () => {
             this.showVisitorFeedbackFormDialog(rowData);
           }

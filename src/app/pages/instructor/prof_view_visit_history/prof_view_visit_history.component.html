@@ -147,8 +147,7 @@
                         {{col.header}}
                         <p-sortIcon [field]="col.field"></p-sortIcon>
                       </th>
-                      <th style="width: 8%">Confirm</th>
-                      <th style="width: 8%">Cancel</th>
+                      <th style="width: 8%">Actions</th>
                     </tr>
                   </ng-template>
 
@@ -158,17 +157,14 @@
                         {{rowData[col.field]}}
                       </td>
                       <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-gittip" (onClick)="instructorConfirmDialog(rowData)"></p-button>
-                      </td>
-                      <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-trash" (onClick)="instructorCancelDialog(rowData)"></p-button>
+                        <p-splitButton label=" " (onClick)="IPActionList(rowData)" [model]="IPItems" (onDropdownClick)="IPActionList(rowData)"></p-splitButton>
                       </td>
                     </tr>
                   </ng-template>
 
                   <ng-template pTemplate="emptymessage" let-columns>
                     <tr>
-                      <td [attr.colspan]="columns.length+2">
+                      <td [attr.colspan]="columns.length+1">
                         No records found
                       </td>
                     </tr>
@@ -200,7 +196,7 @@
                         {{rowData[col.field]}}
                       </td>
                       <td style="text-align: center">
-                        <p-splitButton label=" " (onClick)="iActionList(rowData)" [model]="items" (onDropdownClick)="iActionList(rowData)"></p-splitButton>
+                        <p-splitButton label=" " (onClick)="ICActionList(rowData)" [model]="ICItems" (onDropdownClick)="ICActionList(rowData)"></p-splitButton>
                       </td>
                     </tr>
                   </ng-template>
@@ -268,7 +264,7 @@
                         {{col.header}}
                         <p-sortIcon [field]="col.field"></p-sortIcon>
                       </th>
-                      <th style="width: 7%">Cancel</th>
+                      <th style="width: 8%">Actions</th>
                     </tr>
                   </ng-template>
 
@@ -278,7 +274,7 @@
                         {{rowData[col.field]}}
                       </td>
                       <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-trash" (onClick)="visitorCancelDialog(rowData)"></p-button>
+                        <p-splitButton label=" " (onClick)="VPActionList(rowData)" [model]="VPItems" (onDropdownClick)="VPActionList(rowData)"></p-splitButton>
                       </td>
                     </tr>
                   </ng-template>
@@ -317,7 +313,7 @@
                         {{rowData[col.field]}}
                       </td>
                       <td style="text-align: center">
-                        <p-splitButton label=" " (onClick)="iActionList(rowData)" [model]="items" (onDropdownClick)="iActionList(rowData)"></p-splitButton>
+                        <p-splitButton label=" " (onClick)="VCActionList(rowData)" [model]="VCItems" (onDropdownClick)="VCActionList(rowData)"></p-splitButton>
                       </td>
                     </tr>
                   </ng-template>

@@ -207,7 +207,8 @@ export class ViewRequestCourseComponent implements OnInit {
     this.newVisit.moduleGroup = this.course.moduleGroup;
     this.newVisit.moduleTitle = this.course.moduleTitle;
     this.newVisit.instructorName = this.course.staffName;
-    this.newVisit.status = "pending";
+    this.newVisit.vStatus = "pending";
+    this.newVisit.iStatus = "pending";
     this.newVisit.date = this.date;
     this.newVisit.instructorId = this.instructorId;
 
