@@ -26,7 +26,8 @@ export class ViewCourseListComponent implements OnInit {
     private fileUploadService: FileUploadService,
     private router: Router,
     private courseService: CourseService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private shareService: ShareService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
@@ -103,8 +104,12 @@ export class ViewCourseListComponent implements OnInit {
   }
 
   viewTimetable(rowData) {
-    // this.shareService.setValue("courseId",rowData.id);
     sessionStorage.setItem("courseId", rowData.id);
     this.router.navigate(["/viewTimetable"]);
+  }
+
+  updateCourse(rowData) {
+    this.shareService.setValue("courseId", rowData.id);
+    this.router.navigate(["/updateCourse"]);
   }
 }
