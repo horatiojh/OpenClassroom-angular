@@ -12,12 +12,93 @@
           </ng-template>
         </p-fileUpload>
 
+        <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showNewStaffDialog()"></p-button>
+
+        <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>New Staff</p-header>
+
+          <div style="margin-top: 15px">
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Name:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <input type="text" pInputText [(ngModel)]="newStaffName" style="width:95%" name="newStaffName" placeholder="Full Name">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Staff Id:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <input type="text" pInputText [(ngModel)]="newStaffId" style="width:95%" name="newStaffId" placeholder="Username">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Email:</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <input type="text" pInputText [(ngModel)]="newEmailAdd" style="width:95%" name="newEmailAdd" placeholder="Email Address">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-3">
+                <label>Role:</label>
+              </div>
+              <div class="ui-grid-col-9">
+                <p-dropdown [options]="roles" [(ngModel)]="selectedRole" optionLabel="label" [showClear]="true" [style]="{'width':'95%'}"
+                  placeholder="Please Select One"></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-3">
+                <label>Gender:</label>
+              </div>
+              <div class="ui-grid-col-9" style="margin-top: -6px;margin-left: -6px">
+                <div class="ui-g-4">
+                  <p-radioButton name="group1" value="M" label="Male" [(ngModel)]="newGender" inputId="gender1"></p-radioButton>
+                </div>
+                <div class="ui-g-4">
+                  <p-radioButton name="group1" value="F" label="Female" [(ngModel)]="newGender" inputId="gender2"></p-radioButton>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p-footer>
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <p-button label="Submit" (onClick)="createStaffInfo($event)" [style]="createStaffBtnStyle"></p-button>
+                </div>
+              </div>
+            </div>
+          </p-footer>
+        </p-dialog>
+
         <p-table #dt [columns]="cols" [value]="staffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
           <ng-template pTemplate="caption">
             <div style="text-align: right">
               <i class="fa fa-search" style="margin:4px 4px 0 0px"></i>
-              <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              <input id="table_search_cus" type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
                 style="width:35%;margin-left: 3px;color:aliceblue">
             </div>
           </ng-template>

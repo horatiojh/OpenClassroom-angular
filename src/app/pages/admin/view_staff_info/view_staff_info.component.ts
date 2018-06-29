@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { Message } from "primeng/primeng";
+import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 import { FileUploadService } from "../../../../providers/fileUploadService";
 import { StaffService } from "../../../../providers/staffService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 
 import { Staff } from "../../../../domain/staff";
+import { Role } from "../../../../wrapper/role";
 
 @Component({
   selector: "app-viewStaffInfo",
@@ -21,16 +22,48 @@ export class ViewStaffInfoComponent implements OnInit {
   cols: any[];
   staffs: Staff[];
 
+  // for css style
+  showDialogBtnStyle: SafeStyle;
+  createStaffBtnStyle: SafeStyle;
+
+  // for new staff creation
+  display: boolean = false;
+  newGender: string;
+  roles: Role[];
+  selectedRole: string;
+  newStaffName: string;
+  newStaffId: string;
+  newEmailAdd: string;
+  newStaff: Staff;
+
   constructor(
     private fileUploadService: FileUploadService,
-    private router: Router,
     private staffService: StaffService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private domSanitizer: DomSanitizer
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
 
   ngOnInit() {
+    // for css style
+    let showDialogstyle =
+      "margin-top:10px;margin-bottom:10px;margin-left:1px;width:100px";
+    this.showDialogBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      showDialogstyle
+    );
+
+    let createStaffStyle = "width:100px";
+    this.createStaffBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      createStaffStyle
+    );
+
+    // for new staff creation
+    this.roles = [
+      { label: "Admin", value: "admin" },
+      { label: "Instructor", value: "instructor" }
+    ];
+
     //for datatable
     this.cols = [
       { field: "staffName", header: "Name", width: "18%" },
@@ -70,6 +103,36 @@ export class ViewStaffInfoComponent implements OnInit {
         });
       }
     );
+  }
+
+  showNewStaffDialog() {
+    this.display = true;
+  }
+
+  createStaffInfo(event) {
+    this.msgs = [];
+    this.newStaff = new Staff();
+
+    this.newStaff.staffName = this.newStaffName;
+    this.newStaff.staffId = this.newStaffId;
+    this.newStaff.gender = this.newGender;
+    this.newStaff.staffRole = this.selectedRole;
+    this.newStaff.pwd = "password";
+    this.newStaff.emailAddress = this.newEmailAdd;
+
+    this.staffService.createStaff(this.newStaff).subscribe(response => {
+      this.msgs.push({
+        severity: "info",
+        summary: "Successfully Archived!",
+        detail: ""
+      });
+
+      this.display = false;
+
+      setTimeout(function() {
+        location.reload();
+      }, 300);
+    });
   }
 
   viewStaffInfo(event) {}

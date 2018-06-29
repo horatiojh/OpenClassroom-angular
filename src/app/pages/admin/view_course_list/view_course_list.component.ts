@@ -26,8 +26,7 @@ export class ViewCourseListComponent implements OnInit {
     private fileUploadService: FileUploadService,
     private router: Router,
     private courseService: CourseService,
-    private breadcrumbService: BreadcrumbService,
-    private shareService: ShareService
+    private breadcrumbService: BreadcrumbService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }

@@ -3,7 +3,6 @@ import { Message, ConfirmationService } from "primeng/primeng";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 
 import { BreadcrumbService } from "../../../breadcrumb.service";
-import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
 import { DateService } from "../../../../providers/dateService";
 
@@ -56,7 +55,6 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
 
   constructor(
     private breadcrumbService: BreadcrumbService,
-    private shareService: ShareService,
     private timetableService: TimetableService,
     private dateService: DateService,
     private domSanitizer: DomSanitizer,
@@ -184,11 +182,11 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
             summary: "Successfully Archived!",
             detail: ""
           });
-        });
 
-        setTimeout(function() {
-          location.reload();
-        }, 300);
+          setTimeout(function() {
+            location.reload();
+          }, 300);
+        });
       } else {
         this.msgs.push({
           severity: "error",
@@ -223,11 +221,11 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
             summary: "Successfully Restored!",
             detail: ""
           });
-        });
 
-        setTimeout(function() {
-          location.reload();
-        }, 300);
+          setTimeout(function() {
+            location.reload();
+          }, 300);
+        });
       } else {
         this.msgs.push({
           severity: "error",

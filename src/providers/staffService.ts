@@ -1,9 +1,15 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/throw";
 import { of } from "rxjs";
+
+import { Staff } from "../domain/staff";
+
+const httpOptions = {
+  headers: new HttpHeaders({ "Content-Type": "application/json" })
+};
 
 @Injectable()
 export class StaffService {
@@ -32,6 +38,17 @@ export class StaffService {
       .pipe(
         tap(_ => console.log(`getStaffBySIDStr staffId=${staffId}`)),
         catchError(this.handleError<any>(`getStaffBySIDStr staffId=${staffId}`))
+      );
+  }
+
+  createStaff(staff: Staff): Observable<any> {
+    let createStaffReq = { staff: staff };
+
+    return this.httpClient
+      .put<any>(this.baseUrl + "/createStaff", createStaffReq, httpOptions)
+      .pipe(
+        tap(_ => console.log("createStaff")),
+        catchError(this.handleError<any>("createStaff"))
       );
   }
 
