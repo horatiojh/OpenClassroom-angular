@@ -5,6 +5,8 @@
         <h1>Staff Management</h1>
         <p-growl [value]="msgs" life="4500"></p-growl>
 
+        <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
+
         <p-fileUpload #fileUpload name="files[]" (uploadHandler)="onFileUpload($event,fileUpload)" accept="text/csv" maxFileSize="1000000"
           customUpload="true">
           <ng-template pTemplate="toolbar">
@@ -206,7 +208,7 @@
                 <p-button icon="fa fa-fw fa-edit" (onClick)="showUpdateStaffDialog(rowData)"></p-button>
               </td>
               <td style="text-align: center">
-                <p-button icon="fa fa-fw fa-trash" (onClick)="deleteStaffInfo($event)"></p-button>
+                <p-button icon="fa fa-fw fa-trash" (onClick)="deleteStaffConfirmDialog(rowData)"></p-button>
               </td>
             </tr>
           </ng-template>

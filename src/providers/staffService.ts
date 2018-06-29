@@ -63,6 +63,15 @@ export class StaffService {
       );
   }
 
+  deleteStaff(staffId: number): Observable<any> {
+    return this.httpClient
+      .delete<any>(this.baseUrl + "/deleteStaff/" + "?staffId=" + staffId)
+      .pipe(
+        tap(_ => console.error(`deleteStaff staffId=${staffId}`)),
+        catchError(this.handleError<any>(`deleteStaff staffId=${staffId}`))
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

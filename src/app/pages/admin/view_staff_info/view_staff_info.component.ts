@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Message } from "primeng/primeng";
+import { Message, ConfirmationService } from "primeng/primeng";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 import { FileUploadService } from "../../../../providers/fileUploadService";
@@ -53,7 +53,8 @@ export class ViewStaffInfoComponent implements OnInit {
     private fileUploadService: FileUploadService,
     private staffService: StaffService,
     private breadcrumbService: BreadcrumbService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private confirmationService: ConfirmationService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
@@ -258,5 +259,33 @@ export class ViewStaffInfoComponent implements OnInit {
       });
     }
   }
-  deleteStaffInfo(event) {}
+  deleteStaffInfo(rowData) {
+    this.msgs = [];
+
+    this.staffService.deleteStaff(rowData.id).subscribe(response => {
+      console.log("delete staff");
+      this.msgs.push({
+        severity: "info",
+        summary: "Successfully Deleted!",
+        detail: ""
+      });
+
+      setTimeout(function() {
+        location.reload();
+      }, 300);
+    });
+  }
+
+  deleteStaffConfirmDialog(rowData) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to delete it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.deleteStaffInfo(rowData);
+      },
+      reject: () => {}
+    });
+  }
 }
