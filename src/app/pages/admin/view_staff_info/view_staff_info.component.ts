@@ -218,30 +218,45 @@ export class ViewStaffInfoComponent implements OnInit {
     }
   }
 
-  viewStaffInfo(event) {}
   updateStaffInfo(event) {
-    this.updateStaff = new Staff();
+    this.msgs = [];
 
-    this.updateStaff.id = this.uStaffId;
-    this.updateStaff.emailAddress = this.updateEmailAdd;
-    this.updateStaff.gender = this.updateGender;
-    this.updateStaff.staffId = this.updateStaffId;
-    this.updateStaff.staffName = this.updateStaffName;
-    this.updateStaff.staffRole = this.updateRole;
+    if (
+      this.newStaffName != undefined &&
+      this.newStaffId != undefined &&
+      this.newGender != undefined &&
+      this.selectedRole != undefined &&
+      this.newEmailAdd != undefined
+    ) {
+      this.updateStaff = new Staff();
 
-    this.staffService.updateStaff(this.updateStaff).subscribe(response => {
+      this.updateStaff.id = this.uStaffId;
+      this.updateStaff.emailAddress = this.updateEmailAdd;
+      this.updateStaff.gender = this.updateGender;
+      this.updateStaff.staffId = this.updateStaffId;
+      this.updateStaff.staffName = this.updateStaffName;
+      this.updateStaff.staffRole = this.updateRole;
+
+      this.staffService.updateStaff(this.updateStaff).subscribe(response => {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Updated!",
+          detail: ""
+        });
+
+        this.updateDisplay = false;
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
+      });
+    } else {
       this.msgs.push({
         severity: "info",
-        summary: "Successfully Updated!",
+        summary: "Invalid Input!",
         detail: ""
       });
-
-      this.updateDisplay = false;
-
-      setTimeout(function() {
-        location.reload();
-      }, 300);
-    });
+    }
   }
   deleteStaffInfo(event) {}
 }
