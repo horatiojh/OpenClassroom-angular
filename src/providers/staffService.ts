@@ -52,6 +52,17 @@ export class StaffService {
       );
   }
 
+  updateStaff(staff: Staff): Observable<any> {
+    let updateStaffReq = { staff: staff };
+
+    return this.httpClient
+      .post<any>(this.baseUrl + "/updateStaff", updateStaffReq, httpOptions)
+      .pipe(
+        tap(_ => console.log(`updateStaff id=${staff.id}`)),
+        catchError(this.handleError<any>(`updateStaff id=${staff.id}`))
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
