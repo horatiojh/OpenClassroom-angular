@@ -28,6 +28,14 @@ export class ViewCourseListComponent implements OnInit {
   dCols: any[];
   dCourseInfos: CourseInfo[];
 
+  // for view course dialog
+  viewDisplay: boolean = false;
+  courseInfoId: number;
+  moduleCode: string;
+  moduleTitle: string;
+  description: string;
+  courseInfo: CourseInfo;
+
   constructor(
     private fileUploadService: FileUploadService,
     private router: Router,
@@ -130,5 +138,23 @@ export class ViewCourseListComponent implements OnInit {
   updateCourse(rowData) {
     this.shareService.setValue("courseId", rowData.id);
     this.router.navigate(["/updateCourse"]);
+  }
+
+  showViewCourseDialog(rowData) {
+    this.viewDisplay = true;
+    this.viewCourseInfo(rowData);
+  }
+
+  viewCourseInfo(rowData) {
+    this.courseInfoId = rowData.id;
+    this.courseInfoService
+      .getCourseInfoByCourseInfoId(this.courseInfoId)
+      .subscribe(response => {
+        this.courseInfo = response.courseInfo;
+
+        this.moduleCode = this.courseInfo.moduleCode;
+        this.moduleTitle = this.courseInfo.moduleTitle;
+        this.description = this.courseInfo.description;
+      });
   }
 }

@@ -19,7 +19,48 @@
           </ng-template>
         </p-fileUpload>
 
-        <p-tabView>
+        <p-dialog [(visible)]="viewDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>Course Details</p-header>
+
+          <div style="margin-top: 15px">
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-4">
+                  <label>Module Code:</label>
+                </div>
+                <div class="ui-grid-col-8">
+                  {{moduleCode}}
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-4">
+                  <label>Module Title:</label>
+                </div>
+                <div class="ui-grid-col-8">
+                  {{moduleTitle}}
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-4">
+                  <label>Description:</label>
+                </div>
+                <div class="ui-grid-col-8" style="text-align: justify;margin-bottom: 12px;">
+                  {{description}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-dialog>
+
+        <p-tabView [style]="{'margin-top': '10px'}">
           <p-tabPanel header="Schedule">
             <p-table #sdt [columns]="cols" [value]="courses" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
@@ -104,7 +145,7 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon='fa fa-fw fa-file-text' (onClick)="viewTimetable(rowData)"></p-button>
+                    <p-button icon='fa fa-fw fa-file-text' (onClick)="showViewCourseDialog(rowData)"></p-button>
                   </td>
                   <td style="text-align: center">
                     <p-button icon='fa fa-fw fa-edit' (onClick)="updateCourse(rowData)"></p-button>

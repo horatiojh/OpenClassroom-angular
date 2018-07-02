@@ -26,6 +26,17 @@ export class CourseInfoService {
     return this.httpClient.get<any>(this.baseUrl + "/getAllRecords");
   }
 
+  getCourseInfoByCourseInfoId(courseInfoId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getCourseInfoByCIID/" + courseInfoId)
+      .pipe(
+        tap(_ => console.log(`getCourseInfoByCIID courseInfoId=${courseInfoId}`)),
+        catchError(
+          this.handleError<any>(`getCourseInfoByCIID courseInfoId=${courseInfoId}`)
+        )
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
