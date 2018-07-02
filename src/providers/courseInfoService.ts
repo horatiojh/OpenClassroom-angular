@@ -22,6 +22,10 @@ export class CourseInfoService {
       );
   }
 
+  getAllCourseInfo(): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getAllRecords");
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

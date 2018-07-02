@@ -6,8 +6,10 @@ import { FileUploadService } from "../../../../providers/fileUploadService";
 import { CourseService } from "../../../../providers/courseService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { ShareService } from "../../../../providers/shareService";
+import { CourseInfoService } from "../../../../providers/courseInfoService";
 
 import { Course } from "../../../../domain/course";
+import { CourseInfo } from "../../../../domain/courseInfo";
 
 @Component({
   selector: "app-viewCourseList",
@@ -18,30 +20,47 @@ export class ViewCourseListComponent implements OnInit {
   // for upload file
   msgs: Message[] = [];
 
-  // for datatable
+  // for schedule datatable
   cols: any[];
   courses: Course[];
+
+  // for description datatable
+  dCols: any[];
+  dCourseInfos: CourseInfo[];
 
   constructor(
     private fileUploadService: FileUploadService,
     private router: Router,
     private courseService: CourseService,
     private breadcrumbService: BreadcrumbService,
-    private shareService: ShareService
+    private shareService: ShareService,
+    private courseInfoService: CourseInfoService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
 
   ngOnInit() {
-    // for datatable
+    // for schedule datatable
     this.cols = [
       { field: "staffName", header: "Instructor", width: "18%" },
-      { field: "moduleTitle", header: "Module Title", width: "16%" },
-      { field: "moduleCode", header: "Module Code", width: "12%" },
-      { field: "moduleGroup", header: "Group", width: "8%" }
+      { field: "moduleTitle", header: "Module Title", width: "18%" },
+      { field: "moduleCode", header: "Code", width: "8%" },
+      { field: "moduleGroup", header: "Group", width: "7%" }
     ];
+
     this.courseService.getAllCourses().subscribe(response => {
       this.courses = response.courses;
+    });
+
+    // for description datatable
+    this.dCols = [
+      { field: "id", header: "ID", width: "10%" },
+      { field: "moduleCode", header: "Code", width: "12%" },
+      { field: "moduleTitle", header: "Module Title", width: "18%" }
+    ];
+
+    this.courseInfoService.getAllCourseInfo().subscribe(response => {
+      this.dCourseInfos = response.courseInfos;
     });
   }
 
