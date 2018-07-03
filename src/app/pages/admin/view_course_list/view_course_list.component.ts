@@ -10,6 +10,7 @@ import { CourseInfoService } from "../../../../providers/courseInfoService";
 
 import { Course } from "../../../../domain/course";
 import { CourseInfo } from "../../../../domain/courseInfo";
+import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 @Component({
   selector: "app-viewCourseList",
@@ -17,6 +18,9 @@ import { CourseInfo } from "../../../../domain/courseInfo";
   styleUrls: ["./view_course_list.component.css"]
 })
 export class ViewCourseListComponent implements OnInit {
+  // css style
+  updateCourseBtnStyle: SafeStyle;
+
   // for upload file
   msgs: Message[] = [];
 
@@ -36,18 +40,35 @@ export class ViewCourseListComponent implements OnInit {
   description: string;
   courseInfo: CourseInfo;
 
+  // for update course dialog
+  updateDisplay: boolean = false;
+  newModuleCode: string;
+  newModuleTitle: string;
+  newDescription: string;
+  newCourseInfo: CourseInfo;
+  newId: number;
+  updateCourseInfoId: number;
+  updatedCourseInfo: CourseInfo;
+
   constructor(
     private fileUploadService: FileUploadService,
     private router: Router,
     private courseService: CourseService,
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,
-    private courseInfoService: CourseInfoService
+    private courseInfoService: CourseInfoService,
+    private domSanitizer: DomSanitizer
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
   }
 
   ngOnInit() {
+    // css style
+    let updateCourseStyle = "width:120px;height:35px";
+    this.updateCourseBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      updateCourseStyle
+    );
+
     // for schedule datatable
     this.cols = [
       { field: "staffName", header: "Instructor", width: "18%" },
@@ -114,6 +135,7 @@ export class ViewCourseListComponent implements OnInit {
           summary: "File Uploaded",
           detail: ""
         });
+
         this.courseService.getAllCourses().subscribe(response => {
           this.courses = response.courses;
         });
@@ -155,6 +177,50 @@ export class ViewCourseListComponent implements OnInit {
         this.moduleCode = this.courseInfo.moduleCode;
         this.moduleTitle = this.courseInfo.moduleTitle;
         this.description = this.courseInfo.description;
+      });
+  }
+
+  showUpdateCourseDialog(rowData) {
+    this.updateDisplay = true;
+
+    this.updateCourseInfoId = rowData.id;
+
+    this.courseInfoService
+      .getCourseInfoByCourseInfoId(this.updateCourseInfoId)
+      .subscribe(response => {
+        this.newCourseInfo = response.courseInfo;
+
+        this.newModuleCode = this.newCourseInfo.moduleCode;
+        this.newModuleTitle = this.newCourseInfo.moduleTitle;
+        this.newDescription = this.newCourseInfo.description;
+        this.newId = this.newCourseInfo.id;
+      });
+  }
+
+  updateCourseInfo(rowData) {
+    this.msgs = [];
+
+    this.updatedCourseInfo = new CourseInfo();
+
+    this.updatedCourseInfo.moduleCode = this.newModuleCode;
+    this.updatedCourseInfo.moduleTitle = this.newModuleTitle;
+    this.updatedCourseInfo.description = this.newDescription;
+    this.updatedCourseInfo.id = this.newId;
+
+    this.courseInfoService
+      .updateCourseInfo(this.updatedCourseInfo)
+      .subscribe(response => {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Updated!",
+          detail: ""
+        });
+
+        this.updateDisplay = false;
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
       });
   }
 }

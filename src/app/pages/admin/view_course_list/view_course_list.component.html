@@ -60,6 +60,57 @@
           </div>
         </p-dialog>
 
+        <p-dialog [(visible)]="updateDisplay" [draggable]="false" [resizable]="false" [width]="450" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>Update Course</p-header>
+
+          <div style="margin-top: 15px">
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-4">
+                  <label>Module Code:</label>
+                </div>
+                <div class="ui-grid-col-8">
+                  <input type="text" pInputText [(ngModel)]="newModuleCode" style="width:95%" name="newModuleCode" placeholder="Module Code">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-4">
+                  <label>Module Title:</label>
+                </div>
+                <div class="ui-grid-col-8">
+                  <input type="text" pInputText [(ngModel)]="newModuleTitle" style="width:95%" name="newModuleTitle" placeholder="Module Title">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-4">
+                  <label>Description:</label>
+                </div>
+                <div class="ui-grid-col-8">
+                  <textarea rows="8" cols="30" pInputTextarea [(ngModel)]="newDescription" class="text_area_cus" name="newDescription"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p-footer>
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <p-button label="Submit" (onClick)="updateCourseInfo($event)" [style]="updateCourseBtnStyle"></p-button>
+                </div>
+              </div>
+            </div>
+          </p-footer>
+        </p-dialog>
+
         <p-tabView [style]="{'margin-top': '10px'}">
           <p-tabPanel header="Schedule">
             <p-table #sdt [columns]="cols" [value]="courses" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
@@ -148,7 +199,7 @@
                     <p-button icon='fa fa-fw fa-file-text' (onClick)="showViewCourseDialog(rowData)"></p-button>
                   </td>
                   <td style="text-align: center">
-                    <p-button icon='fa fa-fw fa-edit' (onClick)="updateCourse(rowData)"></p-button>
+                    <p-button icon='fa fa-fw fa-edit' (onClick)="showUpdateCourseDialog(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>
