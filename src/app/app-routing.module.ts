@@ -23,6 +23,7 @@ import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_v
 import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
 import { ProfViewNotificationContentComponent } from "./pages/instructor/prof_view_notification_content/prof_view_notification_content.component";
 import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profile/prof_update_profile.component";
+import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_app_rating.component";
 
 import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff_info.component";
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
@@ -37,6 +38,7 @@ import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/vi
 import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_course_details/view_request_course_details.component";
 import { UpdateCourseComponent } from "./pages/admin/update_course/update_course.component";
 import { UpdateProfileComponent } from "./pages/admin/update_profile/update_profile.component";
+import { AppRatingComponent } from "./pages/admin/app_rating/app_rating.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -65,7 +67,8 @@ const routes: Routes = [
         component: ViewRequestCourseDetailsComponent
       },
       { path: "updateCourse", component: UpdateCourseComponent },
-      { path: "updateProfile", component: UpdateProfileComponent }
+      { path: "updateProfile", component: UpdateProfileComponent },
+      { path: "rateApp", component: AppRatingComponent }
     ]
   },
   {
@@ -109,6 +112,10 @@ const routes: Routes = [
       {
         path: "profUpdateProfile",
         component: ProfUpdateProfileComponent
+      },
+      {
+        path: "profRateApp",
+        component: ProfAppRatingComponent
       }
     ]
   }

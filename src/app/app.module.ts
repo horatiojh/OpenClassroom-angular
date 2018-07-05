@@ -91,6 +91,7 @@ import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/vi
 import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_course_details/view_request_course_details.component";
 import { UpdateCourseComponent } from "./pages/admin/update_course/update_course.component";
 import { UpdateProfileComponent } from "./pages/admin/update_profile/update_profile.component";
+import { AppRatingComponent } from "./pages/admin/app_rating/app_rating.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
 
@@ -98,6 +99,7 @@ import { ModuleCardComponent } from "./pages/card/module_card/module_card.compon
 import { RequestDateCardComponent } from "./pages/card/request_date_card/request_date_card.component";
 import { RequestTimetableCardComponent } from "./pages/card/request_timetable_card/request_timetable_card.component";
 import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profile/prof_update_profile.component";
+import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_app_rating.component";
 
 @NgModule({
   declarations: [
@@ -138,7 +140,9 @@ import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profi
     ProfViewNotificationContentComponent,
     ProfUpdateProfileComponent,
     UpdateCourseComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    AppRatingComponent,
+    ProfAppRatingComponent
   ],
   imports: [
     BrowserModule,

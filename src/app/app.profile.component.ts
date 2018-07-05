@@ -32,7 +32,7 @@ import { StaffService } from "../providers/staffService";
                 </a>
             </li>
             <li role="menuitem">
-                <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
+                <a [routerLink]="appRating" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
                     <i class="material-icons">star_rate</i>
                     <span>Rate App</span>
                 </a>
@@ -87,6 +87,9 @@ export class AppInlineProfileComponent implements OnInit {
   profileUpdate: string;
   staffRole: string;
 
+  // for rate app
+  appRating: string;
+
   constructor(
     public app: MainComponent,
     private router: Router,
@@ -112,8 +115,10 @@ export class AppInlineProfileComponent implements OnInit {
 
       if (this.staffRole === "admin") {
         this.profileUpdate = "/updateProfile";
+        this.appRating = "/rateApp";
       } else if (this.staffRole === "instructor") {
         this.profileUpdate = "/profUpdateProfile";
+        this.appRating = "/profRateApp";
       }
     });
   }
