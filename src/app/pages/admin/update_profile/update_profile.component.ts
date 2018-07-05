@@ -7,6 +7,7 @@ import { Staff } from "../../../../domain/staff";
 import { StaffService } from "../../../../providers/staffService";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 import { Api } from "../../../../providers/api";
+import { BreadcrumbService } from "../../../breadcrumb.service";
 
 @Component({
   selector: "app-updateProfile",
@@ -16,7 +17,15 @@ import { Api } from "../../../../providers/api";
 export class UpdateProfileComponent implements OnInit {
   roles: Role[];
   msgs: Message[] = [];
-  canChangePwd: boolean;
+  newPwdBoolean: boolean;
+  confirmPwdBoolean: boolean;
+  matchPwdBoolean: boolean;
+
+  staffIdBoolean: boolean;
+  staffNameBoolean: boolean;
+  staffGenderBoolean: boolean;
+  staffRoleBoolean: boolean;
+  staffEmailBoolean: boolean;
 
   // for update staff
   uStaffId: number;
@@ -40,8 +49,11 @@ export class UpdateProfileComponent implements OnInit {
   constructor(
     private staffService: StaffService,
     private domSanitizer: DomSanitizer,
-    private api: Api
-  ) {}
+    private api: Api,
+    private breadcrumbService: BreadcrumbService
+  ) {
+    this.breadcrumbService.setItems([{ label: "" }]);
+  }
 
   ngOnInit() {
     // for update staff
@@ -79,51 +91,66 @@ export class UpdateProfileComponent implements OnInit {
     this.msgs = [];
 
     if (this.updateStaffName == undefined || this.updateStaffName == "") {
+      this.staffNameBoolean = false;
       this.msgs.push({
         severity: "error",
-        summary: "Please enter the staff name.",
+        summary: "Please enter your staff name.",
         detail: ""
       });
+    } else {
+      this.staffNameBoolean = true;
     }
 
     if (this.updateStaffId == undefined || this.updateStaffId == "") {
+      this.staffIdBoolean = false;
       this.msgs.push({
         severity: "error",
-        summary: "Please enter the staff id.",
+        summary: "Please enter your staff id.",
         detail: ""
       });
+    } else {
+      this.staffIdBoolean = true;
     }
 
     if (this.updateEmailAdd == undefined || this.updateEmailAdd == "") {
+      this.staffEmailBoolean = false;
       this.msgs.push({
         severity: "error",
-        summary: "Please enter the email address.",
+        summary: "Please enter your email address.",
         detail: ""
       });
+    } else {
+      this.staffEmailBoolean = true;
     }
 
     if (this.updateGender == undefined || this.updateGender == "") {
+      this.staffGenderBoolean = false;
       this.msgs.push({
         severity: "error",
         summary: "Please choose the gender.",
         detail: ""
       });
+    } else {
+      this.staffGenderBoolean = true;
     }
 
     if (this.updateRole == undefined || this.updateRole == "") {
+      this.staffRoleBoolean = false;
       this.msgs.push({
         severity: "error",
         summary: "Please select the role.",
         detail: ""
       });
+    } else {
+      this.staffRoleBoolean = true;
     }
 
     if (
-      this.updateStaffName != undefined &&
-      this.updateStaffId != undefined &&
-      this.updateGender != undefined &&
-      this.updateRole != undefined &&
-      this.updateEmailAdd != undefined
+      this.staffNameBoolean &&
+      this.staffIdBoolean &&
+      this.staffEmailBoolean &&
+      this.staffGenderBoolean &&
+      this.staffRoleBoolean
     ) {
       this.updateStaff = new Staff();
 
@@ -152,39 +179,39 @@ export class UpdateProfileComponent implements OnInit {
     this.msgs = [];
 
     if (this.newPassword == undefined || this.newPassword == "") {
-      this.canChangePwd = false;
+      this.newPwdBoolean = false;
       this.msgs.push({
         severity: "error",
         summary: "Please enter your password.",
         detail: ""
       });
     } else {
-      this.canChangePwd = true;
+      this.newPwdBoolean = true;
     }
 
     if (this.confirmPassword == undefined || this.confirmPassword == "") {
-      this.canChangePwd = false;
+      this.confirmPwdBoolean = false;
       this.msgs.push({
         severity: "error",
         summary: "Please enter your confirm password.",
         detail: ""
       });
     } else {
-      this.canChangePwd = true;
+      this.confirmPwdBoolean = true;
     }
 
     if (this.newPassword !== this.confirmPassword) {
-      this.canChangePwd = false;
+      this.matchPwdBoolean = false;
       this.msgs.push({
         severity: "error",
         summary: "Mismatch password",
         detail: ""
       });
     } else {
-      this.canChangePwd = true;
+      this.matchPwdBoolean = true;
     }
 
-    if (this.canChangePwd) {
+    if (this.newPwdBoolean && this.confirmPwdBoolean && this.matchPwdBoolean) {
       let endpoint = "staff/changePwd";
       let body = {
         staffId: this.staffIdStr,
