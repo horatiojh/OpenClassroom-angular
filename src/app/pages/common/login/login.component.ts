@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
         response => {
           this.staff = response.staff;
           sessionStorage.setItem("isLogin", "true");
-          sessionStorage.setItem("staffRole", this.staff.staffRole);
-          sessionStorage.setItem("staffId", this.staff.id.toString());
+          sessionStorage.setItem("sessionStaffRole", this.staff.staffRole);
+          sessionStorage.setItem("sessionStaffId", this.staff.id.toString());
 
           if (this.staff.staffRole === "admin") {
             this.router.navigate(["/viewStaffInfo"]);

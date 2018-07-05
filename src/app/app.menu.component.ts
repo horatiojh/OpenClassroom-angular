@@ -21,7 +21,7 @@ export class AppMenuComponent implements OnInit {
 
     ngOnInit() {
 
-      this.staffRole = sessionStorage.getItem("staffRole");
+      this.staffRole = sessionStorage.getItem("sessionStaffRole");
 
       if(this.staffRole === "admin") {
         this.model = [

@@ -90,6 +90,7 @@ import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analyt
 import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/view_course_details.component";
 import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_course_details/view_request_course_details.component";
 import { UpdateCourseComponent } from "./pages/admin/update_course/update_course.component";
+import { UpdateProfileComponent } from "./pages/admin/update_profile/update_profile.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
 
@@ -136,7 +137,8 @@ import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profi
     ProfViewNotificationsComponent,
     ProfViewNotificationContentComponent,
     ProfUpdateProfileComponent,
-    UpdateCourseComponent
+    UpdateCourseComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,

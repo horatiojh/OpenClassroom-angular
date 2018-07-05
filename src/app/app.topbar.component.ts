@@ -138,7 +138,7 @@ export class AppTopbarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.staffRole = sessionStorage.getItem("staffRole");
+    this.staffRole = sessionStorage.getItem("sessionStaffRole");
 
     if (this.staffRole === "admin") {
       this.searchLink = "/searchCourse";
@@ -155,7 +155,7 @@ export class AppTopbarComponent implements OnInit {
     }
 
     // for notification
-    this.staffId = Number(sessionStorage.getItem("staffId"));
+    this.staffId = Number(sessionStorage.getItem("sessionStaffId"));
 
     this.msgService
       .getUnreadMessagesByStaffId(this.staffId)

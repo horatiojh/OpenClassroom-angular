@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   get isAdmin() {
-    this.staffRole = sessionStorage.getItem("staffRole");
+    this.staffRole = sessionStorage.getItem("sessionStaffRole");
 
     if (this.staffRole === "admin") {
       return true;
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   get isInstructor() {
-    this.staffRole = sessionStorage.getItem("staffRole");
+    this.staffRole = sessionStorage.getItem("sessionStaffRole");
 
     if (this.staffRole === "instructor") {
       return true;
