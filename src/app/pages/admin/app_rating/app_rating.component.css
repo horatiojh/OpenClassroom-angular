@@ -1,0 +1,6 @@
+.text_area_cus {
+  resize: none;
+  border-style: solid;
+  border-width: 0.1px;
+  margin-top: 8px;
+}
