@@ -57,7 +57,7 @@ export class ProfViewNotificationsComponent implements OnInit {
     );
 
     // data view
-    this.staffId = Number(sessionStorage.getItem("staffId"));
+    this.staffId = Number(sessionStorage.getItem("sessionStaffId"));
 
     this.msgService
       .getUnreadMessagesByStaffId(this.staffId)

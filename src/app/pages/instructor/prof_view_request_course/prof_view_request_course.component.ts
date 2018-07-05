@@ -77,7 +77,7 @@ export class ProfViewRequestCourseComponent implements OnInit {
       { label: "Search Results", routerLink: ["/profViewRequestCourse"] }
     ]);
 
-    this.staffId = Number(sessionStorage.getItem("staffId"));
+    this.staffId = Number(sessionStorage.getItem("sessionStaffId"));
 
     this.staffService.getStaffByStaffId(this.staffId).subscribe(response => {
       this.staff = response.staff;

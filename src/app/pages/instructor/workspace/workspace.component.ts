@@ -27,7 +27,7 @@ export class WorkspaceComponent implements OnInit {
 
   ngOnInit() {
 
-    this.staffId = Number(sessionStorage.getItem("staffId"));
+    this.staffId = Number(sessionStorage.getItem("sessionStaffId"));
 
     this.courseService.getCoursesByStaffId(this.staffId).subscribe(response => {
       if (response != null && typeof response.courses != undefined) {

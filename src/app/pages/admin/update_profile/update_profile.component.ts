@@ -197,6 +197,10 @@ export class UpdateProfileComponent implements OnInit {
           summary: "Successfully Changed!",
           detail: ""
         });
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
       });
     }
   }
