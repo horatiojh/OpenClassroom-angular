@@ -2,78 +2,117 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <div class="card">
-        <h1 style="margin-left: 14px">Profile Update</h1>
+
         <p-growl [value]="msgs" life="4500"></p-growl>
 
-        <div class="ui-g form-group">
-          <div class="ui-g-18 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <label>Name:</label>
-              </div>
-              <div class="ui-grid-col-9">
-                <input type="text" pInputText [(ngModel)]="updateStaffName" style="width:95%" name="updateStaffName" placeholder="Full Name">
-              </div>
-            </div>
-          </div>
+        <p-tabView [style]="{'margin-top': '10px'}">
+          <p-tabPanel header="Profile Details">
 
-          <div class="ui-g-18 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <label>Staff Id:</label>
-              </div>
-              <div class="ui-grid-col-9">
-                <input type="text" pInputText [(ngModel)]="updateStaffId" style="width:95%" name="updateStaffId" placeholder="Username">
-              </div>
-            </div>
-          </div>
-
-          <div class="ui-g-18 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <label>Email:</label>
-              </div>
-              <div class="ui-grid-col-9">
-                <input type="text" pInputText [(ngModel)]="updateEmailAdd" style="width:95%" name="updateEmailAdd" placeholder="Email Address">
-              </div>
-            </div>
-          </div>
-
-          <div class="ui-g-18 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <label>Role:</label>
-              </div>
-              <div class="ui-grid-col-9">
-                <p-dropdown [options]="roles" [(ngModel)]="updateRole" [showClear]="true" [style]="{'width':'95%'}" placeholder="Please Select One"></p-dropdown>
-              </div>
-            </div>
-          </div>
-
-          <div class="ui-g-18 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <label>Gender:</label>
-              </div>
-              <div class="ui-grid-col-9" style="margin-top: -6px;margin-left: -6px">
-                <div class="ui-g-4">
-                  <p-radioButton name="group2" value="M" label="Male" [(ngModel)]="updateGender" inputId="gender3"></p-radioButton>
-                </div>
-                <div class="ui-g-4">
-                  <p-radioButton name="group2" value="F" label="Female" [(ngModel)]="updateGender" inputId="gender4"></p-radioButton>
+            <div class="ui-g form-group">
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Name:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <input type="text" pInputText [(ngModel)]="updateStaffName" style="width:95%" name="updateStaffName" placeholder="Full Name">
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div class="ui-g-18 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <p-button label="Submit" (onClick)="updateStaffInfo($event)" [style]="updateStaffBtnStyle"></p-button>
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Staff Id:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <input type="text" pInputText [(ngModel)]="updateStaffId" style="width:95%" name="updateStaffId" placeholder="Username">
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Email:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <input type="text" pInputText [(ngModel)]="updateEmailAdd" style="width:95%" name="updateEmailAdd" placeholder="Email Address">
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Role:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <p-dropdown [options]="roles" [(ngModel)]="updateRole" [showClear]="true" [style]="{'width':'95%'}" placeholder="Please Select One"></p-dropdown>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Gender:</label>
+                  </div>
+                  <div class="ui-grid-col-9" style="margin-top: -6px;margin-left: -6px">
+                    <div class="ui-g-4">
+                      <p-radioButton name="group2" value="M" label="Male" [(ngModel)]="updateGender" inputId="gender3"></p-radioButton>
+                    </div>
+                    <div class="ui-g-4">
+                      <p-radioButton name="group2" value="F" label="Female" [(ngModel)]="updateGender" inputId="gender4"></p-radioButton>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <p-button label="Submit" (onClick)="updateStaffInfo($event)" [style]="updateStaffBtnStyle"></p-button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </p-tabPanel>
+
+          <p-tabPanel header="Change Password">
+            <div class="ui-g form-group">
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Password:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <input type="password" pInputText [(ngModel)]="newPassword" style="width:95%" name="newPassword" placeholder="Password">
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Confirm Password:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <input type="password" pInputText [(ngModel)]="confirmPassword" style="width:95%" name="confirmPassword" placeholder="Confirm Password">
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <p-button label="Submit" (onClick)="changePassword($event)" [style]="changePwdBtnStyle"></p-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
       </div>
     </div>
   </div>
