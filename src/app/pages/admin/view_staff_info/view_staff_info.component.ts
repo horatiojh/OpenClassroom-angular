@@ -222,12 +222,52 @@ export class ViewStaffInfoComponent implements OnInit {
   updateStaffInfo(event) {
     this.msgs = [];
 
+    if (this.updateStaffName == undefined || this.updateStaffName == "") {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please enter the staff name.",
+        detail: ""
+      });
+    }
+
+    if (this.updateStaffId == undefined || this.updateStaffId == "") {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please enter the staff id.",
+        detail: ""
+      });
+    }
+
+    if (this.updateEmailAdd == undefined || this.updateEmailAdd == "") {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please enter the email address.",
+        detail: ""
+      });
+    }
+
+    if (this.updateGender == undefined || this.updateGender == "") {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please choose the gender.",
+        detail: ""
+      });
+    }
+
+    if (this.updateRole == undefined || this.updateRole == "") {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please select the role.",
+        detail: ""
+      });
+    }
+
     if (
-      this.newStaffName != undefined &&
-      this.newStaffId != undefined &&
-      this.newGender != undefined &&
-      this.selectedRole != undefined &&
-      this.newEmailAdd != undefined
+      this.updateStaffName != undefined &&
+      this.updateStaffId != undefined &&
+      this.updateGender != undefined &&
+      this.updateRole != undefined &&
+      this.updateEmailAdd != undefined
     ) {
       this.updateStaff = new Staff();
 
@@ -250,12 +290,6 @@ export class ViewStaffInfoComponent implements OnInit {
         setTimeout(function() {
           location.reload();
         }, 300);
-      });
-    } else {
-      this.msgs.push({
-        severity: "info",
-        summary: "Invalid Input!",
-        detail: ""
       });
     }
   }
