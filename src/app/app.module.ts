@@ -41,6 +41,7 @@ import { DataViewModule } from "primeng/dataview";
 import { ListboxModule } from "primeng/listbox";
 import { RatingModule } from "primeng/rating";
 import { RadioButtonModule } from "primeng/radiobutton";
+import { ChipsModule } from "primeng/chips";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -59,6 +60,7 @@ import { MsgService } from "../providers/msgService";
 import { MessageService } from "primeng/components/common/messageservice";
 import { VFeedbackService } from "../providers/vFeedbackService";
 import { IFeedbackService } from "../providers/iFeedbackService";
+import { TagService } from "../providers/tagService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -172,7 +174,8 @@ import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_
     DataViewModule,
     ListboxModule,
     RatingModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ChipsModule
   ],
   providers: [
     Api,
@@ -196,7 +199,8 @@ import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_
     WebsocketService,
     MessageService,
     VFeedbackService,
-    IFeedbackService
+    IFeedbackService,
+    TagService
   ],
   bootstrap: [AppComponent]
 })

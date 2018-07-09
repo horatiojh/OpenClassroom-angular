@@ -1,0 +1,75 @@
+.tagbtn {
+  cursor: pointer;
+  margin-right: 8px;
+  margin-bottom: 5px;
+}
+
+.gract {
+  color: #ff8f00;
+  text-decoration: none;
+  font-size: 12px;
+  text-align: center;
+  border-right: 1px solid #ffe082;
+  border-bottom: 1px solid #ffe082;
+  background-color: #fffde7;
+  padding: 3px 3px 2px 3px;
+  margin-top: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.gract:hover {
+  color: #ffffff;
+  font-size: 12px;
+  border-right: 1px solid #ffc107;
+  border-bottom: 1px solid #ffc107;
+  background-color: #ffc107;
+  padding: 3px 3px 2px 3px;
+  margin-top: 2px;
+}
+
+.gract a:link {
+  text-decoration: none;
+  color: #ff8f00;
+  font-size: 12px;
+  text-align: center;
+  padding: 3px 3px 2px 3px;
+  margin-top: 2px;
+}
+
+.gract a:visited {
+  text-decoration: none;
+  color: #ff8f00;
+  font-size: 12px;
+  text-align: center;
+  padding: 3px 3px 2px 3px;
+  margin-top: 2px;
+}
+
+.gract a:hover {
+  color: #ff8f00;
+  font-size: 12px;
+  border-left: 1px solid #ffe082;
+  border-top: 1px solid #ffe082;
+  border-right: 1px solid #ffc107;
+  border-bottom: 1px solid #ffc107;
+  background-color: #ffc107;
+  padding: 3px 3px 2px 3px;
+  margin-top: 2px;
+}
+
+.rdact {
+  color: #bbbbbb;
+  text-decoration: none;
+  font-size: 12px;
+  text-align: center;
+  border-right: 1px solid #ffe082;
+  border-bottom: 1px solid #ffe082;
+  background-color: #fffde7;
+  padding: 3px 3px 2px 3px;
+  margin-top: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
+}

@@ -5,7 +5,6 @@ import { Router } from "@angular/router";
 import { Staff } from "../../../../domain/staff";
 
 import { Api } from "../../../../providers/api";
-import { ChatService } from "../../../../providers/chatService";
 
 @Component({
   selector: "app-login",

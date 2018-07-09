@@ -18,7 +18,6 @@
               #inusername="ngModel" placeholder="Username" />
             <div *ngIf="inusername.invalid && (inusername.dirty || inusername.touched || submitted)">
               <div *ngIf="inusername.errors.required">
-                <!-- <p-message severity="error" text="Please enter valid username." class="error_message_cus"></p-message> -->
                 <div class="ui-message ui-messages-error ui-corner-all error_message_cus">
                   Please enter your username.
                 </div>
@@ -31,7 +30,6 @@
               placeholder="Password" />
             <div *ngIf="inpassword.invalid && (inpassword.dirty || inpassword.touched || submitted)">
               <div *ngIf="inpassword.errors.required">
-                <!-- <p-message severity="error" text="Please enter valid password." class="error_message_cus"></p-message> -->
                 <div class="ui-message ui-messages-error ui-corner-all error_message_cus">
                   Please enter your password.
                 </div>

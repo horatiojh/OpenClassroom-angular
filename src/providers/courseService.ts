@@ -8,6 +8,7 @@ import { catchError, tap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/throw";
 import { of } from "rxjs";
+
 import { Course } from "../domain/course";
 
 const httpOptions = {

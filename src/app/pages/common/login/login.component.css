@@ -1,59 +1,59 @@
 .login-container_cus {
-    margin-top: 0px;
-    background-size: 100%;
-    height: 100%;
-    width: 100%;
-    min-height: 100vh;
-    overflow: scroll;
+  margin-top: 0px;
+  background-size: 100%;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  overflow: scroll;
 }
 
 .login-panel_cus {
-    margin: 170px auto 0 auto;
-    text-align: center;
-    width: 380px;
-    height: 350px;
-    font-size: 14px;
-    color: #f6a828;
-    margin-top: 220px;
+  margin: 170px auto 0 auto;
+  text-align: center;
+  width: 380px;
+  height: 350px;
+  font-size: 14px;
+  color: #f6a828;
+  margin-top: 220px;
 }
 
-.login-panel h2{
-    margin-top: 40px;
+.login-panel h2 {
+  margin-top: 40px;
 }
 
 .login-input_cus {
-    width: 350px;
-    height: 40px;
-    background-color: #ffffff;
-    columns: #31353D;;
+  width: 350px;
+  height: 40px;
+  background-color: #ffffff;
+  columns: #31353d;
 }
 
 .login-button_cus {
-    width: 358px;
-    height: 45px;
-    margin-left: 2px;
-    border: 1px solid #f6a828;
-    background-color: #f6a828;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 16px;
+  width: 358px;
+  height: 45px;
+  margin-left: 2px;
+  border: 1px solid #f6a828;
+  background-color: #f6a828;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 ::placeholder {
-    font-weight: 300;
-    color: #bdbdbd;
-    font-size: 12px;
+  font-weight: 300;
+  color: #bdbdbd;
+  font-size: 12px;
 }
 
 body {
-    background-color: rgb(247,247,247);
-    font-size: 12px;
-    color: #042D58;
-    margin: 0;
-    font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+  background-color: rgb(247, 247, 247);
+  font-size: 12px;
+  color: #042d58;
+  margin: 0;
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
 }
 
-.error_message_cus{
+.error_message_cus {
   width: 340px;
   float: left;
   text-align: left;

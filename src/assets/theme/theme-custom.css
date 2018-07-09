@@ -4157,7 +4157,8 @@ body {
     body .ui-datepicker .ui-timepicker {
       -moz-border-radius: 0;
       -webkit-border-radius: 0;
-      border-radius: 0; }
+      border-radius: 0;
+      height: 75px;}
       body .ui-datepicker .ui-timepicker > div a {
         height: 1.5em; }
         body .ui-datepicker .ui-timepicker > div a > span {
@@ -4326,13 +4327,14 @@ body {
       width: 0; }
   body .ui-chips > ul.ui-inputtext .ui-chips-token {
     display: inline-block;
-    float: none;
+    float: left;
     vertical-align: middle;
     font-size: 1em;
     margin-bottom: 2px; }
     body .ui-chips > ul.ui-inputtext .ui-chips-token .ui-chips-token-label {
       display: inline-block;
-      vertical-align: middle; }
+      vertical-align: middle;
+      color: #ffffff; }
   body .ui-password-panel.ui-shadow {
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
