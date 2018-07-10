@@ -53,7 +53,6 @@ export class ProfViewCourseDetailsComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private breadcrumbService: BreadcrumbService,
-    private shareService: ShareService,
     private timetableService: TimetableService,
     private courseInfoService: CourseInfoService,
     private dateService: DateService,

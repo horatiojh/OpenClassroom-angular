@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, OnDestroy, DoCheck } from "@angular/core";
 import { Router } from "@angular/router";
+import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
+
 import { Message } from "primeng/primeng";
 
 import { FileUploadService } from "../../../../providers/fileUploadService";
@@ -10,7 +12,6 @@ import { CourseInfoService } from "../../../../providers/courseInfoService";
 
 import { Course } from "../../../../domain/course";
 import { CourseInfo } from "../../../../domain/courseInfo";
-import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 @Component({
   selector: "app-viewCourseList",
@@ -222,5 +223,10 @@ export class ViewCourseListComponent implements OnInit {
           location.reload();
         }, 300);
       });
+  }
+
+  viewCourseDetails(rowData) {
+    sessionStorage.setItem("courseId", rowData.id);
+    this.router.navigate(["/viewCourseDetails"]);
   }
 }

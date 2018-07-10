@@ -4,6 +4,8 @@
       <div class="card">
         <p-growl [value]="msgs" life="4500"></p-growl>
 
+        <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
+
         <div class="ui-g form-group">
           <div class="ui-g-12">
             <label style="font-size: 20px;font-weight: bold">{{moduleCode}} - {{moduleTitle}}</label>
@@ -44,6 +46,11 @@
               <p-accordionTab header="Timetable" [selected]="true">
                 <div style="text-align: justify;text-justify: auto">
                   <app-requestDateCard [dates]="dates"></app-requestDateCard>
+                </div>
+              </p-accordionTab>
+              <p-accordionTab header="Tags" [selected]="true">
+                <div>
+                  <p-chips [(ngModel)]="inputTags" name="inputTags" (onRemove)="onRemoveEvent($event)"></p-chips>
                 </div>
               </p-accordionTab>
             </p-accordion>

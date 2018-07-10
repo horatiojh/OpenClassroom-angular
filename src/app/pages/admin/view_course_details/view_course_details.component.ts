@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Message } from "primeng/primeng";
+import { Message, ConfirmationService } from "primeng/primeng";
 
 import { CourseService } from "../../../../providers/courseService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
-import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
 import { CourseInfoService } from "../../../../providers/courseInfoService";
 import { DateService } from "../../../../providers/dateService";
@@ -13,6 +12,7 @@ import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
 import { CourseInfo } from "../../../../domain/courseInfo";
 import { DateEntity } from "../../../../domain/date";
+import { Tag } from "../../../../domain/tag";
 
 @Component({
   selector: "app-viewCourseDetails",
@@ -42,13 +42,21 @@ export class ViewCourseDetailsComponent implements OnInit {
   weeksName: string;
   dates: DateEntity[];
 
+  // view tags
+  tags: Tag[] = [];
+  inputTags: string[] = [];
+
+  // delete tags
+  tagsByCID: Tag[] = [];
+
   constructor(
     private courseService: CourseService,
     private breadcrumbService: BreadcrumbService,
-    private shareService: ShareService,
     private timetableService: TimetableService,
     private courseInfoService: CourseInfoService,
-    private dateService: DateService
+    private dateService: DateService,
+    private tagService: TagService,
+    private confirmationService: ConfirmationService
   ) {
     this.breadcrumbService.setItems([
       { label: "Course Details", routerLink: ["/profViewCourseDetails"] }
@@ -56,7 +64,7 @@ export class ViewCourseDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.courseId = this.shareService.getValue("courseId");
+    this.courseId = Number(sessionStorage.getItem("courseId"));
 
     this.courseService
       .getCourseByCourseId(this.courseId)
@@ -109,5 +117,63 @@ export class ViewCourseDetailsComponent implements OnInit {
       .subscribe(response => {
         this.dates = response.dates;
       });
+
+    this.tagService.getTagsByCourseId(this.courseId).subscribe(response => {
+      this.tags = response.tags;
+
+      for (let i = 0; i < this.tags.length; i++) {
+        this.inputTags.push(this.tags[i].tagName);
+      }
+    });
+  }
+
+  onRemoveEvent(event) {
+    let tagName: string;
+    tagName = event.value;
+    this.deleteConfirmationDialog(tagName);
+  }
+
+  deleteConfirmationDialog(tagName) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to delete it?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.deleteTag(tagName);
+      },
+      reject: () => {
+        this.inputTags.push(tagName);
+      }
+    });
+  }
+
+  deleteTag(tagName) {
+    let index: number;
+    let tag: Tag;
+
+    this.tagService.getTagsByCourseId(this.courseId).subscribe(response => {
+      this.tagsByCID = response.tags;
+
+      for (let i = 0; i < this.tagsByCID.length; i++) {
+        if (this.tagsByCID[i].tagName == tagName) {
+          tag = this.tagsByCID[i];
+          index = tag.id;
+        }
+      }
+
+      this.tagService.deleteTag(index).subscribe(response => {
+        console.log("Delete Tag");
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Deleted!",
+          detail: ""
+        });
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
+      });
+    });
   }
 }

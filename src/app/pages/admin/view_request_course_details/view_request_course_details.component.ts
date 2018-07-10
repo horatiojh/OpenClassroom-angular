@@ -50,7 +50,6 @@ export class ViewRequestCourseDetailsComponent implements OnInit {
     private dateService: DateService
   ) {
     this.breadcrumbService.setItems([
-      { label: "Search Courses", routerLink: ["/searchCourse"] },
       { label: "Search Results", routerLink: ["/viewRequestCourse"] },
       { label: "Course Details", routerLink: ["/viewRequestCourseDetails"] }
     ]);
