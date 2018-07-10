@@ -7,11 +7,13 @@ import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
 import { CourseInfoService } from "../../../../providers/courseInfoService";
 import { DateService } from "../../../../providers/dateService";
+import { TagService } from "../../../../providers/tagService";
 
 import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
 import { CourseInfo } from "../../../../domain/courseInfo";
 import { DateEntity } from "../../../../domain/date";
+import { Tag } from "../../../../domain/tag";
 
 @Component({
   selector: "app-profViewCourseDetails",
@@ -41,13 +43,18 @@ export class ProfViewCourseDetailsComponent implements OnInit {
   weeksName: string;
   dates: DateEntity[];
 
+  // view tags
+  tags: Tag[] = [];
+  inputTags: string[] = [];
+
   constructor(
     private courseService: CourseService,
     private breadcrumbService: BreadcrumbService,
     private shareService: ShareService,
     private timetableService: TimetableService,
     private courseInfoService: CourseInfoService,
-    private dateService: DateService
+    private dateService: DateService,
+    private tagService: TagService
   ) {
     this.breadcrumbService.setItems([
       { label: "Course Details", routerLink: ["/profViewCourseDetails"] }
@@ -108,5 +115,15 @@ export class ProfViewCourseDetailsComponent implements OnInit {
       .subscribe(response => {
         this.dates = response.dates;
       });
+
+    this.tagService.getAllTags().subscribe(response => {
+      this.tags = response.tags;
+
+      for (let i = 0; i < this.tags.length; i++) {
+        this.inputTags.push(this.tags[i].tagName);
+      }
+    });
   }
+
+  onRemoveEvent(event) {}
 }

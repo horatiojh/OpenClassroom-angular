@@ -3,15 +3,18 @@ import {
   OnInit,
   Input,
   OnChanges,
-  SimpleChanges,
-  SimpleChange
+  SimpleChanges
 } from "@angular/core";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 
+import { Message } from "primeng/primeng";
+
 import { Course } from "../../../../domain/course";
 
 import { ShareService } from "../../../../providers/shareService";
+import { TagService } from "../../../../providers/tagService";
+import { Tag } from "../../../../domain/tag";
 
 @Component({
   selector: "app-moduleCard",
@@ -20,6 +23,9 @@ import { ShareService } from "../../../../providers/shareService";
 })
 export class ModuleCardComponent implements OnInit, OnChanges {
   @Input("course") course: Course;
+
+  // for component
+  msgs: Message[] = [];
 
   // attributes
   moduleCode: string;
@@ -33,14 +39,22 @@ export class ModuleCardComponent implements OnInit, OnChanges {
   viewTimetableBtnStyle: SafeStyle;
   createTagsBtnStyle: SafeStyle;
   viewCourseBtnStyle: SafeStyle;
+  createTagBtnStyle: SafeStyle;
+
+  // create new tag
+  tags: string[] = [];
+  display: boolean = false;
+  tag: Tag;
 
   constructor(
     private shareService: ShareService,
     private router: Router,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private tagService: TagService
   ) {}
 
   ngOnInit() {
+    // css style
     let viewCourseStyle = "margin-top: 10px";
     this.viewCourseBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       viewCourseStyle
@@ -61,6 +75,12 @@ export class ModuleCardComponent implements OnInit, OnChanges {
       createStyle
     );
 
+    let createTagStyle = "width:100px";
+    this.createTagBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
+      createTagStyle
+    );
+
+    // view course details
     this.moduleCode = this.course.moduleCode;
     this.moduleTitle = this.course.moduleTitle;
     this.staffName = this.course.staffName;
@@ -89,5 +109,45 @@ export class ModuleCardComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.course = changes.course.currentValue;
+  }
+
+  showNewTagDialog() {
+    this.display = true;
+  }
+
+  createNewTag(event) {
+    this.msgs = [];
+    let check: boolean = true;
+
+    if (this.tags.length > 0) {
+      for (let i = 0; i < this.tags.length; i++) {
+        this.tag = new Tag();
+        this.tag.tagName = this.tags[i];
+        this.tag.course = this.course;
+
+        this.tagService.createTag(this.tag).subscribe(
+          response => {
+            console.log("create tag successfully");
+          },
+          error => {
+            check = false;
+          }
+        );
+      }
+
+      if (check) {
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Created!",
+          detail: ""
+        });
+
+        this.display = false;
+
+        setTimeout(function() {
+          location.reload();
+        }, 300);
+      }
+    }
   }
 }

@@ -7,6 +7,7 @@ import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
 import { CourseInfoService } from "../../../../providers/courseInfoService";
 import { DateService } from "../../../../providers/dateService";
+import { TagService } from "../../../../providers/tagService";
 
 import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";

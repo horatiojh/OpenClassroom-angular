@@ -4330,7 +4330,8 @@ body {
     float: left;
     vertical-align: middle;
     font-size: 1em;
-    margin-bottom: 2px; }
+    margin-bottom: 5px;
+    margin-left: 5px; }
     body .ui-chips > ul.ui-inputtext .ui-chips-token .ui-chips-token-label {
       display: inline-block;
       vertical-align: middle;
