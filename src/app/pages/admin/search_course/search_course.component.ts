@@ -24,7 +24,8 @@ export class SearchCourseComponent implements OnInit {
   selectedWeekDay: string;
   preferStartTime: string;
   preferEndTime: string;
-  preferDates: string;
+  preferDates: Date[] = [];
+  preferDay: number;
 
   // css style
   buttonStyle: SafeScript;
@@ -119,5 +120,29 @@ export class SearchCourseComponent implements OnInit {
     }
 
     spans.item(index).className = "tagbtn gract";
+  }
+
+  dateSelectEvent(event) {
+    if (this.preferDates[1] == null) {
+      this.preferDay = this.preferDates[0].getDay();
+
+      if (this.preferDay == 1) {
+        this.selectedWeekDay = "Mon";
+      } else if (this.preferDay == 2) {
+        this.selectedWeekDay = "Tue";
+      } else if (this.preferDay == 3) {
+        this.selectedWeekDay = "Wed";
+      } else if (this.preferDay == 4) {
+        this.selectedWeekDay = "Thu";
+      } else if (this.preferDay == 5) {
+        this.selectedWeekDay = "Fri";
+      } else if (this.preferDay == 6) {
+        this.selectedWeekDay = "Sat";
+      } else if (this.preferDay == 7) {
+        this.selectedWeekDay = "Sun";
+      }
+    } else {
+      this.selectedWeekDay = "";
+    }
   }
 }

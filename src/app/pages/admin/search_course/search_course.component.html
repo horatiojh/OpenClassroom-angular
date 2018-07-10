@@ -13,7 +13,7 @@
                 <label class="label_cus">Date:</label>
               </div>
               <div class="ui-grid-col-4">
-                <p-calendar [(ngModel)]="preferDates" selectionMode="range" readonlyInput="true"></p-calendar>
+                <p-calendar [(ngModel)]="preferDates" selectionMode="range" readonlyInput="true" (onSelect)="dateSelectEvent($event)"></p-calendar>
               </div>
               <div class="ui-grid-col-2">
                 <label class="label_cus">Week Day:</label>
