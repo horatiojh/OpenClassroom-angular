@@ -24,7 +24,13 @@ export class SearchCourseComponent implements OnInit {
   selectedWeekDay: string;
   preferStartTime: string;
   preferEndTime: string;
-  preferDates: Date[] = [];
+  preferDates: Date[];
+  preferStartDate: Date;
+  preferEndDate: Date;
+  startHour: string;
+  startMin: string;
+  endHour: string;
+  endMin: string;
   preferDay: number;
 
   // css style
@@ -47,6 +53,9 @@ export class SearchCourseComponent implements OnInit {
     this.selectedWeekDay = "";
     this.preferEndTime = "";
     this.preferStartTime = "";
+    this.preferDates = null;
+    this.preferStartDate = null;
+    this.preferEndDate = null;
   }
 
   ngOnInit() {
@@ -75,6 +84,38 @@ export class SearchCourseComponent implements OnInit {
   }
 
   searchCourse(event) {
+    if (this.preferStartDate !== null) {
+      if (this.preferStartDate.getHours().toString().length == 1) {
+        this.startHour = "0" + this.preferStartDate.getHours();
+      } else {
+        this.startHour = String(this.preferStartDate.getHours());
+      }
+
+      if (this.preferStartDate.getMinutes().toString().length == 1) {
+        this.startMin = "0" + this.preferStartDate.getMinutes();
+      } else {
+        this.startMin = String(this.preferStartDate.getMinutes());
+      }
+
+      this.preferStartTime = this.startHour + ":" + this.startMin;
+    }
+
+    if (this.preferEndDate != null) {
+      if (this.preferEndDate.getHours().toString().length == 1) {
+        this.endHour = "0" + this.preferEndDate.getHours();
+      } else {
+        this.endHour = String(this.preferEndDate.getHours());
+      }
+
+      if (this.preferEndDate.getMinutes().toString().length == 1) {
+        this.endMin = "0" + this.preferEndDate.getMinutes();
+      } else {
+        this.endMin = String(this.preferEndDate.getMinutes());
+      }
+
+      this.preferEndTime = this.endHour + ":" + this.endMin;
+    }
+
     this.shareService.setValue("weekDay", this.selectedWeekDay);
     this.shareService.setValue("startTime", this.preferStartTime);
     this.shareService.setValue("endTime", this.preferEndTime);

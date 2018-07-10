@@ -1,72 +1,72 @@
 <div class="container">
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <div class="card">
-        <h1 style="margin-left: 14px">Search Courses</h1>
-        <p-growl [value]="msgs" life="4500"></p-growl>
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <div class="card">
+          <h1 style="margin-left: 14px">Search Courses</h1>
+          <p-growl [value]="msgs" life="4500"></p-growl>
 
-        <div class="ui-g form-group">
+          <div class="ui-g form-group">
 
-          <div class="ui-g-12 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-2">
-                <label class="label_cus">Date:</label>
-              </div>
-              <div class="ui-grid-col-4">
-                <p-calendar [(ngModel)]="preferDates" selectionMode="range" readonlyInput="true"></p-calendar>
-              </div>
-              <div class="ui-grid-col-2">
-                <label class="label_cus">Week Day:</label>
-              </div>
-              <div class="ui-grid-col-4">
-                <p-dropdown [options]="weekDays" [(ngModel)]="selectedWeekDay" [style]="{'width':'58%'}"></p-dropdown>
+            <div class="ui-g-12 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                  <label class="label_cus">Date:</label>
+                </div>
+                <div class="ui-grid-col-4">
+                  <p-calendar [(ngModel)]="preferDates" selectionMode="range" readonlyInput="true" (onSelect)="dateSelectEvent($event)"></p-calendar>
+                </div>
+                <div class="ui-grid-col-2">
+                  <label class="label_cus">Week Day:</label>
+                </div>
+                <div class="ui-grid-col-4">
+                  <p-dropdown [options]="weekDays" [(ngModel)]="selectedWeekDay" [style]="{'width':'58%'}"></p-dropdown>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="ui-g-12 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-2">
-                <label class="label_cus">Time Range (from):</label>
-              </div>
-              <div class="ui-grid-col-4">
-                <p-calendar [(ngModel)]="preferStartTime" [timeOnly]="true"></p-calendar>
-              </div>
-              <div class="ui-grid-col-2">
-                <label class="label_cus">Time Range (to):</label>
-              </div>
-              <div class="ui-grid-col-4">
-                <p-calendar [(ngModel)]="preferEndTime" [timeOnly]="true"></p-calendar>
+            <div class="ui-g-12 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                  <label class="label_cus">Time Range (from):</label>
+                </div>
+                <div class="ui-grid-col-4">
+                  <p-calendar [(ngModel)]="preferStartDate" [timeOnly]="true"></p-calendar>
+                </div>
+                <div class="ui-grid-col-2">
+                  <label class="label_cus">Time Range (to):</label>
+                </div>
+                <div class="ui-grid-col-4">
+                  <p-calendar [(ngModel)]="preferEndDate" [timeOnly]="true"></p-calendar>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="ui-g-12 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-2">
-                <label class="label_cus">Tags:</label>
-              </div>
-              <div class="ui-grid-col-6">
-                <p-chips [(ngModel)]="inputTags" name="inputTags" (onRemove)="onRemoveEvent($event)"></p-chips>
-              </div>
-            </div>
-          </div>
-
-          <div class="ui-g-12 ui-md-12">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-8" id="tags">
-                <p-card>
-                  <span *ngFor="let tag of tags" class="tagbtn gract" (click)="enableTag(tag)">{{tag}}</span>
-                </p-card>
+            <div class="ui-g-12 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                  <label class="label_cus">Tags:</label>
+                </div>
+                <div class="ui-grid-col-6">
+                  <p-chips [(ngModel)]="inputTags" name="inputTags" (onRemove)="onRemoveEvent($event)"></p-chips>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="ui-grid-row" style="margin-top: 12px">
-            <p-button icon="fa fa-fw fa-search" label="Search" [style]="buttonStyle" (onClick)="searchCourse($event)"></p-button>
+            <div class="ui-g-12 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-8" id="tags">
+                  <p-card>
+                    <span *ngFor="let tag of tags" class="tagbtn gract" (click)="enableTag(tag)">{{tag}}</span>
+                  </p-card>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-grid-row" style="margin-top: 12px">
+              <p-button icon="fa fa-fw fa-search" label="Search" [style]="buttonStyle" (onClick)="searchCourse($event)"></p-button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
