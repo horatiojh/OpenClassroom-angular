@@ -36,6 +36,22 @@ export class TagService {
       );
   }
 
+  getTagsByCourseId(courseId: number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getTags/" + courseId).pipe(
+      tap(_ => console.log(`getTags courseId=${courseId}`)),
+      catchError(this.handleError<any>(`getTags courseId=${courseId}`))
+    );
+  }
+
+  deleteTag(tagId: number): Observable<any> {
+    return this.httpClient
+      .delete<any>(this.baseUrl + "/deleteTag/" + "?tagId=" + tagId)
+      .pipe(
+        tap(_ => console.error(`deleteTag tagId=${tagId}`)),
+        catchError(this.handleError<any>(`deleteTag tagId=${tagId}`))
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
