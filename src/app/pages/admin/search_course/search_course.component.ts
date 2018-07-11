@@ -74,12 +74,8 @@ export class SearchCourseComponent implements OnInit {
     ];
 
     // tags
-    this.tagService.getAllTags().subscribe(response => {
-      this.tagsList = response.tags;
-
-      for (let i = 0; i < this.tagsList.length; i++) {
-        this.tags.push(this.tagsList[i].tagName);
-      }
+    this.tagService.getAllNonDuplicateTagsName().subscribe(response => {
+      this.tags = response.tagsName;
     });
   }
 

@@ -52,6 +52,15 @@ export class TagService {
       );
   }
 
+  getAllNonDuplicateTagsName(): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getAllNonDuplicateTagsName")
+      .pipe(
+        tap(_ => console.log(`getAllNonDuplicateTagsName`)),
+        catchError(this.handleError<any>(`getAllNonDuplicateTagsName error`))
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
