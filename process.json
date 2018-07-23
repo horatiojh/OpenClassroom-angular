@@ -1,0 +1,10 @@
+{
+    "apps": [
+        {
+            "name": "api",
+            "cwd": "/home/yongxue/OpenClassroom-angular",
+            "script": "/usr/local/bin/ng serve --proxy-config proxy.conf.json",
+            "watch": true
+        }
+    ]
+}
