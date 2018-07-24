@@ -44,7 +44,6 @@ export class ModuleCardComponent implements OnInit, OnChanges {
   // create new tag
   tags: string[] = [];
   display: boolean = false;
-  tag: Tag;
 
   constructor(
     private shareService: ShareService,
@@ -121,28 +120,37 @@ export class ModuleCardComponent implements OnInit, OnChanges {
 
     if (this.tags.length > 0) {
       for (let i = 0; i < this.tags.length; i++) {
-        this.tag = new Tag();
-        this.tag.tagName = this.tags[i];
-        this.tag.course = this.course;
+        let endpoint = "/createTag";
+        let body = {
+          tagName: this.tags[i],
+          courseId: String(this.course.id)
+        };
 
-        this.tagService.createTag(this.tag).subscribe(
+        this.tagService.createTag(endpoint, body).subscribe(
           response => {
             console.log("create tag successfully");
           },
           error => {
             check = false;
+            console.log("duplicate tag");
+
+            if (check) {
+              this.msgs.push({
+                severity: "info",
+                summary: "Successfully Created!",
+                detail: ""
+              });
+
+              this.display = false;
+            } else {
+              this.msgs.push({
+                severity: "error",
+                summary: "Duplicated Tag!",
+                detail: ""
+              });
+            }
           }
         );
-      }
-
-      if (check) {
-        this.msgs.push({
-          severity: "info",
-          summary: "Successfully Created!",
-          detail: ""
-        });
-
-        this.display = false;
       }
     }
   }

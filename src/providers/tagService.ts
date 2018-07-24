@@ -25,15 +25,11 @@ export class TagService {
     return this.httpClient.get<any>(this.baseUrl + "/getAllRecords");
   }
 
-  createTag(tag: Tag): Observable<any> {
-    let createTagReq = { tag: tag };
-
-    return this.httpClient
-      .put<any>(this.baseUrl + "/createTag", createTagReq, httpOptions)
-      .pipe(
-        tap(_ => console.log("createVisit")),
-        catchError(this.handleError<any>("createVisit"))
-      );
+  createTag(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
   deleteTag(endpoint: string, body?: any): Observable<any> {
