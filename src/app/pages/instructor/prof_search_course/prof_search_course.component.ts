@@ -40,6 +40,7 @@ export class ProfSearchCourseComponent implements OnInit {
   tags: string[] = [];
   tagsList: Tag[] = undefined;
   inputTags: string[] = [];
+  tagName: string = null;
 
   constructor(
     private domSanitizer: DomSanitizer,
@@ -116,9 +117,19 @@ export class ProfSearchCourseComponent implements OnInit {
       this.preferEndTime = this.endHour + ":" + this.endMin;
     }
 
+    for (let i = 0; i < this.inputTags.length; i++) {
+      if (this.tagName == null) {
+        this.tagName = this.inputTags[i];
+      } else {
+        this.tagName = this.tagName + "," + this.inputTags[i];
+      }
+    }
+
     this.shareService.setValue("weekDay", this.selectedWeekDay);
     this.shareService.setValue("startTime", this.preferStartTime);
     this.shareService.setValue("endTime", this.preferEndTime);
+    this.shareService.setValue("dates", this.preferDates);
+    this.shareService.setValue("tags", this.tagName);
     this.router.navigate(["/profViewRequestCourse"]);
   }
 

@@ -24,11 +24,6 @@ import { Visit } from "../../../../domain/visit";
   styleUrls: ["./prof_view_request_course.component.css"]
 })
 export class ProfViewRequestCourseComponent implements OnInit {
-  // attributes
-  weekDay: string;
-  startTime: string;
-  endTime: string;
-
   // for datatable
   courses: Course[];
   cols: any[];
@@ -61,6 +56,13 @@ export class ProfViewRequestCourseComponent implements OnInit {
 
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
+
+  // for search courses
+  weekDay: string;
+  startTime: string;
+  endTime: string;
+  tagName: string;
+  dateStr: string;
 
   constructor(
     private shareService: ShareService,
@@ -106,12 +108,24 @@ export class ProfViewRequestCourseComponent implements OnInit {
     this.weekDay = this.shareService.getValue("weekDay");
     this.startTime = this.shareService.getValue("startTime");
     this.endTime = this.shareService.getValue("endTime");
+    this.tagName = this.shareService.getValue("tags");
+    this.dateStr = this.shareService.getValue("dates");
+
+    if (this.tagName == null) {
+      this.tagName = "";
+    }
+
+    if (this.dateStr == null) {
+      this.dateStr = "";
+    }
 
     let endpoint = "/getRequestTimetables";
     let body = {
       weekDay: this.weekDay,
       startTime: this.startTime,
-      endTime: this.endTime
+      endTime: this.endTime,
+      tags: this.tagName,
+      dates: this.dateStr
     };
 
     this.timetableService
