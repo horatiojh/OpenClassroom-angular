@@ -60,11 +60,9 @@ export class ViewRequestCourseComponent implements OnInit {
   weekDay: string;
   startTime: string;
   endTime: string;
+  tagName: string;
+  dateStr: string;
   timetables: Timetable[];
-  tags: string[] = [];
-  tagsStr: string;
-  dates: Date[];
-  datesStr: string;
 
   constructor(
     private shareService: ShareService,
@@ -102,26 +100,24 @@ export class ViewRequestCourseComponent implements OnInit {
     this.weekDay = this.shareService.getValue("weekDay");
     this.startTime = this.shareService.getValue("startTime");
     this.endTime = this.shareService.getValue("endTime");
+    this.tagName = this.shareService.getValue("tags");
+    this.dateStr = this.shareService.getValue("dates");
 
-    this.dates = this.shareService.getValue("dates");
-    if (this.dates == null) {
-      this.datesStr = "";
-    } else {
-      this.datesStr = this.dates.toString();
+    if (this.tagName == null) {
+      this.tagName = "";
     }
 
-    this.tags = this.shareService.getValue("tags");
-    if (this.tags == undefined) {
-      this.tagsStr = "";
-    } else {
-      this.tagsStr = this.tags.toString();
+    if (this.dateStr == null) {
+      this.dateStr = "";
     }
 
     let endpoint = "/getRequestTimetables";
     let body = {
       weekDay: this.weekDay,
       startTime: this.startTime,
-      endTime: this.endTime
+      endTime: this.endTime,
+      tags: this.tagName,
+      dates: this.dateStr
     };
 
     this.timetableService
