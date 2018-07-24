@@ -24,11 +24,6 @@ import { Timetable } from "../../../../domain/timetable";
   styleUrls: ["./view_request_course.component.css"]
 })
 export class ViewRequestCourseComponent implements OnInit {
-  // attributes
-  weekDay: string;
-  startTime: string;
-  endTime: string;
-
   // for datatable
   courses: Course[];
   cols: any[];
@@ -62,7 +57,14 @@ export class ViewRequestCourseComponent implements OnInit {
   requestClassroomVisitBtnStyle: SafeStyle;
 
   // for search courses
+  weekDay: string;
+  startTime: string;
+  endTime: string;
   timetables: Timetable[];
+  tags: string[] = [];
+  tagsStr: string;
+  dates: Date[];
+  datesStr: string;
 
   constructor(
     private shareService: ShareService,
@@ -100,6 +102,20 @@ export class ViewRequestCourseComponent implements OnInit {
     this.weekDay = this.shareService.getValue("weekDay");
     this.startTime = this.shareService.getValue("startTime");
     this.endTime = this.shareService.getValue("endTime");
+
+    this.dates = this.shareService.getValue("dates");
+    if (this.dates == null) {
+      this.datesStr = "";
+    } else {
+      this.datesStr = this.dates.toString();
+    }
+
+    this.tags = this.shareService.getValue("tags");
+    if (this.tags == undefined) {
+      this.tagsStr = "";
+    } else {
+      this.tagsStr = this.tags.toString();
+    }
 
     let endpoint = "/getRequestTimetables";
     let body = {

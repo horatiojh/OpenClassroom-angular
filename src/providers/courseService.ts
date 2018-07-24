@@ -54,19 +54,21 @@ export class CourseService {
       );
   }
 
-  getRequestCourses(endpoint: string, body?: any): Observable<any> {
-    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
-      tap(resp => console.log(resp)),
-      catchError(this.handleErrorApi)
-    );
-  }
+  // getRequestCourses(endpoint: string, body?: any): Observable<any> {
+  //   return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+  //     tap(resp => console.log(resp)),
+  //     catchError(this.handleErrorApi)
+  //   );
+  // }
 
   getCourseByTimetableId(timetableId: number): Observable<any> {
     return this.httpClient
       .get<any>(this.baseUrl + "/getCourseByTID/" + timetableId)
       .pipe(
         tap(_ => console.log(`getCourseByTID timetableId=${timetableId}`)),
-        catchError(this.handleError<any>(`getCourseByTID timetableId=${timetableId}`))
+        catchError(
+          this.handleError<any>(`getCourseByTID timetableId=${timetableId}`)
+        )
       );
   }
 

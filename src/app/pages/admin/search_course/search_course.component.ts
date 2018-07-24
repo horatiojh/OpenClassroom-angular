@@ -115,6 +115,8 @@ export class SearchCourseComponent implements OnInit {
     this.shareService.setValue("weekDay", this.selectedWeekDay);
     this.shareService.setValue("startTime", this.preferStartTime);
     this.shareService.setValue("endTime", this.preferEndTime);
+    this.shareService.setValue("dates", this.preferDates);
+    this.shareService.setValue("tags", this.inputTags);
     this.router.navigate(["/viewRequestCourse"]);
   }
 

@@ -143,10 +143,6 @@ export class ModuleCardComponent implements OnInit, OnChanges {
         });
 
         this.display = false;
-
-        setTimeout(function() {
-          location.reload();
-        }, 300);
       }
     }
   }

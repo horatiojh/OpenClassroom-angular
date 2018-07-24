@@ -16,6 +16,7 @@ export class Course {
   eventSize: string;
   syllabus: string;
   blackoutDates: string;
+  tagList: string[];
 
   timetables: Timetable[];
 
