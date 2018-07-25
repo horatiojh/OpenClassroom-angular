@@ -32,6 +32,7 @@ export class SearchCourseComponent implements OnInit {
   endHour: string;
   endMin: string;
   preferDay: number;
+  dateStr: string;
 
   // css style
   buttonStyle: SafeScript;
@@ -57,6 +58,7 @@ export class SearchCourseComponent implements OnInit {
     this.preferDates = null;
     this.preferStartDate = null;
     this.preferEndDate = null;
+    this.dateStr = "";
   }
 
   ngOnInit() {
@@ -123,6 +125,13 @@ export class SearchCourseComponent implements OnInit {
       } else {
         this.tagName = this.tagName + "," + this.inputTags[i];
       }
+    }
+
+    if (this.preferDates[1] == null) {
+      this.dateStr = String(this.preferDates[0]);
+    } else {
+      this.dateStr =
+        String(this.preferDates[0]) + "," + String(this.preferDates[1]);
     }
 
     this.shareService.setValue("weekDay", this.selectedWeekDay);

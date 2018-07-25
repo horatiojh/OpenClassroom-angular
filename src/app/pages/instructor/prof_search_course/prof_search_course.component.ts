@@ -32,6 +32,7 @@ export class ProfSearchCourseComponent implements OnInit {
   endHour: string;
   endMin: string;
   preferDay: number;
+  dateStr: string;
 
   // css style
   buttonStyle: SafeScript;
@@ -57,6 +58,7 @@ export class ProfSearchCourseComponent implements OnInit {
     this.preferDates = null;
     this.preferStartDate = null;
     this.preferEndDate = null;
+    this.dateStr = "";
   }
 
   ngOnInit() {
@@ -125,10 +127,17 @@ export class ProfSearchCourseComponent implements OnInit {
       }
     }
 
+    if (this.preferDates[1] == null) {
+      this.dateStr = String(this.preferDates[0]);
+    } else {
+      this.dateStr =
+        String(this.preferDates[0]) + "," + String(this.preferDates[1]);
+    }
+
     this.shareService.setValue("weekDay", this.selectedWeekDay);
     this.shareService.setValue("startTime", this.preferStartTime);
     this.shareService.setValue("endTime", this.preferEndTime);
-    this.shareService.setValue("dates", this.preferDates);
+    this.shareService.setValue("dates", this.dateStr);
     this.shareService.setValue("tags", this.tagName);
     this.router.navigate(["/profViewRequestCourse"]);
   }
