@@ -75,6 +75,9 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   vfQuestionRatings: QuestionRating[] = [];
   vFeedback: VFeedback;
   vfVisit: Visit;
+  vQuestionAAns: string;
+  vQuestionBAns: string;
+  vQuestionCAns: string;
 
   // for instructor feedback form dialog
   ifDisplay: boolean = false;
@@ -85,6 +88,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   ifQuestionRatings: QuestionRating[] = [];
   iFeedback: VFeedback;
   ifVisit: Visit;
+  iQuestionAAns: string;
 
   constructor(
     private breadcrumbService: BreadcrumbService,

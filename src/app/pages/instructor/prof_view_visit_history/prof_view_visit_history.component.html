@@ -85,34 +85,87 @@
           </p-footer>
         </p-dialog>
 
-        <p-dialog [(visible)]="vfDisplay" [draggable]="false" [resizable]="false" [width]="680" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+        <p-dialog [(visible)]="vfDisplay" [draggable]="false" [resizable]="false" [width]="600" [height]="auto" [contentStyle]="{'overflow':'visible'}"
           modal="true">
 
           <p-header>Feedback Form</p-header>
 
-          <div style="margin-top: 15px">
+          <div style="margin-top: 10px">
 
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
-                <div class="ui-grid-col-3">Questions:</div>
-                <div class="ui-grid-col-9">
-                  <div *ngFor="let vfQuestionRating of vfQuestionRatings" style="margin-top: -5px;margin-left: -8px">
-                    <div class="ui-g-8">{{vfQuestionRating.question}}</div>
-                    <div class="ui-g-4">
-                      <p-rating [(ngModel)]="vfQuestionRating.rating"></p-rating>
-                    </div>
-                  </div>
+                <div>
+                  <b>Private comments to the instructor: </b>
                 </div>
               </div>
             </div>
 
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                  <label>Comments:</label>
+                <div>
+                  a. What is one thing that worked particularly well in this class?
                 </div>
-                <div class="ui-grid-col-9" style="margin-top: 5px">
-                  <textarea rows="6" cols="53" pInputTextarea [(ngModel)]="vfComment" class="text_area_cus" name="vfComment"></textarea>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  <textarea rows="3" cols="50" pInputTextarea [(ngModel)]="vQuestionAAns" class="text_area_cus" name="vQuestionAAns"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  b. What is one suggestion the instructor can implement for future classes?
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  <textarea rows="3" cols="50" pInputTextarea [(ngModel)]="vQuestionBAns" class="text_area_cus" name="vQuestionBAns"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  c. [Optional] Any other comments for the instructor:
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  <textarea rows="3" cols="50" pInputTextarea [(ngModel)]="vQuestionCAns" class="text_area_cus" name="vQuestionCAns"></textarea>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="ui-g-18 ui-md-12" style="margin-top: 10px">
+              <div class="ui-grid-row">
+                <div>
+                  <b>On a scale of 1-5, where 1 signifies “disagree” and 5 signifies “strongly agree”</b>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <div *ngFor="let vfQuestionRating of vfQuestionRatings" style="margin-top: -5px;margin-left: -8px">
+                    <div class="ui-g-9">{{vfQuestionRating.question}}</div>
+                    <div class="ui-g-3">
+                      <p-rating [(ngModel)]="vfQuestionRating.rating"></p-rating>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -134,15 +187,22 @@
 
           <p-header>Feedback Form</p-header>
 
-          <div style="margin-top: 15px">
+          <div style="margin-top: 10px">
+
+            <div class="ui-g-18 ui-md-12" style="margin-top: 10px">
+              <div class="ui-grid-row">
+                <div>
+                  <b>On a scale of 1-5, where 1 signifies “disagree” and 5 signifies “strongly agree”</b>
+                </div>
+              </div>
+            </div>
 
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
-                <div class="ui-grid-col-3">Questions:</div>
-                <div class="ui-grid-col-9">
+                <div class="ui-grid-col-12">
                   <div *ngFor="let ifQuestionRating of ifQuestionRatings" style="margin-top: -5px;margin-left: -8px">
-                    <div class="ui-g-8">{{ifQuestionRating.question}}</div>
-                    <div class="ui-g-4">
+                    <div class="ui-g-9">{{ifQuestionRating.question}}</div>
+                    <div class="ui-g-3">
                       <p-rating [(ngModel)]="ifQuestionRating.rating"></p-rating>
                     </div>
                   </div>
@@ -150,13 +210,18 @@
               </div>
             </div>
 
+            <div class="ui-g-18 ui-md-12" style="margin-top: 10px">
+              <div class="ui-grid-row">
+                <div>
+                  <b>[Optional] Send a private communication to the observer (up to 400 characters)</b>
+                </div>
+              </div>
+            </div>
+
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
-                <div class="ui-grid-col-3">
-                  <label>Comments:</label>
-                </div>
-                <div class="ui-grid-col-9" style="margin-top: 5px">
-                  <textarea rows="6" cols="53" pInputTextarea [(ngModel)]="ifComment" class="text_area_cus" name="ifComment" placeholder=" Send a private communication to the observer (up to 400 characters) "></textarea>
+                <div>
+                  <textarea rows="6" cols="50" pInputTextarea [(ngModel)]="iQuestionAAns" class="text_area_cus" name="iQuestionAAns"></textarea>
                 </div>
               </div>
             </div>
