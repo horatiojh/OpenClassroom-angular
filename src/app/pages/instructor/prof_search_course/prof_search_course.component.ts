@@ -127,11 +127,13 @@ export class ProfSearchCourseComponent implements OnInit {
       }
     }
 
-    if (this.preferDates[1] == null) {
-      this.dateStr = String(this.preferDates[0]);
-    } else {
-      this.dateStr =
-        String(this.preferDates[0]) + "," + String(this.preferDates[1]);
+    if (this.preferDates != null) {
+      if (this.preferDates[1] == null) {
+        this.dateStr = String(this.preferDates[0]);
+      } else {
+        this.dateStr =
+          String(this.preferDates[0]) + "," + String(this.preferDates[1]);
+      }
     }
 
     this.shareService.setValue("weekDay", this.selectedWeekDay);
@@ -139,6 +141,10 @@ export class ProfSearchCourseComponent implements OnInit {
     this.shareService.setValue("endTime", this.preferEndTime);
     this.shareService.setValue("dates", this.dateStr);
     this.shareService.setValue("tags", this.tagName);
+    this.shareService.setValue(
+      "staffIdStr",
+      sessionStorage.getItem("sessionStaffIdStr")
+    );
     this.router.navigate(["/profViewRequestCourse"]);
   }
 

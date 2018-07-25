@@ -117,7 +117,8 @@ export class ViewRequestCourseComponent implements OnInit {
       startTime: this.startTime,
       endTime: this.endTime,
       tags: this.tagName,
-      dates: this.dateStr
+      dates: this.dateStr,
+      staffId: this.shareService.getValue("staffIdStr")
     };
 
     this.timetableService

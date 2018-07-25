@@ -125,7 +125,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
       startTime: this.startTime,
       endTime: this.endTime,
       tags: this.tagName,
-      dates: this.dateStr
+      dates: this.dateStr,
+      staffId: String(this.shareService.getValue("staffIdStr"))
     };
 
     this.timetableService
