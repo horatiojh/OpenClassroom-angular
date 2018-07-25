@@ -3,8 +3,10 @@ import { Visit } from "./visit";
 export class VFeedback {
   id: number;
   postDate: string;
-  questions: string[];
+  rQuestions: string[];
   qRating: string[];
+  oQuestions: string[];
+  oAns: string[];
   comment: string;
 
   visit: Visit;

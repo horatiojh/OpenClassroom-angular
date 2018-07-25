@@ -300,6 +300,7 @@
                         <p-sortIcon [field]="col.field"></p-sortIcon>
                       </th>
                       <th style="width: 8%">Feedback</th>
+                      <th style="width: 8%">View</th>
                     </tr>
                   </ng-template>
 
@@ -309,14 +310,17 @@
                         {{rowData[col.field]}}
                       </td>
                       <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-envelope" (onClick)="showInstructorFeedbackFormDialog(rowData)"></p-button>
+                        <p-button icon="fa fa-fw fa-envelope" (onClick)="showInstructorFeedbackFormDialog(rowData)" [disabled]="rowData.ifeedbackSubmitted"></p-button>
+                      </td>
+                      <td style="text-align: center">
+                        <p-button icon="fa fa-fw fa-file-text" (onClick)="updateTimetable(rowData)"></p-button>
                       </td>
                     </tr>
                   </ng-template>
 
                   <ng-template pTemplate="emptymessage" let-columns>
                     <tr>
-                      <td [attr.colspan]="columns.length+1">
+                      <td [attr.colspan]="columns.length+2">
                         No records found
                       </td>
                     </tr>
@@ -398,7 +402,7 @@
 
                   <ng-template pTemplate="emptymessage" let-columns>
                     <tr>
-                      <td [attr.colspan]="columns.length+1">
+                      <td [attr.colspan]="columns.length+2">
                         No records found
                       </td>
                     </tr>
@@ -421,6 +425,7 @@
                         <p-sortIcon [field]="col.field"></p-sortIcon>
                       </th>
                       <th style="width: 8%">Feedback</th>
+                      <th style="width: 8%">View</th>
                     </tr>
                   </ng-template>
 
@@ -430,14 +435,17 @@
                         {{rowData[col.field]}}
                       </td>
                       <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-envelope" (onClick)="showVisitorFeedbackFormDialog(rowData)"></p-button>
+                        <p-button icon="fa fa-fw fa-envelope" (onClick)="showVisitorFeedbackFormDialog(rowData)" [disabled]="rowData.vfeedbackSubmitted"></p-button>
+                      </td>
+                      <td style="text-align: center">
+                        <p-button icon="fa fa-fw fa-file-text" (onClick)="updateTimetable(rowData)"></p-button>
                       </td>
                     </tr>
                   </ng-template>
 
                   <ng-template pTemplate="emptymessage" let-columns>
                     <tr>
-                      <td [attr.colspan]="columns.length+1">
+                      <td [attr.colspan]="columns.length+2">
                         No records found
                       </td>
                     </tr>

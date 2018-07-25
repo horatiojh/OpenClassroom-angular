@@ -15,6 +15,7 @@ import { Staff } from "../../../../domain/staff";
 import { MessageEntity } from "../../../../domain/message";
 import { QuestionRating } from "../../../../wrapper/questionRating";
 import { VFeedback } from "../../../../domain/vFeedback";
+import { IFeedback } from "../../../../domain/iFeedback";
 
 @Component({
   selector: "app-profViewVisitHistory",
@@ -75,9 +76,11 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   vfQuestionRatings: QuestionRating[] = [];
   vFeedback: VFeedback;
   vfVisit: Visit;
-  vQuestionAAns: string;
-  vQuestionBAns: string;
-  vQuestionCAns: string;
+  vQuestionAAns: string = "";
+  vQuestionBAns: string = "";
+  vQuestionCAns: string = "";
+  vQuestions: string[] = [];
+  vAns: string[] = [];
 
   // for instructor feedback form dialog
   ifDisplay: boolean = false;
@@ -86,7 +89,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   ifQRatings: string[] = [];
   ifComment: string;
   ifQuestionRatings: QuestionRating[] = [];
-  iFeedback: VFeedback;
+  iFeedback: IFeedback;
   ifVisit: Visit;
   iQuestionAAns: string;
 
@@ -107,6 +110,17 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    // for create visitor feedback
+    this.vQuestions.push(
+      "What is one thing that worked particularly well in this class?"
+    );
+
+    this.vQuestions.push(
+      "What is one suggestion the instructor can implement for future classes?"
+    );
+
+    this.vQuestions.push("Any other comments for the instructor");
+
     // for feedback form dialog
     this.vfQuestionRatings.push({
       question: "This visit caused me to reflect on my own teaching.",
@@ -560,10 +574,16 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       this.vfQRatings.push(String(this.vfQuestionRatings[i].rating));
     }
 
+    this.vAns.push(this.vQuestionAAns);
+    this.vAns.push(this.vQuestionBAns);
+    this.vAns.push(this.vQuestionCAns);
+
     this.vFeedback = new VFeedback();
 
-    this.vFeedback.questions = this.vfQuestions;
+    this.vFeedback.rQuestions = this.vfQuestions;
     this.vFeedback.qRating = this.vfQRatings;
+    this.vFeedback.oQuestions = this.vQuestions;
+    this.vFeedback.oAns = this.vAns;
     this.vFeedback.comment = this.vfComment;
 
     this.visitService
@@ -608,9 +628,9 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       this.ifQRatings.push(String(this.ifQuestionRatings[i].rating));
     }
 
-    this.iFeedback = new VFeedback();
+    this.iFeedback = new IFeedback();
 
-    this.iFeedback.questions = this.ifQuestions;
+    this.iFeedback.rQuestions = this.ifQuestions;
     this.iFeedback.qRating = this.ifQRatings;
     this.iFeedback.comment = this.ifComment;
 

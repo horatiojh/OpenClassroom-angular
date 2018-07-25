@@ -98,6 +98,7 @@ import { Message } from "primeng/api";
                             </li>
                         </ul>
                     </li>
+
                     <li #notifications [ngClass]="{'active-top-menu':app.activeTopbarItem === notifications}"
                     [style]="notificationStyle">
                         <a routerLink="/profViewNotification">
@@ -106,6 +107,7 @@ import { Message } from "primeng/api";
                             <span class="topbar-item-name">Notifications</span>
                         </a>
                     </li>
+
                     <li #search class="search-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === search}">
                         <a [routerLink]="searchLink">
                             <i class="topbar-icon material-icons">search</i>
