@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
-import { Message, ConfirmationService, MenuItem } from "primeng/primeng";
+import { Message, ConfirmationService } from "primeng/primeng";
 
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { VisitService } from "../../../../providers/visitService";
@@ -38,10 +38,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
   // for components
   msgs: Message[] = [];
-  ICItems: MenuItem[];
-  IPItems: MenuItem[];
-  VCItems: MenuItem[];
-  VPItems: MenuItem[];
 
   // for cancellation form dialog
   iMsgContent: string;
@@ -109,32 +105,24 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   ngOnInit() {
     // for feedback form dialog
     this.vfQuestionRatings.push({
-      question: "I learnt something about the classroom climate.",
+      question: "This visit caused me to reflect on my own teaching.",
       rating: 0
     });
 
     this.vfQuestionRatings.push({
-      question: "I learnt something about the course content.",
-      rating: 0
-    });
-
-    this.vfQuestionRatings.push({
-      question: "I learnt something about the professor’s teaching methods.",
+      question:
+        "As a result of the visit, I anticipate making changes to my classes.",
       rating: 0
     });
 
     this.ifQuestionRatings.push({
-      question: "Dummy Question 1",
+      question: "The visit caused me to reflect on my teaching.",
       rating: 0
     });
 
     this.ifQuestionRatings.push({
-      question: "Dummy Question 2",
-      rating: 0
-    });
-
-    this.ifQuestionRatings.push({
-      question: "Dummy Question 3",
+      question:
+        "As a result of the visit, I will implement changes to how I teach this course.",
       rating: 0
     });
 
@@ -161,12 +149,11 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     );
 
     // for datatable
-    this.staffId = Number(sessionStorage.getItem("staffId"));
+    this.staffId = Number(sessionStorage.getItem("sessionStaffId"));
 
     this.iCols = [
       { field: "visitorName", header: "Observer", width: "20%" },
       { field: "moduleCode", header: "Code", width: "9%" },
-      { field: "moduleGroup", header: "Group", width: "9%" },
       { field: "visitDate", header: "Date", width: "10%" },
       { field: "startTime", header: "Start", width: "9%" },
       { field: "endTime", header: "End", width: "8%" },
@@ -174,7 +161,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     ];
 
     this.vCols = [
-      { field: "moduleTitle", header: "Module Title", width: "20%" },
+      { field: "moduleCode", header: "Module Code", width: "12%" },
       { field: "instructorName", header: "Instructor", width: "20%" },
       { field: "visitDate", header: "Date", width: "9%" },
       { field: "startTime", header: "Start", width: "8%" },
@@ -243,6 +230,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       .subscribe(response => {
         if (response != null && typeof response.visits != undefined) {
           this.vPendingVisit = response.visits;
+
+          console.log(this.vPendingVisit);
         } else {
           this.msgs.push({
             severity: "error",
@@ -284,7 +273,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   instructorConfirmDialog(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to confirm it?",
+      message: "Are you sure that you want to confirm?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
@@ -297,7 +286,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   instructorCancelDialog(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to cancel it?",
+      message: "Are you sure that you want to cancel?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
@@ -310,7 +299,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   visitorConfirmDialog(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to confirm it?",
+      message: "Are you sure that you want to confirm?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
@@ -323,7 +312,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   visitorCancelDialog(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to cancel it?",
+      message: "Are you sure that you want to cancel?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
@@ -653,89 +642,5 @@ export class ProfViewVisitHistoryComponent implements OnInit {
               });
           });
       });
-  }
-
-  VCActionList(rowData) {
-    let visitId = rowData.id;
-    let visit: Visit;
-
-    this.visitService.getVisitByVisitId(visitId).subscribe(response => {
-      visit = response.visit;
-
-      this.VCItems = [
-        {
-          disabled: visit.vfeedbackSubmitted,
-          icon: "fa-thumbs-up",
-          command: () => {
-            this.showVisitorFeedbackFormDialog(rowData);
-          }
-        },
-        {
-          icon: "fa-envelope",
-          command: () => {
-            this.showVisitorFeedbackFormDialog(rowData);
-          }
-        }
-      ];
-    });
-  }
-
-  VPActionList(rowData) {
-    this.VPItems = [
-      {
-        icon: "fa-gittip",
-        command: () => {
-          this.visitorConfirmDialog(rowData);
-        }
-      },
-      {
-        icon: "fa-trash",
-        command: () => {
-          this.visitorCancelDialog(rowData);
-        }
-      }
-    ];
-  }
-
-  IPActionList(rowData) {
-    this.IPItems = [
-      {
-        icon: "fa-gittip",
-        command: () => {
-          this.instructorConfirmDialog(rowData);
-        }
-      },
-      {
-        icon: "fa-trash",
-        command: () => {
-          this.instructorCancelDialog(rowData);
-        }
-      }
-    ];
-  }
-
-  ICActionList(rowData) {
-    let visitId = rowData.id;
-    let visit: Visit;
-
-    this.visitService.getVisitByVisitId(visitId).subscribe(response => {
-      visit = response.visit;
-
-      this.ICItems = [
-        {
-          disabled: visit.ifeedbackSubmitted,
-          icon: "fa-thumbs-up",
-          command: () => {
-            this.showInstructorFeedbackFormDialog(rowData);
-          }
-        },
-        {
-          icon: "fa-envelope",
-          command: () => {
-            this.showInstructorFeedbackFormDialog(rowData);
-          }
-        }
-      ];
-    });
   }
 }
