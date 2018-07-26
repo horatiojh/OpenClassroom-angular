@@ -12,6 +12,7 @@ import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
 import { CourseInfo } from "../../../../domain/courseInfo";
 import { DateEntity } from "../../../../domain/date";
+import { Tag } from "../../../../domain/tag";
 
 @Component({
   selector: "app-profViewRequestCourseDetails",
@@ -40,6 +41,9 @@ export class ProfViewRequestCourseDetailsComponent implements OnInit {
   timetables: Timetable[];
   weeksName: string;
   dates: DateEntity[];
+
+  // view tags
+  inputTags: string[] = [];
 
   constructor(
     private courseService: CourseService,
@@ -73,6 +77,7 @@ export class ProfViewRequestCourseDetailsComponent implements OnInit {
           this.syllabus = this.course.syllabus;
           this.blackoutDates = this.course.blackoutDates;
           this.moduleGroup = this.course.moduleGroup;
+          this.inputTags = this.course.tagList;
 
           this.timetableService
             .getTimetableByCourseId(this.courseId)

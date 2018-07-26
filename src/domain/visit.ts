@@ -13,6 +13,7 @@ export class Visit {
   iStatus: string;
   vfeedbackSubmitted: boolean;
   ifeedbackSubmitted: boolean;
+  complete: boolean;
 
   date: DateEntity;
 

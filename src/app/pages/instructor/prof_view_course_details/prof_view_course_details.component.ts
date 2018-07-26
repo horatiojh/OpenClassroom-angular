@@ -43,7 +43,6 @@ export class ProfViewCourseDetailsComponent implements OnInit {
   dates: DateEntity[];
 
   // view tags
-  tags: Tag[] = [];
   inputTags: string[] = [];
 
   // delete tags

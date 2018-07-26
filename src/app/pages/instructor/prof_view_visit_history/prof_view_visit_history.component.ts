@@ -93,6 +93,19 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   ifVisit: Visit;
   iQuestionAAns: string;
 
+  // for view visitor's feedback
+  vvFeedback: VFeedback;
+  vvfDialogVisitId: number;
+  vvfDisplay: boolean = false;
+  vvQuestionAAns: string = "";
+  vvQuestionBAns: string = "";
+  vvQuestionCAns: string = "";
+  vvfQuestionRatings: QuestionRating[] = [];
+  vvOpenQuestions: string[] = [];
+  vvOpenAns: string[] = [];
+  vvfRQuestions: string[] = [];
+  vvfQRatings: string[] = [];
+
   constructor(
     private breadcrumbService: BreadcrumbService,
     private visitService: VisitService,
@@ -564,6 +577,35 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   showInstructorFeedbackFormDialog(rowData) {
     this.ifDisplay = true;
     this.ifDialogVisitId = rowData.id;
+  }
+
+  showViewVisitorFeedbackDetailsDialog(rowData) {
+    this.vvfDisplay = true;
+    this.vvfDialogVisitId = rowData.id;
+
+    this.vFeedbackService
+      .getVFeedbackByVisitId(this.vvfDialogVisitId)
+      .subscribe(response => {
+        this.vvFeedback = response.vFeedback;
+
+        this.vvOpenQuestions = this.vvFeedback.oQuestions;
+        this.vvOpenAns = this.vvFeedback.oAns;
+        this.vvfRQuestions = this.vvFeedback.rQuestions;
+        this.vvfQRatings = this.vvFeedback.qRating;
+
+        // question & rating
+        for (let i = 0; i < this.vvfRQuestions.length; i++) {
+          this.vvfQuestionRatings.push({
+            question: this.vvfRQuestions[i],
+            rating: Number(this.vvfQRatings[i])
+          });
+        }
+
+        // open questions
+        this.vvQuestionAAns = this.vvOpenAns[0];
+        this.vvQuestionBAns = this.vvOpenAns[1];
+        this.vvQuestionCAns = this.vvOpenAns[2];
+      });
   }
 
   visitorLeaveFeedback() {

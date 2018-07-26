@@ -238,6 +238,93 @@
           </p-footer>
         </p-dialog>
 
+        <p-dialog [(visible)]="vvfDisplay" [draggable]="false" [resizable]="false" [width]="600" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>Feedback Details</p-header>
+
+          <div style="margin-top: 10px;margin-bottom: 10px">
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  <b>Private comments to the instructor: </b>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  a. What is one thing that worked particularly well in this class?
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  <label style="text-align: justify">{{vvQuestionAAns}}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  b. What is one suggestion the instructor can implement for future classes?
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  <label style="text-align: justify">{{vvQuestionBAns}}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  c. [Optional] Any other comments for the instructor:
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  <label style="text-align: justify">{{vvQuestionCAns}}</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="ui-g-18 ui-md-12" style="margin-top: 10px">
+              <div class="ui-grid-row">
+                <div>
+                  <b>On a scale of 1-5, where 1 signifies “disagree” and 5 signifies “strongly agree”</b>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <div *ngFor="let vvfQuestionRating of vvfQuestionRatings" style="margin-top: -5px;margin-left: -8px">
+                    <div class="ui-g-9">{{vvfQuestionRating.question}}</div>
+                    <div class="ui-g-3">
+                      <p-rating [(ngModel)]="vvfQuestionRating.rating" readonly="true" [cancel]="false"></p-rating>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-dialog>
+
         <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
 
         <p-tabView>
@@ -438,7 +525,7 @@
                         <p-button icon="fa fa-fw fa-envelope" (onClick)="showVisitorFeedbackFormDialog(rowData)" [disabled]="rowData.vfeedbackSubmitted"></p-button>
                       </td>
                       <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-file-text" (onClick)="updateTimetable(rowData)"></p-button>
+                        <p-button icon="fa fa-fw fa-file-text" (onClick)="showViewVisitorFeedbackDetailsDialog(rowData)"></p-button>
                       </td>
                     </tr>
                   </ng-template>
