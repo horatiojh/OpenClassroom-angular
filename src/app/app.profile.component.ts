@@ -77,7 +77,6 @@ export class AppInlineProfileComponent implements OnInit {
   // for profile display
   staff: Staff;
   staffName: string;
-  gender: string;
   staffId: number;
 
   // for image display
@@ -105,14 +104,9 @@ export class AppInlineProfileComponent implements OnInit {
     this.staffService.getStaffByStaffId(this.staffId).subscribe(response => {
       this.staff = response.staff;
       this.staffName = this.staff.staffName;
-      this.gender = this.staff.gender;
       this.staffRole = this.staff.staffRole;
 
-      if (this.gender === "M") {
-        this.imageSrc = "assets/layout/images/male.png";
-      } else if (this.gender === "F") {
-        this.imageSrc = "assets/layout/images/female.png";
-      }
+      this.imageSrc = "assets/layout/images/male.png";
 
       if (this.staffRole === "admin") {
         this.profileUpdate = "/updateProfile";

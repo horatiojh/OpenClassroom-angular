@@ -23,13 +23,11 @@ export class UpdateProfileComponent implements OnInit {
 
   staffIdBoolean: boolean;
   staffNameBoolean: boolean;
-  staffGenderBoolean: boolean;
   staffRoleBoolean: boolean;
   staffEmailBoolean: boolean;
 
   // for update staff
   uStaffId: number;
-  updateGender: string;
   updateRole: string;
   updateStaffName: string;
   updateStaffId: string;
@@ -68,7 +66,6 @@ export class UpdateProfileComponent implements OnInit {
       this.staff = response.staff;
 
       this.updateEmailAdd = this.staff.emailAddress;
-      this.updateGender = this.staff.gender;
       this.updateRole = this.staff.staffRole;
       this.updateStaffName = this.staff.staffName;
       this.updateStaffId = this.staff.staffId;
@@ -123,17 +120,6 @@ export class UpdateProfileComponent implements OnInit {
       this.staffEmailBoolean = true;
     }
 
-    if (this.updateGender == undefined || this.updateGender == "") {
-      this.staffGenderBoolean = false;
-      this.msgs.push({
-        severity: "error",
-        summary: "Please choose the gender.",
-        detail: ""
-      });
-    } else {
-      this.staffGenderBoolean = true;
-    }
-
     if (this.updateRole == undefined || this.updateRole == "") {
       this.staffRoleBoolean = false;
       this.msgs.push({
@@ -149,14 +135,12 @@ export class UpdateProfileComponent implements OnInit {
       this.staffNameBoolean &&
       this.staffIdBoolean &&
       this.staffEmailBoolean &&
-      this.staffGenderBoolean &&
       this.staffRoleBoolean
     ) {
       this.updateStaff = new Staff();
 
       this.updateStaff.id = this.uStaffId;
       this.updateStaff.emailAddress = this.updateEmailAdd;
-      this.updateStaff.gender = this.updateGender;
       this.updateStaff.staffId = this.updateStaffId;
       this.updateStaff.staffName = this.updateStaffName;
       this.updateStaff.staffRole = this.updateRole;

@@ -31,7 +31,6 @@ export class ViewStaffInfoComponent implements OnInit {
 
   // for new staff creation
   createDisplay: boolean = false;
-  newGender: string;
   roles: Role[];
   selectedRole: string;
   newStaffName: string;
@@ -42,7 +41,6 @@ export class ViewStaffInfoComponent implements OnInit {
   // for update staff
   uStaffId: number;
   updateDisplay: boolean = false;
-  updateGender: string;
   updateRole: string;
   updateStaffName: string;
   updateStaffId: string;
@@ -137,7 +135,6 @@ export class ViewStaffInfoComponent implements OnInit {
       this.staff = response.staff;
 
       this.updateEmailAdd = this.staff.emailAddress;
-      this.updateGender = this.staff.gender;
       this.updateRole = this.staff.staffRole;
       this.updateStaffId = this.staff.staffId;
       this.updateStaffName = this.staff.staffName;
@@ -171,14 +168,6 @@ export class ViewStaffInfoComponent implements OnInit {
       });
     }
 
-    if (this.newGender == undefined || this.newGender == "") {
-      this.msgs.push({
-        severity: "error",
-        summary: "Please choose the gender.",
-        detail: ""
-      });
-    }
-
     if (this.selectedRole == undefined || this.selectedRole == "") {
       this.msgs.push({
         severity: "error",
@@ -190,7 +179,6 @@ export class ViewStaffInfoComponent implements OnInit {
     if (
       this.newStaffName != undefined &&
       this.newStaffId != undefined &&
-      this.newGender != undefined &&
       this.selectedRole != undefined &&
       this.newEmailAdd != undefined
     ) {
@@ -198,7 +186,6 @@ export class ViewStaffInfoComponent implements OnInit {
 
       this.newStaff.staffName = this.newStaffName;
       this.newStaff.staffId = this.newStaffId;
-      this.newStaff.gender = this.newGender;
       this.newStaff.staffRole = this.selectedRole;
       this.newStaff.pwd = "password";
       this.newStaff.emailAddress = this.newEmailAdd;
@@ -246,14 +233,6 @@ export class ViewStaffInfoComponent implements OnInit {
       });
     }
 
-    if (this.updateGender == undefined || this.updateGender == "") {
-      this.msgs.push({
-        severity: "error",
-        summary: "Please choose the gender.",
-        detail: ""
-      });
-    }
-
     if (this.updateRole == undefined || this.updateRole == "") {
       this.msgs.push({
         severity: "error",
@@ -265,7 +244,6 @@ export class ViewStaffInfoComponent implements OnInit {
     if (
       this.updateStaffName != undefined &&
       this.updateStaffId != undefined &&
-      this.updateGender != undefined &&
       this.updateRole != undefined &&
       this.updateEmailAdd != undefined
     ) {
@@ -273,7 +251,6 @@ export class ViewStaffInfoComponent implements OnInit {
 
       this.updateStaff.id = this.uStaffId;
       this.updateStaff.emailAddress = this.updateEmailAdd;
-      this.updateStaff.gender = this.updateGender;
       this.updateStaff.staffId = this.updateStaffId;
       this.updateStaff.staffName = this.updateStaffName;
       this.updateStaff.staffRole = this.updateRole;
