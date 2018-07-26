@@ -9,8 +9,6 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/throw";
 import { of } from "rxjs";
 
-import { Tag } from "../domain/tag";
-
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
 };

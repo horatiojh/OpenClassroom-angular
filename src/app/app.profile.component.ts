@@ -89,6 +89,7 @@ export class AppInlineProfileComponent implements OnInit {
 
   // for rate app
   appRating: string;
+  appRatingDisable: string;
 
   constructor(
     public app: MainComponent,
