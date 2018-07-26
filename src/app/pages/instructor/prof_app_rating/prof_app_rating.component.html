@@ -1,3 +1,43 @@
-<p>
-  prof-app-rating works!
-</p>
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="card">
+        <h1 style="margin-left: 14px">Rate App</h1>
+        <p-growl [value]="msgs" life="4500"></p-growl>
+
+        <div class="ui-g form-group">
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div>
+                <b>How would you rate this app out of 5 stars?</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-8">
+                <div *ngFor="let questionRating of questionRatings" style="margin-top: -5px;margin-left: -8px">
+                  <div class="ui-g-9">{{questionRating.question}}</div>
+                  <div class="ui-g-3">
+                    <p-rating [(ngModel)]="questionRating.rating"></p-rating>
+                  </div>
+                </div>
+                <div class="ui-grid-col-4"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-3">
+                <p-button label="Submit" (onClick)="submitAppRating($event)" [style]="submitRatingBtnStyle"></p-button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
