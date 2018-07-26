@@ -325,6 +325,52 @@
           </div>
         </p-dialog>
 
+        <p-dialog [(visible)]="vifDisplay" [draggable]="false" [resizable]="false" [width]="680" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>Feedback Details</p-header>
+
+          <div style="margin-top: 10px;margin-bottom: 10px">
+
+            <div class="ui-g-18 ui-md-12" style="margin-top: 10px">
+              <div class="ui-grid-row">
+                <div>
+                  <b>On a scale of 1-5, where 1 signifies “disagree” and 5 signifies “strongly agree”</b>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <div *ngFor="let vifQuestionRating of vifQuestionRatings" style="margin-top: -5px;margin-left: -8px">
+                    <div class="ui-g-9">{{vifQuestionRating.question}}</div>
+                    <div class="ui-g-3">
+                      <p-rating [(ngModel)]="vifQuestionRating.rating" readonly="true" [cancel]="false"></p-rating>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12" style="margin-top: 10px">
+              <div class="ui-grid-row">
+                <div>
+                  <b>[Optional] Send a private communication to the observer (up to 400 characters)</b>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div>
+                  <label style="text-align: justify">{{vifQuestionAAns}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-dialog>
+
         <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
 
         <p-tabView>
@@ -400,7 +446,7 @@
                         <p-button icon="fa fa-fw fa-envelope" (onClick)="showInstructorFeedbackFormDialog(rowData)" [disabled]="rowData.ifeedbackSubmitted"></p-button>
                       </td>
                       <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-file-text" (onClick)="updateTimetable(rowData)"></p-button>
+                        <p-button icon="fa fa-fw fa-file-text" (onClick)="showViewInstructorFeedbackDetailsDialog(rowData)" [disabled]="!rowData.complete"></p-button>
                       </td>
                     </tr>
                   </ng-template>
@@ -525,7 +571,7 @@
                         <p-button icon="fa fa-fw fa-envelope" (onClick)="showVisitorFeedbackFormDialog(rowData)" [disabled]="rowData.vfeedbackSubmitted"></p-button>
                       </td>
                       <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-file-text" (onClick)="showViewVisitorFeedbackDetailsDialog(rowData)"></p-button>
+                        <p-button icon="fa fa-fw fa-file-text" (onClick)="showViewVisitorFeedbackDetailsDialog(rowData)" [disabled]="!rowData.complete"></p-button>
                       </td>
                     </tr>
                   </ng-template>

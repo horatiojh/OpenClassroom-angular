@@ -72,7 +72,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   vfDialogVisitId: number;
   vfQuestions: string[] = [];
   vfQRatings: string[] = [];
-  vfComment: string;
   vfQuestionRatings: QuestionRating[] = [];
   vFeedback: VFeedback;
   vfVisit: Visit;
@@ -87,7 +86,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   ifDialogVisitId: number;
   ifQuestions: string[] = [];
   ifQRatings: string[] = [];
-  ifComment: string;
   ifQuestionRatings: QuestionRating[] = [];
   iFeedback: IFeedback;
   ifVisit: Visit;
@@ -105,6 +103,15 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   vvOpenAns: string[] = [];
   vvfRQuestions: string[] = [];
   vvfQRatings: string[] = [];
+
+  // for view instructor's feedback
+  viFeedback: IFeedback;
+  vifDialogVisitId: number;
+  vifDisplay: boolean = false;
+  vifQuestionRatings: QuestionRating[] = [];
+  vifQuestionAAns: string;
+  vifRQuestions: string[] = [];
+  vifQRatings: string[] = [];
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -608,6 +615,31 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       });
   }
 
+  showViewInstructorFeedbackDetailsDialog(rowData) {
+    this.vifDisplay = true;
+    this.vifDialogVisitId = rowData.id;
+
+    this.iFeedbackService
+      .getVFeedbackByVisitId(this.vifDialogVisitId)
+      .subscribe(response => {
+        this.viFeedback = response.iFeedback;
+
+        this.vifRQuestions = this.viFeedback.rQuestions;
+        this.vifQRatings = this.viFeedback.qRating;
+
+        // open question (private message)
+        this.vifQuestionAAns = this.viFeedback.comment;
+
+        // question & rating
+        for (let i = 0; i < this.vifRQuestions.length; i++) {
+          this.vifQuestionRatings.push({
+            question: this.vifRQuestions[i],
+            rating: Number(this.vifQRatings[i])
+          });
+        }
+      });
+  }
+
   visitorLeaveFeedback() {
     this.msgs = [];
 
@@ -626,7 +658,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     this.vFeedback.qRating = this.vfQRatings;
     this.vFeedback.oQuestions = this.vQuestions;
     this.vFeedback.oAns = this.vAns;
-    this.vFeedback.comment = this.vfComment;
 
     this.visitService
       .getVisitByVisitId(this.vfDialogVisitId)
@@ -674,7 +705,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     this.iFeedback.rQuestions = this.ifQuestions;
     this.iFeedback.qRating = this.ifQRatings;
-    this.iFeedback.comment = this.ifComment;
+    this.iFeedback.comment = this.iQuestionAAns;
 
     this.visitService
       .getVisitByVisitId(this.ifDialogVisitId)

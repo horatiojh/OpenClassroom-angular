@@ -7,7 +7,6 @@ export class VFeedback {
   qRating: string[];
   oQuestions: string[];
   oAns: string[];
-  comment: string;
 
   visit: Visit;
 

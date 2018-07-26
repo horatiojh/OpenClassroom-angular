@@ -43,6 +43,17 @@ export class IFeedbackService {
       );
   }
 
+  getVFeedbackByVisitId(visitId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getIFeedbackByVID/" + visitId)
+      .pipe(
+        tap(_ => console.log(`getIFeedbackByVID visitId=${visitId}`)),
+        catchError(
+          this.handleError<any>(`getIFeedbackByVID visitId=${visitId}`)
+        )
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
