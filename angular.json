@@ -27,7 +27,8 @@
               "node_modules/quill/dist/quill.core.css"
             ],
             "scripts": [
-              "node_modules/quill/dist/quill.js"
+              "node_modules/quill/dist/quill.js",
+              "node_modules/chart.js/dist/Chart.js"
             ]
           },
           "configurations": {
