@@ -18,4 +18,8 @@ export class DataAnalyticsService {
   baseUrl = "/api/data";
 
   constructor(private httpClient: HttpClient) {}
+
+  getAllLastNumOfVisits(): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getAllNonLastNumOfVisits");
+  }
 }

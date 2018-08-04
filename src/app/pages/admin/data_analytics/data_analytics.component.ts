@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 import { BreadcrumbService } from "../../../breadcrumb.service";
+import { NumOfVisits } from "../../../../domain/numOfVisits";
+import { DataAnalyticsService } from "../../../../providers/dataAnalyticsService";
 
 @Component({
   selector: "app-dataAnalytics",
@@ -9,36 +11,42 @@ import { BreadcrumbService } from "../../../breadcrumb.service";
 })
 export class DataAnalyticsComponent implements OnInit {
   numOfVisits: any;
+  visits: NumOfVisits[];
+  label: string[] = [];
+  data: number[] = [];
 
-  constructor(private breadcrumbService: BreadcrumbService) {
+  constructor(
+    private breadcrumbService: BreadcrumbService,
+    private dataAnalyticsService: DataAnalyticsService
+  ) {
     this.breadcrumbService.setItems([{ label: "" }]);
-
-    this.numOfVisits = {
-      labels: [
-        "Week 1",
-        "Week 2",
-        "Week 3",
-        "Week 4",
-        "Week 5",
-        "Week 6",
-        "Week 7",
-        "Week 8",
-        "Week 9",
-        "Week 10",
-        "Week 11",
-        "Week 12",
-        "Week 13"
-      ],
-      datasets: [
-        {
-          label: "Number of Visits",
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: "#4bc0c0"
-        }
-      ]
-    };
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dataAnalyticsService.getAllLastNumOfVisits().subscribe(response => {
+      this.visits = response.numOfVisits;
+
+      for (let i = 0; i < this.visits.length; i++) {
+        if (this.visits[i].week == 1) {
+          this.label.push("Week 1");
+        } else if (this.visits[i].week == 2) {
+          this.label.push("Week 2");
+        }
+
+        this.data.push(this.visits[i].num);
+      }
+
+      this.numOfVisits = {
+        labels: this.label,
+        datasets: [
+          {
+            label: "Number of Visits",
+            data: this.data,
+            fill: false,
+            borderColor: "#4bc0c0"
+          }
+        ]
+      };
+    });
+  }
 }
