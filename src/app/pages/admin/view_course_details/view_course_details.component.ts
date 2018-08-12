@@ -135,9 +135,8 @@ export class ViewCourseDetailsComponent implements OnInit {
         detail: ""
       });
 
-      setTimeout(function() {
-        location.reload();
-      }, 300);
+      let index: number = this.inputTags.indexOf(tagName);
+      this.inputTags.slice(index, index + 1);
     });
   }
 }

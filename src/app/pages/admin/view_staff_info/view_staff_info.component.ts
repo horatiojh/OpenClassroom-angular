@@ -58,6 +58,18 @@ export class ViewStaffInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    //for datatable
+    this.cols = [
+      { field: "staffName", header: "Name", width: "18%" },
+      { field: "staffId", header: "Staff Id", width: "10%" },
+      { field: "staffRole", header: "Role", width: "10%" },
+      { field: "emailAddress", header: "Email", width: "23%" }
+    ];
+
+    this.staffService.getAllStaffs().subscribe(response => {
+      this.staffs = response.staffs;
+    });
+
     // for css style
     let showDialogstyle =
       "margin-top:10px;margin-bottom:10px;margin-left:1px;width:100px";
@@ -80,17 +92,6 @@ export class ViewStaffInfoComponent implements OnInit {
       { label: "Admin", value: "admin" },
       { label: "Instructor", value: "instructor" }
     ];
-
-    //for datatable
-    this.cols = [
-      { field: "staffName", header: "Name", width: "18%" },
-      { field: "staffId", header: "Staff Id", width: "10%" },
-      { field: "staffRole", header: "Role", width: "10%" },
-      { field: "emailAddress", header: "Email", width: "23%" }
-    ];
-    this.staffService.getAllStaffs().subscribe(response => {
-      this.staffs = response.staffs;
-    });
   }
 
   onFileUpload(event, fileUpload) {

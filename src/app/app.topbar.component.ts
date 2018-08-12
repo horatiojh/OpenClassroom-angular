@@ -59,46 +59,6 @@ import { Message } from "primeng/api";
                         </ul>
                     </li>
 
-                    <li #messages [ngClass]="{'active-top-menu':app.activeTopbarItem === messages}">
-                        <a href="#" (click)="app.onTopbarItemClick($event,messages)">
-                            <i class="topbar-icon material-icons animated swing">message</i>
-                            <span class="topbar-badge animated rubberBand">5</span>
-                            <span class="topbar-item-name">Messages</span>
-                        </a>
-                        <ul class="ultima-menu animated fadeInDown">
-                            <li role="menuitem">
-                                <a href="#" class="topbar-message">
-                                    <img src="assets/layout/images/avatar1.png" width="35"/>
-                                    <span>Give me a call</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#" class="topbar-message">
-                                    <img src="assets/layout/images/avatar2.png" width="35"/>
-                                    <span>Sales reports attached</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#" class="topbar-message">
-                                    <img src="assets/layout/images/avatar3.png" width="35"/>
-                                    <span>About your invoice</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#" class="topbar-message">
-                                    <img src="assets/layout/images/avatar2.png" width="35"/>
-                                    <span>Meeting today at 10pm</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#" class="topbar-message">
-                                    <img src="assets/layout/images/avatar4.png" width="35"/>
-                                    <span>Out of office</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
                     <li #notifications [ngClass]="{'active-top-menu':app.activeTopbarItem === notifications}"
                     [style]="notificationStyle">
                         <a routerLink="/profViewNotification">

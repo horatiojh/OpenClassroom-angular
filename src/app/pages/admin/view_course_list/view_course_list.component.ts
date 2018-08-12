@@ -19,6 +19,10 @@ import { CourseInfo } from "../../../../domain/courseInfo";
   styleUrls: ["./view_course_list.component.css"]
 })
 export class ViewCourseListComponent implements OnInit {
+  // for loading
+  loadingStatus: string;
+  interval: any;
+
   // css style
   updateCourseBtnStyle: SafeStyle;
 
@@ -92,6 +96,13 @@ export class ViewCourseListComponent implements OnInit {
     this.courseInfoService.getAllCourseInfo().subscribe(response => {
       this.dCourseInfos = response.courseInfos;
     });
+
+    // for loading
+    this.loadingStatus = "loading";
+
+    this.interval = setInterval(() => {
+      this.loadingStatus = "active";
+    }, 4000);
   }
 
   onFileUploadCourse(event, uploadCourse) {

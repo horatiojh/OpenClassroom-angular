@@ -8,3 +8,12 @@
   border-width: 0.1px;
   margin-top: 8px;
 }
+
+.loading_style {
+  background-image: url("../../../../assets/layout/images/loading.png");
+  width: 295px;
+  height: 295px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin-left: 32%;
+}
