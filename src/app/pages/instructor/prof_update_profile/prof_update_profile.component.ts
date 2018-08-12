@@ -152,10 +152,6 @@ export class ProfUpdateProfileComponent implements OnInit {
           summary: "Successfully Updated!",
           detail: ""
         });
-
-        setTimeout(function() {
-          location.reload();
-        }, 300);
       });
     }
   }
@@ -209,10 +205,6 @@ export class ProfUpdateProfileComponent implements OnInit {
           summary: "Successfully Changed!",
           detail: ""
         });
-
-        setTimeout(function() {
-          location.reload();
-        }, 300);
       });
     }
   }

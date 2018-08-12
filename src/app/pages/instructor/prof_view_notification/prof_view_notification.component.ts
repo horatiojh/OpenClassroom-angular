@@ -88,18 +88,22 @@ export class ProfViewNotificationsComponent implements OnInit {
 
   deleteUnreadMessage(messageId: number) {
     this.msgs = [];
+    let message: MessageEntity;
 
-    this.msgService.deleteMessage(messageId).subscribe(response => {
-      console.log("delete unread message");
-      this.msgs.push({
-        severity: "info",
-        summary: "Successfully Deleted!",
-        detail: ""
+    this.msgService.getMessageByMessageId(messageId).subscribe(response => {
+      message = response.message;
+
+      this.msgService.deleteMessage(messageId).subscribe(response => {
+        console.log("delete unread message");
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Deleted!",
+          detail: ""
+        });
+
+        let index: number = this.unReadMessages.indexOf(message);
+        this.unReadMessages.slice(index, index + 1);
       });
-
-      setTimeout(function() {
-        location.reload();
-      }, 300);
     });
   }
 
@@ -132,18 +136,22 @@ export class ProfViewNotificationsComponent implements OnInit {
 
   deleteReadMessage(messageId: number) {
     this.msgs = [];
+    let message: MessageEntity;
 
-    this.msgService.deleteMessage(messageId).subscribe(response => {
-      console.log("delete unread message");
-      this.msgs.push({
-        severity: "info",
-        summary: "Successfully Deleted!",
-        detail: ""
+    this.msgService.getMessageByMessageId(messageId).subscribe(response => {
+      message = response.message;
+
+      this.msgService.deleteMessage(messageId).subscribe(response => {
+        console.log("delete unread message");
+        this.msgs.push({
+          severity: "info",
+          summary: "Successfully Deleted!",
+          detail: ""
+        });
+
+        let index: number = this.readMessages.indexOf(message);
+        this.readMessages.slice(index, index + 1);
       });
-
-      setTimeout(function() {
-        location.reload();
-      }, 300);
     });
   }
 
