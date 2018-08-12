@@ -32,7 +32,7 @@ export class ViewStaffInfoComponent implements OnInit {
   // for new staff creation
   createDisplay: boolean = false;
   roles: Role[];
-  selectedRole: string;
+  selectedRole: Role;
   newStaffName: string;
   newStaffId: string;
   newEmailAdd: string;
@@ -168,7 +168,7 @@ export class ViewStaffInfoComponent implements OnInit {
       });
     }
 
-    if (this.selectedRole == undefined || this.selectedRole == "") {
+    if (this.selectedRole == undefined || this.selectedRole.value == "") {
       this.msgs.push({
         severity: "error",
         summary: "Please select the role.",
@@ -186,7 +186,7 @@ export class ViewStaffInfoComponent implements OnInit {
 
       this.newStaff.staffName = this.newStaffName;
       this.newStaff.staffId = this.newStaffId;
-      this.newStaff.staffRole = this.selectedRole;
+      this.newStaff.staffRole = this.selectedRole.value;
       this.newStaff.pwd = "password";
       this.newStaff.emailAddress = this.newEmailAdd;
 

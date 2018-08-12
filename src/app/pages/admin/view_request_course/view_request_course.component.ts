@@ -31,6 +31,10 @@ export class ViewRequestCourseComponent implements OnInit {
   // for component
   msgs: Message[] = [];
 
+  // for loading
+  loadingStatus: string;
+  interval: any;
+
   // for dialog
   display: boolean = false;
   dialogDateTime: string;
@@ -165,6 +169,13 @@ export class ViewRequestCourseComponent implements OnInit {
         });
       }
     });
+
+    // for loading
+    this.loadingStatus = "loading";
+
+    this.interval = setInterval(() => {
+      this.loadingStatus = "active";
+    }, 5500);
   }
 
   viewCourseDetails(rowData) {

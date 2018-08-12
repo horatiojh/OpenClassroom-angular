@@ -43,6 +43,7 @@ import { RatingModule } from "primeng/rating";
 import { RadioButtonModule } from "primeng/radiobutton";
 import { ChipsModule } from "primeng/chips";
 import { ChartModule } from "primeng/chart";
+import { ProgressSpinnerModule } from "primeng/progressspinner";
 
 import { Api } from "../providers/api";
 import { FileUploadService } from "../providers/fileUploadService";
@@ -179,7 +180,8 @@ import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_
     RatingModule,
     RadioButtonModule,
     ChipsModule,
-    ChartModule
+    ChartModule,
+    ProgressSpinnerModule
   ],
   providers: [
     Api,
