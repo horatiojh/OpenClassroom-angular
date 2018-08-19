@@ -119,6 +119,8 @@ export class ProfViewCourseDetailsComponent implements OnInit {
   }
 
   onRemoveEvent(event) {
+    this.msgs = [];
+
     let tagName: string;
     tagName = event.value;
 

@@ -104,8 +104,6 @@ export class ModuleCardComponent implements OnInit, OnChanges {
     this.router.navigate(["/profViewTimetable"]);
   }
 
-  createTags(event) {}
-
   ngOnChanges(changes: SimpleChanges) {
     this.course = changes.course.currentValue;
   }
@@ -129,6 +127,16 @@ export class ModuleCardComponent implements OnInit, OnChanges {
         this.tagService.createTag(endpoint, body).subscribe(
           response => {
             console.log("create tag successfully");
+
+            if (check) {
+              this.msgs.push({
+                severity: "info",
+                summary: "Successfully Created!",
+                detail: ""
+              });
+
+              this.display = false;
+            }
           },
           error => {
             check = false;

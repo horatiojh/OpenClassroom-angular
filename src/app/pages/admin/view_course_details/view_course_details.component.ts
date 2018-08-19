@@ -119,6 +119,8 @@ export class ViewCourseDetailsComponent implements OnInit {
   }
 
   onRemoveEvent(event) {
+    this.msgs = [];
+
     let tagName: string;
     tagName = event.value;
 

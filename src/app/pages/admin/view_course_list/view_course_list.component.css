@@ -11,9 +11,9 @@
 
 .loading_style {
   background-image: url("../../../../assets/layout/images/loading.png");
-  width: 295px;
-  height: 295px;
-  margin-top: 10%;
-  margin-bottom: 10%;
-  margin-left: 32%;
+  width: 200px;
+  height: 200px;
+  margin-top: 18%;
+  margin-bottom: 15%;
+  margin-left: 38%;
 }
