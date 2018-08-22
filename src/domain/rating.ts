@@ -4,6 +4,7 @@ export class Rating {
   rating: string[];
   status: boolean;
   staffId: string;
+  staffRole: string;
 
   constructor() {}
 }

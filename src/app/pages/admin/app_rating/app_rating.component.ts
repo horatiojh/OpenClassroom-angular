@@ -2,10 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 import { Message } from "../../../../../node_modules/primeng/primeng";
 
-import { QuestionRating } from "../../../../wrapper/questionRating";
-import { Rating } from "../../../../domain/rating";
-
 import { RatingService } from "../../../../providers/ratingService";
+
+import { QuestionRating } from "../../../../wrapper/questionRating";
+import { Role } from "../../../../wrapper/role";
+
+import { Rating } from "../../../../domain/rating";
 
 @Component({
   selector: "app-appRating",
@@ -25,6 +27,8 @@ export class AppRatingComponent implements OnInit {
   newRating: Rating;
   questions: string[] = [];
   rating: string[] = [];
+  roles: Role[];
+  selectedRole: Role;
 
   constructor(
     private domSanitizer: DomSanitizer,
@@ -53,6 +57,12 @@ export class AppRatingComponent implements OnInit {
       question: "Contains useful information and data",
       rating: 0
     });
+
+    // for staff roles
+    this.roles = [
+      { label: "Observer", value: "observer" },
+      { label: "Instructor", value: "instructor" }
+    ];
   }
 
   submitAppRating(event) {
@@ -67,6 +77,7 @@ export class AppRatingComponent implements OnInit {
     this.newRating.questions = this.questions;
     this.newRating.rating = this.rating;
     this.newRating.staffId = sessionStorage.getItem("sessionStaffIdStr");
+    this.newRating.staffRole = this.selectedRole.value;
 
     this.ratingService.createRating(this.newRating).subscribe(response => {
       this.msgs.push({
