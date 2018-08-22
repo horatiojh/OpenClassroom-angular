@@ -26,10 +26,12 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   // for datatable
   iCols: any[];
   vCols: any[];
-  iConfirmedVisit: Visit[];
+  iConfirmedFeedbackedVisit: Visit[];
+  iConfirmedNonFeedbackedVisit: Visit[];
   iPendingVisit: Visit[];
   iCancelledVisit: Visit[];
-  vConfirmedVisit: Visit[];
+  vConfirmedFeedbackedVisit: Visit[];
+  vConfirmedNonFeedbackedVisit: Visit[];
   vPendingVisit: Visit[];
   vCancelledVisit: Visit[];
   staff: Staff;
@@ -112,6 +114,21 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   vifQuestionAAns: string;
   vifRQuestions: string[] = [];
   vifQRatings: string[] = [];
+
+  // for view instructor's private message (from observer)
+  vIMDisplay: boolean = false;
+  vIMDialogVisitId: number;
+  vIMFeedback: VFeedback;
+  vIMOpenAns: string[] = [];
+  vIMQuestionAAns: string = "";
+  vIMQuestionBAns: string = "";
+  vIMQuestionCAns: string = "";
+
+  // for view observer's private message (from instructor)
+  vVMDisplay: boolean = false;
+  vVMDialogVisitId: number;
+  vVMFeedback: IFeedback;
+  vVMQuestionAAns: string;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -228,10 +245,24 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           });
 
         this.visitService
-          .getConfirmedVisitByStaffId(this.staffIdStr)
+          .getAllIFeedbackedConfirmedVisitsByStaffId(this.staffIdStr)
           .subscribe(response => {
             if (response != null && typeof response.visits != undefined) {
-              this.iConfirmedVisit = response.visits;
+              this.iConfirmedFeedbackedVisit = response.visits;
+            } else {
+              this.msgs.push({
+                severity: "error",
+                summary: "An error has occurred while processing the request",
+                detail: ""
+              });
+            }
+          });
+
+        this.visitService
+          .getAllNonIFeedbackedConfirmedVisitsByStaffId(this.staffIdStr)
+          .subscribe(response => {
+            if (response != null && typeof response.visits != undefined) {
+              this.iConfirmedNonFeedbackedVisit = response.visits;
             } else {
               this.msgs.push({
                 severity: "error",
@@ -280,10 +311,24 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       });
 
     this.visitService
-      .getMyConfirmedVisitHistory(this.staffId)
+      .getAllVFeedbackedConfirmedVisits(this.staffId)
       .subscribe(response => {
         if (response != null && typeof response.visits != undefined) {
-          this.vConfirmedVisit = response.visits;
+          this.vConfirmedFeedbackedVisit = response.visits;
+        } else {
+          this.msgs.push({
+            severity: "error",
+            summary: "An error has occurred while processing the request",
+            detail: ""
+          });
+        }
+      });
+
+    this.visitService
+      .getAllNonVFeedbackedConfirmedVisits(this.staffId)
+      .subscribe(response => {
+        if (response != null && typeof response.visits != undefined) {
+          this.vConfirmedNonFeedbackedVisit = response.visits;
         } else {
           this.msgs.push({
             severity: "error",
@@ -581,11 +626,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     this.vfDialogVisitId = rowData.id;
   }
 
-  showInstructorFeedbackFormDialog(rowData) {
-    this.ifDisplay = true;
-    this.ifDialogVisitId = rowData.id;
-  }
-
   showViewVisitorFeedbackDetailsDialog(rowData) {
     this.vvfDisplay = true;
     this.vvfDialogVisitId = rowData.id;
@@ -601,6 +641,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
         this.vvfQRatings = this.vvFeedback.qRating;
 
         // question & rating
+        this.vvfQuestionRatings = [];
+
         for (let i = 0; i < this.vvfRQuestions.length; i++) {
           this.vvfQuestionRatings.push({
             question: this.vvfRQuestions[i],
@@ -615,12 +657,49 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       });
   }
 
+  showInstructorFeedbackFormDialog(rowData) {
+    this.ifDisplay = true;
+    this.ifDialogVisitId = rowData.id;
+  }
+
+  showInstructorMessageDialog(rowData) {
+    this.vIMDisplay = true;
+    this.vIMDialogVisitId = rowData.id;
+
+    this.vFeedbackService
+      .getVFeedbackByVisitId(this.vIMDialogVisitId)
+      .subscribe(response => {
+        this.vIMFeedback = response.vFeedback;
+
+        this.vIMOpenAns = this.vIMFeedback.oAns;
+
+        // open questions
+        this.vIMQuestionAAns = this.vIMOpenAns[0];
+        this.vIMQuestionBAns = this.vIMOpenAns[1];
+        this.vIMQuestionCAns = this.vIMOpenAns[2];
+      });
+  }
+
+  showVisitorMessageDialog(rowData) {
+    this.vVMDisplay = true;
+    this.vVMDialogVisitId = rowData.id;
+
+    this.iFeedbackService
+      .getIFeedbackByVisitId(this.vVMDialogVisitId)
+      .subscribe(response => {
+        this.vVMFeedback = response.iFeedback;
+
+        // open question (private message)
+        this.vVMQuestionAAns = this.vVMFeedback.comment;
+      });
+  }
+
   showViewInstructorFeedbackDetailsDialog(rowData) {
     this.vifDisplay = true;
     this.vifDialogVisitId = rowData.id;
 
     this.iFeedbackService
-      .getVFeedbackByVisitId(this.vifDialogVisitId)
+      .getIFeedbackByVisitId(this.vifDialogVisitId)
       .subscribe(response => {
         this.viFeedback = response.iFeedback;
 
@@ -631,6 +710,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
         this.vifQuestionAAns = this.viFeedback.comment;
 
         // question & rating
+        this.vifQuestionRatings = [];
+
         for (let i = 0; i < this.vifRQuestions.length; i++) {
           this.vifQuestionRatings.push({
             question: this.vifRQuestions[i],

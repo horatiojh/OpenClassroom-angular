@@ -103,7 +103,7 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div>
-                  a. What is one thing that worked particularly well in this class?
+                  <b>a. What is one thing that worked particularly well in this class?</b>
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div>
-                  b. What is one suggestion the instructor can implement for future classes?
+                  <b>b. What is one suggestion the instructor can implement for future classes?</b>
                 </div>
               </div>
             </div>
@@ -135,7 +135,7 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div>
-                  c. [Optional] Any other comments for the instructor:
+                  <b>c. [Optional] Any other comments for the instructor:</b>
                 </div>
               </div>
             </div>
@@ -241,7 +241,7 @@
         <p-dialog [(visible)]="vvfDisplay" [draggable]="false" [resizable]="false" [width]="600" [height]="auto" [contentStyle]="{'overflow':'visible'}"
           modal="true">
 
-          <p-header>Feedback Details</p-header>
+          <p-header>Feedback Review</p-header>
 
           <div style="margin-top: 10px;margin-bottom: 10px">
 
@@ -256,7 +256,7 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div>
-                  a. What is one thing that worked particularly well in this class?
+                  <b>a. What is one thing that worked particularly well in this class?</b>
                 </div>
               </div>
             </div>
@@ -272,7 +272,7 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div>
-                  b. What is one suggestion the instructor can implement for future classes?
+                  <b>b. What is one suggestion the instructor can implement for future classes?</b>
                 </div>
               </div>
             </div>
@@ -288,7 +288,7 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div>
-                  c. [Optional] Any other comments for the instructor:
+                  <b>c. [Optional] Any other comments for the instructor:</b>
                 </div>
               </div>
             </div>
@@ -301,7 +301,6 @@
               </div>
             </div>
 
-
             <div class="ui-g-18 ui-md-12" style="margin-top: 10px">
               <div class="ui-grid-row">
                 <div>
@@ -313,10 +312,10 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div class="ui-grid-col-12">
-                  <div *ngFor="let questionRating of questionRatings" style="margin-top: -5px;margin-left: -8px">
-                    <div class="ui-g-9">{{questionRating.question}}</div>
+                  <div *ngFor="let vvfQuestionRating of vvfQuestionRatings" style="margin-top: -5px;margin-left: -8px">
+                    <div class="ui-g-9">{{vvfQuestionRating.question}}</div>
                     <div class="ui-g-3">
-                      <p-rating [(ngModel)]="questionRating.rating"></p-rating>
+                      <p-rating [(ngModel)]="vvfQuestionRating.rating" readonly="true" [cancel]="false"></p-rating>
                     </div>
                   </div>
                 </div>
@@ -329,7 +328,7 @@
         <p-dialog [(visible)]="vifDisplay" [draggable]="false" [resizable]="false" [width]="680" [height]="auto" [contentStyle]="{'overflow':'visible'}"
           modal="true">
 
-          <p-header>Feedback Details</p-header>
+          <p-header>Feedback Review</p-header>
 
           <div style="margin-top: 10px;margin-bottom: 10px">
 
@@ -370,6 +369,76 @@
               </div>
             </div>
           </div>
+        </p-dialog>
+
+        <p-dialog [(visible)]="vIMDisplay" [draggable]="false" [resizable]="false" [width]="680" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>Private Message From Observer</p-header>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div>
+                <b>a. What is one thing that worked particularly well in this class?</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div>
+                <label style="text-align: justify">{{vIMQuestionAAns}}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div>
+                <b>b. What is one suggestion the instructor can implement for future classes?</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div>
+                <label style="text-align: justify">{{vIMQuestionBAns}}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div>
+                <b>c. [Optional] Any other comments for the instructor:</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div>
+                <label style="text-align: justify">{{vIMQuestionCAns}}</label>
+              </div>
+            </div>
+          </div>
+
+        </p-dialog>
+
+        <p-dialog [(visible)]="vVMDisplay" [draggable]="false" [resizable]="false" [width]="680" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+          modal="true">
+
+          <p-header>Private Message From Instructor</p-header>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div>
+                <label style="text-align: justify">{{vVMQuestionAAns}}</label>
+              </div>
+            </div>
+          </div>
+
         </p-dialog>
 
         <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
@@ -420,50 +489,98 @@
                 </p-table>
               </p-accordionTab>
 
-              <p-accordionTab header="Confirmed" [selected]="true">
-                <p-table #iDt [columns]="iCols" [value]="iConfirmedVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+              <p-accordionTab header="Confirmed">
 
-                  <ng-template pTemplate="caption">
+                <p-tabView>
+                  <p-tabPanel header="Feedback Undone">
 
-                  </ng-template>
+                    <p-table #iDt [columns]="iCols" [value]="iConfirmedNonFeedbackedVisit" [paginator]="true" [rows]="10" [responsive]="true"
+                      paginatorPosition="bottom">
 
-                  <ng-template pTemplate="header" let-columns>
-                    <tr>
-                      <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
-                        {{col.header}}
-                        <p-sortIcon [field]="col.field"></p-sortIcon>
-                      </th>
-                      <th style="width: 8%">Feedback</th>
-                      <th style="width: 8%">View</th>
-                    </tr>
-                  </ng-template>
+                      <ng-template pTemplate="caption">
 
-                  <ng-template pTemplate="body" let-rowData let-columns="columns">
-                    <tr [pSelectableRow]="rowData" style="height:55px">
-                      <td *ngFor="let col of columns" style="text-align: center">
-                        {{rowData[col.field]}}
-                      </td>
-                      <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-envelope" (onClick)="showInstructorFeedbackFormDialog(rowData)" [disabled]="rowData.ifeedbackSubmitted"></p-button>
-                      </td>
-                      <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-file-text" (onClick)="showViewInstructorFeedbackDetailsDialog(rowData)" [disabled]="!rowData.complete"></p-button>
-                      </td>
-                    </tr>
-                  </ng-template>
+                      </ng-template>
 
-                  <ng-template pTemplate="emptymessage" let-columns>
-                    <tr>
-                      <td [attr.colspan]="columns.length+2">
-                        No records found
-                      </td>
-                    </tr>
-                  </ng-template>
+                      <ng-template pTemplate="header" let-columns>
+                        <tr>
+                          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                          </th>
+                          <th style="width: 8%">Feedback</th>
+                        </tr>
+                      </ng-template>
 
-                </p-table>
+                      <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData" style="height:55px">
+                          <td *ngFor="let col of columns" style="text-align: center">
+                            {{rowData[col.field]}}
+                          </td>
+                          <td style="text-align: center">
+                            <p-button icon="fa fa-fw fa-envelope" (onClick)="showInstructorFeedbackFormDialog(rowData)" [disabled]="rowData.ifeedbackSubmitted"></p-button>
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                      <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                          <td [attr.colspan]="columns.length+1">
+                            No records found
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                    </p-table>
+                  </p-tabPanel>
+
+                  <p-tabPanel header="Feedback Done">
+
+                    <p-table #iDt [columns]="iCols" [value]="iConfirmedFeedbackedVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+
+                      <ng-template pTemplate="caption">
+
+                      </ng-template>
+
+                      <ng-template pTemplate="header" let-columns>
+                        <tr>
+                          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                          </th>
+                          <th style="width: 8%">Review</th>
+                          <th style="width: 8%">Msg</th>
+                        </tr>
+                      </ng-template>
+
+                      <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData" style="height:55px">
+                          <td *ngFor="let col of columns" style="text-align: center">
+                            {{rowData[col.field]}}
+                          </td>
+                          <td style="text-align: center">
+                            <p-button icon="fa fa-fw fa-envelope" (onClick)="showViewInstructorFeedbackDetailsDialog(rowData)"></p-button>
+                          </td>
+                          <td style="text-align: center">
+                            <p-button icon="fa fa-fw fa-comment" (onClick)="showInstructorMessageDialog(rowData)" [disabled]="!rowData.complete"></p-button>
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                      <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                          <td [attr.colspan]="columns.length+2">
+                            No records found
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                    </p-table>
+                  </p-tabPanel>
+                </p-tabView>
+
               </p-accordionTab>
 
-              <p-accordionTab header="Cancelled" [selected]="true">
+              <p-accordionTab header="Cancelled">
                 <p-table #iDt [columns]="iCols" [value]="iCancelledVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
                   <ng-template pTemplate="caption">
@@ -545,50 +662,100 @@
                 </p-table>
               </p-accordionTab>
 
-              <p-accordionTab header="Confirmed" [selected]="true">
-                <p-table #vDt [columns]="vCols" [value]="vConfirmedVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+              <p-accordionTab header="Confirmed">
 
-                  <ng-template pTemplate="caption">
+                <p-tabView>
+                  <p-tabPanel header="Feedback Undone">
 
-                  </ng-template>
+                    <p-table #vDt [columns]="vCols" [value]="vConfirmedNonFeedbackedVisit" [paginator]="true" [rows]="10" [responsive]="true"
+                      paginatorPosition="bottom">
 
-                  <ng-template pTemplate="header" let-columns>
-                    <tr>
-                      <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
-                        {{col.header}}
-                        <p-sortIcon [field]="col.field"></p-sortIcon>
-                      </th>
-                      <th style="width: 8%">Feedback</th>
-                      <th style="width: 8%">View</th>
-                    </tr>
-                  </ng-template>
+                      <ng-template pTemplate="caption">
 
-                  <ng-template pTemplate="body" let-rowData let-columns="columns">
-                    <tr [pSelectableRow]="rowData" style="height:55px">
-                      <td *ngFor="let col of columns" style="text-align: center">
-                        {{rowData[col.field]}}
-                      </td>
-                      <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-envelope" (onClick)="showVisitorFeedbackFormDialog(rowData)" [disabled]="rowData.vfeedbackSubmitted"></p-button>
-                      </td>
-                      <td style="text-align: center">
-                        <p-button icon="fa fa-fw fa-file-text" (onClick)="showViewVisitorFeedbackDetailsDialog(rowData)" [disabled]="!rowData.complete"></p-button>
-                      </td>
-                    </tr>
-                  </ng-template>
+                      </ng-template>
 
-                  <ng-template pTemplate="emptymessage" let-columns>
-                    <tr>
-                      <td [attr.colspan]="columns.length+2">
-                        No records found
-                      </td>
-                    </tr>
-                  </ng-template>
+                      <ng-template pTemplate="header" let-columns>
+                        <tr>
+                          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                          </th>
+                          <th style="width: 8%">Feedback</th>
+                        </tr>
+                      </ng-template>
 
-                </p-table>
+                      <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData" style="height:55px">
+                          <td *ngFor="let col of columns" style="text-align: center">
+                            {{rowData[col.field]}}
+                          </td>
+                          <td style="text-align: center">
+                            <p-button icon="fa fa-fw fa-envelope" (onClick)="showVisitorFeedbackFormDialog(rowData)"></p-button>
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                      <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                          <td [attr.colspan]="columns.length+1">
+                            No records found
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                    </p-table>
+
+                  </p-tabPanel>
+
+                  <p-tabPanel header="Feedback Done">
+
+                    <p-table #vDt [columns]="vCols" [value]="vConfirmedFeedbackedVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+
+                      <ng-template pTemplate="caption">
+
+                      </ng-template>
+
+                      <ng-template pTemplate="header" let-columns>
+                        <tr>
+                          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                          </th>
+                          <th style="width: 6%">Review</th>
+                          <th style="width: 6%">Msg</th>
+                        </tr>
+                      </ng-template>
+
+                      <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData" style="height:55px">
+                          <td *ngFor="let col of columns" style="text-align: center">
+                            {{rowData[col.field]}}
+                          </td>
+                          <td style="text-align: center">
+                            <p-button icon="fa fa-fw fa-envelope" (onClick)="showViewVisitorFeedbackDetailsDialog(rowData)"></p-button>
+                          </td>
+                          <td style="text-align: center">
+                            <p-button icon="fa fa-fw fa-comment" (onClick)="showVisitorMessageDialog(rowData)" [disabled]="!rowData.complete"></p-button>
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                      <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                          <td [attr.colspan]="columns.length+2">
+                            No records found
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                    </p-table>
+
+                  </p-tabPanel>
+                </p-tabView>
+
               </p-accordionTab>
 
-              <p-accordionTab header="Cancelled" [selected]="true">
+              <p-accordionTab header="Cancelled">
                 <p-table #vDt [columns]="vCols" [value]="vCancelledVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
                   <ng-template pTemplate="caption">

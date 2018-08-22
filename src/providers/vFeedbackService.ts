@@ -54,6 +54,17 @@ export class VFeedbackService {
       );
   }
 
+  getVFeedbackByIFeedbackId(iFeedbackId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getVFeedbackByIFID/" + iFeedbackId)
+      .pipe(
+        tap(_ => console.log(`getVFeedbackByIFID iFeedbackId=${iFeedbackId}`)),
+        catchError(
+          this.handleError<any>(`getVFeedbackByIFID iFeedbackId=${iFeedbackId}`)
+        )
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

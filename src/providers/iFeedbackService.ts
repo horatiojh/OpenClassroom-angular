@@ -43,13 +43,24 @@ export class IFeedbackService {
       );
   }
 
-  getVFeedbackByVisitId(visitId: number): Observable<any> {
+  getIFeedbackByVisitId(visitId: number): Observable<any> {
     return this.httpClient
       .get<any>(this.baseUrl + "/getIFeedbackByVID/" + visitId)
       .pipe(
         tap(_ => console.log(`getIFeedbackByVID visitId=${visitId}`)),
         catchError(
           this.handleError<any>(`getIFeedbackByVID visitId=${visitId}`)
+        )
+      );
+  }
+
+  getIFeedbackByVFeedbackId(vFeedbackId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getIFeedbackByVFID/" + vFeedbackId)
+      .pipe(
+        tap(_ => console.log(`getIFeedbackByVFID vFeedbackId=${vFeedbackId}`)),
+        catchError(
+          this.handleError<any>(`getIFeedbackByVFID vFeedbackId=${vFeedbackId}`)
         )
       );
   }

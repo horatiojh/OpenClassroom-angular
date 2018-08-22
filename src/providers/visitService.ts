@@ -43,17 +43,6 @@ export class VisitService {
       );
   }
 
-  getConfirmedVisitByStaffId(staffId: string): Observable<any> {
-    return this.httpClient
-      .get<any>(this.baseUrl + "/getConfirmedVisitsBySID/" + staffId)
-      .pipe(
-        tap(_ => console.log(`getConfirmedVisitsBySID staffId=${staffId}`)),
-        catchError(
-          this.handleError<any>(`getConfirmedVisitsBySID staffId=${staffId}`)
-        )
-      );
-  }
-
   getCancelledVisitByStaffId(staffId: string): Observable<any> {
     return this.httpClient
       .get<any>(this.baseUrl + "/getCancelledVisitsBySID/" + staffId)
@@ -61,6 +50,46 @@ export class VisitService {
         tap(_ => console.log(`getCancelledVisitsBySID staffId=${staffId}`)),
         catchError(
           this.handleError<any>(`getCancelledVisitsBySID staffId=${staffId}`)
+        )
+      );
+  }
+
+  getAllIFeedbackedConfirmedVisitsByStaffId(staffId: string): Observable<any> {
+    return this.httpClient
+      .get<any>(
+        this.baseUrl + "/getAllIFeedbackedConfirmedVisitsBySID/" + staffId
+      )
+      .pipe(
+        tap(_ =>
+          console.log(
+            `getAllIFeedbackedConfirmedVisitsBySID staffId=${staffId}`
+          )
+        ),
+        catchError(
+          this.handleError<any>(
+            `getAllIFeedbackedConfirmedVisitsBySID staffId=${staffId}`
+          )
+        )
+      );
+  }
+
+  getAllNonIFeedbackedConfirmedVisitsByStaffId(
+    staffId: string
+  ): Observable<any> {
+    return this.httpClient
+      .get<any>(
+        this.baseUrl + "/getAllNonIFeedbackedConfirmedVisitsBySID/" + staffId
+      )
+      .pipe(
+        tap(_ =>
+          console.log(
+            `getAllNonIFeedbackedConfirmedVisitsBySID staffId=${staffId}`
+          )
+        ),
+        catchError(
+          this.handleError<any>(
+            `getAllNonIFeedbackedConfirmedVisitsBySID staffId=${staffId}`
+          )
         )
       );
   }
@@ -76,17 +105,6 @@ export class VisitService {
       );
   }
 
-  getMyConfirmedVisitHistory(staffId: number): Observable<any> {
-    return this.httpClient
-      .get<any>(this.baseUrl + "/getMyConfirmedVisitHistory/" + staffId)
-      .pipe(
-        tap(_ => console.log(`getMyConfirmedVisitHistory staffId=${staffId}`)),
-        catchError(
-          this.handleError<any>(`getMyConfirmedVisitHistory staffId=${staffId}`)
-        )
-      );
-  }
-
   getMyCancelledVisitHistory(staffId: number): Observable<any> {
     return this.httpClient
       .get<any>(this.baseUrl + "/getMyCancelledVisitHistory/" + staffId)
@@ -94,6 +112,38 @@ export class VisitService {
         tap(_ => console.log(`getMyCancelledVisitHistory staffId=${staffId}`)),
         catchError(
           this.handleError<any>(`getMyCancelledVisitHistory staffId=${staffId}`)
+        )
+      );
+  }
+
+  getAllVFeedbackedConfirmedVisits(staffId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getAllVFeedbackedConfirmedVisits/" + staffId)
+      .pipe(
+        tap(_ =>
+          console.log(`getAllVFeedbackedConfirmedVisits staffId=${staffId}`)
+        ),
+        catchError(
+          this.handleError<any>(
+            `getAllVFeedbackedConfirmedVisits staffId=${staffId}`
+          )
+        )
+      );
+  }
+
+  getAllNonVFeedbackedConfirmedVisits(staffId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(
+        this.baseUrl + "/getAllNonVFeedbackedConfirmedVisits/" + staffId
+      )
+      .pipe(
+        tap(_ =>
+          console.log(`getAllNonVFeedbackedConfirmedVisits staffId=${staffId}`)
+        ),
+        catchError(
+          this.handleError<any>(
+            `getAllNonVFeedbackedConfirmedVisits staffId=${staffId}`
+          )
         )
       );
   }
