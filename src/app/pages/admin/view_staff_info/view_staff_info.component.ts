@@ -112,13 +112,23 @@ export class ViewStaffInfoComponent implements OnInit {
         });
       },
       error => {
-        fileUpload.clear();
-        this.msgs = [];
-        this.msgs.push({
-          severity: "error",
-          summary: "HTTP " + error.status,
-          detail: ""
-        });
+        if (error == "Duplicate") {
+          fileUpload.clear();
+          this.msgs = [];
+          this.msgs.push({
+            severity: "error",
+            summary: "Duplicate Record",
+            detail: ""
+          });
+        } else if (error == "Bad Request") {
+          fileUpload.clear();
+          this.msgs = [];
+          this.msgs.push({
+            severity: "error",
+            summary: "Please upload the correct file",
+            detail: ""
+          });
+        }
       }
     );
   }
