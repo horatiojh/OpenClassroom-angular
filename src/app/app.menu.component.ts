@@ -27,8 +27,8 @@ export class AppMenuComponent implements OnInit {
         this.model = [
             { label: 'Staff Management', icon: 'camera', routerLink: ['/viewStaffInfo'] },
             { label: 'Classroom Management', icon: 'class', routerLink: ['/viewClassroom'] },
-            { label: 'Course Management', icon: 'list', routerLink: ['/viewCourseList'] },
-            { label: 'Data Analytics', icon: 'poll', routerLink: ['/dataAnalytics'] }
+            { label: 'Course Management', icon: 'list', routerLink: ['/viewCourseList'] }
+            // { label: 'Data Analytics', icon: 'poll', routerLink: ['/dataAnalytics'] }
         ];
       } else if(this.staffRole === "instructor") {
         this.model = [

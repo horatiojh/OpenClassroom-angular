@@ -7,6 +7,7 @@ import { ClassroomService } from "../../../../providers/classroomService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 
 import { Classroom } from "../../../../domain/classroom";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-viewClassroom",
@@ -75,13 +76,23 @@ export class ViewClassroomComponent implements OnInit {
         });
       },
       error => {
-        fileUpload.clear();
-        this.msgs = [];
-        this.msgs.push({
-          severity: "error",
-          summary: "Please upload the correct file",
-          detail: ""
-        });
+        if (error == "Duplicate") {
+          fileUpload.clear();
+          this.msgs = [];
+          this.msgs.push({
+            severity: "error",
+            summary: "Duplicate Record",
+            detail: ""
+          });
+        } else if (error == "Bad Request") {
+          fileUpload.clear();
+          this.msgs = [];
+          this.msgs.push({
+            severity: "error",
+            summary: "Please upload the correct file",
+            detail: ""
+          });
+        }
       }
     );
   }

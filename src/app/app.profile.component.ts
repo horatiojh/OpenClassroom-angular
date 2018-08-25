@@ -34,7 +34,7 @@ import { StaffService } from "../providers/staffService";
             <li role="menuitem">
                 <a [routerLink]="appRating" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
                     <i class="material-icons">star_rate</i>
-                    <span>Rate App</span>
+                    <span>App Evaluation</span>
                 </a>
             </li>
             <li role="menuitem">

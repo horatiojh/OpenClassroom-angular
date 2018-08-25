@@ -106,9 +106,9 @@ export class DateService {
   }
 
   updateIsBooked(endpoint: string, body?: any): Observable<any> {
-    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
-      catchError(this.handleErrorApi)
-    );
+    return this.httpClient
+      .post<any>(this.baseUrl + endpoint, body)
+      .pipe(catchError(this.handleErrorApi));
   }
 
   getBookedDateByTimetableId(timetableId: number): Observable<any> {

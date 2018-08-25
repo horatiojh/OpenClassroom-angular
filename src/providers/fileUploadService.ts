@@ -11,27 +11,31 @@ export class FileUploadService {
   constructor(private httpClient: HttpClient) {}
 
   uploadClassroom(data: FormData): Observable<any> {
-    return this.httpClient
-      .post<any>(this.baseUrl + "classroom", data)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
+    return this.httpClient.post<any>(this.baseUrl + "classroom", data).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleError)
+    );
   }
 
   uploadStaffInfo(data: FormData): Observable<any> {
-    return this.httpClient
-      .post<any>(this.baseUrl + "staffInfo", data)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
+    return this.httpClient.post<any>(this.baseUrl + "staffInfo", data).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleError)
+    );
   }
 
   uploadCourse(data: FormData): Observable<any> {
-    return this.httpClient
-      .post<any>(this.baseUrl + "courseList", data)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
+    return this.httpClient.post<any>(this.baseUrl + "courseList", data).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleError)
+    );
   }
 
   uploadCourseInfo(data: FormData): Observable<any> {
-    return this.httpClient
-      .post<any>(this.baseUrl + "courseInfo", data)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleError));
+    return this.httpClient.post<any>(this.baseUrl + "courseInfo", data).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -40,6 +44,8 @@ export class FileUploadService {
     if (error.error instanceof ErrorEvent) {
       console.error("An unknown error has occurred:", error.error.message);
     } else {
+      errMsg = error.error;
+
       console.error(
         "An HTTP error has occurred: " +
           `HTTP ${error.status}: ${error.error.message}`
