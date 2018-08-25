@@ -153,13 +153,23 @@ export class ViewCourseListComponent implements OnInit {
         });
       },
       error => {
-        uploadCourseInfo.clear();
-        this.msgs = [];
-        this.msgs.push({
-          severity: "error",
-          summary: "Invalid File",
-          detail: ""
-        });
+        if (error == "Duplicate") {
+          uploadCourseInfo.clear();
+          this.msgs = [];
+          this.msgs.push({
+            severity: "error",
+            summary: "Duplicate Record",
+            detail: ""
+          });
+        } else if (error == "Bad Request") {
+          uploadCourseInfo.clear();
+          this.msgs = [];
+          this.msgs.push({
+            severity: "error",
+            summary: "Invalid File",
+            detail: ""
+          });
+        }
       }
     );
   }

@@ -89,7 +89,7 @@ export class ViewClassroomComponent implements OnInit {
           this.msgs = [];
           this.msgs.push({
             severity: "error",
-            summary: "Please upload the correct file",
+            summary: "Invalid File",
             detail: ""
           });
         }
