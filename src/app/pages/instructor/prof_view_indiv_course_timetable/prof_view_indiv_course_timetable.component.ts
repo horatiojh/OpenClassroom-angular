@@ -314,7 +314,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   confirmArchive(rowDate) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to archive it?",
+      message: "Are you sure that you want to archive?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
@@ -327,7 +327,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   confirmRestore(rowDate) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to restore it?",
+      message: "Are you sure that you want to restore?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {

@@ -321,4 +321,70 @@ export class ViewStaffInfoComponent implements OnInit {
       reject: () => {}
     });
   }
+
+  confirmArchive(rowData) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to archive?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.archiveStaff(rowData);
+      },
+      reject: () => {}
+    });
+  }
+
+  confirmRestore(rowData) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to restore?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.restoreStaff(rowData);
+      },
+      reject: () => {}
+    });
+  }
+
+  archiveStaff(rowData) {
+    let endpoint = "/updateIsActive";
+    let body = {
+      staffId: String(rowData.id),
+      isActive: false
+    };
+
+    this.staffService.updateIsActive(endpoint, body).subscribe(response => {
+      this.msgs.push({
+        severity: "info",
+        summary: "Successfully Archived!",
+        detail: ""
+      });
+
+      setTimeout(function() {
+        location.reload();
+      }, 300);
+    });
+  }
+
+  restoreStaff(rowData) {
+    let endpoint = "/updateIsActive";
+    let body = {
+      staffId: String(rowData.id),
+      isActive: true
+    };
+
+    this.staffService.updateIsActive(endpoint, body).subscribe(response => {
+      this.msgs.push({
+        severity: "info",
+        summary: "Successfully Restored!",
+        detail: ""
+      });
+
+      setTimeout(function() {
+        location.reload();
+      }, 300);
+    });
+  }
 }

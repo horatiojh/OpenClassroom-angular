@@ -216,8 +216,8 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     });
   }
 
-  archiveDate(rowDate) {
-    this.dateService.getDateByDateId(rowDate.id).subscribe(response => {
+  archiveDate(rowData) {
+    this.dateService.getDateByDateId(rowData.id).subscribe(response => {
       if (response != null && typeof response.date != undefined) {
         this.date = response.date;
         this.dateId = this.date.id;
@@ -255,8 +255,8 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     });
   }
 
-  restoreDate(rowDate) {
-    this.dateService.getDateByDateId(rowDate.id).subscribe(response => {
+  restoreDate(rowData) {
+    this.dateService.getDateByDateId(rowData.id).subscribe(response => {
       if (response != null && typeof response.date != undefined) {
         this.date = response.date;
         this.dateId = this.date.id;
@@ -371,7 +371,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   confirmArchive(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to archive it?",
+      message: "Are you sure that you want to archive?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
@@ -384,7 +384,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   confirmRestore(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to restore it?",
+      message: "Are you sure that you want to restore?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {

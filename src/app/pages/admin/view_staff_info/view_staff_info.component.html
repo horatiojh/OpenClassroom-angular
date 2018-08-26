@@ -183,7 +183,7 @@
                     <p-button icon="fa fa-fw fa-trash" (onClick)="deleteStaffConfirmDialog(rowData)"></p-button>
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-archive" (onClick)="deleteStaffConfirmDialog(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-archive" (onClick)="confirmArchive(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>
@@ -233,7 +233,7 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-star" (onClick)="deleteStaffConfirmDialog(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-star" (onClick)="confirmRestore(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>
