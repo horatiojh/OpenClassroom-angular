@@ -17,8 +17,12 @@ export class StaffService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllStaffs(): Observable<any> {
-    return this.httpClient.get<any>(this.baseUrl + "/getAllRecords");
+  getAllActiveStaffs(): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getAllActiveStaffs");
+  }
+
+  getAllInactiveStaffs(): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getAllInactiveStaffs");
   }
 
   getAllInstructors(): Observable<any> {

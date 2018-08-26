@@ -141,56 +141,114 @@
           </p-footer>
         </p-dialog>
 
-        <p-table #dt [columns]="cols" [value]="staffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-          sortField="staffRole" [sortOrder]="1">
+        <p-tabView>
+          <p-tabPanel header="Available">
+            <p-table #dt [columns]="cols" [value]="activeStaffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+              sortField="staffRole" [sortOrder]="1">
 
-          <ng-template pTemplate="caption">
-            <div style="text-align: right">
-              <i class="fa fa-search" style="margin:4px 4px 0 0px"></i>
-              <input id="table_search_cus" type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                style="width:35%;margin-left: 3px;color:aliceblue">
-            </div>
-          </ng-template>
+              <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                  <i class="fa fa-search" style="margin:4px 4px 0 0px"></i>
+                  <input id="table_search_cus" type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    style="width:35%;margin-left: 3px;color:aliceblue">
+                </div>
+              </ng-template>
 
-          <ng-template pTemplate="header" let-columns>
-            <tr>
-              <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
-                {{col.header}}
-                <p-sortIcon [field]="col.field"></p-sortIcon>
-              </th>
-              <th style="width: 8%">Update</th>
-              <th style="width: 8%">Delete</th>
-            </tr>
-            <tr style="display:none;">
-              <th *ngFor="let col of columns" [ngSwitch]="col.field">
-                <input *ngSwitchCase="'staffName'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              </th>
-            </tr>
-          </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                  <th style="width: 8%">Update</th>
+                  <th style="width: 8%">Delete</th>
+                  <th style="width: 8%">Archieve</th>
+                </tr>
+                <tr style="display:none;">
+                  <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                    <input *ngSwitchCase="'staffName'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                  </th>
+                </tr>
+              </ng-template>
 
-          <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr [pSelectableRow]="rowData" style="height:55px">
-              <td *ngFor="let col of columns">
-                {{rowData[col.field]}}
-              </td>
-              <td style="text-align: center">
-                <p-button icon="fa fa-fw fa-edit" (onClick)="showUpdateStaffDialog(rowData)"></p-button>
-              </td>
-              <td style="text-align: center">
-                <p-button icon="fa fa-fw fa-trash" (onClick)="deleteStaffConfirmDialog(rowData)"></p-button>
-              </td>
-            </tr>
-          </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData" style="height:55px">
+                  <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td style="text-align: center">
+                    <p-button icon="fa fa-fw fa-edit" (onClick)="showUpdateStaffDialog(rowData)"></p-button>
+                  </td>
+                  <td style="text-align: center">
+                    <p-button icon="fa fa-fw fa-trash" (onClick)="deleteStaffConfirmDialog(rowData)"></p-button>
+                  </td>
+                  <td style="text-align: center">
+                    <p-button icon="fa fa-fw fa-archive" (onClick)="deleteStaffConfirmDialog(rowData)"></p-button>
+                  </td>
+                </tr>
+              </ng-template>
 
-          <ng-template pTemplate="emptymessage" let-columns>
-            <tr>
-              <td [attr.colspan]="columns.length+3">
-                No records found
-              </td>
-            </tr>
-          </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length+3">
+                    No records found
+                  </td>
+                </tr>
+              </ng-template>
 
-        </p-table>
+            </p-table>
+          </p-tabPanel>
+
+          <p-tabPanel header="Archived">
+
+            <p-table #dt [columns]="cols" [value]="inactiveStaffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+              sortField="staffRole" [sortOrder]="1">
+
+              <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                  <i class="fa fa-search" style="margin:4px 4px 0 0px"></i>
+                  <input id="table_search_cus" type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    style="width:35%;margin-left: 3px;color:aliceblue">
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                  <th style="width: 8%">Restore</th>
+                </tr>
+                <tr style="display:none;">
+                  <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                    <input *ngSwitchCase="'staffName'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                  </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData" style="height:55px">
+                  <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td style="text-align: center">
+                    <p-button icon="fa fa-fw fa-star" (onClick)="deleteStaffConfirmDialog(rowData)"></p-button>
+                  </td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length+1">
+                    No records found
+                  </td>
+                </tr>
+              </ng-template>
+
+            </p-table>
+          </p-tabPanel>
+        </p-tabView>
       </div>
     </div>
   </div>

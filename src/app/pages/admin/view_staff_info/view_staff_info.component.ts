@@ -22,7 +22,8 @@ export class ViewStaffInfoComponent implements OnInit {
 
   // for datatable
   cols: any[];
-  staffs: Staff[];
+  activeStaffs: Staff[];
+  inactiveStaffs: Staff[];
 
   // for css style
   showDialogBtnStyle: SafeStyle;
@@ -66,8 +67,12 @@ export class ViewStaffInfoComponent implements OnInit {
       { field: "emailAddress", header: "Email", width: "23%" }
     ];
 
-    this.staffService.getAllStaffs().subscribe(response => {
-      this.staffs = response.staffs;
+    this.staffService.getAllActiveStaffs().subscribe(response => {
+      this.activeStaffs = response.staffs;
+    });
+
+    this.staffService.getAllInactiveStaffs().subscribe(response => {
+      this.inactiveStaffs = response.staffs;
     });
 
     // for css style
@@ -101,9 +106,15 @@ export class ViewStaffInfoComponent implements OnInit {
     this.fileUploadService.uploadStaffInfo(data).subscribe(
       response => {
         fileUpload.clear();
-        this.staffService.getAllStaffs().subscribe(response => {
-          this.staffs = response.staffs;
+
+        this.staffService.getAllActiveStaffs().subscribe(response => {
+          this.activeStaffs = response.staffs;
         });
+
+        this.staffService.getAllInactiveStaffs().subscribe(response => {
+          this.inactiveStaffs = response.staffs;
+        });
+
         this.msgs = [];
         this.msgs.push({
           severity: "info",
