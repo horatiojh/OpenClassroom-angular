@@ -19,7 +19,13 @@ export class DataAnalyticsService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllLastNumOfVisits(): Observable<any> {
+  getAllNonLastNumOfVisits(): Observable<any> {
     return this.httpClient.get<any>(this.baseUrl + "/getAllNonLastNumOfVisits");
+  }
+
+  getAllNonLastNumOfVisitors(): Observable<any> {
+    return this.httpClient.get<any>(
+      this.baseUrl + "/getAllNonLastNumOfVisitors"
+    );
   }
 }
