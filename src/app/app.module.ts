@@ -42,7 +42,6 @@ import { ListboxModule } from "primeng/listbox";
 import { RatingModule } from "primeng/rating";
 import { RadioButtonModule } from "primeng/radiobutton";
 import { ChipsModule } from "primeng/chips";
-import { ChartModule } from "primeng/chart";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { ToggleButtonModule } from "primeng/togglebutton";
 
@@ -91,7 +90,6 @@ import { UpdateTimetableComponent } from "./pages/admin/update_timetable/update_
 import { ViewIndivCourseTimetableComponent } from "./pages/admin/view_indiv_course_timetable/view_indiv_course_timetable.component";
 import { SearchCourseComponent } from "./pages/admin/search_course/search_course.component";
 import { ViewRequestCourseComponent } from "./pages/admin/view_request_course/view_request_course.component";
-import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analytics.component";
 import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/view_course_details.component";
 import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_course_details/view_request_course_details.component";
 import { UpdateCourseComponent } from "./pages/admin/update_course/update_course.component";
@@ -120,7 +118,6 @@ import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_
     ViewClassroomComponent,
     ViewCourseListComponent,
     ViewTimetableComponent,
-    DataAnalyticsComponent,
     UpdateTimetableComponent,
     WorkspaceComponent,
     ProfViewVisitHistoryComponent,
@@ -179,7 +176,6 @@ import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_
     RatingModule,
     RadioButtonModule,
     ChipsModule,
-    ChartModule,
     ProgressSpinnerModule,
     ToggleButtonModule
   ],

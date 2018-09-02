@@ -33,7 +33,6 @@ import { UpdateTimetableComponent } from "./pages/admin/update_timetable/update_
 import { ViewIndivCourseTimetableComponent } from "./pages/admin/view_indiv_course_timetable/view_indiv_course_timetable.component";
 import { SearchCourseComponent } from "./pages/admin/search_course/search_course.component";
 import { ViewRequestCourseComponent } from "./pages/admin/view_request_course/view_request_course.component";
-import { DataAnalyticsComponent } from "./pages/admin/data_analytics/data_analytics.component";
 import { ViewCourseDetailsComponent } from "./pages/admin/view_course_details/view_course_details.component";
 import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_course_details/view_request_course_details.component";
 import { UpdateCourseComponent } from "./pages/admin/update_course/update_course.component";
@@ -52,7 +51,6 @@ const routes: Routes = [
       { path: "viewStaffInfo", component: ViewStaffInfoComponent },
       { path: "viewClassroom", component: ViewClassroomComponent },
       { path: "viewCourseList", component: ViewCourseListComponent },
-      { path: "dataAnalytics", component: DataAnalyticsComponent },
       { path: "viewTimetable", component: ViewTimetableComponent },
       { path: "updateTimetable", component: UpdateTimetableComponent },
       {
