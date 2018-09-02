@@ -22,8 +22,8 @@ export class ViewStaffInfoComponent implements OnInit {
 
   // for datatable
   cols: any[];
-  activeStaffs: Staff[];
-  inactiveStaffs: Staff[];
+  enrolledStaffs: Staff[];
+  nonEnrolledStaffs: Staff[];
 
   // for css style
   showDialogBtnStyle: SafeStyle;
@@ -67,12 +67,12 @@ export class ViewStaffInfoComponent implements OnInit {
       { field: "emailAddress", header: "Email", width: "23%" }
     ];
 
-    this.staffService.getAllActiveStaffs().subscribe(response => {
-      this.activeStaffs = response.staffs;
+    this.staffService.getAllEnrolledStaffs().subscribe(response => {
+      this.enrolledStaffs = response.staffs;
     });
 
-    this.staffService.getAllInactiveStaffs().subscribe(response => {
-      this.inactiveStaffs = response.staffs;
+    this.staffService.getAllNonEnrolledStaffs().subscribe(response => {
+      this.nonEnrolledStaffs = response.staffs;
     });
 
     // for css style
@@ -107,12 +107,12 @@ export class ViewStaffInfoComponent implements OnInit {
       response => {
         fileUpload.clear();
 
-        this.staffService.getAllActiveStaffs().subscribe(response => {
-          this.activeStaffs = response.staffs;
+        this.staffService.getAllEnrolledStaffs().subscribe(response => {
+          this.enrolledStaffs = response.staffs;
         });
 
-        this.staffService.getAllInactiveStaffs().subscribe(response => {
-          this.inactiveStaffs = response.staffs;
+        this.staffService.getAllNonEnrolledStaffs().subscribe(response => {
+          this.nonEnrolledStaffs = response.staffs;
         });
 
         this.msgs = [];
@@ -211,6 +211,7 @@ export class ViewStaffInfoComponent implements OnInit {
       this.newStaff.staffRole = this.selectedRole.value;
       this.newStaff.pwd = "password";
       this.newStaff.emailAddress = this.newEmailAdd;
+      this.newStaff.isEnrolled = true;
 
       this.staffService.createStaff(this.newStaff).subscribe(response => {
         this.msgs.push({
@@ -349,13 +350,13 @@ export class ViewStaffInfoComponent implements OnInit {
   }
 
   archiveStaff(rowData) {
-    let endpoint = "/updateIsActive";
+    let endpoint = "/updateIsEnrolled";
     let body = {
       staffId: String(rowData.id),
-      isActive: false
+      isEnrolled: false
     };
 
-    this.staffService.updateIsActive(endpoint, body).subscribe(response => {
+    this.staffService.updateIsEnrolled(endpoint, body).subscribe(response => {
       this.msgs.push({
         severity: "info",
         summary: "Successfully Archived!",
@@ -369,13 +370,13 @@ export class ViewStaffInfoComponent implements OnInit {
   }
 
   restoreStaff(rowData) {
-    let endpoint = "/updateIsActive";
+    let endpoint = "/updateIsEnrolled";
     let body = {
       staffId: String(rowData.id),
-      isActive: true
+      isEnrolled: true
     };
 
-    this.staffService.updateIsActive(endpoint, body).subscribe(response => {
+    this.staffService.updateIsEnrolled(endpoint, body).subscribe(response => {
       this.msgs.push({
         severity: "info",
         summary: "Successfully Restored!",

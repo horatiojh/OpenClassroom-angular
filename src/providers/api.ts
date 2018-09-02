@@ -44,6 +44,8 @@ export class Api {
     if (error.error instanceof ErrorEvent) {
       console.error("An unknown error has occurred:", error.error.message);
     } else {
+      errMsg = error.error;
+
       console.error(
         "An HTTP error has occurred: " +
           `HTTP ${error.status}: ${error.error.message}`

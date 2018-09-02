@@ -143,7 +143,7 @@
 
         <p-tabView>
           <p-tabPanel header="Available">
-            <p-table #dt [columns]="cols" [value]="activeStaffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+            <p-table #dt [columns]="cols" [value]="enrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
               sortField="staffRole" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
@@ -201,7 +201,7 @@
 
           <p-tabPanel header="Archived">
 
-            <p-table #dt [columns]="cols" [value]="inactiveStaffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+            <p-table #dt [columns]="cols" [value]="nonEnrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
               sortField="staffRole" [sortOrder]="1">
 
               <ng-template pTemplate="caption">

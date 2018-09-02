@@ -1,5 +1,4 @@
 export class Staff {
-
   id: number;
   staffId: string;
   pwd: string;
@@ -7,6 +6,7 @@ export class Staff {
   staffName: string;
   staffRole: string;
   isFirstLogin: boolean;
+  isEnrolled: boolean;
 
   constructor() {}
 }

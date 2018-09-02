@@ -78,6 +78,7 @@ export class ViewClassroomComponent implements OnInit {
       error => {
         if (error == "Duplicate") {
           fileUpload.clear();
+
           this.msgs = [];
           this.msgs.push({
             severity: "error",
@@ -86,6 +87,7 @@ export class ViewClassroomComponent implements OnInit {
           });
         } else if (error == "Bad Request") {
           fileUpload.clear();
+
           this.msgs = [];
           this.msgs.push({
             severity: "error",

@@ -58,8 +58,13 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          let msg: string = "Sign in failed! Incorrect username or password";
-          this.loginErrorMessage = msg;
+          if (error == "Archived Account") {
+            let msg: string = "Sign in failed! Invalid username or password";
+            this.loginErrorMessage = msg;
+          } else if (error == "Authentication Failed") {
+            let msg: string = "Sign in failed! Incorrect username or password";
+            this.loginErrorMessage = msg;
+          }
         }
       );
     }

@@ -57,8 +57,6 @@ import { AuthService } from "../providers/authService";
 import { DateService } from "../providers/dateService";
 import { CourseInfoService } from "../providers/courseInfoService";
 import { VisitService } from "../providers/visitService";
-import { ChatService } from "../providers/chatService";
-import { WebsocketService } from "../providers/websocketService";
 import { MsgService } from "../providers/msgService";
 import { MessageService } from "primeng/components/common/messageservice";
 import { VFeedbackService } from "../providers/vFeedbackService";
@@ -203,8 +201,6 @@ import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_
     CourseInfoService,
     VisitService,
     MsgService,
-    ChatService,
-    WebsocketService,
     MessageService,
     VFeedbackService,
     IFeedbackService,

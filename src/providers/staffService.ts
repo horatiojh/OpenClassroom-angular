@@ -21,12 +21,12 @@ export class StaffService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllActiveStaffs(): Observable<any> {
-    return this.httpClient.get<any>(this.baseUrl + "/getAllActiveStaffs");
+  getAllEnrolledStaffs(): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getAllEnrolledStaffs");
   }
 
-  getAllInactiveStaffs(): Observable<any> {
-    return this.httpClient.get<any>(this.baseUrl + "/getAllInactiveStaffs");
+  getAllNonEnrolledStaffs(): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/getAllNonEnrolledStaffs");
   }
 
   getAllInstructors(): Observable<any> {
@@ -80,7 +80,7 @@ export class StaffService {
       );
   }
 
-  updateIsActive(endpoint: string, body?: any): Observable<any> {
+  updateIsEnrolled(endpoint: string, body?: any): Observable<any> {
     return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
       tap(resp => console.log(resp)),
       catchError(this.handleErrorApi)
@@ -99,6 +99,8 @@ export class StaffService {
     if (error.error instanceof ErrorEvent) {
       console.error("An unknown error has occurred:", error.error.message);
     } else {
+      errMsg = error.error;
+
       console.error(
         "An HTTP error has occurred: " +
           `HTTP ${error.status}: ${error.error.message}`
