@@ -5,8 +5,11 @@ export class Staff {
   emailAddress: string;
   staffName: string;
   staffRole: string;
+  division: string;
+
   isFirstLogin: boolean;
   isEnrolled: boolean;
+  isActive: boolean;
 
   constructor() {}
 }

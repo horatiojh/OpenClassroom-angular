@@ -7,8 +7,8 @@
 
         <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="auto"></p-confirmDialog>
 
-        <p-fileUpload #fileUpload name="files[]" (uploadHandler)="onFileUpload($event,fileUpload)" accept="text/csv" maxFileSize="1000000"
-          customUpload="true">
+        <p-fileUpload #fileUpload name="files[]" (uploadHandler)="onFileUpload($event,fileUpload)" accept="text/csv"
+          maxFileSize="1000000" customUpload="true">
           <ng-template pTemplate="toolbar">
             <div style="margin-top: 8px">Please upload a file with csv format.</div>
           </ng-template>
@@ -16,8 +16,8 @@
 
         <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showNewStaffDialog()"></p-button>
 
-        <p-dialog [(visible)]="createDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
-          modal="true">
+        <p-dialog [(visible)]="createDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto"
+          [contentStyle]="{'overflow':'visible'}" modal="true">
 
           <p-header>New Staff</p-header>
 
@@ -25,10 +25,11 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div class="ui-grid-col-3">
-                  <label>Name:</label>
+                  <label>Name</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="newStaffName" style="width:95%" name="newStaffName" placeholder="Full Name">
+                  <input type="text" pInputText [(ngModel)]="newStaffName" style="width:95%" name="newStaffName"
+                    placeholder="Full Name">
                 </div>
               </div>
             </div>
@@ -36,10 +37,11 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div class="ui-grid-col-3">
-                  <label>Staff Id:</label>
+                  <label>Staff Id</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="newStaffId" style="width:95%" name="newStaffId" placeholder="Username">
+                  <input type="text" pInputText [(ngModel)]="newStaffId" style="width:95%" name="newStaffId"
+                    placeholder="Username">
                 </div>
               </div>
             </div>
@@ -47,10 +49,11 @@
             <div class="ui-g-18 ui-md-12">
               <div class="ui-grid-row">
                 <div class="ui-grid-col-3">
-                  <label>Email:</label>
+                  <label>Email</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="newEmailAdd" style="width:95%" name="newEmailAdd" placeholder="Email Address">
+                  <input type="text" pInputText [(ngModel)]="newEmailAdd" style="width:95%" name="newEmailAdd"
+                    placeholder="Email Address">
                 </div>
               </div>
             </div>
@@ -59,11 +62,42 @@
           <div class="ui-g-18 ui-md-12">
             <div class="ui-grid-row">
               <div class="ui-grid-col-3">
-                <label>Role:</label>
+                <label>Role</label>
               </div>
               <div class="ui-grid-col-9">
                 <p-dropdown [options]="roles" [(ngModel)]="selectedRole" optionLabel="label" [showClear]="true" [style]="{'width':'95%'}"
                   placeholder="Please Select One"></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-18 ui-md-12">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                  <label>Division</label>
+                </div>
+                <div class="ui-grid-col-9">
+                  <p-dropdown [options]="divisions" [(ngModel)]="selectedDivision" optionLabel="label" [showClear]="true" [style]="{'width':'95%'}"
+                    placeholder="Please Select One"></p-dropdown>
+                </div>
+              </div>
+            </div>
+
+          <div class="ui-g-18 ui-md-12">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-3">
+                <label>Active?</label>
+              </div>
+              <div class="ui-grid-col-9">
+                <div class="ui-g" style="margin-top:-7px;margin-left:-7px">
+                  <div class="ui-g-4">
+                    <p-radioButton name="active" value="Yes" label="Yes" [(ngModel)]="active" inputId="opt1"></p-radioButton>
+                  </div>
+                  <div class="ui-g-4">
+                    <p-radioButton name="active" value="No" label="No" [(ngModel)]="active" inputId="opt2"></p-radioButton>
+                  </div>
+                  <div class="ui-g-4"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -79,8 +113,8 @@
           </p-footer>
         </p-dialog>
 
-        <p-dialog [(visible)]="updateDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
-          modal="true">
+        <p-dialog [(visible)]="updateDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto"
+          [contentStyle]="{'overflow':'visible'}" modal="true">
 
           <p-header>Update Staff</p-header>
 
@@ -91,7 +125,8 @@
                   <label>Name:</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="updateStaffName" style="width:95%" name="updateStaffName" placeholder="Full Name">
+                  <input type="text" pInputText [(ngModel)]="updateStaffName" style="width:95%" name="updateStaffName"
+                    placeholder="Full Name">
                 </div>
               </div>
             </div>
@@ -102,7 +137,8 @@
                   <label>Staff Id:</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="updateStaffId" style="width:95%" name="updateStaffId" placeholder="Username">
+                  <input type="text" pInputText [(ngModel)]="updateStaffId" style="width:95%" name="updateStaffId"
+                    placeholder="Username">
                 </div>
               </div>
             </div>
@@ -113,7 +149,8 @@
                   <label>Email:</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="updateEmailAdd" style="width:95%" name="updateEmailAdd" placeholder="Email Address">
+                  <input type="text" pInputText [(ngModel)]="updateEmailAdd" style="width:95%" name="updateEmailAdd"
+                    placeholder="Email Address">
                 </div>
               </div>
             </div>
@@ -125,7 +162,8 @@
                 <label>Role:</label>
               </div>
               <div class="ui-grid-col-9">
-                <p-dropdown [options]="roles" [(ngModel)]="updateRole" [showClear]="true" [style]="{'width':'95%'}" placeholder="Please Select One"></p-dropdown>
+                <p-dropdown [options]="roles" [(ngModel)]="updateRole" [showClear]="true" [style]="{'width':'95%'}"
+                  placeholder="Please Select One"></p-dropdown>
               </div>
             </div>
           </div>
@@ -143,8 +181,8 @@
 
         <p-tabView>
           <p-tabPanel header="Available">
-            <p-table #dt [columns]="cols" [value]="enrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-              sortField="staffRole" [sortOrder]="1">
+            <p-table #dt [columns]="cols" [value]="enrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true"
+              paginatorPosition="bottom" sortField="staffRole" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
                 <div style="text-align: right">
@@ -201,8 +239,8 @@
 
           <p-tabPanel header="Archived">
 
-            <p-table #dt [columns]="cols" [value]="nonEnrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-              sortField="staffRole" [sortOrder]="1">
+            <p-table #dt [columns]="cols" [value]="nonEnrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true"
+              paginatorPosition="bottom" sortField="staffRole" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
                 <div style="text-align: right">

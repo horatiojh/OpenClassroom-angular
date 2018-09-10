@@ -8,6 +8,7 @@ import { BreadcrumbService } from "../../../breadcrumb.service";
 
 import { Staff } from "../../../../domain/staff";
 import { Role } from "../../../../wrapper/role";
+import { Division } from "../../../../wrapper/division";
 
 @Component({
   selector: "app-viewStaffInfo",
@@ -38,6 +39,10 @@ export class ViewStaffInfoComponent implements OnInit {
   newStaffId: string;
   newEmailAdd: string;
   newStaff: Staff;
+  active: string;
+  isActive: boolean = false;
+  divisions: Division[];
+  selectedDivision: Division;
 
   // for update staff
   uStaffId: number;
@@ -96,6 +101,12 @@ export class ViewStaffInfoComponent implements OnInit {
     this.roles = [
       { label: "Admin", value: "admin" },
       { label: "Instructor", value: "instructor" }
+    ];
+
+    this.divisions = [
+      { label: "Humanities", value: "Humanities" },
+      { label: "Science", value: "Science" },
+      { label: "Social Science", value: "SS" }
     ];
   }
 
@@ -199,19 +210,55 @@ export class ViewStaffInfoComponent implements OnInit {
     }
 
     if (
+      this.selectedDivision == undefined ||
+      this.selectedDivision.value == ""
+    ) {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please select the division.",
+        detail: ""
+      });
+    }
+
+    if (this.active == undefined || this.active == "") {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please choose whether the staff is active.",
+        detail: ""
+      });
+    }
+
+    if (
       this.newStaffName != undefined &&
       this.newStaffId != undefined &&
       this.selectedRole != undefined &&
-      this.newEmailAdd != undefined
+      this.selectedDivision != undefined &&
+      this.newEmailAdd != undefined &&
+      this.active != undefined &&
+      this.newStaffName != "" &&
+      this.newStaffId != "" &&
+      this.selectedRole.value != "" &&
+      this.selectedDivision.value != "" &&
+      this.newEmailAdd != "" &&
+      this.active != ""
     ) {
       this.newStaff = new Staff();
 
       this.newStaff.staffName = this.newStaffName;
       this.newStaff.staffId = this.newStaffId;
       this.newStaff.staffRole = this.selectedRole.value;
+      this.newStaff.division = this.selectedDivision.value;
       this.newStaff.pwd = "password";
       this.newStaff.emailAddress = this.newEmailAdd;
       this.newStaff.isEnrolled = true;
+
+      if (this.active == "Yes") {
+        this.isActive = true;
+      } else if (this.active == "No") {
+        this.isActive = false;
+      }
+
+      this.newStaff.isActive = this.isActive;
 
       this.staffService.createStaff(this.newStaff).subscribe(response => {
         this.msgs.push({
