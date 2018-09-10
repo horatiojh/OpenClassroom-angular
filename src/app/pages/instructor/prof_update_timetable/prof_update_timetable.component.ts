@@ -29,7 +29,6 @@ export class ProfUpdateTimetableComponent implements OnInit {
   weeks: string;
   startTime: string;
   endTime: string;
-  roomPart: string;
   duration: string;
 
   selectedWeekDay: string;
@@ -90,7 +89,6 @@ export class ProfUpdateTimetableComponent implements OnInit {
         this.weeks = this.timetable.weeks;
         this.startTime = this.timetable.startTime;
         this.endTime = this.timetable.endTime;
-        this.roomPart = this.timetable.roomPart;
         this.selectedWeekDay = this.timetable.weekDay;
         this.selectedRoom = this.timetable.room;
         this.duration = this.timetable.duration;
@@ -105,7 +103,6 @@ export class ProfUpdateTimetableComponent implements OnInit {
       this.selectedWeekDay,
       this.startTime,
       this.endTime,
-      this.roomPart,
       this.selectedRoom,
       this.duration
     );

@@ -7,7 +7,6 @@ export class Timetable {
   weekDay: string;
   startTime: string;
   endTime: string;
-  roomPart: string;
   room: string;
   duration: string;
 
@@ -25,7 +24,6 @@ export class Timetable {
     weekDay: string,
     startTime: string,
     endTime: string,
-    roomPart: string,
     room: string,
     duration: string
   ) {
@@ -35,7 +33,6 @@ export class Timetable {
     this.weekDay = weekDay;
     this.startTime = startTime;
     this.endTime = endTime;
-    this.roomPart = roomPart;
     this.room = room;
     this.duration = duration;
   }

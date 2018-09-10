@@ -24,16 +24,10 @@ export class ProfUpdateCourseComponent implements OnInit {
   courseId: number;
   instructorId: string;
   staffName: string;
-  eventId: string;
-  faculty: string;
-  dept: string;
   moduleCode: string;
   instance: string;
   moduleGroup: string;
-  moduleType: string;
   moduleTitle: string;
-  groupSize: string;
-  eventSize: string;
   syllabus: string;
   blackoutDates: string;
 
@@ -73,17 +67,10 @@ export class ProfUpdateCourseComponent implements OnInit {
 
         this.courseId = this.course.id;
         this.blackoutDates = this.course.blackoutDates;
-        this.dept = this.course.dept;
-        this.eventId = this.course.eventId;
-        this.eventSize = this.course.eventSize;
-        this.faculty = this.course.faculty;
-        this.groupSize = this.course.groupSize;
-        this.instance = this.course.instance;
         this.instructorId = this.course.instructorId;
         this.moduleCode = this.course.moduleCode;
         this.moduleGroup = this.course.moduleGroup;
         this.moduleTitle = this.course.moduleTitle;
-        this.moduleType = this.course.moduleType;
         this.staffName = this.course.staffName;
         this.syllabus = this.course.syllabus;
 
@@ -109,17 +96,9 @@ export class ProfUpdateCourseComponent implements OnInit {
       this.courseId,
       this.instructorId,
       this.staffName,
-      this.eventId,
-      this.faculty,
-      this.dept,
       this.moduleCode,
-      this.instance,
       this.moduleGroup,
-      this.moduleType,
       this.moduleTitle,
-      this.groupSize,
-      this.eventSize,
-      this.description,
       this.syllabus,
       this.blackoutDates
     );

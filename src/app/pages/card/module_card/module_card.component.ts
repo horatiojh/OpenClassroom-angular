@@ -83,7 +83,6 @@ export class ModuleCardComponent implements OnInit, OnChanges {
     this.moduleCode = this.course.moduleCode;
     this.moduleTitle = this.course.moduleTitle;
     this.staffName = this.course.staffName;
-    this.faculty = this.course.faculty;
     this.moduleGroup = this.course.moduleGroup;
   }
 

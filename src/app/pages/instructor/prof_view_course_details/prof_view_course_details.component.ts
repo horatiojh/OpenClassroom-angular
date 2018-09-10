@@ -73,7 +73,6 @@ export class ProfViewCourseDetailsComponent implements OnInit {
           this.courseId = this.course.id;
           this.moduleCode = this.course.moduleCode;
           this.moduleTitle = this.course.moduleTitle;
-          this.groupSize = this.course.groupSize;
           this.staffName = this.course.staffName;
           this.syllabus = this.course.syllabus;
           this.blackoutDates = this.course.blackoutDates;

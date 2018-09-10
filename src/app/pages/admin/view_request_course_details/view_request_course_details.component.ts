@@ -26,7 +26,6 @@ export class ViewRequestCourseDetailsComponent implements OnInit {
   course: Course;
   moduleCode: string;
   moduleTitle: string;
-  groupSize: string;
   staffName: string;
   syllabus: string;
   blackoutDates: string;
@@ -67,7 +66,6 @@ export class ViewRequestCourseDetailsComponent implements OnInit {
           this.courseId = this.course.id;
           this.moduleCode = this.course.moduleCode;
           this.moduleTitle = this.course.moduleTitle;
-          this.groupSize = this.course.groupSize;
           this.staffName = this.course.staffName;
           this.syllabus = this.course.syllabus;
           this.blackoutDates = this.course.blackoutDates;
