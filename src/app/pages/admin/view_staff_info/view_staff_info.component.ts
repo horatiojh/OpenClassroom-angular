@@ -41,7 +41,7 @@ export class ViewStaffInfoComponent implements OnInit {
   newStaff: Staff;
   active: string;
   isActive: boolean = false;
-  divisions: Division[];
+  division: Division[];
   selectedDivision: Division;
 
   // for update staff
@@ -52,6 +52,7 @@ export class ViewStaffInfoComponent implements OnInit {
   updateStaffId: string;
   updateEmailAdd: string;
   updateStaff: Staff;
+  updateDivision: string;
   updateActive: string;
   updateIsActive: boolean = false;
 
@@ -105,7 +106,7 @@ export class ViewStaffInfoComponent implements OnInit {
       { label: "Instructor", value: "instructor" }
     ];
 
-    this.divisions = [
+    this.division = [
       { label: "Humanities", value: "Humanities" },
       { label: "Science", value: "Science" },
       { label: "Social Science", value: "SS" },
@@ -174,6 +175,7 @@ export class ViewStaffInfoComponent implements OnInit {
       this.updateRole = this.staff.staffRole;
       this.updateStaffId = this.staff.staffId;
       this.updateStaffName = this.staff.staffName;
+      this.updateDivision = this.staff.division;
     });
   }
 
@@ -314,10 +316,7 @@ export class ViewStaffInfoComponent implements OnInit {
       });
     }
 
-    if (
-      this.selectedDivision == undefined ||
-      this.selectedDivision.value == ""
-    ) {
+    if (this.updateDivision == undefined || this.updateDivision == "") {
       this.msgs.push({
         severity: "error",
         summary: "Please select the division.",
@@ -339,11 +338,13 @@ export class ViewStaffInfoComponent implements OnInit {
       this.updateRole != undefined &&
       this.updateEmailAdd != undefined &&
       this.updateActive != undefined &&
+      this.updateDivision != undefined &&
       this.updateStaffName != "" &&
       this.updateStaffId != "" &&
       this.updateRole != "" &&
       this.updateEmailAdd != "" &&
-      this.updateActive != ""
+      this.updateActive != "" &&
+      this.updateDivision != ""
     ) {
       this.updateStaff = new Staff();
 
@@ -353,7 +354,7 @@ export class ViewStaffInfoComponent implements OnInit {
       this.updateStaff.staffName = this.updateStaffName;
       this.updateStaff.staffRole = this.updateRole;
 
-      this.updateStaff.division = this.selectedDivision.value;
+      this.updateStaff.division = this.updateDivision;
 
       if (this.updateActive == "Yes") {
         this.updateIsActive = true;
@@ -378,6 +379,7 @@ export class ViewStaffInfoComponent implements OnInit {
       });
     }
   }
+
   deleteStaffInfo(rowData) {
     this.msgs = [];
 
