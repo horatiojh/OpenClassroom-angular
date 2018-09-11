@@ -212,13 +212,13 @@
 
         <p-tabView>
           <p-tabPanel header="Available">
-            <p-table #dt [columns]="cols" [value]="enrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true"
-              paginatorPosition="bottom" [sortOrder]="1">
+            <p-table #availDt [columns]="cols" [value]="enrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true"
+              paginatorPosition="bottom" sortField="staffRole" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
                 <div style="text-align: right">
                   <i class="fa fa-search" style="margin:4px 4px 0 0px"></i>
-                  <input id="table_search_cus" type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  <input id="table_search_cus" type="text" pInputText size="50" placeholder="Global Filter" (input)="availDt.filterGlobal($event.target.value, 'contains')"
                     style="width:35%;margin-left: 3px;color:aliceblue">
                 </div>
               </ng-template>
@@ -270,13 +270,13 @@
 
           <p-tabPanel header="Archived">
 
-            <p-table #dt [columns]="cols" [value]="nonEnrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true"
+            <p-table #archiDt [columns]="cols" [value]="nonEnrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true"
               paginatorPosition="bottom" sortField="staffRole" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
                 <div style="text-align: right">
                   <i class="fa fa-search" style="margin:4px 4px 0 0px"></i>
-                  <input id="table_search_cus" type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  <input id="table_search_cus" type="text" pInputText size="50" placeholder="Global Filter" (input)="archiDt.filterGlobal($event.target.value, 'contains')"
                     style="width:35%;margin-left: 3px;color:aliceblue">
                 </div>
               </ng-template>
