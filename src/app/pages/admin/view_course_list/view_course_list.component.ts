@@ -111,15 +111,18 @@ export class ViewCourseListComponent implements OnInit {
 
     this.fileUploadService.uploadCourse(data).subscribe(
       response => {
-        uploadCourse.clear();
         this.msgs = [];
+
+        uploadCourse.clear();
+
+        this.courseService.getAllCourses().subscribe(response => {
+          this.courses = response.courses;
+        });
+
         this.msgs.push({
           severity: "info",
           summary: "File Uploaded",
           detail: ""
-        });
-        this.courseService.getAllCourses().subscribe(response => {
-          this.courses = response.courses;
         });
       },
       error => {
@@ -140,16 +143,18 @@ export class ViewCourseListComponent implements OnInit {
 
     this.fileUploadService.uploadCourseInfo(data).subscribe(
       response => {
-        uploadCourseInfo.clear();
         this.msgs = [];
+
+        uploadCourseInfo.clear();
+
+        this.courseInfoService.getAllCourseInfo().subscribe(response => {
+          this.dCourseInfos = response.courseInfos;
+        });
+
         this.msgs.push({
           severity: "info",
           summary: "File Uploaded",
           detail: ""
-        });
-
-        this.courseService.getAllCourses().subscribe(response => {
-          this.courses = response.courses;
         });
       },
       error => {

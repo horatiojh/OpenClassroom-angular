@@ -52,6 +52,8 @@ export class ViewStaffInfoComponent implements OnInit {
   updateStaffId: string;
   updateEmailAdd: string;
   updateStaff: Staff;
+  updateActive: string;
+  updateIsActive: boolean = false;
 
   constructor(
     private fileUploadService: FileUploadService,
@@ -106,7 +108,8 @@ export class ViewStaffInfoComponent implements OnInit {
     this.divisions = [
       { label: "Humanities", value: "Humanities" },
       { label: "Science", value: "Science" },
-      { label: "Social Science", value: "SS" }
+      { label: "Social Science", value: "SS" },
+      { label: "Admin", value: "Admin" }
     ];
   }
 
@@ -248,7 +251,7 @@ export class ViewStaffInfoComponent implements OnInit {
       this.newStaff.staffId = this.newStaffId;
       this.newStaff.staffRole = this.selectedRole.value;
       this.newStaff.division = this.selectedDivision.value;
-      this.newStaff.pwd = "password";
+      this.newStaff.pwd = "pAssw0rd";
       this.newStaff.emailAddress = this.newEmailAdd;
       this.newStaff.isEnrolled = true;
 
@@ -312,10 +315,35 @@ export class ViewStaffInfoComponent implements OnInit {
     }
 
     if (
+      this.selectedDivision == undefined ||
+      this.selectedDivision.value == ""
+    ) {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please select the division.",
+        detail: ""
+      });
+    }
+
+    if (this.updateActive == undefined || this.updateActive == "") {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please choose whether the staff is active.",
+        detail: ""
+      });
+    }
+
+    if (
       this.updateStaffName != undefined &&
       this.updateStaffId != undefined &&
       this.updateRole != undefined &&
-      this.updateEmailAdd != undefined
+      this.updateEmailAdd != undefined &&
+      this.updateActive != undefined &&
+      this.updateStaffName != "" &&
+      this.updateStaffId != "" &&
+      this.updateRole != "" &&
+      this.updateEmailAdd != "" &&
+      this.updateActive != ""
     ) {
       this.updateStaff = new Staff();
 
@@ -324,6 +352,16 @@ export class ViewStaffInfoComponent implements OnInit {
       this.updateStaff.staffId = this.updateStaffId;
       this.updateStaff.staffName = this.updateStaffName;
       this.updateStaff.staffRole = this.updateRole;
+
+      this.updateStaff.division = this.selectedDivision.value;
+
+      if (this.updateActive == "Yes") {
+        this.updateIsActive = true;
+      } else if (this.updateActive == "No") {
+        this.updateIsActive = false;
+      }
+
+      this.updateStaff.isActive = this.updateIsActive;
 
       this.staffService.updateStaff(this.updateStaff).subscribe(response => {
         this.msgs.push({
