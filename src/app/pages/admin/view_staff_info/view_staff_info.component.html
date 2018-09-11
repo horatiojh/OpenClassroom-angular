@@ -213,7 +213,7 @@
         <p-tabView>
           <p-tabPanel header="Available">
             <p-table #dt [columns]="cols" [value]="enrolledStaffs" [paginator]="true" [rows]="10" [responsive]="true"
-              paginatorPosition="bottom" sortField="staffRole" [sortOrder]="1">
+              paginatorPosition="bottom" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
                 <div style="text-align: right">
