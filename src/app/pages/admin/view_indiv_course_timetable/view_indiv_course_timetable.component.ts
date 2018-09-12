@@ -56,6 +56,12 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   newStartTime: string;
   newEndTime: string;
   newDateTime: string;
+  startHour: string;
+  startMin: string;
+  endHour: string;
+  endMin: string;
+  newStartTimeDate: Date;
+  newEndTimeDate: Date;
   createNewDate: DateEntity;
   validationMsgs: Message[] = [];
   newWeekDay: string;
@@ -77,6 +83,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   instructorIdStr: string;
   instructor: Staff;
 
+  test: string;
   constructor(
     private breadcrumbService: BreadcrumbService,
     private timetableService: TimetableService,
@@ -302,7 +309,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     this.validationMsgs = [];
     this.msgs = [];
 
-    if (this.newDateTime == null) {
+    let validation: boolean;
+
+    if (this.newDateTime == undefined || this.newDateTime == null) {
       this.validationMsgs.push({
         severity: "error",
         summary: "Please choose the date.",
@@ -310,7 +319,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       });
     }
 
-    if (this.newStartTime == undefined || this.newStartTime == "") {
+    if (this.newStartTimeDate == undefined || this.newStartTimeDate == null) {
       this.validationMsgs.push({
         severity: "error",
         summary: "Please enter the start time.",
@@ -318,7 +327,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       });
     }
 
-    if (this.newEndTime == undefined || this.newEndTime == "") {
+    if (this.newEndTimeDate == undefined || this.newEndTimeDate == null) {
       this.validationMsgs.push({
         severity: "error",
         summary: "Please enter the end time.",
@@ -326,14 +335,60 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       });
     }
 
+    if (this.newStartTimeDate > this.newEndTimeDate) {
+      validation = false;
+
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please enter the valid start time.",
+        detail: ""
+      });
+    } else {
+      validation = true;
+    }
+
     if (
+      this.newDateTime != undefined &&
+      this.newStartTimeDate != undefined &&
+      this.newEndTimeDate != undefined &&
       this.newDateTime != null &&
-      this.newStartTime != undefined &&
-      this.newEndTime != undefined &&
-      this.newStartTime != "" &&
-      this.newEndTime != ""
+      this.newStartTimeDate != null &&
+      this.newEndTimeDate != null &&
+      validation
     ) {
       this.createNewDate = new DateEntity();
+
+      if (this.newStartTimeDate !== null) {
+        if (this.newStartTimeDate.getHours().toString().length == 1) {
+          this.startHour = "0" + this.newStartTimeDate.getHours();
+        } else {
+          this.startHour = String(this.newStartTimeDate.getHours());
+        }
+
+        if (this.newStartTimeDate.getMinutes().toString().length == 1) {
+          this.startMin = "0" + this.newStartTimeDate.getMinutes();
+        } else {
+          this.startMin = String(this.newStartTimeDate.getMinutes());
+        }
+
+        this.newStartTime = this.startHour + ":" + this.startMin;
+      }
+
+      if (this.newEndTimeDate !== null) {
+        if (this.newEndTimeDate.getHours().toString().length == 1) {
+          this.endHour = "0" + this.newEndTimeDate.getHours();
+        } else {
+          this.endHour = String(this.newEndTimeDate.getHours());
+        }
+
+        if (this.newEndTimeDate.getMinutes().toString().length == 1) {
+          this.endMin = "0" + this.newEndTimeDate.getMinutes();
+        } else {
+          this.endMin = String(this.newEndTimeDate.getMinutes());
+        }
+
+        this.newEndTime = this.endHour + ":" + this.endMin;
+      }
 
       this.createNewDate.startTime = this.newStartTime;
       this.createNewDate.endTime = this.newEndTime;

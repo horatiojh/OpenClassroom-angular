@@ -10,8 +10,8 @@
 
         <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showDialog()"></p-button>
 
-        <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto" [contentStyle]="{'overflow':'visible'}"
-          modal="true">
+        <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto"
+          [contentStyle]="{'overflow':'visible'}" modal="true">
 
           <p-header>New Session</p-header>
 
@@ -33,7 +33,7 @@
                   <label>Start:</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="newStartTime" style="width:95%" name="startTime" placeholder="(hh:mm)">
+                  <p-calendar [(ngModel)]="newStartTimeDate" [timeOnly]="true"></p-calendar>
                 </div>
               </div>
             </div>
@@ -44,7 +44,7 @@
                   <label>End:</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="newEndTime" style="width:95%" name="endTime" placeholder="(hh:mm)">
+                  <p-calendar [(ngModel)]="newEndTimeDate" [timeOnly]="true"></p-calendar>
                 </div>
               </div>
             </div>
@@ -63,8 +63,8 @@
 
         <p-tabView>
           <p-tabPanel header="Available">
-            <p-table #availDt [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-              sortField="dateStr" [sortOrder]="1">
+            <p-table #availDt [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true"
+              paginatorPosition="bottom" sortField="dateStr" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
 
@@ -103,8 +103,8 @@
           </p-tabPanel>
 
           <p-tabPanel header="Archived">
-            <p-table [columns]="cols" [value]="archivedDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-              sortField="dateStr" [sortOrder]="1">
+            <p-table [columns]="cols" [value]="archivedDates" [paginator]="true" [rows]="10" [responsive]="true"
+              paginatorPosition="bottom" sortField="dateStr" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
 
@@ -143,8 +143,8 @@
           </p-tabPanel>
 
           <p-tabPanel header="Booked">
-            <p-table #bookedDt [columns]="bookedDatesCols" [value]="bookedDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-              sortField="dateStr" [sortOrder]="1">
+            <p-table #bookedDt [columns]="bookedDatesCols" [value]="bookedDates" [paginator]="true" [rows]="10"
+              [responsive]="true" paginatorPosition="bottom" sortField="dateStr" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
 
