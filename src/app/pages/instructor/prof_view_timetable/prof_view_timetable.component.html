@@ -7,7 +7,8 @@
 
         <p-button label="View" icon="fa fa-fw fa-file-text" (onClick)="viewIndivCourseTimetable($event)" [style]="viewSessionBtnStyle"></p-button>
 
-        <p-table #dt [columns]="cols" [value]="timetables" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+        <p-table #dt [columns]="cols" [value]="timetables" [paginator]="true" [rows]="10" [responsive]="true"
+          paginatorPosition="bottom">
 
           <ng-template pTemplate="caption">
 
@@ -19,7 +20,6 @@
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
-              <th style="width: 9%">Update</th>
             </tr>
           </ng-template>
 
@@ -28,15 +28,15 @@
               <td *ngFor="let col of columns">
                 {{rowData[col.field]}}
               </td>
-              <td style="text-align: center">
+              <!-- <td style="text-align: center">
                 <p-button icon="fa fa-fw fa-edit" (onClick)="updateTimetable(rowData)"></p-button>
-              </td>
+              </td> -->
             </tr>
           </ng-template>
 
           <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-              <td [attr.colspan]="columns.length+1">
+              <td [attr.colspan]="columns.length">
                 No records found
               </td>
             </tr>
