@@ -95,6 +95,7 @@ import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_co
 import { UpdateCourseComponent } from "./pages/admin/update_course/update_course.component";
 import { UpdateProfileComponent } from "./pages/admin/update_profile/update_profile.component";
 import { AppRatingComponent } from "./pages/admin/app_rating/app_rating.component";
+import { ViewScheduleListComponent } from "./pages/admin/view_schedule_list/view_schedule_list.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
 
@@ -144,7 +145,8 @@ import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_
     UpdateCourseComponent,
     UpdateProfileComponent,
     AppRatingComponent,
-    ProfAppRatingComponent
+    ProfAppRatingComponent,
+    ViewScheduleListComponent
   ],
   imports: [
     BrowserModule,

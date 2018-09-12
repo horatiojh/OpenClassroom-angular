@@ -38,6 +38,7 @@ import { ViewRequestCourseDetailsComponent } from "./pages/admin/view_request_co
 import { UpdateCourseComponent } from "./pages/admin/update_course/update_course.component";
 import { UpdateProfileComponent } from "./pages/admin/update_profile/update_profile.component";
 import { AppRatingComponent } from "./pages/admin/app_rating/app_rating.component";
+import { ViewScheduleListComponent } from "./pages/admin/view_schedule_list/view_schedule_list.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -66,7 +67,8 @@ const routes: Routes = [
       },
       { path: "updateCourse", component: UpdateCourseComponent },
       { path: "updateProfile", component: UpdateProfileComponent },
-      { path: "rateApp", component: AppRatingComponent }
+      { path: "rateApp", component: AppRatingComponent },
+      { path: "viewScheduleList", component: ViewScheduleListComponent }
     ]
   },
   {

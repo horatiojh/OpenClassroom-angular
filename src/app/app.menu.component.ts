@@ -1,49 +1,74 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MenuItem } from 'primeng/primeng';
-import { AppComponent } from './app.component';
-import { MainComponent } from './main.component';
+import { Component, Input, OnInit } from "@angular/core";
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from "@angular/animations";
+import { MenuItem } from "primeng/primeng";
+import { AppComponent } from "./app.component";
+import { MainComponent } from "./main.component";
 
 @Component({
-    selector: 'app-menu',
-    template: `
+  selector: "app-menu",
+  template: `
         <ul app-submenu [item]="model" root="true" class="ultima-menu ultima-main-menu clearfix" [reset]="reset" visible="true"></ul>
     `
 })
 export class AppMenuComponent implements OnInit {
+  @Input()
+  reset: boolean;
 
-    @Input() reset: boolean;
+  model: any[];
+  staffRole: string;
 
-    model: any[];
-    staffRole: string;
+  constructor(public app: MainComponent) {}
 
-    constructor(public app: MainComponent) { }
+  ngOnInit() {
+    this.staffRole = sessionStorage.getItem("sessionStaffRole");
 
-    ngOnInit() {
-
-      this.staffRole = sessionStorage.getItem("sessionStaffRole");
-
-      if(this.staffRole === "admin") {
-        this.model = [
-            { label: 'Staff Management', icon: 'camera', routerLink: ['/viewStaffInfo'] },
-            { label: 'Classroom Management', icon: 'class', routerLink: ['/viewClassroom'] },
-            { label: 'Course Management', icon: 'list', routerLink: ['/viewCourseList'] }
-            // { label: 'Data Analytics', icon: 'poll', routerLink: ['/dataAnalytics'] }
-        ];
-      } else if(this.staffRole === "instructor") {
-        this.model = [
-          { label: 'Workspace', icon: 'class', routerLink: ['/workspace'] },
-          { label: 'Visit History', icon: 'public', routerLink: ['/profViewVisitHistory'] }
-        ];
-      }
+    if (this.staffRole === "admin") {
+      this.model = [
+        {
+          label: "Staff Management",
+          icon: "camera",
+          routerLink: ["/viewStaffInfo"]
+        },
+        {
+          label: "Classroom Management",
+          icon: "class",
+          routerLink: ["/viewClassroom"]
+        },
+        {
+          label: "Schedule Management",
+          icon: "schedule",
+          routerLink: ["/viewScheduleList"]
+        },
+        {
+          label: "Course Management",
+          icon: "list",
+          routerLink: ["/viewCourseList"]
+        }
+      ];
+    } else if (this.staffRole === "instructor") {
+      this.model = [
+        { label: "Workspace", icon: "class", routerLink: ["/workspace"] },
+        {
+          label: "Visit History",
+          icon: "public",
+          routerLink: ["/profViewVisitHistory"]
+        }
+      ];
     }
+  }
 }
 
 @Component({
-    /* tslint:disable:component-selector */
-    selector: '[app-submenu]',
-    /* tslint:enable:component-selector */
-    template: `
+  /* tslint:disable:component-selector */
+  selector: "[app-submenu]",
+  /* tslint:enable:component-selector */
+  template: `
         <ng-template ngFor let-child let-i="index" [ngForOf]="(root ? item : item.items)">
             <li [ngClass]="{'active-menuitem': isActive(i)}" [class]="child.badgeStyleClass" *ngIf="child.visible === false ? false : true">
                 <a [href]="child.url||'#'" (click)="itemClick($event,child,i)" (mouseenter)="onMouseEnter(i)"
@@ -73,102 +98,128 @@ export class AppMenuComponent implements OnInit {
             </li>
         </ng-template>
     `,
-    animations: [
-        trigger('children', [
-            state('hiddenAnimated', style({
-                height: '0px'
-            })),
-            state('visibleAnimated', style({
-                height: '*'
-            })),
-            state('visible', style({
-                height: '*',
-                'z-index': 100
-            })),
-            state('hidden', style({
-                height: '0px',
-                'z-index': '*'
-            })),
-            transition('visibleAnimated => hiddenAnimated', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)')),
-            transition('hiddenAnimated => visibleAnimated', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
-        ])
-    ]
+  animations: [
+    trigger("children", [
+      state(
+        "hiddenAnimated",
+        style({
+          height: "0px"
+        })
+      ),
+      state(
+        "visibleAnimated",
+        style({
+          height: "*"
+        })
+      ),
+      state(
+        "visible",
+        style({
+          height: "*",
+          "z-index": 100
+        })
+      ),
+      state(
+        "hidden",
+        style({
+          height: "0px",
+          "z-index": "*"
+        })
+      ),
+      transition(
+        "visibleAnimated => hiddenAnimated",
+        animate("400ms cubic-bezier(0.86, 0, 0.07, 1)")
+      ),
+      transition(
+        "hiddenAnimated => visibleAnimated",
+        animate("400ms cubic-bezier(0.86, 0, 0.07, 1)")
+      )
+    ])
+  ]
 })
 export class AppSubMenuComponent {
+  @Input()
+  item: MenuItem;
 
-    @Input() item: MenuItem;
+  @Input()
+  root: boolean;
 
-    @Input() root: boolean;
+  @Input()
+  visible: boolean;
 
-    @Input() visible: boolean;
+  _reset: boolean;
 
-    _reset: boolean;
+  activeIndex: number;
 
-    activeIndex: number;
+  constructor(public app: MainComponent) {}
 
-    constructor(public app: MainComponent) { }
-
-    itemClick(event: Event, item: MenuItem, index: number) {
-        if (this.root) {
-            this.app.menuHoverActive = !this.app.menuHoverActive;
-        }
-
-        // avoid processing disabled items
-        if (item.disabled) {
-            event.preventDefault();
-            return true;
-        }
-
-        // activate current item and deactivate active sibling if any
-        this.activeIndex = (this.activeIndex === index) ? null : index;
-
-        // execute command
-        if (item.command) {
-            item.command({ originalEvent: event, item: item });
-        }
-
-        // prevent hash change
-        if (item.items || (!item.url && !item.routerLink)) {
-            setTimeout(() => {
-                this.app.layoutMenuScrollerViewChild.moveBar();
-            }, 450);
-            event.preventDefault();
-        }
-
-        // hide menu
-        if (!item.items) {
-            if (this.app.isHorizontal() || this.app.isSlim()) {
-                this.app.resetMenu = true;
-            } else {
-                this.app.resetMenu = false;
-            }
-
-            this.app.overlayMenuActive = false;
-            this.app.staticMenuMobileActive = false;
-            this.app.menuHoverActive = !this.app.menuHoverActive;
-        }
+  itemClick(event: Event, item: MenuItem, index: number) {
+    if (this.root) {
+      this.app.menuHoverActive = !this.app.menuHoverActive;
     }
 
-    onMouseEnter(index: number) {
-        if (this.root && this.app.menuHoverActive && (this.app.isHorizontal() || this.app.isSlim())
-            && !this.app.isMobile() && !this.app.isTablet()) {
-            this.activeIndex = index;
-        }
+    // avoid processing disabled items
+    if (item.disabled) {
+      event.preventDefault();
+      return true;
     }
 
-    isActive(index: number): boolean {
-        return this.activeIndex === index;
+    // activate current item and deactivate active sibling if any
+    this.activeIndex = this.activeIndex === index ? null : index;
+
+    // execute command
+    if (item.command) {
+      item.command({ originalEvent: event, item: item });
     }
 
-    @Input() get reset(): boolean {
-        return this._reset;
+    // prevent hash change
+    if (item.items || (!item.url && !item.routerLink)) {
+      setTimeout(() => {
+        this.app.layoutMenuScrollerViewChild.moveBar();
+      }, 450);
+      event.preventDefault();
     }
 
-    set reset(val: boolean) {
-        this._reset = val;
+    // hide menu
+    if (!item.items) {
+      if (this.app.isHorizontal() || this.app.isSlim()) {
+        this.app.resetMenu = true;
+      } else {
+        this.app.resetMenu = false;
+      }
 
-        if (this._reset && (this.app.isHorizontal() || this.app.isSlim())) {
-            this.activeIndex = null;
-        }
+      this.app.overlayMenuActive = false;
+      this.app.staticMenuMobileActive = false;
+      this.app.menuHoverActive = !this.app.menuHoverActive;
     }
+  }
+
+  onMouseEnter(index: number) {
+    if (
+      this.root &&
+      this.app.menuHoverActive &&
+      (this.app.isHorizontal() || this.app.isSlim()) &&
+      !this.app.isMobile() &&
+      !this.app.isTablet()
+    ) {
+      this.activeIndex = index;
+    }
+  }
+
+  isActive(index: number): boolean {
+    return this.activeIndex === index;
+  }
+
+  @Input()
+  get reset(): boolean {
+    return this._reset;
+  }
+
+  set reset(val: boolean) {
+    this._reset = val;
+
+    if (this._reset && (this.app.isHorizontal() || this.app.isSlim())) {
+      this.activeIndex = null;
+    }
+  }
 }

@@ -29,10 +29,6 @@ export class ViewCourseListComponent implements OnInit {
   // for upload file
   msgs: Message[] = [];
 
-  // for schedule datatable
-  cols: any[];
-  courses: Course[];
-
   // for description datatable
   dCols: any[];
   dCourseInfos: CourseInfo[];
@@ -57,10 +53,7 @@ export class ViewCourseListComponent implements OnInit {
 
   constructor(
     private fileUploadService: FileUploadService,
-    private router: Router,
-    private courseService: CourseService,
     private breadcrumbService: BreadcrumbService,
-    private shareService: ShareService,
     private courseInfoService: CourseInfoService,
     private domSanitizer: DomSanitizer
   ) {
@@ -74,18 +67,6 @@ export class ViewCourseListComponent implements OnInit {
       updateCourseStyle
     );
 
-    // for schedule datatable
-    this.cols = [
-      { field: "staffName", header: "Instructor", width: "18%" },
-      { field: "moduleTitle", header: "Module Title", width: "18%" },
-      { field: "moduleCode", header: "Code", width: "8%" },
-      { field: "moduleGroup", header: "Group", width: "7%" }
-    ];
-
-    this.courseService.getAllCourses().subscribe(response => {
-      this.courses = response.courses;
-    });
-
     // for description datatable
     this.dCols = [
       { field: "id", header: "ID", width: "10%" },
@@ -96,45 +77,6 @@ export class ViewCourseListComponent implements OnInit {
     this.courseInfoService.getAllCourseInfo().subscribe(response => {
       this.dCourseInfos = response.courseInfos;
     });
-
-    // for loading
-    this.loadingStatus = "loading";
-
-    this.interval = setInterval(() => {
-      this.loadingStatus = "active";
-    }, 4000);
-  }
-
-  onFileUploadCourse(event, uploadCourse) {
-    let data = new FormData();
-    data.append("file", event.files[0]);
-
-    this.fileUploadService.uploadCourse(data).subscribe(
-      response => {
-        this.msgs = [];
-
-        uploadCourse.clear();
-
-        this.courseService.getAllCourses().subscribe(response => {
-          this.courses = response.courses;
-        });
-
-        this.msgs.push({
-          severity: "info",
-          summary: "File Uploaded",
-          detail: ""
-        });
-      },
-      error => {
-        uploadCourse.clear();
-        this.msgs = [];
-        this.msgs.push({
-          severity: "error",
-          summary: "Invalid File",
-          detail: ""
-        });
-      }
-    );
   }
 
   onFileUploadCourseInfo(event, uploadCourseInfo) {
@@ -177,16 +119,6 @@ export class ViewCourseListComponent implements OnInit {
         }
       }
     );
-  }
-
-  viewTimetable(rowData) {
-    sessionStorage.setItem("courseId", rowData.id);
-    this.router.navigate(["/viewTimetable"]);
-  }
-
-  updateCourse(rowData) {
-    this.shareService.setValue("courseId", rowData.id);
-    this.router.navigate(["/updateCourse"]);
   }
 
   showViewCourseDialog(rowData) {
@@ -249,10 +181,5 @@ export class ViewCourseListComponent implements OnInit {
           location.reload();
         }, 300);
       });
-  }
-
-  viewCourseDetails(rowData) {
-    sessionStorage.setItem("courseId", rowData.id);
-    this.router.navigate(["/viewCourseDetails"]);
   }
 }
