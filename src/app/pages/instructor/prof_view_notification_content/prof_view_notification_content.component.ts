@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 
-import { Message, ConfirmationService } from "primeng/primeng";
+import { Message } from "primeng/primeng";
 
 import { ShareService } from "../../../../providers/shareService";
 import { VisitService } from "../../../../providers/visitService";

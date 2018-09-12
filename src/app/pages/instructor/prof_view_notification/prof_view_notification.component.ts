@@ -180,7 +180,7 @@ export class ProfViewNotificationsComponent implements OnInit {
   deleteUnreadMessageConfirmDialog(event: Event, msg: MessageEntity) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to delete it?",
+      message: "Are you sure that you want to delete?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
@@ -193,7 +193,7 @@ export class ProfViewNotificationsComponent implements OnInit {
   deleteReadMessageConfirmDialog(event: Event, msg: MessageEntity) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to delete it?",
+      message: "Are you sure that you want to delete?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {

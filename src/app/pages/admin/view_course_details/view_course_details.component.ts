@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Message, ConfirmationService } from "primeng/primeng";
+import { Message } from "primeng/primeng";
 
 import { CourseService } from "../../../../providers/courseService";
 import { BreadcrumbService } from "../../../breadcrumb.service";

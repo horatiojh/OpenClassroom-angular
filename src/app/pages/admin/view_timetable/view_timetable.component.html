@@ -7,7 +7,8 @@
 
         <p-button label="View" icon="fa fa-fw fa-file-text" (onClick)="viewIndivCourseTimetable($event)" [style]="viewSessionBtnStyle"></p-button>
 
-        <p-table #dt [columns]="cols" [value]="timetables" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
+        <p-table #dt [columns]="cols" [value]="timetables" [paginator]="true" [rows]="10" [responsive]="true"
+          paginatorPosition="bottom">
 
           <ng-template pTemplate="caption">
 
@@ -25,7 +26,7 @@
 
           <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr [pSelectableRow]="rowData" style="height:55px">
-              <td *ngFor="let col of columns">
+              <td *ngFor="let col of columns" style="text-align: center">
                 {{rowData[col.field]}}
               </td>
               <td style="text-align: center">

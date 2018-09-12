@@ -10,8 +10,8 @@
 
         <p-button label="New" icon="fa fa-fw fa-plus" [style]="showDialogBtnStyle" (onClick)="showNewSessionDialog()"></p-button>
 
-        <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto" [contentStyle]="{'overflow':'visible'}"
-          modal="true">
+        <p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="300" [height]="auto"
+          [contentStyle]="{'overflow':'visible'}" modal="true">
 
           <p-header>New Session</p-header>
 
@@ -33,7 +33,8 @@
                   <label>Start:</label>
                 </div>
                 <div class="ui-grid-col-9">
-                  <input type="text" pInputText [(ngModel)]="newStartTime" style="width:95%" name="startTime" placeholder="(hh:mm)">
+                  <input type="text" pInputText [(ngModel)]="newStartTime" style="width:95%" name="startTime"
+                    placeholder="(hh:mm)">
                 </div>
               </div>
             </div>
@@ -61,8 +62,8 @@
           </p-footer>
         </p-dialog>
 
-        <p-dialog [(visible)]="requestCVDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
-          modal="true">
+        <p-dialog [(visible)]="requestCVDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto"
+          [contentStyle]="{'overflow':'visible'}" modal="true">
 
           <p-header>Request Classroom Visit</p-header>
 
@@ -136,8 +137,8 @@
 
         <p-tabView>
           <p-tabPanel header="Available">
-            <p-table #availDt [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-              sortField="dateStr" [sortOrder]="1">
+            <p-table #availDt [columns]="cols" [value]="availDates" [paginator]="true" [rows]="10" [responsive]="true"
+              paginatorPosition="bottom" sortField="dateStr" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
 
@@ -149,8 +150,8 @@
                     {{col.header}}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
-                  <th>Archive</th>
                   <th>Request</th>
+                  <th>Archive</th>
                 </tr>
               </ng-template>
 
@@ -160,10 +161,10 @@
                     {{rowData[col.field]}}
                   </td>
                   <td style="text-align: center">
-                    <p-button icon="fa fa-fw fa-archive" (onClick)="confirmArchive(rowData)"></p-button>
+                    <p-button icon='fa fa-fw fa-send' (onClick)="showRequestCVDialog(rowData)"></p-button>
                   </td>
                   <td style="text-align: center">
-                    <p-button icon='fa fa-fw fa-send' (onClick)="showRequestCVDialog(rowData)"></p-button>
+                    <p-button icon="fa fa-fw fa-archive" (onClick)="confirmArchive(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>
@@ -180,8 +181,8 @@
           </p-tabPanel>
 
           <p-tabPanel header="Archived">
-            <p-table [columns]="cols" [value]="archivedDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-              sortField="dateStr" [sortOrder]="1">
+            <p-table [columns]="cols" [value]="archivedDates" [paginator]="true" [rows]="10" [responsive]="true"
+              paginatorPosition="bottom" sortField="dateStr" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
 
@@ -220,8 +221,8 @@
           </p-tabPanel>
 
           <p-tabPanel header="Booked">
-            <p-table #bookedDt [columns]="bookedDatesCols" [value]="bookedDates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
-              sortField="dateStr" [sortOrder]="1">
+            <p-table #bookedDt [columns]="bookedDatesCols" [value]="bookedDates" [paginator]="true" [rows]="10"
+              [responsive]="true" paginatorPosition="bottom" sortField="dateStr" [sortOrder]="1">
 
               <ng-template pTemplate="caption">
 

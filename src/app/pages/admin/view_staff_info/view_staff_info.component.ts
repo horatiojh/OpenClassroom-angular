@@ -400,7 +400,7 @@ export class ViewStaffInfoComponent implements OnInit {
   deleteStaffConfirmDialog(rowData) {
     this.msgs = [];
     this.confirmationService.confirm({
-      message: "Are you sure that you want to delete it?",
+      message: "Are you sure that you want to delete?",
       header: "Confirmation",
       icon: "fa fa-question-circle",
       accept: () => {
