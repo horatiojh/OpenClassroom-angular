@@ -158,7 +158,7 @@ export class RequestDateCardComponent implements OnInit {
         let isBooked = "booked";
         let endpoint = "/updateIsBooked";
         let body = {
-          dateId: String(this.date.id),
+          dateId: String(this.dateId),
           isBooked: isBooked
         };
 
