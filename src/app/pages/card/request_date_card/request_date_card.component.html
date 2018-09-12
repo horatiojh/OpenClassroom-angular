@@ -1,3 +1,5 @@
+<p-growl [value]="msgs" life="4500"></p-growl>
+
 <p-table #dt [columns]="cols" [value]="dates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
   sortField="dateStr" [sortOrder]="1">
 
@@ -25,7 +27,7 @@
         {{rowData[col.field]}}
       </td>
       <td style="text-align: center">
-        <p-button icon='fa fa-fw fa-send' (onClick)="requestClassroomVisit(rowData)"></p-button>
+        <p-button icon='fa fa-fw fa-send' (onClick)="showDialog(rowData)"></p-button>
       </td>
     </tr>
   </ng-template>
@@ -39,3 +41,76 @@
   </ng-template>
 
 </p-table>
+
+<p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+  modal="true">
+
+  <p-header>Request Classroom Visit</p-header>
+
+  <div style="margin-top: 15px">
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>Date:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{dateStr}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>Day:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{weekDay}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>Start:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{startTime}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>End:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{endTime}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>Visitor:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <p-dropdown [options]="staffItems" [(ngModel)]="visitorName" [style]="{'width':'250px'}" (onChange)="staffNameChange($event)"></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-footer>
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <p-button label="Submit" (onClick)="requestClassroomVisit($event)" [style]="requestClassroomVisitBtnStyle"></p-button>
+        </div>
+      </div>
+    </div>
+  </p-footer>
+</p-dialog>

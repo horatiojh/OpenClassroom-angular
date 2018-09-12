@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           if (error == "Archived Account") {
-            let msg: string = "Sign in failed! Invalid username or password";
+            let msg: string = "Sign in failed! Archived account";
             this.loginErrorMessage = msg;
           } else if (error == "Authentication Failed") {
             let msg: string = "Sign in failed! Incorrect username or password";

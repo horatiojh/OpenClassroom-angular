@@ -220,6 +220,7 @@ export class ViewRequestCourseComponent implements OnInit {
 
   requestClassroomVisit(event) {
     this.msgs = [];
+
     this.newVisit = new Visit();
     this.newVisit.startTime = this.dialogStartTime;
     this.newVisit.endTime = this.dialogEndTime;
@@ -231,10 +232,10 @@ export class ViewRequestCourseComponent implements OnInit {
     this.newVisit.moduleGroup = this.course.moduleGroup;
     this.newVisit.moduleTitle = this.course.moduleTitle;
     this.newVisit.instructorName = this.course.staffName;
+    this.newVisit.instructorId = this.instructorId;
     this.newVisit.vStatus = "pending";
     this.newVisit.iStatus = "pending";
     this.newVisit.date = this.date;
-    this.newVisit.instructorId = this.instructorId;
 
     this.visitService.createVisit(this.newVisit).subscribe(
       response => {
@@ -245,6 +246,7 @@ export class ViewRequestCourseComponent implements OnInit {
         });
 
         this.display = false;
+
         let isBooked = "booked";
         let endpoint = "/updateIsBooked";
         let body = {

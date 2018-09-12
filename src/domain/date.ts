@@ -9,6 +9,7 @@ export class DateEntity {
   isExpired: string;
   isBooked: string;
   weekDay: string;
+
   timetable: Timetable;
 
   constructor() {}
