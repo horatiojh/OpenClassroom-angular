@@ -234,6 +234,7 @@
                     {{col.header}}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
+                  <th>Cancel</th>
                 </tr>
               </ng-template>
 
@@ -241,6 +242,9 @@
                 <tr [pSelectableRow]="rowData" style="height:55px">
                   <td *ngFor="let col of columns" style="text-align: center">
                     {{rowData[col.field]}}
+                  </td>
+                  <td style="text-align: center">
+                    <p-button icon="fa fa-fw fa-close" (onClick)="cancelVisitDialog(rowData)"></p-button>
                   </td>
                 </tr>
               </ng-template>

@@ -468,4 +468,21 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       }
     }
   }
+
+  visitorCancelDialog(rowData) {
+    this.msgs = [];
+    this.confirmationService.confirm({
+      message: "Are you sure that you want to cancel?",
+      header: "Confirmation",
+      icon: "fa fa-question-circle",
+      accept: () => {
+        this.cancelVisit(rowData);
+      },
+      reject: () => {}
+    });
+  }
+
+  cancelVisit(rowData) {
+    this.msgs = [];
+  }
 }
