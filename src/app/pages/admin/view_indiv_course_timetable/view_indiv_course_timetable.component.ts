@@ -65,6 +65,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   createNewDate: DateEntity;
   validationMsgs: Message[] = [];
   newWeekDay: string;
+  minDate: Date;
 
   // for request classroom visit dialog
   requestCVDisplay: boolean = false;
@@ -83,7 +84,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   instructorIdStr: string;
   instructor: Staff;
 
-  test: string;
   constructor(
     private breadcrumbService: BreadcrumbService,
     private timetableService: TimetableService,
@@ -221,6 +221,14 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         });
       }
     });
+
+    // for new session creation
+    let now = Date.now();
+    let nowDate = new Date(now);
+    this.minDate = new Date();
+    this.minDate.setFullYear(nowDate.getFullYear());
+    this.minDate.setMonth(nowDate.getMonth());
+    this.minDate.setDate(nowDate.getDate());
   }
 
   archiveDate(rowData) {

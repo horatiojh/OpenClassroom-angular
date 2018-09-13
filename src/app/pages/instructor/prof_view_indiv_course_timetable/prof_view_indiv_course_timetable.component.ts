@@ -58,6 +58,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   createNewDate: DateEntity;
   validationMsgs: Message[] = [];
   newWeekDay: string;
+  minDate: Date;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -162,6 +163,14 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
           });
         }
       });
+
+    // for new session creation
+    let now = Date.now();
+    let nowDate = new Date(now);
+    this.minDate = new Date();
+    this.minDate.setFullYear(nowDate.getFullYear());
+    this.minDate.setMonth(nowDate.getMonth());
+    this.minDate.setDate(nowDate.getDate());
   }
 
   archiveDate(rowDate) {
