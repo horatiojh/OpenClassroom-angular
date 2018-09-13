@@ -94,9 +94,12 @@ export class DateService {
       );
   }
 
-  getVacateDateByTimetableId(timetableId: number): Observable<any> {
+  getVacateDateByTimetableIdDateStr(
+    timetableId: number,
+    dateStr: string
+  ): Observable<any> {
     return this.httpClient
-      .get<any>(this.baseUrl + "/getVacateDates/" + timetableId)
+      .get<any>(this.baseUrl + "/getVacateDates/" + timetableId + "/" + dateStr)
       .pipe(
         tap(_ => console.log(`getVacateDates timetableId=${timetableId}`)),
         catchError(

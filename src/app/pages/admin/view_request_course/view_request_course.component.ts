@@ -202,12 +202,14 @@ export class ViewRequestCourseComponent implements OnInit {
       });
 
     this.dateService
-      .getVacateDateByTimetableId(this.timetableId)
+      .getVacateDateByTimetableIdDateStr(this.timetableId, this.dateStr)
       .subscribe(response => {
         this.vacateDates = response.dates;
+
         this.vacateDates = this.vacateDates.sort((a, b) =>
           a.dateStr.localeCompare(b.dateStr)
         );
+
         this.vacateDatesItems = [{ label: "Please Select One", value: null }];
         for (let i = 0; i < this.vacateDates.length; i++) {
           this.vacateDatesItems.push({
