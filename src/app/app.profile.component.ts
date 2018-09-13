@@ -12,6 +12,7 @@ import { Router } from "@angular/router";
 import { Staff } from "../domain/staff";
 
 import { StaffService } from "../providers/staffService";
+import { DomSanitizer, SafeScript } from "@angular/platform-browser";
 
 @Component({
   selector: "app-inline-profile",
@@ -32,10 +33,12 @@ import { StaffService } from "../providers/staffService";
                 </a>
             </li>
             <li role="menuitem">
+              <div [style]="appRatingStyle">
                 <a [routerLink]="appRating" class="ripplelink" [attr.tabindex]="!active ? '-1' : null">
                     <i class="material-icons">star_rate</i>
                     <span>App Evaluation</span>
                 </a>
+              </div>
             </li>
             <li role="menuitem">
                 <a class="ripplelink" [attr.tabindex]="!active ? '-1' : null"
@@ -89,11 +92,13 @@ export class AppInlineProfileComponent implements OnInit {
   // for rate app
   appRating: string;
   appRatingDisable: string;
+  appRatingStyle: SafeScript;
 
   constructor(
     public app: MainComponent,
     private router: Router,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private domSanitizer: DomSanitizer
   ) {
     this.imageSrc = "";
   }
@@ -110,10 +115,17 @@ export class AppInlineProfileComponent implements OnInit {
 
       if (this.staffRole === "admin") {
         this.profileUpdate = "/updateProfile";
-        this.appRating = "/rateApp";
+        // this.appRating = "/rateApp";
+
+        let style = "display:none";
+        this.appRatingStyle = this.domSanitizer.bypassSecurityTrustStyle(style);
       } else if (this.staffRole === "instructor") {
         this.profileUpdate = "/profUpdateProfile";
         this.appRating = "/profRateApp";
+        this.appRatingStyle = "{'diplay':'none'}";
+
+        let style = "";
+        this.appRatingStyle = this.domSanitizer.bypassSecurityTrustStyle(style);
       }
     });
   }
