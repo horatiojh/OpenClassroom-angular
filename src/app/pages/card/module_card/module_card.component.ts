@@ -14,7 +14,6 @@ import { Course } from "../../../../domain/course";
 
 import { ShareService } from "../../../../providers/shareService";
 import { TagService } from "../../../../providers/tagService";
-import { Tag } from "../../../../domain/tag";
 
 @Component({
   selector: "app-moduleCard",
