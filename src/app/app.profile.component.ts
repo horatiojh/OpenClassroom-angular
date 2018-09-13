@@ -139,6 +139,9 @@ export class AppInlineProfileComponent implements OnInit {
   }
 
   doLogout(event) {
+    localStorage.clear();
+    sessionStorage.clear();
+
     this.router.navigate(["/login"]);
   }
 }
