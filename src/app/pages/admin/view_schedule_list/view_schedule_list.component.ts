@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+
 import { Message } from "primeng/api";
 import { Course } from "../../../../domain/course";
+
 import { CourseService } from "../../../../providers/courseService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { FileUploadService } from "../../../../providers/fileUploadService";
-import { Router } from "@angular/router";
 import { ShareService } from "../../../../providers/shareService";
 
 @Component({

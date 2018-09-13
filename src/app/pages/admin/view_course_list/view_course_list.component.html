@@ -13,7 +13,7 @@
           </ng-template>
         </p-fileUpload>
 
-        <p-dialog [(visible)]="viewDisplay" [draggable]="false" [resizable]="false" [width]="400" [height]="auto"
+        <p-dialog [(visible)]="viewDisplay" [draggable]="false" [resizable]="false" [width]="580" [height]="auto"
           [contentStyle]="{'overflow':'visible'}" modal="true">
 
           <p-header>Course Details</p-header>
@@ -46,15 +46,15 @@
                 <div class="ui-grid-col-4">
                   <label>Description:</label>
                 </div>
-                <div class="ui-grid-col-8" style="text-align: justify;margin-bottom: 12px;">
-                  {{description}}
+                <div class="ui-grid-col-8" style="margin-bottom: 22px;">
+                  <p-editor [(ngModel)]="description" [style]="{'height':'200px'}" [readonly]="true"></p-editor>
                 </div>
               </div>
             </div>
           </div>
         </p-dialog>
 
-        <p-dialog [(visible)]="updateDisplay" [draggable]="false" [resizable]="false" [width]="450" [height]="auto"
+        <p-dialog [(visible)]="updateDisplay" [draggable]="false" [resizable]="false" [width]="580" [height]="auto"
           [contentStyle]="{'overflow':'visible'}" modal="true">
 
           <p-header>Update Course</p-header>
@@ -90,7 +90,7 @@
                   <label>Description:</label>
                 </div>
                 <div class="ui-grid-col-8">
-                  <textarea rows="8" cols="30" pInputTextarea [(ngModel)]="newDescription" class="text_area_cus" name="newDescription"></textarea>
+                  <p-editor [(ngModel)]="newDescription" [style]="{'height':'200px'}"></p-editor>
                 </div>
               </div>
             </div>

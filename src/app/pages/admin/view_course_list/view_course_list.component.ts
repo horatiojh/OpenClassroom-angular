@@ -62,7 +62,7 @@ export class ViewCourseListComponent implements OnInit {
 
   ngOnInit() {
     // css style
-    let updateCourseStyle = "width:120px;height:35px";
+    let updateCourseStyle = "width:140px;height:35px";
     this.updateCourseBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       updateCourseStyle
     );

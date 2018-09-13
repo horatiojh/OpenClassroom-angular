@@ -9,11 +9,11 @@
   margin-top: 8px;
 }
 
-.loading_style {
-  background-image: url("../../../../assets/layout/images/loading.png");
-  width: 200px;
-  height: 200px;
-  margin-top: 18%;
-  margin-bottom: 15%;
-  margin-left: 38%;
+:host >>> .ui-editor-toolbar {
+  width: 95%;
+  margin-top: 5px;
+}
+
+:host >>> .ui-editor-content {
+  width: 95%;
 }
