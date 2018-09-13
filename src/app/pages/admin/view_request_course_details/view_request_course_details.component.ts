@@ -40,6 +40,9 @@ export class ViewRequestCourseDetailsComponent implements OnInit {
   weeksName: string;
   dates: DateEntity[];
 
+  // view tags
+  inputTags: string[] = [];
+
   constructor(
     private courseService: CourseService,
     private breadcrumbService: BreadcrumbService,
@@ -70,6 +73,7 @@ export class ViewRequestCourseDetailsComponent implements OnInit {
           this.syllabus = this.course.syllabus;
           this.blackoutDates = this.course.blackoutDates;
           this.moduleGroup = this.course.moduleGroup;
+          this.inputTags = this.course.tagList;
 
           this.timetableService
             .getTimetableByCourseId(this.courseId)

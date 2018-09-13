@@ -43,6 +43,11 @@
                   <app-requestTimetableCard [timetables]="timetables"></app-requestTimetableCard>
                 </div>
               </p-accordionTab>
+              <p-accordionTab header="Tags" [selected]="true">
+                <div>
+                  <p-chips [(ngModel)]="inputTags" name="inputTags" [disabled]="true"></p-chips>
+                </div>
+              </p-accordionTab>
             </p-accordion>
           </div>
         </div>
