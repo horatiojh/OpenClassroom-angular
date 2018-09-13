@@ -122,8 +122,14 @@ export class ViewRequestCourseComponent implements OnInit {
       endTime: this.endTime,
       tags: this.tagName,
       dates: this.dateStr,
-      staffId: this.shareService.getValue("staffIdStr")
+      staffId: ""
     };
+
+    console.log("weekdays " + this.weekDay);
+    console.log("startTime " + this.startTime);
+    console.log("endTime " + this.endTime);
+    console.log("tagName " + this.tagName);
+    console.log("dateStr " + this.dateStr);
 
     this.timetableService
       .getRequestTimetables(endpoint, body)
@@ -179,8 +185,16 @@ export class ViewRequestCourseComponent implements OnInit {
   }
 
   viewCourseDetails(rowData) {
-    this.shareService.setValue("courseId", rowData.id);
-    this.router.navigate(["/viewRequestCourseDetails"]);
+    let course: Course;
+
+    this.courseService
+      .getCourseByTimetableId(rowData.id)
+      .subscribe(response => {
+        course = response.course;
+
+        this.shareService.setValue("courseId", course.id);
+        this.router.navigate(["/viewRequestCourseDetails"]);
+      });
   }
 
   showDialog(rowData) {

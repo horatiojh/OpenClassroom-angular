@@ -150,7 +150,6 @@ export class SearchCourseComponent implements OnInit {
     this.shareService.setValue("endTime", this.preferEndTime);
     this.shareService.setValue("dates", this.dateStr);
     this.shareService.setValue("tags", this.tagName);
-    this.shareService.setValue("staffIdStr", "");
     this.router.navigate(["/viewRequestCourse"]);
   }
 

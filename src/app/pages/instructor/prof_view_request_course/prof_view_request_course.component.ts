@@ -175,8 +175,16 @@ export class ProfViewRequestCourseComponent implements OnInit {
   }
 
   viewCourseDetails(rowData) {
-    this.shareService.setValue("courseId", rowData.id);
-    this.router.navigate(["/profViewRequestCourseDetails"]);
+    let course: Course;
+
+    this.courseService
+      .getCourseByTimetableId(rowData.id)
+      .subscribe(response => {
+        course = response.course;
+
+        this.shareService.setValue("courseId", course.id);
+        this.router.navigate(["/profViewRequestCourseDetails"]);
+      });
   }
 
   showDialog(rowData) {
@@ -218,6 +226,7 @@ export class ProfViewRequestCourseComponent implements OnInit {
 
   requestClassroomVisit(event) {
     this.msgs = [];
+
     this.newVisit = new Visit();
     this.newVisit.startTime = this.dialogStartTime;
     this.newVisit.endTime = this.dialogEndTime;
