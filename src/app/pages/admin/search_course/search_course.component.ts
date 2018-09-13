@@ -19,6 +19,7 @@ export class SearchCourseComponent implements OnInit {
   // for components
   weekDays: SelectItem[];
   msgs: Message[] = [];
+  minDate: Date;
 
   // for attributes
   selectedWeekDay: string;
@@ -62,6 +63,14 @@ export class SearchCourseComponent implements OnInit {
   }
 
   ngOnInit() {
+    // for calendar
+    let now = Date.now();
+    let nowDate = new Date(now);
+    this.minDate = new Date();
+    this.minDate.setFullYear(nowDate.getFullYear());
+    this.minDate.setMonth(nowDate.getMonth());
+    this.minDate.setDate(nowDate.getDate());
+
     // css style
     let style = "width:180%;height:34px";
     this.buttonStyle = this.domSanitizer.bypassSecurityTrustStyle(style);
@@ -139,7 +148,7 @@ export class SearchCourseComponent implements OnInit {
     this.shareService.setValue("weekDay", this.selectedWeekDay);
     this.shareService.setValue("startTime", this.preferStartTime);
     this.shareService.setValue("endTime", this.preferEndTime);
-    this.shareService.setValue("dates", this.preferDates);
+    this.shareService.setValue("dates", this.dateStr);
     this.shareService.setValue("tags", this.tagName);
     this.shareService.setValue("staffIdStr", "");
     this.router.navigate(["/viewRequestCourse"]);

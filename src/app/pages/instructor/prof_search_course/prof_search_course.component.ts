@@ -19,6 +19,7 @@ export class ProfSearchCourseComponent implements OnInit {
   // for components
   weekDays: SelectItem[];
   msgs: Message[] = [];
+  minDate: Date;
 
   // for attributes
   selectedWeekDay: string;
@@ -62,6 +63,14 @@ export class ProfSearchCourseComponent implements OnInit {
   }
 
   ngOnInit() {
+    // for calendar
+    let now = Date.now();
+    let nowDate = new Date(now);
+    this.minDate = new Date();
+    this.minDate.setFullYear(nowDate.getFullYear());
+    this.minDate.setMonth(nowDate.getMonth());
+    this.minDate.setDate(nowDate.getDate());
+
     // css style
     let style = "width:180%;height:34px";
     this.buttonStyle = this.domSanitizer.bypassSecurityTrustStyle(style);
