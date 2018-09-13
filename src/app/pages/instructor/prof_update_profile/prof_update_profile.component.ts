@@ -29,9 +29,10 @@ export class ProfUpdateProfileComponent implements OnInit {
 
   // for update staff
   uStaffId: number;
-  updateRole: string;
-  updateStaffName: string;
-  updateStaffId: string;
+  role: string;
+  staffName: string;
+  staffId: string;
+  division: string;
   updateEmailAdd: string;
   updateStaff: Staff;
   staff: Staff;
@@ -67,9 +68,10 @@ export class ProfUpdateProfileComponent implements OnInit {
       this.staff = response.staff;
 
       this.updateEmailAdd = this.staff.emailAddress;
-      this.updateRole = this.staff.staffRole;
-      this.updateStaffName = this.staff.staffName;
-      this.updateStaffId = this.staff.staffId;
+      this.role = this.staff.staffRole;
+      this.staffName = this.staff.staffName;
+      this.staffId = this.staff.staffId;
+      this.division = this.staff.division;
       this.staffIdStr = this.staff.staffId;
     });
 
@@ -88,28 +90,6 @@ export class ProfUpdateProfileComponent implements OnInit {
   updateStaffInfo() {
     this.msgs = [];
 
-    if (this.updateStaffName == undefined || this.updateStaffName == "") {
-      this.staffNameBoolean = false;
-      this.msgs.push({
-        severity: "error",
-        summary: "Please enter your staff name.",
-        detail: ""
-      });
-    } else {
-      this.staffNameBoolean = true;
-    }
-
-    if (this.updateStaffId == undefined || this.updateStaffId == "") {
-      this.staffIdBoolean = false;
-      this.msgs.push({
-        severity: "error",
-        summary: "Please enter your staff id.",
-        detail: ""
-      });
-    } else {
-      this.staffIdBoolean = true;
-    }
-
     if (this.updateEmailAdd == undefined || this.updateEmailAdd == "") {
       this.staffEmailBoolean = false;
       this.msgs.push({
@@ -121,30 +101,15 @@ export class ProfUpdateProfileComponent implements OnInit {
       this.staffEmailBoolean = true;
     }
 
-    if (this.updateRole == undefined || this.updateRole == "") {
-      this.staffRoleBoolean = false;
-      this.msgs.push({
-        severity: "error",
-        summary: "Please select the role.",
-        detail: ""
-      });
-    } else {
-      this.staffRoleBoolean = true;
-    }
-
-    if (
-      this.staffNameBoolean &&
-      this.staffIdBoolean &&
-      this.staffEmailBoolean &&
-      this.staffRoleBoolean
-    ) {
+    if (this.staffEmailBoolean) {
       this.updateStaff = new Staff();
 
       this.updateStaff.id = this.uStaffId;
       this.updateStaff.emailAddress = this.updateEmailAdd;
-      this.updateStaff.staffId = this.updateStaffId;
-      this.updateStaff.staffName = this.updateStaffName;
-      this.updateStaff.staffRole = this.updateRole;
+      this.updateStaff.staffId = this.staffId;
+      this.updateStaff.staffName = this.staffName;
+      this.updateStaff.staffRole = this.role;
+      this.updateStaff.division = this.division;
 
       this.staffService.updateStaff(this.updateStaff).subscribe(response => {
         this.msgs.push({
@@ -205,6 +170,10 @@ export class ProfUpdateProfileComponent implements OnInit {
           summary: "Successfully Changed!",
           detail: ""
         });
+
+        setTimeout(function() {
+          window.open("login", "_self");
+        }, 1000);
       });
     }
   }

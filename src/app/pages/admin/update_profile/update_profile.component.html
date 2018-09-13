@@ -15,7 +15,7 @@
                     <label>Name:</label>
                   </div>
                   <div class="ui-grid-col-9">
-                    <input type="text" pInputText [(ngModel)]="updateStaffName" style="width:95%" name="updateStaffName" placeholder="Full Name">
+                    {{staffName}}
                   </div>
                 </div>
               </div>
@@ -26,18 +26,7 @@
                     <label>Staff Id:</label>
                   </div>
                   <div class="ui-grid-col-9">
-                    <input type="text" pInputText [(ngModel)]="updateStaffId" style="width:95%" name="updateStaffId" placeholder="Username">
-                  </div>
-                </div>
-              </div>
-
-              <div class="ui-g-18 ui-md-12">
-                <div class="ui-grid-row">
-                  <div class="ui-grid-col-3">
-                    <label>Email:</label>
-                  </div>
-                  <div class="ui-grid-col-9">
-                    <input type="text" pInputText [(ngModel)]="updateEmailAdd" style="width:95%" name="updateEmailAdd" placeholder="Email Address">
+                    {{staffId}}
                   </div>
                 </div>
               </div>
@@ -48,7 +37,30 @@
                     <label>Role:</label>
                   </div>
                   <div class="ui-grid-col-9">
-                    <p-dropdown [options]="roles" [(ngModel)]="updateRole" [showClear]="true" [style]="{'width':'95%'}" placeholder="Please Select One"></p-dropdown>
+                    {{role}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Division:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    {{division}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="ui-g-18 ui-md-12">
+                <div class="ui-grid-row">
+                  <div class="ui-grid-col-3">
+                    <label>Email:</label>
+                  </div>
+                  <div class="ui-grid-col-9">
+                    <input type="text" pInputText [(ngModel)]="updateEmailAdd" style="width:95%" name="updateEmailAdd"
+                      placeholder="Email Address">
                   </div>
                 </div>
               </div>
@@ -71,7 +83,8 @@
                     <label>Password:</label>
                   </div>
                   <div class="ui-grid-col-9">
-                    <input type="password" pInputText [(ngModel)]="newPassword" style="width:95%" name="newPassword" placeholder="Password">
+                    <input type="password" pInputText [(ngModel)]="newPassword" style="width:95%" name="newPassword"
+                      placeholder="Password">
                   </div>
                 </div>
               </div>
@@ -82,7 +95,8 @@
                     <label>Confirm Password:</label>
                   </div>
                   <div class="ui-grid-col-9">
-                    <input type="password" pInputText [(ngModel)]="confirmPassword" style="width:95%" name="confirmPassword" placeholder="Confirm Password">
+                    <input type="password" pInputText [(ngModel)]="confirmPassword" style="width:95%" name="confirmPassword"
+                      placeholder="Confirm Password">
                   </div>
                 </div>
               </div>
