@@ -1,16 +1,12 @@
 import { Component, OnInit, Output, OnDestroy, DoCheck } from "@angular/core";
-import { Router } from "@angular/router";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 import { Message } from "primeng/primeng";
 
 import { FileUploadService } from "../../../../providers/fileUploadService";
-import { CourseService } from "../../../../providers/courseService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
-import { ShareService } from "../../../../providers/shareService";
 import { CourseInfoService } from "../../../../providers/courseInfoService";
 
-import { Course } from "../../../../domain/course";
 import { CourseInfo } from "../../../../domain/courseInfo";
 
 @Component({
