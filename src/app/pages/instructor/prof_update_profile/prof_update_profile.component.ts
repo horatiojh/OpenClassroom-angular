@@ -117,6 +117,10 @@ export class ProfUpdateProfileComponent implements OnInit {
           summary: "Successfully Updated!",
           detail: ""
         });
+
+        setTimeout(function() {
+          window.open("workspace", "_self");
+        }, 1000);
       });
     }
   }
