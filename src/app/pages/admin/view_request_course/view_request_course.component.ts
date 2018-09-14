@@ -125,12 +125,6 @@ export class ViewRequestCourseComponent implements OnInit {
       staffId: ""
     };
 
-    console.log("weekdays " + this.weekDay);
-    console.log("startTime " + this.startTime);
-    console.log("endTime " + this.endTime);
-    console.log("tagName " + this.tagName);
-    console.log("dateStr " + this.dateStr);
-
     this.timetableService
       .getRequestTimetables(endpoint, body)
       .subscribe(response => {

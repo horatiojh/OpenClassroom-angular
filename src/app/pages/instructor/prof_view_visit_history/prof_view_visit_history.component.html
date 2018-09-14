@@ -489,7 +489,7 @@
                 </p-table>
               </p-accordionTab>
 
-              <p-accordionTab header="Confirmed">
+              <p-accordionTab header="Confirmed" [selected]="true">
 
                 <p-tabView>
                   <p-tabPanel header="Feedback Undone">
@@ -580,7 +580,7 @@
 
               </p-accordionTab>
 
-              <p-accordionTab header="Cancelled">
+              <p-accordionTab header="Cancelled" [selected]="true">
                 <p-table #iDt [columns]="iCols" [value]="iCancelledVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
                   <ng-template pTemplate="caption">
@@ -662,7 +662,7 @@
                 </p-table>
               </p-accordionTab>
 
-              <p-accordionTab header="Confirmed">
+              <p-accordionTab header="Confirmed" [selected]="true">
 
                 <p-tabView>
                   <p-tabPanel header="Feedback Undone">
@@ -755,7 +755,7 @@
 
               </p-accordionTab>
 
-              <p-accordionTab header="Cancelled">
+              <p-accordionTab header="Cancelled" [selected]="true">
                 <p-table #vDt [columns]="vCols" [value]="vCancelledVisit" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom">
 
                   <ng-template pTemplate="caption">

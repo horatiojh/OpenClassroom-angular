@@ -53,7 +53,6 @@ export class ProfViewRequestCourseDetailsComponent implements OnInit {
     private dateService: DateService
   ) {
     this.breadcrumbService.setItems([
-      { label: "Search Courses", routerLink: ["/profSearchCourse"] },
       { label: "Search Results", routerLink: ["/profViewRequestCourse"] },
       { label: "Course Details", routerLink: ["/profViewRequestCourseDetails"] }
     ]);

@@ -108,6 +108,10 @@ export class UpdateCourseComponent implements OnInit {
         summary: "Successfully Updated!",
         detail: ""
       });
+
+      setTimeout(function() {
+        window.open("viewScheduleList", "_self");
+      }, 1000);
     });
   }
 }
