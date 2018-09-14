@@ -271,19 +271,36 @@ export class ViewStaffInfoComponent implements OnInit {
 
       this.newStaff.isActive = this.isActive;
 
-      this.staffService.createStaff(this.newStaff).subscribe(response => {
-        this.msgs.push({
-          severity: "info",
-          summary: "Successfully Created!",
-          detail: ""
-        });
+      this.staffService.createStaff(this.newStaff).subscribe(
+        response => {
+          this.msgs.push({
+            severity: "info",
+            summary: "Successfully Created!",
+            detail: ""
+          });
 
-        this.createDisplay = false;
+          this.createDisplay = false;
 
-        setTimeout(function() {
-          location.reload();
-        }, 300);
-      });
+          setTimeout(function() {
+            location.reload();
+          }, 300);
+        },
+        error => {
+          if (error.error.message == "Duplicate") {
+            this.msgs.push({
+              severity: "error",
+              summary: "Duplicate Record!",
+              detail: ""
+            });
+          } else {
+            this.msgs.push({
+              severity: "error",
+              summary: "HTTP " + error.status,
+              detail: error.error.message
+            });
+          }
+        }
+      );
     }
   }
 
