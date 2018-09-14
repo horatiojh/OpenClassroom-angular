@@ -14,8 +14,6 @@ import { ClassroomService } from "../../../../providers/classroomService";
 import { TimetableService } from "../../../../providers/timetableService";
 import { ShareService } from "../../../../providers/shareService";
 
-
-
 @Component({
   selector: "app-updateTimetable",
   templateUrl: "./update_timetable.component.html",
@@ -60,7 +58,6 @@ export class UpdateTimetableComponent implements OnInit {
   }
 
   ngOnInit() {
-
     let style = "width:180%;height:34px";
     this.buttonStyle = this.domSanitizer.bypassSecurityTrustStyle(style);
 

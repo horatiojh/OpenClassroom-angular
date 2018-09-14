@@ -53,8 +53,11 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   startMin: string;
   endHour: string;
   endMin: string;
+  month: string;
+  day: string;
   newStartTimeDate: Date;
   newEndTimeDate: Date;
+  newDatetimeDate: Date;
   createNewDate: DateEntity;
   validationMsgs: Message[] = [];
   newWeekDay: string;
@@ -261,7 +264,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
 
     let validation: boolean;
 
-    if (this.newDateTime == undefined || this.newDateTime == null) {
+    if (this.newDatetimeDate == undefined || this.newDatetimeDate == null) {
       this.validationMsgs.push({
         severity: "error",
         summary: "Please choose the date.",
@@ -285,7 +288,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       });
     }
 
-    if (this.newStartTimeDate > this.newEndTimeDate) {
+    if (this.newStartTimeDate >= this.newEndTimeDate) {
       validation = false;
 
       this.validationMsgs.push({
@@ -298,56 +301,69 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
     }
 
     if (
-      this.newDateTime != undefined &&
+      this.newDatetimeDate != undefined &&
       this.newStartTimeDate != undefined &&
       this.newEndTimeDate != undefined &&
-      this.newDateTime != null &&
+      this.newDatetimeDate != null &&
       this.newStartTimeDate != null &&
       this.newEndTimeDate != null &&
       validation
     ) {
       this.createNewDate = new DateEntity();
 
-      if (this.newStartTimeDate !== null) {
-        if (this.newStartTimeDate.getHours().toString().length == 1) {
-          this.startHour = "0" + this.newStartTimeDate.getHours();
-        } else {
-          this.startHour = String(this.newStartTimeDate.getHours());
-        }
-
-        if (this.newStartTimeDate.getMinutes().toString().length == 1) {
-          this.startMin = "0" + this.newStartTimeDate.getMinutes();
-        } else {
-          this.startMin = String(this.newStartTimeDate.getMinutes());
-        }
-
-        this.newStartTime = this.startHour + ":" + this.startMin;
+      if (this.newStartTimeDate.getHours().toString().length == 1) {
+        this.startHour = "0" + this.newStartTimeDate.getHours();
+      } else {
+        this.startHour = String(this.newStartTimeDate.getHours());
       }
 
-      if (this.newEndTimeDate !== null) {
-        if (this.newEndTimeDate.getHours().toString().length == 1) {
-          this.endHour = "0" + this.newEndTimeDate.getHours();
-        } else {
-          this.endHour = String(this.newEndTimeDate.getHours());
-        }
-
-        if (this.newEndTimeDate.getMinutes().toString().length == 1) {
-          this.endMin = "0" + this.newEndTimeDate.getMinutes();
-        } else {
-          this.endMin = String(this.newEndTimeDate.getMinutes());
-        }
-
-        this.newEndTime = this.endHour + ":" + this.endMin;
+      if (this.newStartTimeDate.getMinutes().toString().length == 1) {
+        this.startMin = "0" + this.newStartTimeDate.getMinutes();
+      } else {
+        this.startMin = String(this.newStartTimeDate.getMinutes());
       }
+
+      this.newStartTime = this.startHour + ":" + this.startMin;
+
+      if (this.newEndTimeDate.getHours().toString().length == 1) {
+        this.endHour = "0" + this.newEndTimeDate.getHours();
+      } else {
+        this.endHour = String(this.newEndTimeDate.getHours());
+      }
+
+      if (this.newEndTimeDate.getMinutes().toString().length == 1) {
+        this.endMin = "0" + this.newEndTimeDate.getMinutes();
+      } else {
+        this.endMin = String(this.newEndTimeDate.getMinutes());
+      }
+
+      this.newEndTime = this.endHour + ":" + this.endMin;
+
+      let monthInt = this.newDatetimeDate.getMonth() + 1;
+
+      if (monthInt.toString().length == 1) {
+        this.month = "0" + monthInt;
+      } else {
+        this.month = String(monthInt);
+      }
+
+      if (this.newDatetimeDate.getDate().toString().length == 1) {
+        this.day = "0" + this.newDatetimeDate.getDate();
+      } else {
+        this.day = String(this.newDatetimeDate.getDate());
+      }
+
+      this.newDateTime =
+        this.newDatetimeDate.getFullYear() + "-" + this.month + "-" + this.day;
 
       this.createNewDate.startTime = this.newStartTime;
       this.createNewDate.endTime = this.newEndTime;
       this.createNewDate.dateStr = this.newDateTime;
-      this.createNewDate.timetable = this.timetables[0];
       this.createNewDate.status = "available";
       this.createNewDate.isBooked = "vacate";
       this.createNewDate.isExpired = "new";
-      this.createNewDate.weekDay = String(this.newDateTime).substr(0, 3);
+      this.createNewDate.weekDay = String(this.newDatetimeDate).substr(0, 3);
+      this.createNewDate.timetable = this.timetables[0];
 
       this.dateService.createDate(this.createNewDate).subscribe(
         response => {
@@ -357,18 +373,26 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
             detail: ""
           });
 
+          this.display = false;
+
           setTimeout(function() {
             location.reload();
           }, 300);
-
-          this.display = false;
         },
         error => {
-          this.msgs.push({
-            severity: "error",
-            summary: "HTTP " + error.status,
-            detail: error.error.message
-          });
+          if (error.error.message == "Duplicate") {
+            this.msgs.push({
+              severity: "error",
+              summary: "Duplicate Record!",
+              detail: ""
+            });
+          } else {
+            this.msgs.push({
+              severity: "error",
+              summary: "HTTP " + error.status,
+              detail: error.error.message
+            });
+          }
         }
       );
     }

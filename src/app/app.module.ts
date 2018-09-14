@@ -62,7 +62,6 @@ import { VFeedbackService } from "../providers/vFeedbackService";
 import { IFeedbackService } from "../providers/iFeedbackService";
 import { TagService } from "../providers/tagService";
 import { RatingService } from "../providers/ratingService";
-import { DataAnalyticsService } from "../providers/dataAnalyticsService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -203,8 +202,7 @@ import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_
     VFeedbackService,
     IFeedbackService,
     TagService,
-    RatingService,
-    DataAnalyticsService
+    RatingService
   ],
   bootstrap: [AppComponent]
 })
