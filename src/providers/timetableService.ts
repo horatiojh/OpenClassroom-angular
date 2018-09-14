@@ -41,13 +41,14 @@ export class TimetableService {
   }
 
   getRequestTimetables(endpoint: string, body?: any): Observable<any> {
-    return this.httpClient
-      .post<any>(this.baseUrl + endpoint, body)
-      .pipe(tap(resp => console.log(resp)), catchError(this.handleErrorApi));
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
   updateTimetable(timetable: Timetable): Observable<any> {
-    let updateTimetableReq = { "timetable": timetable };
+    let updateTimetableReq = { timetable: timetable };
 
     return this.httpClient
       .post<any>(
@@ -63,7 +64,7 @@ export class TimetableService {
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
-      return of(result as T);
+      return Observable.throw(error);
     };
   }
 

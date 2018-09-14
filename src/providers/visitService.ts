@@ -185,7 +185,7 @@ export class VisitService {
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
-      return of(result as T);
+      return Observable.throw(error);
     };
   }
 
