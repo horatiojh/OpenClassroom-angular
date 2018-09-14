@@ -90,6 +90,7 @@ export class AppTopbarComponent implements OnInit {
   staffId: number;
   newMsgs: MessageEntity[];
   notificationMsgs: Message[] = [];
+  isLogin: Boolean;
 
   constructor(
     public app: MainComponent,
@@ -117,34 +118,38 @@ export class AppTopbarComponent implements OnInit {
     }
 
     // for notification
-    this.staffId = Number(sessionStorage.getItem("sessionStaffId"));
+    this.isLogin = Boolean(sessionStorage.getItem("isLogin"));
 
-    this.msgService
-      .getUnreadMessagesByStaffId(this.staffId)
-      .subscribe(response => {
-        this.newMsgs = response.messages;
-        this.numOfNewMsg = this.newMsgs.length;
-        this.preNumOfNewMsg = this.numOfNewMsg;
-      });
+    if (this.isLogin && this.staffRole == "instructor") {
+      this.staffId = Number(sessionStorage.getItem("sessionStaffId"));
 
-    this.interval = setInterval(() => {
       this.msgService
         .getUnreadMessagesByStaffId(this.staffId)
         .subscribe(response => {
           this.newMsgs = response.messages;
           this.numOfNewMsg = this.newMsgs.length;
-
-          if (this.numOfNewMsg - this.preNumOfNewMsg === 1) {
-            this.messageService.add({
-              severity: "warn",
-              summary: "You have a new message",
-              detail: ""
-            });
-
-            this.preNumOfNewMsg = this.numOfNewMsg;
-          }
+          this.preNumOfNewMsg = this.numOfNewMsg;
         });
-    }, 500);
+
+      this.interval = setInterval(() => {
+        this.msgService
+          .getUnreadMessagesByStaffId(this.staffId)
+          .subscribe(response => {
+            this.newMsgs = response.messages;
+            this.numOfNewMsg = this.newMsgs.length;
+
+            if (this.numOfNewMsg - this.preNumOfNewMsg === 1) {
+              this.messageService.add({
+                severity: "warn",
+                summary: "You have a new message",
+                detail: ""
+              });
+
+              this.preNumOfNewMsg = this.numOfNewMsg;
+            }
+          });
+      }, 5000);
+    }
   }
 
   growlOnClick(event) {
