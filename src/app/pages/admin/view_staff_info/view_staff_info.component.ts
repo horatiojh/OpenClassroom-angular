@@ -176,6 +176,12 @@ export class ViewStaffInfoComponent implements OnInit {
       this.updateStaffId = this.staff.staffId;
       this.updateStaffName = this.staff.staffName;
       this.updateDivision = this.staff.division;
+
+      if (this.staff.isActive) {
+        this.updateActive = "Yes";
+      } else {
+        this.updateActive = "No";
+      }
     });
   }
 
