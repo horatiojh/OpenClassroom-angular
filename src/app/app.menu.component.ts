@@ -31,6 +31,11 @@ export class AppMenuComponent implements OnInit {
     if (this.staffRole === "admin") {
       this.model = [
         {
+          label: "Search Courses",
+          icon: "search",
+          routerLink: ["/searchCourse"]
+        },
+        {
           label: "Staff Management",
           icon: "camera",
           routerLink: ["/viewStaffInfo"]
@@ -53,6 +58,11 @@ export class AppMenuComponent implements OnInit {
       ];
     } else if (this.staffRole === "instructor") {
       this.model = [
+        {
+          label: "Search Courses",
+          icon: "search",
+          routerLink: ["/profSearchCourse"]
+        },
         { label: "Workspace", icon: "class", routerLink: ["/workspace"] },
         {
           label: "Visit History",
