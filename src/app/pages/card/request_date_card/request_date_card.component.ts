@@ -40,6 +40,7 @@ export class RequestDateCardComponent implements OnInit {
   endTime: string;
   dateStr: string;
   weekDay: string;
+  room: string;
   date: DateEntity;
   dateId: number;
   timetable: Timetable;
@@ -69,7 +70,8 @@ export class RequestDateCardComponent implements OnInit {
       { field: "dateStr", header: "Date" },
       { field: "startTime", header: "Start" },
       { field: "endTime", header: "End" },
-      { field: "weekDay", header: "Day" }
+      { field: "weekDay", header: "Day" },
+      { field: "room", header: "Room" }
     ];
 
     // for request classroom visit
@@ -103,6 +105,7 @@ export class RequestDateCardComponent implements OnInit {
       this.endTime = this.date.endTime;
       this.weekDay = this.date.weekDay;
       this.dateStr = this.date.dateStr;
+      this.room = this.date.room;
       this.timetable = this.date.timetable;
 
       this.courseService

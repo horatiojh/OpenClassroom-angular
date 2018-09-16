@@ -25,7 +25,7 @@
 
           <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr [pSelectableRow]="rowData" style="height:55px">
-              <td *ngFor="let col of columns">
+              <td *ngFor="let col of columns" style="text-align: center">
                 {{rowData[col.field]}}
               </td>
               <!-- <td style="text-align: center">

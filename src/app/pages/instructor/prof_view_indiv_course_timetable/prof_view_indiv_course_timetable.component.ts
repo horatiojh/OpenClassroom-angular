@@ -101,14 +101,16 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       { field: "dateStr", header: "Date" },
       { field: "startTime", header: "Start" },
       { field: "endTime", header: "End" },
-      { field: "weekDay", header: "WeekDay" }
+      { field: "weekDay", header: "WeekDay" },
+      { field: "room", header: "Room" }
     ];
 
     this.bookedDatesCols = [
       { field: "dateStr", header: "Date" },
       { field: "startTime", header: "Start" },
       { field: "endTime", header: "End" },
-      { field: "weekDay", header: "WeekDay" }
+      { field: "weekDay", header: "WeekDay" },
+      { field: "room", header: "Room" }
     ];
 
     this.dateService
