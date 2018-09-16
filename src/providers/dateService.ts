@@ -108,6 +108,17 @@ export class DateService {
       );
   }
 
+  getVacateDateByTimetableId(timetableId: number): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getVacateDates/" + timetableId)
+      .pipe(
+        tap(_ => console.log(`getVacateDates timetableId=${timetableId}`)),
+        catchError(
+          this.handleError<any>(`getVacateDates timetableId=${timetableId}`)
+        )
+      );
+  }
+
   updateIsBooked(endpoint: string, body?: any): Observable<any> {
     return this.httpClient
       .post<any>(this.baseUrl + endpoint, body)

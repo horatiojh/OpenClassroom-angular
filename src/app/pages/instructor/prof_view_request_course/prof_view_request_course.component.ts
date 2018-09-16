@@ -205,23 +205,43 @@ export class ProfViewRequestCourseComponent implements OnInit {
           });
       });
 
-    this.dateService
-      .getVacateDateByTimetableIdDateStr(this.timetableId, this.dateStr)
-      .subscribe(response => {
-        this.vacateDates = response.dates;
+    if (this.dateStr == "") {
+      this.dateService
+        .getVacateDateByTimetableId(this.timetableId)
+        .subscribe(response => {
+          this.vacateDates = response.dates;
 
-        this.vacateDates = this.vacateDates.sort((a, b) =>
-          a.dateStr.localeCompare(b.dateStr)
-        );
+          this.vacateDates = this.vacateDates.sort((a, b) =>
+            a.dateStr.localeCompare(b.dateStr)
+          );
 
-        this.vacateDatesItems = [{ label: "Please Select One", value: null }];
-        for (let i = 0; i < this.vacateDates.length; i++) {
-          this.vacateDatesItems.push({
-            label: this.vacateDates[i].dateStr,
-            value: this.vacateDates[i].dateStr
-          });
-        }
-      });
+          this.vacateDatesItems = [{ label: "Please Select One", value: null }];
+          for (let i = 0; i < this.vacateDates.length; i++) {
+            this.vacateDatesItems.push({
+              label: this.vacateDates[i].dateStr,
+              value: this.vacateDates[i].dateStr
+            });
+          }
+        });
+    } else {
+      this.dateService
+        .getVacateDateByTimetableIdDateStr(this.timetableId, this.dateStr)
+        .subscribe(response => {
+          this.vacateDates = response.dates;
+
+          this.vacateDates = this.vacateDates.sort((a, b) =>
+            a.dateStr.localeCompare(b.dateStr)
+          );
+
+          this.vacateDatesItems = [{ label: "Please Select One", value: null }];
+          for (let i = 0; i < this.vacateDates.length; i++) {
+            this.vacateDatesItems.push({
+              label: this.vacateDates[i].dateStr,
+              value: this.vacateDates[i].dateStr
+            });
+          }
+        });
+    }
   }
 
   requestClassroomVisit(event) {
