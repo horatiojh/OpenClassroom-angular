@@ -148,6 +148,7 @@ export class RequestDateCardComponent implements OnInit {
     this.newVisit.vStatus = "pending";
     this.newVisit.iStatus = "pending";
     this.newVisit.date = this.date;
+    this.newVisit.room = this.room;
 
     this.visitService.createVisit(this.newVisit).subscribe(
       response => {

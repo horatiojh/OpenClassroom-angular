@@ -9,6 +9,7 @@ export class Visit {
   endTime: string;
   visitDate: string;
   weekDay: string;
+  room: string;
   vStatus: string;
   iStatus: string;
   vfeedbackSubmitted: boolean;

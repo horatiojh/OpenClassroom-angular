@@ -91,6 +91,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   instructorId: number;
   instructorIdStr: string;
   instructor: Staff;
+  room: string;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -258,20 +259,12 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       if (response != null && typeof response.date != undefined) {
         this.date = response.date;
         this.dateId = this.date.id;
-        this.dateStr = this.date.dateStr;
-        this.startTime = this.date.startTime;
-        this.endTime = this.date.endTime;
-        this.weekDay = this.date.weekDay;
 
         this.newDate = new DateEntity();
         this.newDate.status = "archived";
-        this.newDate.dateStr = this.dateStr;
-        this.newDate.startTime = this.startTime;
-        this.newDate.endTime = this.endTime;
         this.newDate.id = this.dateId;
-        this.newDate.weekDay = this.weekDay;
 
-        this.dateService.updateDate(this.newDate).subscribe(response => {
+        this.dateService.updateDateStatus(this.newDate).subscribe(response => {
           this.msgs.push({
             severity: "info",
             summary: "Successfully Archived!",
@@ -297,20 +290,12 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       if (response != null && typeof response.date != undefined) {
         this.date = response.date;
         this.dateId = this.date.id;
-        this.dateStr = this.date.dateStr;
-        this.startTime = this.date.startTime;
-        this.endTime = this.date.endTime;
-        this.weekDay = this.date.weekDay;
 
         this.newDate = new DateEntity();
         this.newDate.status = "available";
-        this.newDate.dateStr = this.dateStr;
-        this.newDate.startTime = this.startTime;
-        this.newDate.endTime = this.endTime;
         this.newDate.id = this.dateId;
-        this.newDate.weekDay = this.weekDay;
 
-        this.dateService.updateDate(this.newDate).subscribe(response => {
+        this.dateService.updateDateStatus(this.newDate).subscribe(response => {
           this.msgs.push({
             severity: "info",
             summary: "Successfully Restored!",
@@ -522,6 +507,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       this.dialogStartTime = this.date.startTime;
       this.dialogEndTime = this.date.endTime;
       this.dialogWeekDay = this.date.weekDay;
+      this.room = this.date.room;
     });
   }
 
@@ -542,6 +528,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     this.newVisit.iStatus = "pending";
     this.newVisit.date = this.date;
     this.newVisit.instructorId = this.instructorId;
+    this.newVisit.room = this.room;
 
     this.visitService.createVisit(this.newVisit).subscribe(
       response => {

@@ -41,6 +41,7 @@ export class ViewRequestCourseComponent implements OnInit {
   dialogStartTime: string;
   dialogEndTime: string;
   dialogWeekDay: string;
+  dialogRoom: string;
   date: DateEntity;
   timetable: Timetable;
   vacateDates: DateEntity[];
@@ -86,6 +87,7 @@ export class ViewRequestCourseComponent implements OnInit {
     this.dialogEndTime = "";
     this.dialogStartTime = "";
     this.dialogWeekDay = "";
+    this.dialogRoom = "";
   }
 
   ngOnInit() {
@@ -266,6 +268,7 @@ export class ViewRequestCourseComponent implements OnInit {
     this.newVisit.vStatus = "pending";
     this.newVisit.iStatus = "pending";
     this.newVisit.date = this.date;
+    this.newVisit.room = this.dialogRoom;
 
     this.visitService.createVisit(this.newVisit).subscribe(
       response => {
@@ -305,12 +308,14 @@ export class ViewRequestCourseComponent implements OnInit {
       this.dialogEndTime = "";
       this.dialogStartTime = "";
       this.dialogWeekDay = "";
+      this.dialogRoom = "";
     } else {
       for (let i = 0; i < this.vacateDates.length; i++) {
         if (this.vacateDates[i].dateStr == dateStr) {
           this.dialogEndTime = this.vacateDates[i].endTime;
           this.dialogStartTime = this.vacateDates[i].startTime;
           this.dialogWeekDay = this.vacateDates[i].weekDay;
+          this.dialogRoom = this.vacateDates[i].room;
           this.date = this.vacateDates[i];
         }
       }
