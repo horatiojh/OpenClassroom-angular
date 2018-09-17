@@ -81,6 +81,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   dialogStartTime: string;
   dialogEndTime: string;
   dialogWeekDay: string;
+  dialogRoom: string;
   staffName: string;
   staffId: number;
   staff: Staff;
@@ -91,7 +92,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   instructorId: number;
   instructorIdStr: string;
   instructor: Staff;
-  room: string;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -350,6 +350,14 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       });
     }
 
+    if (this.selectedRoom == undefined || this.selectedRoom == null) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please enter the classroom.",
+        detail: ""
+      });
+    }
+
     if (this.newStartTimeDate >= this.newEndTimeDate) {
       validation = false;
 
@@ -360,14 +368,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       });
     } else {
       validation = true;
-    }
-
-    if (this.selectedRoom == undefined || this.selectedRoom == null) {
-      this.validationMsgs.push({
-        severity: "error",
-        summary: "Please enter the classroom.",
-        detail: ""
-      });
     }
 
     if (
@@ -507,61 +507,75 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       this.dialogStartTime = this.date.startTime;
       this.dialogEndTime = this.date.endTime;
       this.dialogWeekDay = this.date.weekDay;
-      this.room = this.date.room;
+      this.dialogRoom = this.date.room;
     });
   }
 
   requestClassroomVisit(event) {
     this.msgs = [];
-    this.newVisit = new Visit();
-    this.newVisit.startTime = this.dialogStartTime;
-    this.newVisit.endTime = this.dialogEndTime;
-    this.newVisit.visitDate = this.dialogDateTime;
-    this.newVisit.weekDay = this.dialogWeekDay;
-    this.newVisit.visitorName = this.staffName;
-    this.newVisit.visitorId = this.staffId;
-    this.newVisit.moduleCode = this.course.moduleCode;
-    this.newVisit.moduleGroup = this.course.moduleGroup;
-    this.newVisit.moduleTitle = this.course.moduleTitle;
-    this.newVisit.instructorName = this.course.staffName;
-    this.newVisit.vStatus = "pending";
-    this.newVisit.iStatus = "pending";
-    this.newVisit.date = this.date;
-    this.newVisit.instructorId = this.instructorId;
-    this.newVisit.room = this.room;
+    this.validationMsgs = [];
 
-    this.visitService.createVisit(this.newVisit).subscribe(
-      response => {
-        this.msgs.push({
-          severity: "info",
-          summary: "Successfully Submitted!",
-          detail: ""
-        });
+    if (this.staffName == undefined || this.staffName == null) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please choose the observer's name.",
+        detail: ""
+      });
+    }
 
-        this.requestCVDisplay = false;
-        let isBooked = "booked";
-        let endpoint = "/updateIsBooked";
-        let body = {
-          dateId: String(this.date.id),
-          isBooked: isBooked
-        };
+    if (this.staffName != undefined && this.staffName != null) {
+      this.newVisit = new Visit();
+      this.newVisit.startTime = this.dialogStartTime;
+      this.newVisit.endTime = this.dialogEndTime;
+      this.newVisit.visitDate = this.dialogDateTime;
+      this.newVisit.weekDay = this.dialogWeekDay;
+      this.newVisit.visitorName = this.staffName;
+      this.newVisit.visitorId = this.staffId;
+      this.newVisit.moduleCode = this.course.moduleCode;
+      this.newVisit.moduleGroup = this.course.moduleGroup;
+      this.newVisit.moduleTitle = this.course.moduleTitle;
+      this.newVisit.instructorName = this.course.staffName;
+      this.newVisit.vStatus = "pending";
+      this.newVisit.iStatus = "pending";
+      this.newVisit.date = this.date;
+      this.newVisit.instructorId = this.instructorId;
+      this.newVisit.room = this.dialogRoom;
 
-        this.dateService.updateIsBooked(endpoint, body).subscribe(response => {
-          console.log("update isBooked");
-        });
+      this.visitService.createVisit(this.newVisit).subscribe(
+        response => {
+          this.msgs.push({
+            severity: "info",
+            summary: "Successfully Submitted!",
+            detail: ""
+          });
 
-        setTimeout(function() {
-          location.reload();
-        }, 300);
-      },
-      error => {
-        this.msgs.push({
-          severity: "error",
-          summary: "HTTP " + error.status,
-          detail: error.error.message
-        });
-      }
-    );
+          this.requestCVDisplay = false;
+          let isBooked = "booked";
+          let endpoint = "/updateIsBooked";
+          let body = {
+            dateId: String(this.date.id),
+            isBooked: isBooked
+          };
+
+          this.dateService
+            .updateIsBooked(endpoint, body)
+            .subscribe(response => {
+              console.log("update isBooked");
+            });
+
+          setTimeout(function() {
+            location.reload();
+          }, 300);
+        },
+        error => {
+          this.msgs.push({
+            severity: "error",
+            summary: "HTTP " + error.status,
+            detail: error.error.message
+          });
+        }
+      );
+    }
   }
 
   staffNameChange(event) {

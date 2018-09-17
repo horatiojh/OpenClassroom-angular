@@ -253,52 +253,77 @@ export class ViewRequestCourseComponent implements OnInit {
   requestClassroomVisit(event) {
     this.msgs = [];
 
-    this.newVisit = new Visit();
-    this.newVisit.startTime = this.dialogStartTime;
-    this.newVisit.endTime = this.dialogEndTime;
-    this.newVisit.visitDate = this.dialogDateTime;
-    this.newVisit.weekDay = this.dialogWeekDay;
-    this.newVisit.visitorName = this.staffName;
-    this.newVisit.visitorId = this.staffId;
-    this.newVisit.moduleCode = this.course.moduleCode;
-    this.newVisit.moduleGroup = this.course.moduleGroup;
-    this.newVisit.moduleTitle = this.course.moduleTitle;
-    this.newVisit.instructorName = this.course.staffName;
-    this.newVisit.instructorId = this.instructorId;
-    this.newVisit.vStatus = "pending";
-    this.newVisit.iStatus = "pending";
-    this.newVisit.date = this.date;
-    this.newVisit.room = this.dialogRoom;
+    if (this.staffName == undefined || this.staffName == null) {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please choose the observer's name.",
+        detail: ""
+      });
+    }
 
-    this.visitService.createVisit(this.newVisit).subscribe(
-      response => {
-        this.msgs.push({
-          severity: "info",
-          summary: "Successfully Submitted!",
-          detail: ""
-        });
+    if (this.dialogDateTime == undefined || this.dialogDateTime == null) {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please choose the date of observation.",
+        detail: ""
+      });
+    }
 
-        this.display = false;
+    if (
+      this.staffName != undefined &&
+      this.dialogDateTime != undefined &&
+      this.staffName != null &&
+      this.dialogDateTime != null
+    ) {
+      this.newVisit = new Visit();
+      this.newVisit.startTime = this.dialogStartTime;
+      this.newVisit.endTime = this.dialogEndTime;
+      this.newVisit.visitDate = this.dialogDateTime;
+      this.newVisit.weekDay = this.dialogWeekDay;
+      this.newVisit.visitorName = this.staffName;
+      this.newVisit.visitorId = this.staffId;
+      this.newVisit.moduleCode = this.course.moduleCode;
+      this.newVisit.moduleGroup = this.course.moduleGroup;
+      this.newVisit.moduleTitle = this.course.moduleTitle;
+      this.newVisit.instructorName = this.course.staffName;
+      this.newVisit.instructorId = this.instructorId;
+      this.newVisit.vStatus = "pending";
+      this.newVisit.iStatus = "pending";
+      this.newVisit.date = this.date;
+      this.newVisit.room = this.dialogRoom;
 
-        let isBooked = "booked";
-        let endpoint = "/updateIsBooked";
-        let body = {
-          dateId: String(this.date.id),
-          isBooked: isBooked
-        };
+      this.visitService.createVisit(this.newVisit).subscribe(
+        response => {
+          this.msgs.push({
+            severity: "info",
+            summary: "Successfully Submitted!",
+            detail: ""
+          });
 
-        this.dateService.updateIsBooked(endpoint, body).subscribe(response => {
-          console.log("update isBooked");
-        });
-      },
-      error => {
-        this.msgs.push({
-          severity: "error",
-          summary: "HTTP " + error.status,
-          detail: error.error.message
-        });
-      }
-    );
+          this.display = false;
+
+          let isBooked = "booked";
+          let endpoint = "/updateIsBooked";
+          let body = {
+            dateId: String(this.date.id),
+            isBooked: isBooked
+          };
+
+          this.dateService
+            .updateIsBooked(endpoint, body)
+            .subscribe(response => {
+              console.log("update isBooked");
+            });
+        },
+        error => {
+          this.msgs.push({
+            severity: "error",
+            summary: "HTTP " + error.status,
+            detail: error.error.message
+          });
+        }
+      );
+    }
   }
 
   dateTimeChange(event) {

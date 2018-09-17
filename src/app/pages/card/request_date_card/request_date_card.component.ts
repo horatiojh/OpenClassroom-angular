@@ -133,51 +133,63 @@ export class RequestDateCardComponent implements OnInit {
   requestClassroomVisit() {
     this.msgs = [];
 
-    this.newVisit = new Visit();
-    this.newVisit.startTime = this.startTime;
-    this.newVisit.endTime = this.endTime;
-    this.newVisit.visitDate = this.dateStr;
-    this.newVisit.weekDay = this.weekDay;
-    this.newVisit.visitorName = this.visitorName;
-    this.newVisit.visitorId = this.visitorId;
-    this.newVisit.moduleCode = this.moduleCode;
-    this.newVisit.moduleGroup = this.moduleGroup;
-    this.newVisit.moduleTitle = this.moduleTitle;
-    this.newVisit.instructorName = this.instructorName;
-    this.newVisit.instructorId = this.instructorId;
-    this.newVisit.vStatus = "pending";
-    this.newVisit.iStatus = "pending";
-    this.newVisit.date = this.date;
-    this.newVisit.room = this.room;
+    if (this.visitorName == undefined || this.visitorName == null) {
+      this.msgs.push({
+        severity: "error",
+        summary: "Please choose the observer's name.",
+        detail: ""
+      });
+    }
 
-    this.visitService.createVisit(this.newVisit).subscribe(
-      response => {
-        this.msgs.push({
-          severity: "info",
-          summary: "Successfully Submitted!",
-          detail: ""
-        });
+    if (this.visitorName != undefined && this.visitorName != null) {
+      this.newVisit = new Visit();
+      this.newVisit.startTime = this.startTime;
+      this.newVisit.endTime = this.endTime;
+      this.newVisit.visitDate = this.dateStr;
+      this.newVisit.weekDay = this.weekDay;
+      this.newVisit.visitorName = this.visitorName;
+      this.newVisit.visitorId = this.visitorId;
+      this.newVisit.moduleCode = this.moduleCode;
+      this.newVisit.moduleGroup = this.moduleGroup;
+      this.newVisit.moduleTitle = this.moduleTitle;
+      this.newVisit.instructorName = this.instructorName;
+      this.newVisit.instructorId = this.instructorId;
+      this.newVisit.vStatus = "pending";
+      this.newVisit.iStatus = "pending";
+      this.newVisit.date = this.date;
+      this.newVisit.room = this.room;
 
-        this.display = false;
-        let isBooked = "booked";
-        let endpoint = "/updateIsBooked";
-        let body = {
-          dateId: String(this.dateId),
-          isBooked: isBooked
-        };
+      this.visitService.createVisit(this.newVisit).subscribe(
+        response => {
+          this.msgs.push({
+            severity: "info",
+            summary: "Successfully Submitted!",
+            detail: ""
+          });
 
-        this.dateService.updateIsBooked(endpoint, body).subscribe(response => {
-          console.log("update isBooked");
-        });
-      },
-      error => {
-        this.msgs.push({
-          severity: "error",
-          summary: "HTTP " + error.status,
-          detail: error.error.message
-        });
-      }
-    );
+          this.display = false;
+          let isBooked = "booked";
+          let endpoint = "/updateIsBooked";
+          let body = {
+            dateId: String(this.dateId),
+            isBooked: isBooked
+          };
+
+          this.dateService
+            .updateIsBooked(endpoint, body)
+            .subscribe(response => {
+              console.log("update isBooked");
+            });
+        },
+        error => {
+          this.msgs.push({
+            severity: "error",
+            summary: "HTTP " + error.status,
+            detail: error.error.message
+          });
+        }
+      );
+    }
   }
 
   staffNameChange(event) {
