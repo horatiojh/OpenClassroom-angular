@@ -207,21 +207,23 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     this.staffId = Number(sessionStorage.getItem("sessionStaffId"));
 
     this.iCols = [
-      { field: "visitorName", header: "Observer", width: "20%" },
+      { field: "visitorName", header: "Observer", width: "12%" },
       { field: "moduleCode", header: "Code", width: "9%" },
       { field: "visitDate", header: "Date", width: "10%" },
       { field: "startTime", header: "Start", width: "9%" },
       { field: "endTime", header: "End", width: "8%" },
-      { field: "weekDay", header: "Day", width: "8%" }
+      { field: "weekDay", header: "Day", width: "8%" },
+      { field: "room", header: "Room", width: "8%" }
     ];
 
     this.vCols = [
-      { field: "moduleCode", header: "Module Code", width: "12%" },
-      { field: "instructorName", header: "Instructor", width: "20%" },
+      { field: "moduleCode", header: "Code", width: "8%" },
+      { field: "instructorName", header: "Instructor", width: "15%" },
       { field: "visitDate", header: "Date", width: "9%" },
       { field: "startTime", header: "Start", width: "8%" },
-      { field: "endTime", header: "End", width: "7%" },
-      { field: "weekDay", header: "Day", width: "7%" }
+      { field: "endTime", header: "End", width: "8%" },
+      { field: "weekDay", header: "Day", width: "8%" },
+      { field: "room", header: "Room", width: "8%" }
     ];
 
     this.staffService.getStaffByStaffId(this.staffId).subscribe(response => {
@@ -299,8 +301,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
       .subscribe(response => {
         if (response != null && typeof response.visits != undefined) {
           this.vPendingVisit = response.visits;
-
-          console.log(this.vPendingVisit);
         } else {
           this.msgs.push({
             severity: "error",
