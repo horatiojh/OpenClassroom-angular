@@ -100,14 +100,18 @@ export class SearchCourseComponent implements OnInit {
 
     let validation: boolean = false;
 
-    if (this.preferStartDate >= this.preferEndDate) {
-      validation = false;
+    if (this.preferStartDate !== null && this.preferEndDate != null) {
+      if (this.preferStartDate >= this.preferEndDate) {
+        validation = false;
 
-      this.msgs.push({
-        severity: "error",
-        summary: "Please enter the valid start time.",
-        detail: ""
-      });
+        this.msgs.push({
+          severity: "error",
+          summary: "Please enter the valid start time.",
+          detail: ""
+        });
+      } else {
+        validation = true;
+      }
     } else {
       validation = true;
     }
