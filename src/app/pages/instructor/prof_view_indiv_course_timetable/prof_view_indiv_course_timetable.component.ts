@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Message, ConfirmationService } from "primeng/primeng";
+import { Message, ConfirmationService, SelectItem } from "primeng/primeng";
 import { SafeStyle, DomSanitizer } from "@angular/platform-browser";
 
 import { BreadcrumbService } from "../../../breadcrumb.service";
@@ -8,6 +8,8 @@ import { DateService } from "../../../../providers/dateService";
 
 import { DateEntity } from "../../../../domain/date";
 import { Timetable } from "../../../../domain/timetable";
+import { Classroom } from "../../../../domain/classroom";
+import { ClassroomService } from "../../../../providers/classroomService";
 
 @Component({
   selector: "app-profViewIndivCourseTimetable",
@@ -62,13 +64,17 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
   validationMsgs: Message[] = [];
   newWeekDay: string;
   minDate: Date;
+  rooms: SelectItem[];
+  selectedRoom: string;
+  classrooms: Classroom[];
 
   constructor(
     private breadcrumbService: BreadcrumbService,
     private timetableService: TimetableService,
     private dateService: DateService,
     private domSanitizer: DomSanitizer,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private classroomService: ClassroomService
   ) {
     this.submitted = false;
     this.breadcrumbService.setItems([
@@ -87,7 +93,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       showDialogstyle
     );
 
-    let createIndivSessionStyle = "width:100px";
+    let createIndivSessionStyle = "width:100px;margin-top:15px";
     this.createIndivSessionBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       createIndivSessionStyle
     );
@@ -176,6 +182,17 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
     this.minDate.setFullYear(nowDate.getFullYear());
     this.minDate.setMonth(nowDate.getMonth());
     this.minDate.setDate(nowDate.getDate());
+
+    this.classroomService.getAllClassrooms().subscribe(response => {
+      this.classrooms = response.classrooms;
+      this.rooms = [{ label: "Please Select One", value: null }];
+      for (let i = 0; i < this.classrooms.length; i++) {
+        this.rooms.push({
+          label: this.classrooms[i].roomId,
+          value: this.classrooms[i].roomId
+        });
+      }
+    });
   }
 
   archiveDate(rowDate) {
@@ -302,13 +319,23 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       validation = true;
     }
 
+    if (this.selectedRoom == undefined || this.selectedRoom == null) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please enter the classroom.",
+        detail: ""
+      });
+    }
+
     if (
       this.newDatetimeDate != undefined &&
       this.newStartTimeDate != undefined &&
       this.newEndTimeDate != undefined &&
+      this.selectedRoom != undefined &&
       this.newDatetimeDate != null &&
       this.newStartTimeDate != null &&
       this.newEndTimeDate != null &&
+      this.selectedRoom != null &&
       validation
     ) {
       this.createNewDate = new DateEntity();
@@ -365,6 +392,7 @@ export class ProfViewIndivCourseTimetableComponent implements OnInit {
       this.createNewDate.isBooked = "vacate";
       this.createNewDate.isExpired = "new";
       this.createNewDate.weekDay = String(this.newDatetimeDate).substr(0, 3);
+      this.createNewDate.room = this.selectedRoom;
       this.createNewDate.timetable = this.timetables[0];
 
       this.dateService.createDate(this.createNewDate).subscribe(

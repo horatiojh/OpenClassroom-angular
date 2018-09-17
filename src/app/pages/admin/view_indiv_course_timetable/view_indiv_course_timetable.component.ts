@@ -15,6 +15,8 @@ import { DateEntity } from "../../../../domain/date";
 import { Staff } from "../../../../domain/staff";
 import { Visit } from "../../../../domain/visit";
 import { Course } from "../../../../domain/course";
+import { ClassroomService } from "../../../../providers/classroomService";
+import { Classroom } from "../../../../domain/classroom";
 
 @Component({
   selector: "app-viewIndivCourseTimetable",
@@ -69,6 +71,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   validationMsgs: Message[] = [];
   newWeekDay: string;
   minDate: Date;
+  rooms: SelectItem[];
+  selectedRoom: string;
+  classrooms: Classroom[];
 
   // for request classroom visit dialog
   requestCVDisplay: boolean = false;
@@ -95,7 +100,8 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private visitService: VisitService,
     private staffService: StaffService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private classroomService: ClassroomService
   ) {
     this.submitted = false;
 
@@ -115,7 +121,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       showDialogstyle
     );
 
-    let createIndivSessionStyle = "width:100px";
+    let createIndivSessionStyle = "width:100px;margin-top:15px";
     this.createIndivSessionBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       createIndivSessionStyle
     );
@@ -234,6 +240,17 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     this.minDate.setFullYear(nowDate.getFullYear());
     this.minDate.setMonth(nowDate.getMonth());
     this.minDate.setDate(nowDate.getDate());
+
+    this.classroomService.getAllClassrooms().subscribe(response => {
+      this.classrooms = response.classrooms;
+      this.rooms = [{ label: "Please Select One", value: null }];
+      for (let i = 0; i < this.classrooms.length; i++) {
+        this.rooms.push({
+          label: this.classrooms[i].roomId,
+          value: this.classrooms[i].roomId
+        });
+      }
+    });
   }
 
   archiveDate(rowData) {
@@ -360,13 +377,23 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       validation = true;
     }
 
+    if (this.selectedRoom == undefined || this.selectedRoom == null) {
+      this.validationMsgs.push({
+        severity: "error",
+        summary: "Please enter the classroom.",
+        detail: ""
+      });
+    }
+
     if (
       this.newDatetimeDate != undefined &&
       this.newStartTimeDate != undefined &&
       this.newEndTimeDate != undefined &&
+      this.selectedRoom != undefined &&
       this.newDatetimeDate != null &&
       this.newStartTimeDate != null &&
       this.newEndTimeDate != null &&
+      this.selectedRoom != null &&
       validation
     ) {
       this.createNewDate = new DateEntity();
@@ -423,6 +450,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       this.createNewDate.isBooked = "vacate";
       this.createNewDate.isExpired = "new";
       this.createNewDate.weekDay = String(this.newDatetimeDate).substr(0, 3);
+      this.createNewDate.room = this.selectedRoom;
       this.createNewDate.timetable = this.timetables[0];
 
       this.dateService.createDate(this.createNewDate).subscribe(
