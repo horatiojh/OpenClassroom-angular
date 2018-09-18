@@ -77,6 +77,13 @@ export class RequestDateCardComponent implements OnInit {
     // for request classroom visit
     this.staffService.getAllInstructors().subscribe(response => {
       this.staffs = response.staffs;
+
+      this.staffs = this.staffs.sort((a, b) => {
+        var textA = a.staffName[0].toUpperCase();
+        var textB = b.staffName[0].toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      });
+
       this.staffItems = [{ label: "Please Select One", value: null }];
 
       for (let i = 0; i < this.staffs.length; i++) {
