@@ -300,8 +300,6 @@ export class ViewRequestCourseComponent implements OnInit {
             detail: ""
           });
 
-          this.display = false;
-
           let isBooked = "booked";
           let endpoint = "/updateIsBooked";
           let body = {
@@ -314,6 +312,8 @@ export class ViewRequestCourseComponent implements OnInit {
             .subscribe(response => {
               console.log("update isBooked");
             });
+
+          this.display = false;
         },
         error => {
           this.msgs.push({
