@@ -111,7 +111,7 @@ export class AppInlineProfileComponent implements OnInit {
       this.staffName = this.staff.staffName;
       this.staffRole = this.staff.staffRole;
 
-      this.imageSrc = "assets/layout/images/male.png";
+      this.imageSrc = "assets/layout/images/profile.png";
 
       if (this.staffRole === "admin") {
         this.profileUpdate = "/updateProfile";
