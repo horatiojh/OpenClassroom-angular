@@ -80,6 +80,8 @@ import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_pass
 import { ProfViewVisitHistoryComponent } from "./pages/instructor/prof_view_visit_history/prof_view_visit_history.component";
 import { ProfViewNotificationsComponent } from "./pages/instructor/prof_view_notification/prof_view_notification.component";
 import { ProfViewNotificationContentComponent } from "./pages/instructor/prof_view_notification_content/prof_view_notification_content.component";
+import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profile/prof_update_profile.component";
+import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_app_rating.component";
 
 import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff_info.component";
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
@@ -101,8 +103,7 @@ import { LoginComponent } from "./pages/common/login/login.component";
 import { ModuleCardComponent } from "./pages/card/module_card/module_card.component";
 import { RequestDateCardComponent } from "./pages/card/request_date_card/request_date_card.component";
 import { RequestTimetableCardComponent } from "./pages/card/request_timetable_card/request_timetable_card.component";
-import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profile/prof_update_profile.component";
-import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_app_rating.component";
+import { ProfRequestDateCardComponent } from "./pages/card/prof_request_date_card/prof_request_date_card.component";
 
 @NgModule({
   declarations: [
@@ -145,7 +146,8 @@ import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_
     UpdateProfileComponent,
     AppRatingComponent,
     ProfAppRatingComponent,
-    ViewScheduleListComponent
+    ViewScheduleListComponent,
+    ProfRequestDateCardComponent
   ],
   imports: [
     BrowserModule,

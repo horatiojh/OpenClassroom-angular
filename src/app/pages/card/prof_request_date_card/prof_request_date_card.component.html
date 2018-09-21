@@ -1,0 +1,127 @@
+<p-growl [value]="msgs" life="4500"></p-growl>
+
+<p-table #dt [columns]="cols" [value]="dates" [paginator]="true" [rows]="10" [responsive]="true" paginatorPosition="bottom"
+  sortField="dateStr" [sortOrder]="1">
+
+  <ng-template pTemplate="caption">
+    <div style="text-align: right">
+      <i class="fa fa-search" style="margin:4px 4px 0 0px"></i>
+      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+        style="width:35%;margin-left: 3px;color:aliceblue">
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="text-align: center">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+      <th style="text-align: center">Request</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns" style="text-align: center">
+        {{rowData[col.field]}}
+      </td>
+      <td style="text-align: center">
+        <p-button icon='fa fa-fw fa-send' (onClick)="showDialog(rowData)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td [attr.colspan]="columns.length+1">
+        No records found
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>
+
+<p-dialog [(visible)]="display" [draggable]="false" [resizable]="false" [width]="400" [height]="auto" [contentStyle]="{'overflow':'visible'}"
+  modal="true">
+
+  <p-header>Request Classroom Visit</p-header>
+
+  <div style="margin-top: 15px">
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>Date:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{dateStr}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>Day:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{weekDay}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>Start:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{startTime}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>End:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{endTime}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>Room:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{room}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <label>Observer:</label>
+        </div>
+        <div class="ui-grid-col-9">
+          <label>{{visitorName}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-footer>
+    <div class="ui-g-18 ui-md-12">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <p-button label="Submit" (onClick)="requestClassroomVisit($event)" [style]="requestClassroomVisitBtnStyle"></p-button>
+        </div>
+      </div>
+    </div>
+  </p-footer>
+</p-dialog>

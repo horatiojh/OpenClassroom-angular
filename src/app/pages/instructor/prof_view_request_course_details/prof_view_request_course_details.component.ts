@@ -12,7 +12,6 @@ import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
 import { CourseInfo } from "../../../../domain/courseInfo";
 import { DateEntity } from "../../../../domain/date";
-import { Tag } from "../../../../domain/tag";
 
 @Component({
   selector: "app-profViewRequestCourseDetails",
@@ -40,6 +39,7 @@ export class ProfViewRequestCourseDetailsComponent implements OnInit {
   timetables: Timetable[];
   weeksName: string;
   dates: DateEntity[];
+  staffId: number;
 
   // view tags
   inputTags: string[] = [];
@@ -59,6 +59,8 @@ export class ProfViewRequestCourseDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.staffId = Number(sessionStorage.getItem("sessionStaffId"));
+
     this.courseId = this.shareService.getValue("courseId");
 
     this.courseService

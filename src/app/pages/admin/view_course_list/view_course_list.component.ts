@@ -157,8 +157,6 @@ export class ViewCourseListComponent implements OnInit {
 
     this.updatedCourseInfo = new CourseInfo();
 
-    this.updatedCourseInfo.moduleCode = this.newModuleCode;
-    this.updatedCourseInfo.moduleTitle = this.newModuleTitle;
     this.updatedCourseInfo.description = this.newDescription;
     this.updatedCourseInfo.id = this.newId;
 
