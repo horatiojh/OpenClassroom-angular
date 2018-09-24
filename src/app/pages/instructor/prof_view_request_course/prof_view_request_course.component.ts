@@ -65,6 +65,13 @@ export class ProfViewRequestCourseComponent implements OnInit {
   tagName: string;
   dateStr: string;
 
+  // for notification (request visit)
+  messageContent: string;
+  messageTitle: string;
+  messageStaff: Staff;
+  messageVisitId: number;
+  messageDate: string = "";
+
   constructor(
     private shareService: ShareService,
     private router: Router,
@@ -92,6 +99,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
     this.dialogStartTime = "";
     this.dialogWeekDay = "";
     this.dialogRoom = "";
+
+    this.messageTitle = "Observation Request";
   }
 
   ngOnInit() {
@@ -201,6 +210,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
         .subscribe(response => {
           this.vacateDates = response.dates;
 
+          // console.log(response.dates);
+
           this.vacateDates = this.vacateDates.sort((a, b) =>
             a.dateStr.localeCompare(b.dateStr)
           );
@@ -278,6 +289,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
 
       this.visitService.createVisit(this.newVisit).subscribe(
         response => {
+          // console.log(response.messageId);
+
           this.msgs.push({
             severity: "info",
             summary: "Successfully Submitted!",
