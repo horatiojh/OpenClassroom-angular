@@ -49,26 +49,18 @@ export class StaffService {
       );
   }
 
-  createStaff(staff: Staff): Observable<any> {
-    let createStaffReq = { staff: staff };
-
-    return this.httpClient
-      .put<any>(this.baseUrl + "/createStaff", createStaffReq, httpOptions)
-      .pipe(
-        tap(_ => console.log("createStaff")),
-        catchError(this.handleError<any>("createStaff"))
-      );
+  createStaff(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
-  updateStaff(staff: Staff): Observable<any> {
-    let updateStaffReq = { staff: staff };
-
-    return this.httpClient
-      .post<any>(this.baseUrl + "/updateStaff", updateStaffReq, httpOptions)
-      .pipe(
-        tap(_ => console.log(`updateStaff id=${staff.id}`)),
-        catchError(this.handleError<any>(`updateStaff id=${staff.id}`))
-      );
+  updateStaff(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
   deleteStaff(staffId: number): Observable<any> {

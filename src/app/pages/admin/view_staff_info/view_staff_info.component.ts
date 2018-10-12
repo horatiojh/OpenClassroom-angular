@@ -38,7 +38,6 @@ export class ViewStaffInfoComponent implements OnInit {
   newStaffName: string;
   newStaffId: string;
   newEmailAdd: string;
-  newStaff: Staff;
   active: string;
   isActive: boolean = false;
   division: Division[];
@@ -253,25 +252,23 @@ export class ViewStaffInfoComponent implements OnInit {
       this.newEmailAdd != "" &&
       this.active != ""
     ) {
-      this.newStaff = new Staff();
-
-      this.newStaff.staffName = this.newStaffName;
-      this.newStaff.staffId = this.newStaffId;
-      this.newStaff.staffRole = this.selectedRole.value;
-      this.newStaff.division = this.selectedDivision.value;
-      this.newStaff.pwd = "pAssw0rd";
-      this.newStaff.emailAddress = this.newEmailAdd;
-      this.newStaff.isEnrolled = true;
-
       if (this.active == "Yes") {
         this.isActive = true;
       } else if (this.active == "No") {
         this.isActive = false;
       }
 
-      this.newStaff.isActive = this.isActive;
+      let endpoint = "/createStaff";
+      let body = {
+        staffName: this.newStaffName,
+        staffId: this.newStaffId,
+        emailAddress: this.newEmailAdd,
+        staffRole: this.selectedRole.value,
+        division: this.selectedDivision.value,
+        isActive: Boolean(this.isActive)
+      };
 
-      this.staffService.createStaff(this.newStaff).subscribe(
+      this.staffService.createStaff(endpoint, body).subscribe(
         response => {
           this.msgs.push({
             severity: "info",
@@ -307,42 +304,10 @@ export class ViewStaffInfoComponent implements OnInit {
   updateStaffInfo(event) {
     this.msgs = [];
 
-    if (this.updateStaffName == undefined || this.updateStaffName == "") {
-      this.msgs.push({
-        severity: "error",
-        summary: "Please enter the staff name.",
-        detail: ""
-      });
-    }
-
-    if (this.updateStaffId == undefined || this.updateStaffId == "") {
-      this.msgs.push({
-        severity: "error",
-        summary: "Please enter the staff id.",
-        detail: ""
-      });
-    }
-
     if (this.updateEmailAdd == undefined || this.updateEmailAdd == "") {
       this.msgs.push({
         severity: "error",
         summary: "Please enter the email address.",
-        detail: ""
-      });
-    }
-
-    if (this.updateRole == undefined || this.updateRole == "") {
-      this.msgs.push({
-        severity: "error",
-        summary: "Please select the role.",
-        detail: ""
-      });
-    }
-
-    if (this.updateDivision == undefined || this.updateDivision == "") {
-      this.msgs.push({
-        severity: "error",
-        summary: "Please select the division.",
         detail: ""
       });
     }
@@ -356,38 +321,25 @@ export class ViewStaffInfoComponent implements OnInit {
     }
 
     if (
-      this.updateStaffName != undefined &&
-      this.updateStaffId != undefined &&
-      this.updateRole != undefined &&
       this.updateEmailAdd != undefined &&
       this.updateActive != undefined &&
-      this.updateDivision != undefined &&
-      this.updateStaffName != "" &&
-      this.updateStaffId != "" &&
-      this.updateRole != "" &&
       this.updateEmailAdd != "" &&
-      this.updateActive != "" &&
-      this.updateDivision != ""
+      this.updateActive != ""
     ) {
-      this.updateStaff = new Staff();
-
-      this.updateStaff.id = this.uStaffId;
-      this.updateStaff.emailAddress = this.updateEmailAdd;
-      this.updateStaff.staffId = this.updateStaffId;
-      this.updateStaff.staffName = this.updateStaffName;
-      this.updateStaff.staffRole = this.updateRole;
-
-      this.updateStaff.division = this.updateDivision;
-
       if (this.updateActive == "Yes") {
         this.updateIsActive = true;
       } else if (this.updateActive == "No") {
         this.updateIsActive = false;
       }
 
-      this.updateStaff.isActive = this.updateIsActive;
+      let endpoint = "/updateStaff";
+      let body = {
+        id: String(this.uStaffId),
+        emailAddress: this.updateEmailAdd,
+        isActive: Boolean(this.updateIsActive)
+      };
 
-      this.staffService.updateStaff(this.updateStaff).subscribe(response => {
+      this.staffService.updateStaff(endpoint, body).subscribe(response => {
         this.msgs.push({
           severity: "info",
           summary: "Successfully Updated!",

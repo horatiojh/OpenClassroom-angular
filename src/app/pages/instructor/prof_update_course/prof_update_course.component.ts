@@ -92,16 +92,11 @@ export class ProfUpdateCourseComponent implements OnInit {
   }
 
   updateCourse(event) {
-    this.newCourse = new Course(
-      this.courseId,
-      this.instructorId,
-      this.staffName,
-      this.moduleCode,
-      this.moduleGroup,
-      this.moduleTitle,
-      this.syllabus,
-      this.blackoutDates
-    );
+    this.newCourse = new Course();
+
+    this.newCourse.id = Number(this.courseId);
+    this.newCourse.blackoutDates = this.blackoutDates;
+    this.newCourse.syllabus = this.syllabus;
 
     this.courseService.updateCourse(this.newCourse).subscribe(response => {
       this.msgs.push({

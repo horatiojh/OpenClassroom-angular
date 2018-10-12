@@ -8,24 +8,7 @@ export class Course {
   syllabus: string;
   blackoutDates: string;
   tagList: string[];
+  status: boolean;
 
-  constructor(
-    id: number,
-    instructorId: string,
-    staffName: string,
-    moduleCode: string,
-    moduleGroup: string,
-    moduleTitle: string,
-    syllabus: string,
-    blackoutDates: string
-  ) {
-    this.id = id;
-    this.instructorId = instructorId;
-    this.staffName = staffName;
-    this.moduleCode = moduleCode;
-    this.moduleGroup = moduleGroup;
-    this.moduleTitle = moduleTitle;
-    this.syllabus = syllabus;
-    this.blackoutDates = blackoutDates;
-  }
+  constructor() {}
 }
