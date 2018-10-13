@@ -33,7 +33,6 @@ export class UpdateProfileComponent implements OnInit {
   staffId: string;
   division: string;
   updateEmailAdd: string;
-  updateStaff: Staff;
   staff: Staff;
   staffIdStr: string;
 
@@ -101,16 +100,13 @@ export class UpdateProfileComponent implements OnInit {
     }
 
     if (this.staffEmailBoolean) {
-      this.updateStaff = new Staff();
+      let endpoint = "/updateStaff";
+      let body = {
+        id: String(this.uStaffId),
+        emailAddress: this.updateEmailAdd
+      };
 
-      this.updateStaff.id = this.uStaffId;
-      this.updateStaff.emailAddress = this.updateEmailAdd;
-      this.updateStaff.staffId = this.staffId;
-      this.updateStaff.staffName = this.staffName;
-      this.updateStaff.staffRole = this.role;
-      this.updateStaff.division = this.division;
-
-      this.staffService.updateStaff(this.updateStaff).subscribe(response => {
+      this.staffService.updateStaff(endpoint, body).subscribe(response => {
         this.msgs.push({
           severity: "info",
           summary: "Successfully Updated!",
@@ -118,7 +114,7 @@ export class UpdateProfileComponent implements OnInit {
         });
 
         setTimeout(function() {
-          window.open("workspace", "_self");
+          window.open("viewStaffInfo", "_self");
         }, 1000);
       });
     }

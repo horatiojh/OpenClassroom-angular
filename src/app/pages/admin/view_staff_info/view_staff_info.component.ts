@@ -52,8 +52,6 @@ export class ViewStaffInfoComponent implements OnInit {
   updateEmailAdd: string;
   updateStaff: Staff;
   updateDivision: string;
-  updateActive: string;
-  updateIsActive: boolean = false;
 
   constructor(
     private fileUploadService: FileUploadService,
@@ -175,12 +173,6 @@ export class ViewStaffInfoComponent implements OnInit {
       this.updateStaffId = this.staff.staffId;
       this.updateStaffName = this.staff.staffName;
       this.updateDivision = this.staff.division;
-
-      if (this.staff.isActive) {
-        this.updateActive = "Yes";
-      } else {
-        this.updateActive = "No";
-      }
     });
   }
 
@@ -312,31 +304,11 @@ export class ViewStaffInfoComponent implements OnInit {
       });
     }
 
-    if (this.updateActive == undefined || this.updateActive == "") {
-      this.msgs.push({
-        severity: "error",
-        summary: "Please choose whether the staff is active.",
-        detail: ""
-      });
-    }
-
-    if (
-      this.updateEmailAdd != undefined &&
-      this.updateActive != undefined &&
-      this.updateEmailAdd != "" &&
-      this.updateActive != ""
-    ) {
-      if (this.updateActive == "Yes") {
-        this.updateIsActive = true;
-      } else if (this.updateActive == "No") {
-        this.updateIsActive = false;
-      }
-
+    if (this.updateEmailAdd != undefined && this.updateEmailAdd != "") {
       let endpoint = "/updateStaff";
       let body = {
         id: String(this.uStaffId),
-        emailAddress: this.updateEmailAdd,
-        isActive: Boolean(this.updateIsActive)
+        emailAddress: this.updateEmailAdd
       };
 
       this.staffService.updateStaff(endpoint, body).subscribe(response => {

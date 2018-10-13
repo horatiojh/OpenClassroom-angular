@@ -36,7 +36,6 @@ export class ProfUpdateCourseComponent implements OnInit {
 
   // for update course
   course: Course;
-  newCourse: Course;
   courseInfo: CourseInfo;
 
   constructor(
@@ -92,13 +91,14 @@ export class ProfUpdateCourseComponent implements OnInit {
   }
 
   updateCourse(event) {
-    this.newCourse = new Course();
+    let endpoint = "/updateCourse";
+    let body = {
+      id: String(this.courseId),
+      syllabus: this.syllabus,
+      blackoutDates: this.blackoutDates
+    };
 
-    this.newCourse.id = Number(this.courseId);
-    this.newCourse.blackoutDates = this.blackoutDates;
-    this.newCourse.syllabus = this.syllabus;
-
-    this.courseService.updateCourse(this.newCourse).subscribe(response => {
+    this.courseService.updateCourse(endpoint, body).subscribe(response => {
       this.msgs.push({
         severity: "info",
         summary: "Successfully Updated!",

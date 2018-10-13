@@ -31,11 +31,6 @@ export class AppMenuComponent implements OnInit {
     if (this.staffRole === "admin") {
       this.model = [
         {
-          label: "Search Courses",
-          icon: "search",
-          routerLink: ["/searchCourse"]
-        },
-        {
           label: "Staff Management",
           icon: "camera",
           routerLink: ["/viewStaffInfo"]
@@ -54,20 +49,25 @@ export class AppMenuComponent implements OnInit {
           label: "Course Management",
           icon: "list",
           routerLink: ["/viewCourseList"]
+        },
+        {
+          label: "Search Courses",
+          icon: "search",
+          routerLink: ["/searchCourse"]
         }
       ];
     } else if (this.staffRole === "instructor") {
       this.model = [
-        {
-          label: "Search Courses",
-          icon: "search",
-          routerLink: ["/profSearchCourse"]
-        },
         { label: "Workspace", icon: "class", routerLink: ["/workspace"] },
         {
           label: "Visit History",
           icon: "public",
           routerLink: ["/profViewVisitHistory"]
+        },
+        {
+          label: "Search Courses",
+          icon: "search",
+          routerLink: ["/profSearchCourse"]
         }
       ];
     }

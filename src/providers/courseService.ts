@@ -43,15 +43,11 @@ export class CourseService {
       );
   }
 
-  updateCourse(course: Course): Observable<any> {
-    let updateCourseReq = { course: course };
-
-    return this.httpClient
-      .post<any>(this.baseUrl + "/updateCourse", updateCourseReq, httpOptions)
-      .pipe(
-        tap(_ => console.log(`updateCourse id=${course.id}`)),
-        catchError(this.handleError<any>(`updateCourse id=${course.id}`))
-      );
+  updateCourse(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
   getCourseByTimetableId(timetableId: number): Observable<any> {
