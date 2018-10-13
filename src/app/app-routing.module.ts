@@ -10,7 +10,6 @@ import { InstructorGuard } from "./guards/instructor.guard";
 import { LoginComponent } from "./pages/common/login/login.component";
 
 import { ProfViewTimetableComponent } from "./pages/instructor/prof_view_timetable/prof_view_timetable.component";
-import { ProfUpdateTimetableComponent } from "./pages/instructor/prof_update_timetable/prof_update_timetable.component";
 import { ProfViewIndivCourseTimetableComponent } from "./pages/instructor/prof_view_indiv_course_timetable/prof_view_indiv_course_timetable.component";
 import { ProfViewCourseDetailsComponent } from "./pages/instructor/prof_view_course_details/prof_view_course_details.component";
 import { ProfUpdateCourseComponent } from "./pages/instructor/prof_update_course/prof_update_course.component";
@@ -29,7 +28,6 @@ import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
 import { ViewCourseListComponent } from "./pages/admin/view_course_list/view_course_list.component";
 import { ViewTimetableComponent } from "./pages/admin/view_timetable/view_timetable.component";
-import { UpdateTimetableComponent } from "./pages/admin/update_timetable/update_timetable.component";
 import { ViewIndivCourseTimetableComponent } from "./pages/admin/view_indiv_course_timetable/view_indiv_course_timetable.component";
 import { SearchCourseComponent } from "./pages/admin/search_course/search_course.component";
 import { ViewRequestCourseComponent } from "./pages/admin/view_request_course/view_request_course.component";
@@ -53,7 +51,6 @@ const routes: Routes = [
       { path: "viewClassroom", component: ViewClassroomComponent },
       { path: "viewCourseList", component: ViewCourseListComponent },
       { path: "viewTimetable", component: ViewTimetableComponent },
-      { path: "updateTimetable", component: UpdateTimetableComponent },
       {
         path: "viewIndivCourseTimetable",
         component: ViewIndivCourseTimetableComponent
@@ -82,7 +79,6 @@ const routes: Routes = [
         component: ProfViewVisitHistoryComponent
       },
       { path: "profViewTimetable", component: ProfViewTimetableComponent },
-      { path: "profUpdateTimetable", component: ProfUpdateTimetableComponent },
       {
         path: "profViewIndivCourseTimetable",
         component: ProfViewIndivCourseTimetableComponent

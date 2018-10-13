@@ -1,11 +1,13 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/throw";
 import { of } from "rxjs";
-
-import { CourseInfo } from "../domain/courseInfo";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -47,26 +49,31 @@ export class CourseInfoService {
       );
   }
 
-  updateCourseInfo(courseInfo: CourseInfo): Observable<any> {
-    let updateCourseInfoReq = { courseInfo: courseInfo };
-
-    return this.httpClient
-      .post<any>(
-        this.baseUrl + "/updateCourseInfo",
-        updateCourseInfoReq,
-        httpOptions
-      )
-      .pipe(
-        tap(_ => console.log(`updateCourseInfo id=${courseInfo.id}`)),
-        catchError(
-          this.handleError<any>(`updateCourseInfo id=${courseInfo.id}`)
-        )
-      );
+  updateCourseInfo(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return Observable.throw(error);
     };
+  }
+
+  private handleErrorApi(error: HttpErrorResponse) {
+    let errMsg = error.message || "Server error";
+
+    if (error.error instanceof ErrorEvent) {
+      console.error("An unknown error has occurred:", error.error.message);
+    } else {
+      console.error(
+        "An HTTP error has occurred: " +
+          `HTTP ${error.status}: ${error.error.message}`
+      );
+    }
+
+    return Observable.throw(errMsg);
   }
 }

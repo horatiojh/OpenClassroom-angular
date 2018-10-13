@@ -68,7 +68,6 @@ import { AuthGuard } from "./guards/auth.guard";
 import { InstructorGuard } from "./guards/instructor.guard";
 
 import { ProfViewTimetableComponent } from "./pages/instructor/prof_view_timetable/prof_view_timetable.component";
-import { ProfUpdateTimetableComponent } from "./pages/instructor/prof_update_timetable/prof_update_timetable.component";
 import { ProfViewIndivCourseTimetableComponent } from "./pages/instructor/prof_view_indiv_course_timetable/prof_view_indiv_course_timetable.component";
 import { ProfViewCourseDetailsComponent } from "./pages/instructor/prof_view_course_details/prof_view_course_details.component";
 import { ProfUpdateCourseComponent } from "./pages/instructor/prof_update_course/prof_update_course.component";
@@ -87,7 +86,6 @@ import { ViewStaffInfoComponent } from "./pages/admin/view_staff_info/view_staff
 import { ViewClassroomComponent } from "./pages/admin/view_classroom/view_classroom.component";
 import { ViewCourseListComponent } from "./pages/admin/view_course_list/view_course_list.component";
 import { ViewTimetableComponent } from "./pages/admin/view_timetable/view_timetable.component";
-import { UpdateTimetableComponent } from "./pages/admin/update_timetable/update_timetable.component";
 import { ViewIndivCourseTimetableComponent } from "./pages/admin/view_indiv_course_timetable/view_indiv_course_timetable.component";
 import { SearchCourseComponent } from "./pages/admin/search_course/search_course.component";
 import { ViewRequestCourseComponent } from "./pages/admin/view_request_course/view_request_course.component";
@@ -119,12 +117,10 @@ import { ProfRequestDateCardComponent } from "./pages/card/prof_request_date_car
     ViewClassroomComponent,
     ViewCourseListComponent,
     ViewTimetableComponent,
-    UpdateTimetableComponent,
     WorkspaceComponent,
     ProfViewVisitHistoryComponent,
     ViewIndivCourseTimetableComponent,
     ProfViewTimetableComponent,
-    ProfUpdateTimetableComponent,
     ProfViewIndivCourseTimetableComponent,
     ProfViewCourseDetailsComponent,
     ProfUpdateCourseComponent,

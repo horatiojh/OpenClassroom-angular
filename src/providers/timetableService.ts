@@ -47,21 +47,6 @@ export class TimetableService {
     );
   }
 
-  updateTimetable(timetable: Timetable): Observable<any> {
-    let updateTimetableReq = { timetable: timetable };
-
-    return this.httpClient
-      .post<any>(
-        this.baseUrl + "/updateTimetable",
-        updateTimetableReq,
-        httpOptions
-      )
-      .pipe(
-        tap(_ => console.log(`updateTimetable id=${timetable.id}`)),
-        catchError(this.handleError<any>(`updateTimetable id=${timetable.id}`))
-      );
-  }
-
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return Observable.throw(error);

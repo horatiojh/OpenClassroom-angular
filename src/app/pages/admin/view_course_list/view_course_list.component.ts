@@ -45,7 +45,6 @@ export class ViewCourseListComponent implements OnInit {
   newCourseInfo: CourseInfo;
   newId: number;
   updateCourseInfoId: number;
-  updatedCourseInfo: CourseInfo;
 
   constructor(
     private fileUploadService: FileUploadService,
@@ -155,13 +154,14 @@ export class ViewCourseListComponent implements OnInit {
   updateCourseInfo(rowData) {
     this.msgs = [];
 
-    this.updatedCourseInfo = new CourseInfo();
-
-    this.updatedCourseInfo.description = this.newDescription;
-    this.updatedCourseInfo.id = this.newId;
+    let endpoint = "/updateCourseInfo";
+    let body = {
+      id: String(this.newId),
+      description: this.newDescription
+    };
 
     this.courseInfoService
-      .updateCourseInfo(this.updatedCourseInfo)
+      .updateCourseInfo(endpoint, body)
       .subscribe(response => {
         this.msgs.push({
           severity: "info",
