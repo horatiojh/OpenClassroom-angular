@@ -46,7 +46,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
 
   // update date
   date: DateEntity;
-  newDate: DateEntity;
 
   // css styling
   showDialogBtnStyle: SafeStyle;
@@ -267,21 +266,25 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.date = response.date;
         this.dateId = this.date.id;
 
-        this.newDate = new DateEntity();
-        this.newDate.status = "archived";
-        this.newDate.id = this.dateId;
+        let endpoint = "/updateDateStatus";
+        let body = {
+          id: String(this.dateId),
+          status: "archived"
+        };
 
-        this.dateService.updateDateStatus(this.newDate).subscribe(response => {
-          this.msgs.push({
-            severity: "info",
-            summary: "Successfully Archived!",
-            detail: ""
+        this.dateService
+          .updateDateStatus(endpoint, body)
+          .subscribe(response => {
+            this.msgs.push({
+              severity: "info",
+              summary: "Successfully Archived!",
+              detail: ""
+            });
+
+            setTimeout(function() {
+              location.reload();
+            }, 300);
           });
-
-          setTimeout(function() {
-            location.reload();
-          }, 300);
-        });
       } else {
         this.msgs.push({
           severity: "error",
@@ -298,21 +301,25 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
         this.date = response.date;
         this.dateId = this.date.id;
 
-        this.newDate = new DateEntity();
-        this.newDate.status = "available";
-        this.newDate.id = this.dateId;
+        let endpoint = "/updateDateStatus";
+        let body = {
+          id: String(this.dateId),
+          status: "available"
+        };
 
-        this.dateService.updateDateStatus(this.newDate).subscribe(response => {
-          this.msgs.push({
-            severity: "info",
-            summary: "Successfully Restored!",
-            detail: ""
+        this.dateService
+          .updateDateStatus(endpoint, body)
+          .subscribe(response => {
+            this.msgs.push({
+              severity: "info",
+              summary: "Successfully Restored!",
+              detail: ""
+            });
+
+            setTimeout(function() {
+              location.reload();
+            }, 300);
           });
-
-          setTimeout(function() {
-            location.reload();
-          }, 300);
-        });
       } else {
         this.msgs.push({
           severity: "error",

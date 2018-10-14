@@ -50,15 +50,11 @@ export class DateService {
     );
   }
 
-  updateDateStatus(date: DateEntity): Observable<any> {
-    let updateDateReq = { date: date };
-
-    return this.httpClient
-      .post<any>(this.baseUrl + "/updateDateStatus", updateDateReq, httpOptions)
-      .pipe(
-        tap(_ => console.log(`updateDate id=${date.id}`)),
-        catchError(this.handleError<any>(`updateDate id=${date.id}`))
-      );
+  updateDateStatus(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
   createDate(date: DateEntity): Observable<any> {
