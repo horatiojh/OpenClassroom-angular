@@ -79,7 +79,12 @@ export class ProfAppRatingComponent implements OnInit {
     this.newRating.staffId = sessionStorage.getItem("sessionStaffIdStr");
     this.newRating.staffRole = this.selectedRole.value;
 
-    this.ratingService.createRating(this.newRating).subscribe(response => {
+    let endpoint = "/createRating";
+    let body = {
+      rating: this.newRating
+    };
+
+    this.ratingService.createRating(endpoint, body).subscribe(response => {
       this.msgs.push({
         severity: "info",
         summary: "Successfully Submitted!",

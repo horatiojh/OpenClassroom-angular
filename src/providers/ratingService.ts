@@ -21,20 +21,25 @@ export class RatingService {
 
   constructor(private httpClient: HttpClient) {}
 
-  createRating(rating: Rating): Observable<any> {
-    let createRatingReq = { rating: rating };
-
-    return this.httpClient
-      .put<any>(this.baseUrl + "/createRating", createRatingReq, httpOptions)
-      .pipe(
-        tap(_ => console.log("createVisit")),
-        catchError(this.handleError<any>("createVisit"))
-      );
+  createRating(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
-  private handleError<T>(operation = "operation", result?: T) {
-    return (error: any): Observable<T> => {
-      return Observable.throw(error);
-    };
+  private handleErrorApi(error: HttpErrorResponse) {
+    let errMsg = error.message || "Server error";
+
+    if (error.error instanceof ErrorEvent) {
+      console.error("An unknown error has occurred:", error.error.message);
+    } else {
+      console.error(
+        "An HTTP error has occurred: " +
+          `HTTP ${error.status}: ${error.error.message}`
+      );
+    }
+
+    return Observable.throw(errMsg);
   }
 }
