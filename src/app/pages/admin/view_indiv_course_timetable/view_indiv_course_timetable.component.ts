@@ -66,7 +66,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   newStartTimeDate: Date;
   newEndTimeDate: Date;
   newDatetimeDate: Date;
-  createNewDate: DateEntity;
   validationMsgs: Message[] = [];
   newWeekDay: string;
   minDate: Date;
@@ -395,8 +394,6 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       this.selectedRoom != null &&
       validation
     ) {
-      this.createNewDate = new DateEntity();
-
       if (this.newStartTimeDate.getHours().toString().length == 1) {
         this.startHour = "0" + this.newStartTimeDate.getHours();
       } else {
@@ -442,17 +439,17 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       this.newDateTime =
         this.newDatetimeDate.getFullYear() + "-" + this.month + "-" + this.day;
 
-      this.createNewDate.startTime = this.newStartTime;
-      this.createNewDate.endTime = this.newEndTime;
-      this.createNewDate.dateStr = this.newDateTime;
-      this.createNewDate.status = "available";
-      this.createNewDate.isBooked = "vacate";
-      this.createNewDate.isExpired = "new";
-      this.createNewDate.weekDay = String(this.newDatetimeDate).substr(0, 3);
-      this.createNewDate.room = this.selectedRoom;
-      this.createNewDate.timetable = this.timetables[0];
+      let endpoint = "/createDate";
+      let body = {
+        dateStr: this.newDateTime,
+        startTime: this.newStartTime,
+        endTime: this.newEndTime,
+        weekDay: String(this.newDatetimeDate).substr(0, 3),
+        room: this.selectedRoom,
+        timetableId: String(this.timetables[0].id)
+      };
 
-      this.dateService.createDate(this.createNewDate).subscribe(
+      this.dateService.createDate(endpoint, body).subscribe(
         response => {
           this.msgs.push({
             severity: "info",

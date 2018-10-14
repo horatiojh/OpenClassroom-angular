@@ -57,15 +57,11 @@ export class DateService {
     );
   }
 
-  createDate(date: DateEntity): Observable<any> {
-    let createDateReq = { date: date };
-
-    return this.httpClient
-      .put<any>(this.baseUrl + "/createDate", createDateReq, httpOptions)
-      .pipe(
-        tap(_ => console.log("createDate")),
-        catchError(this.handleError<any>("createDate"))
-      );
+  createDate(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
   getAvailDateByCourseId(courseId: number): Observable<any> {
