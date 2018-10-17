@@ -52,9 +52,6 @@ export class ProfViewRequestCourseComponent implements OnInit {
   instructorIdStr: string;
   instructor: Staff;
 
-  // for request classroom visit
-  newVisit: Visit;
-
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
 
@@ -270,24 +267,24 @@ export class ProfViewRequestCourseComponent implements OnInit {
       this.staffName != null &&
       this.dialogDateTime != null
     ) {
-      this.newVisit = new Visit();
-      this.newVisit.startTime = this.dialogStartTime;
-      this.newVisit.endTime = this.dialogEndTime;
-      this.newVisit.visitDate = this.dialogDateTime;
-      this.newVisit.weekDay = this.dialogWeekDay;
-      this.newVisit.visitorName = this.staffName;
-      this.newVisit.visitorId = this.staffId;
-      this.newVisit.moduleCode = this.course.moduleCode;
-      this.newVisit.moduleTitle = this.course.moduleTitle;
-      this.newVisit.moduleGroup = this.course.moduleGroup;
-      this.newVisit.instructorName = this.course.staffName;
-      this.newVisit.vStatus = "pending";
-      this.newVisit.iStatus = "pending";
-      this.newVisit.date = this.date;
-      this.newVisit.instructorId = this.instructorId;
-      this.newVisit.room = this.dialogRoom;
+      let endpoint = "/createVisit";
+      let body = {
+        startTime: this.dialogStartTime,
+        endTime: this.dialogEndTime,
+        visitDate: this.dialogDateTime,
+        weekDay: this.dialogWeekDay,
+        visitorName: this.staffName,
+        visitorId: String(this.staffId),
+        moduleCode: this.course.moduleCode,
+        moduleGroup: this.course.moduleGroup,
+        moduleTitle: this.course.moduleTitle,
+        instructorName: this.course.staffName,
+        instructorId: String(this.instructorId),
+        room: this.dialogRoom,
+        dateId: String(this.date.id)
+      };
 
-      this.visitService.createVisit(this.newVisit).subscribe(
+      this.visitService.createVisit(endpoint, body).subscribe(
         response => {
           // console.log(response.messageId);
 

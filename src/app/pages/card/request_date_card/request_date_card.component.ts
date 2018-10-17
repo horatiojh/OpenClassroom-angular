@@ -149,24 +149,24 @@ export class RequestDateCardComponent implements OnInit {
     }
 
     if (this.visitorName != undefined && this.visitorName != null) {
-      this.newVisit = new Visit();
-      this.newVisit.startTime = this.startTime;
-      this.newVisit.endTime = this.endTime;
-      this.newVisit.visitDate = this.dateStr;
-      this.newVisit.weekDay = this.weekDay;
-      this.newVisit.visitorName = this.visitorName;
-      this.newVisit.visitorId = this.visitorId;
-      this.newVisit.moduleCode = this.moduleCode;
-      this.newVisit.moduleGroup = this.moduleGroup;
-      this.newVisit.moduleTitle = this.moduleTitle;
-      this.newVisit.instructorName = this.instructorName;
-      this.newVisit.instructorId = this.instructorId;
-      this.newVisit.vStatus = "pending";
-      this.newVisit.iStatus = "pending";
-      this.newVisit.date = this.date;
-      this.newVisit.room = this.room;
+      let endpoint = "/createVisit";
+      let body = {
+        startTime: this.startTime,
+        endTime: this.endTime,
+        visitDate: this.dateStr,
+        weekDay: this.weekDay,
+        visitorName: this.visitorName,
+        visitorId: String(this.visitorId),
+        moduleCode: this.course.moduleCode,
+        moduleGroup: this.course.moduleGroup,
+        moduleTitle: this.course.moduleTitle,
+        instructorName: this.course.staffName,
+        instructorId: String(this.instructorId),
+        room: this.room,
+        dateId: String(this.date.id)
+      };
 
-      this.visitService.createVisit(this.newVisit).subscribe(
+      this.visitService.createVisit(endpoint, body).subscribe(
         response => {
           this.msgs.push({
             severity: "info",

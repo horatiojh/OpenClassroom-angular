@@ -536,6 +536,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
 
     if (this.staffName != undefined && this.staffName != null) {
       this.newVisit = new Visit();
+
       this.newVisit.startTime = this.dialogStartTime;
       this.newVisit.endTime = this.dialogEndTime;
       this.newVisit.visitDate = this.dialogDateTime;
@@ -546,13 +547,28 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       this.newVisit.moduleGroup = this.course.moduleGroup;
       this.newVisit.moduleTitle = this.course.moduleTitle;
       this.newVisit.instructorName = this.course.staffName;
-      this.newVisit.vStatus = "pending";
-      this.newVisit.iStatus = "pending";
-      this.newVisit.date = this.date;
       this.newVisit.instructorId = this.instructorId;
       this.newVisit.room = this.dialogRoom;
+      this.newVisit.date = this.date;
 
-      this.visitService.createVisit(this.newVisit).subscribe(
+      let endpoint = "/createVisit";
+      let body = {
+        startTime: this.dialogStartTime,
+        endTime: this.dialogEndTime,
+        visitDate: this.dialogDateTime,
+        weekDay: this.dialogWeekDay,
+        visitorName: this.staffName,
+        visitorId: String(this.staffId),
+        moduleCode: this.course.moduleCode,
+        moduleGroup: this.course.moduleGroup,
+        moduleTitle: this.course.moduleTitle,
+        instructorName: this.course.staffName,
+        instructorId: String(this.instructorId),
+        room: this.dialogRoom,
+        dateId: String(this.date.id)
+      };
+
+      this.visitService.createVisit(endpoint, body).subscribe(
         response => {
           this.msgs.push({
             severity: "info",
