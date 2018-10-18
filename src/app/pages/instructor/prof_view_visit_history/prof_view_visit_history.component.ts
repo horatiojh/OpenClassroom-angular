@@ -48,7 +48,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   iMsgDate: string = "";
   iDisplay: boolean = false;
   iDialogVisitId: number;
-  iCancelMsg: MessageEntity;
   iVisit: Visit;
   iStaffId: number;
   iStaff: Staff;
@@ -58,7 +57,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   vMsgDate: string = "";
   vDisplay: boolean = false;
   vDialogVisitId: number;
-  vCancelMsg: MessageEntity;
   vVisit: Visit;
   vStaffId: number;
   vStaff: Staff;
@@ -166,7 +164,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     this.vfQuestionRatings.push({
       question:
-        "As a result of the visit, I anticipate making changes to my classes.",
+        "As a result of the visit I anticipate making changes to my classes.",
       rating: 0
     });
 
@@ -177,7 +175,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     this.ifQuestionRatings.push({
       question:
-        "As a result of the visit, I will implement changes to how I teach this course.",
+        "As a result of the visit I will implement changes to how I teach this course.",
       rating: 0
     });
 
@@ -488,15 +486,17 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           .subscribe(response => {
             this.iStaff = response.staff;
 
-            this.iCancelMsg = new MessageEntity();
-            this.iCancelMsg.messageDate = this.iMsgDate;
-            this.iCancelMsg.title = this.iMsgTitle;
-            this.iCancelMsg.content = this.iMsgContent;
-            this.iCancelMsg.staff = this.iStaff;
-            this.iCancelMsg.visitId = this.iDialogVisitId;
+            let endpoint = "/createMessage";
+            let body = {
+              messageDate: this.iMsgDate,
+              content: this.iMsgContent,
+              title: this.iMsgTitle,
+              visitId: String(this.iDialogVisitId),
+              staffId: String(this.iStaff.id)
+            };
 
             this.msgService
-              .createMessage(this.iCancelMsg)
+              .createMessage(endpoint, body)
               .subscribe(response => {
                 this.msgs.push({
                   severity: "info",
@@ -561,15 +561,17 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           .subscribe(response => {
             this.vStaff = response.staff;
 
-            this.vCancelMsg = new MessageEntity();
-            this.vCancelMsg.messageDate = this.vMsgDate;
-            this.vCancelMsg.title = this.vMsgTitle;
-            this.vCancelMsg.content = this.vMsgContent;
-            this.vCancelMsg.staff = this.vStaff;
-            this.vCancelMsg.visitId = this.vDialogVisitId;
+            let endpoint = "/createMessage";
+            let body = {
+              messageDate: this.vMsgDate,
+              content: this.vMsgContent,
+              title: this.vMsgTitle,
+              visitId: String(this.vDialogVisitId),
+              staffId: String(this.vStaff.id)
+            };
 
             this.msgService
-              .createMessage(this.vCancelMsg)
+              .createMessage(endpoint, body)
               .subscribe(response => {
                 this.msgs.push({
                   severity: "info",
@@ -746,8 +748,14 @@ export class ProfViewVisitHistoryComponent implements OnInit {
         this.vfVisit = response.visit;
         this.vFeedback.visit = this.vfVisit;
 
+        let endpoint = "/createVFeedback";
+        let body = {
+          vFeedback: this.vFeedback,
+          visitId: String(this.vfVisit.id)
+        };
+
         this.vFeedbackService
-          .createVFeedback(this.vFeedback)
+          .createVFeedback(endpoint, body)
           .subscribe(response => {
             this.msgs.push({
               severity: "info",
@@ -794,8 +802,14 @@ export class ProfViewVisitHistoryComponent implements OnInit {
         this.ifVisit = response.visit;
         this.iFeedback.visit = this.ifVisit;
 
+        let endpoint = "/createIFeedback";
+        let body = {
+          iFeedback: this.iFeedback,
+          visitId: String(this.ifVisit.id)
+        };
+
         this.iFeedbackService
-          .createIFeedback(this.iFeedback)
+          .createIFeedback(endpoint, body)
           .subscribe(response => {
             this.msgs.push({
               severity: "info",

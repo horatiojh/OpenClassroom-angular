@@ -1,11 +1,13 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs";
 import "rxjs/add/observable/throw";
-
-import { VFeedback } from "../domain/vFeedback";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -17,19 +19,11 @@ export class VFeedbackService {
 
   constructor(private httpClient: HttpClient) {}
 
-  createVFeedback(vFeedback: VFeedback): Observable<any> {
-    let createVFeedbackReq = { vFeedback: vFeedback };
-
-    return this.httpClient
-      .put<any>(
-        this.baseUrl + "/createVFeedback",
-        createVFeedbackReq,
-        httpOptions
-      )
-      .pipe(
-        tap(_ => console.log("createVFeedback")),
-        catchError(this.handleError<any>("createVFeedback"))
-      );
+  createVFeedback(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
   getVFeedbackByVFeedbackId(vFeedbackId: number): Observable<any> {
@@ -69,5 +63,20 @@ export class VFeedbackService {
     return (error: any): Observable<T> => {
       return Observable.throw(error);
     };
+  }
+
+  private handleErrorApi(error: HttpErrorResponse) {
+    let errMsg = error.message || "Server error";
+
+    if (error.error instanceof ErrorEvent) {
+      console.error("An unknown error has occurred:", error.error.message);
+    } else {
+      console.error(
+        "An HTTP error has occurred: " +
+          `HTTP ${error.status}: ${error.error.message}`
+      );
+    }
+
+    return Observable.throw(errMsg);
   }
 }

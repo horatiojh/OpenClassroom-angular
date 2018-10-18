@@ -21,15 +21,11 @@ export class MsgService {
 
   constructor(private httpClient: HttpClient) {}
 
-  createMessage(message: MessageEntity): Observable<any> {
-    let createMessageReq = { message: message };
-
-    return this.httpClient
-      .put<any>(this.baseUrl + "/createMessage", createMessageReq, httpOptions)
-      .pipe(
-        tap(_ => console.log("createMessage")),
-        catchError(this.handleError<any>("createMessage"))
-      );
+  createMessage(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
   }
 
   getUnreadMessagesByStaffId(staffId: number): Observable<any> {
