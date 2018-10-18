@@ -101,6 +101,8 @@ export class AppTopbarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.notificationMsgs = [];
+
     this.staffRole = sessionStorage.getItem("sessionStaffRole");
 
     if (this.staffRole === "admin") {
@@ -128,7 +130,6 @@ export class AppTopbarComponent implements OnInit {
         .subscribe(response => {
           this.newMsgs = response.messages;
           this.numOfNewMsg = this.newMsgs.length;
-          this.preNumOfNewMsg = this.numOfNewMsg;
         });
 
       this.interval = setInterval(() => {
@@ -138,17 +139,23 @@ export class AppTopbarComponent implements OnInit {
             this.newMsgs = response.messages;
             this.numOfNewMsg = this.newMsgs.length;
 
-            if (this.numOfNewMsg - this.preNumOfNewMsg === 1) {
-              this.messageService.add({
+            if (this.numOfNewMsg === 1) {
+              this.notificationMsgs.push({
                 severity: "warn",
                 summary: "You have a new message",
                 detail: ""
               });
-
-              this.preNumOfNewMsg = this.numOfNewMsg;
+              clearInterval(this.interval);
+            } else if (this.numOfNewMsg > 1) {
+              this.notificationMsgs.push({
+                severity: "warn",
+                summary: "You have new messages",
+                detail: ""
+              });
+              clearInterval(this.interval);
             }
           });
-      }, 5000);
+      }, 1000);
     }
   }
 
