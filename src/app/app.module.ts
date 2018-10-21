@@ -94,6 +94,7 @@ import { UpdateCourseComponent } from "./pages/admin/update_course/update_course
 import { UpdateProfileComponent } from "./pages/admin/update_profile/update_profile.component";
 import { AppRatingComponent } from "./pages/admin/app_rating/app_rating.component";
 import { ViewScheduleListComponent } from "./pages/admin/view_schedule_list/view_schedule_list.component";
+import { LoggerComponent } from "./pages/admin/logger/logger.component";
 
 import { LoginComponent } from "./pages/common/login/login.component";
 
@@ -141,7 +142,8 @@ import { ProfRequestDateCardComponent } from "./pages/card/prof_request_date_car
     AppRatingComponent,
     ProfAppRatingComponent,
     ViewScheduleListComponent,
-    ProfRequestDateCardComponent
+    ProfRequestDateCardComponent,
+    LoggerComponent
   ],
   imports: [
     BrowserModule,

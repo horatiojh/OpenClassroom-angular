@@ -70,6 +70,39 @@ export class AppMenuComponent implements OnInit {
           routerLink: ["/profSearchCourse"]
         }
       ];
+    } else if (this.staffRole === "super") {
+      this.model = [
+        {
+          label: "Log Management",
+          icon: "local_offer",
+          routerLink: ["/log"]
+        },
+        {
+          label: "Staff Management",
+          icon: "camera",
+          routerLink: ["/viewStaffInfo"]
+        },
+        {
+          label: "Classroom Management",
+          icon: "class",
+          routerLink: ["/viewClassroom"]
+        },
+        {
+          label: "Schedule Management",
+          icon: "schedule",
+          routerLink: ["/viewScheduleList"]
+        },
+        {
+          label: "Course Management",
+          icon: "list",
+          routerLink: ["/viewCourseList"]
+        },
+        {
+          label: "Search Courses",
+          icon: "search",
+          routerLink: ["/searchCourse"]
+        }
+      ];
     }
   }
 }

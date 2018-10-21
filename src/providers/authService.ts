@@ -20,7 +20,7 @@ export class AuthService {
   get isAdmin() {
     this.staffRole = sessionStorage.getItem("sessionStaffRole");
 
-    if (this.staffRole === "admin") {
+    if (this.staffRole === "admin" || this.staffRole == "super") {
       return true;
     } else {
       return false;

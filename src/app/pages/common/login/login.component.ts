@@ -51,6 +51,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(["/viewStaffInfo"]);
           } else if (this.staff.staffRole === "instructor") {
             this.router.navigate(["/workspace"]);
+          } else if (this.staff.staffRole === "super") {
+            this.router.navigate(["/log"]);
           }
         },
         error => {

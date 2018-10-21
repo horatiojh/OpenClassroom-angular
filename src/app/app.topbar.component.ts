@@ -105,7 +105,7 @@ export class AppTopbarComponent implements OnInit {
 
     this.staffRole = sessionStorage.getItem("sessionStaffRole");
 
-    if (this.staffRole === "admin") {
+    if (this.staffRole === "admin" || this.staffRole == "super") {
       this.searchLink = "/searchCourse";
       let style = "display:none";
       this.notificationStyle = this.domSanitizer.bypassSecurityTrustStyle(
