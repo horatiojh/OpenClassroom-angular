@@ -7,7 +7,6 @@ export class Staff {
   staffRole: string;
   division: string;
 
-  isFirstLogin: boolean;
   isEnrolled: boolean;
   isActive: boolean;
 

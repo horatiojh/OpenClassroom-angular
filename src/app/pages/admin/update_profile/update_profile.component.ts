@@ -36,13 +36,8 @@ export class UpdateProfileComponent implements OnInit {
   staff: Staff;
   staffIdStr: string;
 
-  // for change password
-  newPassword: string;
-  confirmPassword: string;
-
   // for css
   updateStaffBtnStyle: SafeStyle;
-  changePwdBtnStyle: SafeStyle;
 
   constructor(
     private staffService: StaffService,
@@ -78,11 +73,6 @@ export class UpdateProfileComponent implements OnInit {
     this.updateStaffBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
       updateStaffStyle
     );
-
-    let changePwdStyle = "width:180%";
-    this.changePwdBtnStyle = this.domSanitizer.bypassSecurityTrustStyle(
-      changePwdStyle
-    );
   }
 
   updateStaffInfo() {
@@ -115,63 +105,6 @@ export class UpdateProfileComponent implements OnInit {
 
         setTimeout(function() {
           window.open("viewStaffInfo", "_self");
-        }, 1000);
-      });
-    }
-  }
-
-  changePassword() {
-    this.msgs = [];
-
-    if (this.newPassword == undefined || this.newPassword == "") {
-      this.newPwdBoolean = false;
-      this.msgs.push({
-        severity: "error",
-        summary: "Please enter your password.",
-        detail: ""
-      });
-    } else {
-      this.newPwdBoolean = true;
-    }
-
-    if (this.confirmPassword == undefined || this.confirmPassword == "") {
-      this.confirmPwdBoolean = false;
-      this.msgs.push({
-        severity: "error",
-        summary: "Please enter your confirm password.",
-        detail: ""
-      });
-    } else {
-      this.confirmPwdBoolean = true;
-    }
-
-    if (this.newPassword !== this.confirmPassword) {
-      this.matchPwdBoolean = false;
-      this.msgs.push({
-        severity: "error",
-        summary: "Mismatch password",
-        detail: ""
-      });
-    } else {
-      this.matchPwdBoolean = true;
-    }
-
-    if (this.newPwdBoolean && this.confirmPwdBoolean && this.matchPwdBoolean) {
-      let endpoint = "staff/changePwd";
-      let body = {
-        staffId: this.staffIdStr,
-        newPassword: this.newPassword
-      };
-
-      this.api.post(endpoint, body).subscribe(resposne => {
-        this.msgs.push({
-          severity: "info",
-          summary: "Successfully Changed!",
-          detail: ""
-        });
-
-        setTimeout(function() {
-          window.open("login", "_self");
         }, 1000);
       });
     }

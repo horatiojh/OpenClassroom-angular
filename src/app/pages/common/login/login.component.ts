@@ -50,11 +50,7 @@ export class LoginComponent implements OnInit {
           if (this.staff.staffRole === "admin") {
             this.router.navigate(["/viewStaffInfo"]);
           } else if (this.staff.staffRole === "instructor") {
-            if (this.staff.isFirstLogin == true) {
-              this.router.navigate(["/profChangePassword"]);
-            } else {
-              this.router.navigate(["/workspace"]);
-            }
+            this.router.navigate(["/workspace"]);
           }
         },
         error => {
@@ -63,6 +59,9 @@ export class LoginComponent implements OnInit {
             this.loginErrorMessage = msg;
           } else if (error == "Authentication Failed") {
             let msg: string = "Sign in failed! Incorrect username or password";
+            this.loginErrorMessage = msg;
+          } else if (error == "Invalid User") {
+            let msg: string = "Sign in failed! Invalid user";
             this.loginErrorMessage = msg;
           }
         }

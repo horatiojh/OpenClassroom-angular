@@ -75,7 +75,6 @@ import { ProfSearchCourseComponent } from "./pages/instructor/prof_search_course
 import { ProfViewRequestCourseComponent } from "./pages/instructor/prof_view_request_course/prof_view_request_course.component";
 import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.component";
 import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
-import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
 import { ProfViewVisitHistoryComponent } from "./pages/instructor/prof_view_visit_history/prof_view_visit_history.component";
 import { ProfViewNotificationsComponent } from "./pages/instructor/prof_view_notification/prof_view_notification.component";
 import { ProfViewNotificationContentComponent } from "./pages/instructor/prof_view_notification_content/prof_view_notification_content.component";
@@ -133,7 +132,6 @@ import { ProfRequestDateCardComponent } from "./pages/card/prof_request_date_car
     ViewCourseDetailsComponent,
     RequestTimetableCardComponent,
     ProfViewRequestCourseDetailsComponent,
-    ProfChangePasswordComponent,
     ViewRequestCourseDetailsComponent,
     ProfViewNotificationsComponent,
     ProfViewNotificationContentComponent,

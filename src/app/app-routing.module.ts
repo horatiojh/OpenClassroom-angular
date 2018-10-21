@@ -19,7 +19,6 @@ import { WorkspaceComponent } from "./pages/instructor/workspace/workspace.compo
 import { ProfViewVisitHistoryComponent } from "./pages/instructor/prof_view_visit_history/prof_view_visit_history.component";
 import { ProfViewNotificationsComponent } from "./pages/instructor/prof_view_notification/prof_view_notification.component";
 import { ProfViewRequestCourseDetailsComponent } from "./pages/instructor/prof_view_request_course_details/prof_view_request_course_details.component";
-import { ProfChangePasswordComponent } from "./pages/instructor/prof_change_password/prof_change_password.component";
 import { ProfViewNotificationContentComponent } from "./pages/instructor/prof_view_notification_content/prof_view_notification_content.component";
 import { ProfUpdateProfileComponent } from "./pages/instructor/prof_update_profile/prof_update_profile.component";
 import { ProfAppRatingComponent } from "./pages/instructor/prof_app_rating/prof_app_rating.component";
@@ -41,7 +40,6 @@ import { ViewScheduleListComponent } from "./pages/admin/view_schedule_list/view
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
-  { path: "profChangePassword", component: ProfChangePasswordComponent },
   {
     path: "",
     component: MainComponent,
