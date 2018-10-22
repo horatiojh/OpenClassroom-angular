@@ -62,6 +62,7 @@ import { VFeedbackService } from "../providers/vFeedbackService";
 import { IFeedbackService } from "../providers/iFeedbackService";
 import { TagService } from "../providers/tagService";
 import { RatingService } from "../providers/ratingService";
+import { LogService } from "src/providers/logService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -200,7 +201,8 @@ import { ProfRequestDateCardComponent } from "./pages/card/prof_request_date_car
     VFeedbackService,
     IFeedbackService,
     TagService,
-    RatingService
+    RatingService,
+    LogService
   ],
   bootstrap: [AppComponent]
 })

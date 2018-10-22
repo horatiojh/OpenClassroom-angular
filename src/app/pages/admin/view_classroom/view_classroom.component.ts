@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import { Message, DataTable } from "primeng/primeng";
+import { Message } from "primeng/primeng";
 
 import { FileUploadService } from "../../../../providers/fileUploadService";
 import { ClassroomService } from "../../../../providers/classroomService";
