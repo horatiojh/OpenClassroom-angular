@@ -75,7 +75,7 @@ export class AppMenuComponent implements OnInit {
         {
           label: "Log Management",
           icon: "local_offer",
-          routerLink: ["/log"]
+          routerLink: ["/logger"]
         },
         {
           label: "Staff Management",

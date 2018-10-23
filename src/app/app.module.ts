@@ -103,6 +103,7 @@ import { ModuleCardComponent } from "./pages/card/module_card/module_card.compon
 import { RequestDateCardComponent } from "./pages/card/request_date_card/request_date_card.component";
 import { RequestTimetableCardComponent } from "./pages/card/request_timetable_card/request_timetable_card.component";
 import { ProfRequestDateCardComponent } from "./pages/card/prof_request_date_card/prof_request_date_card.component";
+import { LogComponent } from './pages/admin/log/log.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import { ProfRequestDateCardComponent } from "./pages/card/prof_request_date_car
     ProfAppRatingComponent,
     ViewScheduleListComponent,
     ProfRequestDateCardComponent,
-    LoggerComponent
+    LoggerComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,

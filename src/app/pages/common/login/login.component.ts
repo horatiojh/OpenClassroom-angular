@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
           } else if (this.staff.staffRole === "instructor") {
             this.router.navigate(["/workspace"]);
           } else if (this.staff.staffRole === "super") {
-            this.router.navigate(["/log"]);
+            this.router.navigate(["/logger"]);
           }
         },
         error => {
