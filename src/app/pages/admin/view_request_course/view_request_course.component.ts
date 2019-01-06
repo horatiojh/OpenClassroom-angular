@@ -52,6 +52,7 @@ export class ViewRequestCourseComponent implements OnInit {
   instructorId: number;
   instructorIdStr: string;
   instructor: Staff;
+  status: Boolean;
 
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
@@ -175,6 +176,7 @@ export class ViewRequestCourseComponent implements OnInit {
   }
 
   viewCourseDetails(rowData) {
+    this.msgs = [];
     let course: Course;
 
     this.courseService
@@ -182,19 +184,28 @@ export class ViewRequestCourseComponent implements OnInit {
       .subscribe(response => {
         course = response.course;
 
-        this.shareService.setValue("courseId", course.id);
-        this.router.navigate(["/viewRequestCourseDetails"]);
+        if (course.status == true) {
+          this.shareService.setValue("courseId", course.id);
+          this.router.navigate(["/viewRequestCourseDetails"]);
+        } else if (course.status == false) {
+          this.msgs.push({
+            severity: "info",
+            summary: "The course is not available.",
+            detail: ""
+          });
+        }
       });
   }
 
   showDialog(rowData) {
-    this.display = true;
+    this.msgs = [];
     this.timetableId = rowData.id;
 
     this.courseService
       .getCourseByTimetableId(this.timetableId)
       .subscribe(response => {
         this.course = response.course;
+        this.status = this.course.status;
 
         this.instructorIdStr = this.course.instructorId;
         this.staffService
@@ -205,42 +216,58 @@ export class ViewRequestCourseComponent implements OnInit {
           });
       });
 
-    if (this.dateStr == "") {
-      this.dateService
-        .getVacateDateByTimetableId(this.timetableId)
-        .subscribe(response => {
-          this.vacateDates = response.dates;
+    if (this.status == false) {
+      this.display = false;
 
-          this.vacateDates = this.vacateDates.sort((a, b) =>
-            a.dateStr.localeCompare(b.dateStr)
-          );
+      this.msgs.push({
+        severity: "info",
+        summary: "The course is not available.",
+        detail: ""
+      });
+    } else if (this.status == true) {
+      this.display = true;
 
-          this.vacateDatesItems = [{ label: "Please Select One", value: null }];
-          for (let i = 0; i < this.vacateDates.length; i++) {
-            this.vacateDatesItems.push({
-              label: this.vacateDates[i].dateStr,
-              value: this.vacateDates[i].dateStr
-            });
-          }
-        });
-    } else {
-      this.dateService
-        .getVacateDateByTimetableIdDateStr(this.timetableId, this.dateStr)
-        .subscribe(response => {
-          this.vacateDates = response.dates;
+      if (this.dateStr == "") {
+        this.dateService
+          .getVacateDateByTimetableId(this.timetableId)
+          .subscribe(response => {
+            this.vacateDates = response.dates;
 
-          this.vacateDates = this.vacateDates.sort((a, b) =>
-            a.dateStr.localeCompare(b.dateStr)
-          );
+            this.vacateDates = this.vacateDates.sort((a, b) =>
+              a.dateStr.localeCompare(b.dateStr)
+            );
 
-          this.vacateDatesItems = [{ label: "Please Select One", value: null }];
-          for (let i = 0; i < this.vacateDates.length; i++) {
-            this.vacateDatesItems.push({
-              label: this.vacateDates[i].dateStr,
-              value: this.vacateDates[i].dateStr
-            });
-          }
-        });
+            this.vacateDatesItems = [
+              { label: "Please Select One", value: null }
+            ];
+            for (let i = 0; i < this.vacateDates.length; i++) {
+              this.vacateDatesItems.push({
+                label: this.vacateDates[i].dateStr,
+                value: this.vacateDates[i].dateStr
+              });
+            }
+          });
+      } else {
+        this.dateService
+          .getVacateDateByTimetableIdDateStr(this.timetableId, this.dateStr)
+          .subscribe(response => {
+            this.vacateDates = response.dates;
+
+            this.vacateDates = this.vacateDates.sort((a, b) =>
+              a.dateStr.localeCompare(b.dateStr)
+            );
+
+            this.vacateDatesItems = [
+              { label: "Please Select One", value: null }
+            ];
+            for (let i = 0; i < this.vacateDates.length; i++) {
+              this.vacateDatesItems.push({
+                label: this.vacateDates[i].dateStr,
+                value: this.vacateDates[i].dateStr
+              });
+            }
+          });
+      }
     }
   }
 
