@@ -7,12 +7,14 @@ import { TimetableService } from "../../../../providers/timetableService";
 import { CourseInfoService } from "../../../../providers/courseInfoService";
 import { DateService } from "../../../../providers/dateService";
 import { TagService } from "../../../../providers/tagService";
+import { StaffService } from "src/providers/staffService";
 
 import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
 import { CourseInfo } from "../../../../domain/courseInfo";
 import { DateEntity } from "../../../../domain/date";
 import { Tag } from "../../../../domain/tag";
+import { Staff } from "src/domain/staff";
 
 @Component({
   selector: "app-viewCourseDetails",
@@ -31,6 +33,8 @@ export class ViewCourseDetailsComponent implements OnInit {
   syllabus: string;
   blackoutDates: string;
   moduleGroup: string;
+  division: string;
+  staffIdStr: string;
 
   // for course info attributes
   description: string;
@@ -53,7 +57,8 @@ export class ViewCourseDetailsComponent implements OnInit {
     private timetableService: TimetableService,
     private courseInfoService: CourseInfoService,
     private dateService: DateService,
-    private tagService: TagService
+    private tagService: TagService,
+    private staffService: StaffService
   ) {
     this.breadcrumbService.setItems([
       { label: "Course Details", routerLink: ["/profViewCourseDetails"] }
@@ -77,6 +82,7 @@ export class ViewCourseDetailsComponent implements OnInit {
           this.blackoutDates = this.course.blackoutDates;
           this.moduleGroup = this.course.moduleGroup;
           this.inputTags = this.course.tagList;
+          this.staffIdStr = this.course.instructorId;
 
           this.timetableService
             .getTimetableByCourseId(this.courseId)
@@ -99,6 +105,14 @@ export class ViewCourseDetailsComponent implements OnInit {
                   detail: ""
                 });
               }
+            });
+
+          let staff: Staff;
+          this.staffService
+            .getStaffByStaffIdStr(this.staffIdStr)
+            .subscribe(response => {
+              staff = response.staff;
+              this.division = staff.division;
             });
         } else {
           this.msgs.push({

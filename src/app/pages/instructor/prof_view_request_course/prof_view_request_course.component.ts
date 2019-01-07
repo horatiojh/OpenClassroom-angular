@@ -103,12 +103,13 @@ export class ProfViewRequestCourseComponent implements OnInit {
   ngOnInit() {
     // for datatable
     this.cols = [
-      { field: "staffName", header: "Instructor", width: "18%" },
-      { field: "moduleTitle", header: "Module Title", width: "18%" },
-      { field: "moduleCode", header: "Code", width: "9%" },
-      { field: "weekDay", header: "Day", width: "8%" },
-      { field: "startTime", header: "Start", width: "8%" },
-      { field: "endTime", header: "End", width: "8%" }
+      { field: "staffName", header: "Instructor", width: "15%" },
+      { field: "moduleTitle", header: "Module Title", width: "15%" },
+      { field: "moduleCode", header: "Code", width: "8%" },
+      { field: "weekDay", header: "Day", width: "7%" },
+      { field: "startTime", header: "Start", width: "7%" },
+      { field: "endTime", header: "End", width: "7%" },
+      { field: "division", header: "Division", width: "9%" }
     ];
 
     // for search courses
@@ -153,6 +154,16 @@ export class ProfViewRequestCourseComponent implements OnInit {
               i
             ].course.moduleTitle;
             this.timetables[i].staffName = this.timetables[i].course.staffName;
+
+            let staffId = this.timetables[i].course.instructorId;
+            let staff: Staff;
+            this.staffService
+              .getStaffByStaffIdStr(staffId)
+              .subscribe(response => {
+                staff = response.staff;
+
+                this.timetables[i].division = staff.division;
+              });
           }
         } else {
           this.msgs.push({

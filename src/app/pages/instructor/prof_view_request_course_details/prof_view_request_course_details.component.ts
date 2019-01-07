@@ -7,11 +7,13 @@ import { ShareService } from "../../../../providers/shareService";
 import { TimetableService } from "../../../../providers/timetableService";
 import { CourseInfoService } from "../../../../providers/courseInfoService";
 import { DateService } from "../../../../providers/dateService";
+import { StaffService } from "src/providers/staffService";
 
 import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
 import { CourseInfo } from "../../../../domain/courseInfo";
 import { DateEntity } from "../../../../domain/date";
+import { Staff } from "src/domain/staff";
 
 @Component({
   selector: "app-profViewRequestCourseDetails",
@@ -30,6 +32,8 @@ export class ProfViewRequestCourseDetailsComponent implements OnInit {
   syllabus: string;
   blackoutDates: string;
   moduleGroup: string;
+  division: string;
+  staffIdStr: string;
 
   // for course info attributes
   description: string;
@@ -50,7 +54,8 @@ export class ProfViewRequestCourseDetailsComponent implements OnInit {
     private shareService: ShareService,
     private timetableService: TimetableService,
     private courseInfoService: CourseInfoService,
-    private dateService: DateService
+    private dateService: DateService,
+    private staffService: StaffService
   ) {
     this.breadcrumbService.setItems([
       { label: "Search Results", routerLink: ["/profViewRequestCourse"] },
@@ -77,6 +82,7 @@ export class ProfViewRequestCourseDetailsComponent implements OnInit {
           this.blackoutDates = this.course.blackoutDates;
           this.moduleGroup = this.course.moduleGroup;
           this.inputTags = this.course.tagList;
+          this.staffIdStr = this.course.instructorId;
 
           this.timetableService
             .getTimetableByCourseId(this.courseId)
@@ -99,6 +105,14 @@ export class ProfViewRequestCourseDetailsComponent implements OnInit {
                   detail: ""
                 });
               }
+            });
+
+          let staff: Staff;
+          this.staffService
+            .getStaffByStaffIdStr(this.staffIdStr)
+            .subscribe(response => {
+              staff = response.staff;
+              this.division = staff.division;
             });
         } else {
           this.msgs.push({

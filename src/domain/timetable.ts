@@ -16,6 +16,7 @@ export class Timetable {
   moduleCode: string;
   moduleTitle: string;
   moduleGroup: string;
+  division:string;
 
   constructor(
     id: number,
