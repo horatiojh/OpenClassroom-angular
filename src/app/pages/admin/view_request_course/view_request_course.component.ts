@@ -89,13 +89,13 @@ export class ViewRequestCourseComponent implements OnInit {
   ngOnInit() {
     // for datatable
     this.cols = [
-      { field: "staffName", header: "Instructor", width: "14%" },
-      { field: "moduleTitle", header: "Module Title", width: "14%" },
+      { field: "staffName", header: "Instructor", width: "13%" },
+      { field: "moduleTitle", header: "Module Title", width: "13%" },
       { field: "moduleCode", header: "Code", width: "8%" },
       { field: "weekDay", header: "Day", width: "7%" },
       { field: "startTime", header: "Start", width: "7%" },
       { field: "endTime", header: "End", width: "7%" },
-      { field: "division", header: "Division", width: "9%" }
+      { field: "division", header: "Division", width: "10%" }
     ];
 
     // for search courses
