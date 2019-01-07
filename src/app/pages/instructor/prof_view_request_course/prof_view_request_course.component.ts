@@ -239,8 +239,6 @@ export class ProfViewRequestCourseComponent implements OnInit {
         .subscribe(response => {
           this.vacateDates = response.dates;
 
-          // console.log(response.dates);
-
           this.vacateDates = this.vacateDates.sort((a, b) =>
             a.dateStr.localeCompare(b.dateStr)
           );
