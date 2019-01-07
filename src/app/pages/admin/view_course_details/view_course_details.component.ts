@@ -108,12 +108,33 @@ export class ViewCourseDetailsComponent implements OnInit {
             });
 
           let staff: Staff;
-          this.staffService
-            .getStaffByStaffIdStr(this.staffIdStr)
-            .subscribe(response => {
-              staff = response.staff;
-              this.division = staff.division;
-            });
+
+          if (this.staffIdStr == "NA") {
+            let staffs: Staff[] = [];
+            this.staffService
+              .getStaffsByModuleCode(this.moduleCode)
+              .subscribe(response => {
+                staffs = response.staffs;
+
+                let staffId = staffs[0].staffId;
+                let staff: Staff;
+
+                this.staffService
+                  .getStaffByStaffIdStr(staffId)
+                  .subscribe(response => {
+                    staff = response.staff;
+
+                    this.division = staff.division;
+                  });
+              });
+          } else {
+            this.staffService
+              .getStaffByStaffIdStr(this.staffIdStr)
+              .subscribe(response => {
+                staff = response.staff;
+                this.division = staff.division;
+              });
+          }
         } else {
           this.msgs.push({
             severity: "error",

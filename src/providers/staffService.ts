@@ -79,6 +79,16 @@ export class StaffService {
     );
   }
 
+  getStaffsByModuleCode(moduleCode: string): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + "/getStaffsByModuleCode/" + moduleCode)
+      .pipe(
+        catchError(
+          this.handleError<any>(`getStaffsByModuleCode moduleCode=${moduleCode}`)
+        )
+      );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return Observable.throw(error);

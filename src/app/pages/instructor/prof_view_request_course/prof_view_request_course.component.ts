@@ -103,8 +103,8 @@ export class ProfViewRequestCourseComponent implements OnInit {
   ngOnInit() {
     // for datatable
     this.cols = [
-      { field: "staffName", header: "Instructor", width: "15%" },
-      { field: "moduleTitle", header: "Module Title", width: "15%" },
+      { field: "staffName", header: "Instructor", width: "14%" },
+      { field: "moduleTitle", header: "Module Title", width: "14%" },
       { field: "moduleCode", header: "Code", width: "8%" },
       { field: "weekDay", header: "Day", width: "7%" },
       { field: "startTime", header: "Start", width: "7%" },
@@ -156,14 +156,35 @@ export class ProfViewRequestCourseComponent implements OnInit {
             this.timetables[i].staffName = this.timetables[i].course.staffName;
 
             let staffId = this.timetables[i].course.instructorId;
-            let staff: Staff;
-            this.staffService
-              .getStaffByStaffIdStr(staffId)
-              .subscribe(response => {
-                staff = response.staff;
 
-                this.timetables[i].division = staff.division;
-              });
+            if (staffId == "NA") {
+              let staffs: Staff[] = [];
+              this.staffService
+                .getStaffsByModuleCode(this.timetables[i].course.moduleCode)
+                .subscribe(response => {
+                  staffs = response.staffs;
+
+                  let staffId = staffs[0].staffId;
+                  let staff: Staff;
+
+                  this.staffService
+                    .getStaffByStaffIdStr(staffId)
+                    .subscribe(response => {
+                      staff = response.staff;
+
+                      this.timetables[i].division = staff.division;
+                    });
+                });
+            } else {
+              let staff: Staff;
+              this.staffService
+                .getStaffByStaffIdStr(staffId)
+                .subscribe(response => {
+                  staff = response.staff;
+
+                  this.timetables[i].division = staff.division;
+                });
+            }
           }
         } else {
           this.msgs.push({
