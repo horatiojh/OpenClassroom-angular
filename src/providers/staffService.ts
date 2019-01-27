@@ -44,7 +44,6 @@ export class StaffService {
     return this.httpClient
       .get<any>(this.baseUrl + "/getStaffBySIDStr/" + staffId)
       .pipe(
-        tap(_ => console.log(`getStaffBySIDStr staffId=${staffId}`)),
         catchError(this.handleError<any>(`getStaffBySIDStr staffId=${staffId}`))
       );
   }

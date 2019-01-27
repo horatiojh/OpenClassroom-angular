@@ -154,16 +154,18 @@ export class ViewRequestCourseComponent implements OnInit {
                 .subscribe(response => {
                   staffs = response.staffs;
 
-                  let staffId = staffs[0].staffId;
-                  let staff: Staff;
+                  if (staffs.length != 0) {
+                    let staffId = staffs[0].staffId;
+                    let staff: Staff;
 
-                  this.staffService
-                    .getStaffByStaffIdStr(staffId)
-                    .subscribe(response => {
-                      staff = response.staff;
+                    this.staffService
+                      .getStaffByStaffIdStr(staffId)
+                      .subscribe(response => {
+                        staff = response.staff;
 
-                      this.timetables[i].division = staff.division;
-                    });
+                        this.timetables[i].division = staff.division;
+                      });
+                  }
                 });
             } else {
               let staff: Staff;
