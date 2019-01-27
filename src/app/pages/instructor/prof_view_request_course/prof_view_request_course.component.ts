@@ -11,12 +11,13 @@ import { BreadcrumbService } from "../../../breadcrumb.service";
 import { StaffService } from "../../../../providers/staffService";
 import { VisitService } from "../../../../providers/visitService";
 import { CourseService } from "../../../../providers/courseService";
+import { EmailService } from "src/providers/emailService";
+import { MsgService } from "src/providers/msgService";
 
 import { Course } from "../../../../domain/course";
 import { Timetable } from "../../../../domain/timetable";
 import { DateEntity } from "../../../../domain/date";
 import { Staff } from "../../../../domain/staff";
-import { Visit } from "../../../../domain/visit";
 
 @Component({
   selector: "app-profViewRequestCourse",
@@ -51,6 +52,7 @@ export class ProfViewRequestCourseComponent implements OnInit {
   instructorId: number;
   instructorIdStr: string;
   instructor: Staff;
+  newVisitId: number;
 
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
@@ -78,7 +80,9 @@ export class ProfViewRequestCourseComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private staffService: StaffService,
     private visitService: VisitService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private emailService: EmailService,
+    private msgService: MsgService
   ) {
     this.breadcrumbService.setItems([
       { label: "Search Results", routerLink: ["/profViewRequestCourse"] }
@@ -316,7 +320,7 @@ export class ProfViewRequestCourseComponent implements OnInit {
 
       this.visitService.createVisit(endpoint, body).subscribe(
         response => {
-          // console.log(response.messageId);
+          this.newVisitId = response.visitId;
 
           this.msgs.push({
             severity: "info",
@@ -335,6 +339,59 @@ export class ProfViewRequestCourseComponent implements OnInit {
             .updateIsBooked(endpoint, body)
             .subscribe(response => {
               console.log("update isBooked");
+
+              // send email to instructor
+              let endpointSendEmailToInstructor = "/sendEmail";
+              let bodySendEmailToInstructor = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.instructorId),
+                keyword: "submitted"
+              };
+
+              this.emailService
+                .sendEmail(
+                  endpointSendEmailToInstructor,
+                  bodySendEmailToInstructor
+                )
+                .subscribe(response => {
+                  console.log("send email to instructor");
+                });
+
+              // send email to visitor
+              let endpointSendEmailToVisitor = "/sendEmail";
+              let bodySendEmailToVisitor = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.staffId),
+                keyword: "success"
+              };
+
+              this.emailService
+                .sendEmail(endpointSendEmailToVisitor, bodySendEmailToVisitor)
+                .subscribe(response => {
+                  console.log("send email to visitor");
+                });
+
+              // send message notification to instructor
+              let endpointInstructorMsg = "/createSubmittedMessage";
+              let bodyInstructorMsg = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.instructorId)
+              };
+
+              this.msgService
+                .createMessage(endpointInstructorMsg, bodyInstructorMsg)
+                .subscribe(response => {});
+
+              // send message notification to visitor
+              let endpointVisitorMsg = "/createSuccessMessage";
+              let bodyVisitorMsg = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.staffId)
+              };
+
+              this.msgService
+                .createMessage(endpointVisitorMsg, bodyVisitorMsg)
+                .subscribe(response => {});
             });
 
           this.display = false;

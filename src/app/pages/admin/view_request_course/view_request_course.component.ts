@@ -11,11 +11,12 @@ import { VisitService } from "../../../../providers/visitService";
 import { BreadcrumbService } from "../../../breadcrumb.service";
 import { TimetableService } from "../../../../providers/timetableService";
 import { StaffService } from "../../../../providers/staffService";
+import { MsgService } from "../../../../providers/msgService";
+import { EmailService } from "src/providers/emailService";
 
 import { Course } from "../../../../domain/course";
 import { DateEntity } from "../../../../domain/date";
 import { Staff } from "../../../../domain/staff";
-import { Visit } from "../../../../domain/visit";
 import { Timetable } from "../../../../domain/timetable";
 
 @Component({
@@ -53,6 +54,7 @@ export class ViewRequestCourseComponent implements OnInit {
   instructorIdStr: string;
   instructor: Staff;
   status: Boolean;
+  newVisitId: number;
 
   // for css
   requestClassroomVisitBtnStyle: SafeStyle;
@@ -74,7 +76,9 @@ export class ViewRequestCourseComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private breadcrumbService: BreadcrumbService,
     private timetableService: TimetableService,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private msgService: MsgService,
+    private emailService: EmailService
   ) {
     this.breadcrumbService.setItems([
       { label: "Search Results", routerLink: ["/viewRequestCourse"] }
@@ -348,11 +352,7 @@ export class ViewRequestCourseComponent implements OnInit {
 
       this.visitService.createVisit(endpoint, body).subscribe(
         response => {
-          this.msgs.push({
-            severity: "info",
-            summary: "Successfully Submitted!",
-            detail: ""
-          });
+          this.newVisitId = response.visitId;
 
           let isBooked = "booked";
           let endpoint = "/updateIsBooked";
@@ -365,6 +365,59 @@ export class ViewRequestCourseComponent implements OnInit {
             .updateIsBooked(endpoint, body)
             .subscribe(response => {
               console.log("update isBooked");
+
+              // send email to instructor
+              let endpointSendEmailToInstructor = "/sendEmail";
+              let bodySendEmailToInstructor = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.instructorId),
+                keyword: "submitted"
+              };
+
+              this.emailService
+                .sendEmail(
+                  endpointSendEmailToInstructor,
+                  bodySendEmailToInstructor
+                )
+                .subscribe(response => {
+                  console.log("send email to instructor");
+                });
+
+              // send email to visitor
+              let endpointSendEmailToVisitor = "/sendEmail";
+              let bodySendEmailToVisitor = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.staffId),
+                keyword: "success"
+              };
+
+              this.emailService
+                .sendEmail(endpointSendEmailToVisitor, bodySendEmailToVisitor)
+                .subscribe(response => {
+                  console.log("send email to visitor");
+                });
+
+              // send message notification to instructor
+              let endpointInstructorMsg = "/createSubmittedMessage";
+              let bodyInstructorMsg = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.instructorId)
+              };
+
+              this.msgService
+                .createMessage(endpointInstructorMsg, bodyInstructorMsg)
+                .subscribe(response => {});
+
+              // send message notification to visitor
+              let endpointVisitorMsg = "/createSuccessMessage";
+              let bodyVisitorMsg = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.staffId)
+              };
+
+              this.msgService
+                .createMessage(endpointVisitorMsg, bodyVisitorMsg)
+                .subscribe(response => {});
             });
 
           this.display = false;

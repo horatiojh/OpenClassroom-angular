@@ -1,18 +1,20 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Message, SelectItem } from "primeng/primeng";
-
-import { DateEntity } from "../../../../domain/date";
-import { Timetable } from "../../../../domain/timetable";
+import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 import { TimetableService } from "../../../../providers/timetableService";
-import { Visit } from "../../../../domain/visit";
+import { EmailService } from "src/providers/emailService";
+import { MsgService } from "src/providers/msgService";
 import { VisitService } from "../../../../providers/visitService";
 import { DateService } from "../../../../providers/dateService";
 import { CourseService } from "../../../../providers/courseService";
-import { Course } from "../../../../domain/course";
 import { StaffService } from "../../../../providers/staffService";
+
+import { Visit } from "../../../../domain/visit";
+import { Course } from "../../../../domain/course";
+import { DateEntity } from "../../../../domain/date";
+import { Timetable } from "../../../../domain/timetable";
 import { Staff } from "../../../../domain/staff";
-import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
 @Component({
   selector: "app-requestDateCard",
@@ -56,13 +58,16 @@ export class RequestDateCardComponent implements OnInit {
   moduleGroup: string;
   moduleCode: string;
   moduleTitle: string;
+  newVisitId: number;
 
   constructor(
     private visitService: VisitService,
     private dateService: DateService,
     private courseService: CourseService,
     private staffService: StaffService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private emailService: EmailService,
+    private msgService: MsgService
   ) {}
 
   ngOnInit() {
@@ -168,6 +173,8 @@ export class RequestDateCardComponent implements OnInit {
 
       this.visitService.createVisit(endpoint, body).subscribe(
         response => {
+          this.newVisitId = response.visitId;
+
           this.msgs.push({
             severity: "info",
             summary: "Successfully Submitted!",
@@ -186,6 +193,59 @@ export class RequestDateCardComponent implements OnInit {
             .updateIsBooked(endpoint, body)
             .subscribe(response => {
               console.log("update isBooked");
+
+              // send email to instructor
+              let endpointSendEmailToInstructor = "/sendEmail";
+              let bodySendEmailToInstructor = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.instructorId),
+                keyword: "submitted"
+              };
+
+              this.emailService
+                .sendEmail(
+                  endpointSendEmailToInstructor,
+                  bodySendEmailToInstructor
+                )
+                .subscribe(response => {
+                  console.log("send email to instructor");
+                });
+
+              // send email to visitor
+              let endpointSendEmailToVisitor = "/sendEmail";
+              let bodySendEmailToVisitor = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.visitorId),
+                keyword: "success"
+              };
+
+              this.emailService
+                .sendEmail(endpointSendEmailToVisitor, bodySendEmailToVisitor)
+                .subscribe(response => {
+                  console.log("send email to visitor");
+                });
+
+              // send message notification to instructor
+              let endpointInstructorMsg = "/createSubmittedMessage";
+              let bodyInstructorMsg = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.instructorId)
+              };
+
+              this.msgService
+                .createMessage(endpointInstructorMsg, bodyInstructorMsg)
+                .subscribe(response => {});
+
+              // send message notification to visitor
+              let endpointVisitorMsg = "/createSuccessMessage";
+              let bodyVisitorMsg = {
+                visitId: String(this.newVisitId),
+                staffId: String(this.visitorId)
+              };
+
+              this.msgService
+                .createMessage(endpointVisitorMsg, bodyVisitorMsg)
+                .subscribe(response => {});
             });
         },
         error => {

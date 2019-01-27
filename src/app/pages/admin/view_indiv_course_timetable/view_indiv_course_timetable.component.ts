@@ -9,13 +9,15 @@ import { DateService } from "../../../../providers/dateService";
 import { VisitService } from "../../../../providers/visitService";
 import { StaffService } from "../../../../providers/staffService";
 import { CourseService } from "../../../../providers/courseService";
+import { ClassroomService } from "../../../../providers/classroomService";
+import { EmailService } from "src/providers/emailService";
+import { MsgService } from "src/providers/msgService";
 
 import { Timetable } from "../../../../domain/timetable";
 import { DateEntity } from "../../../../domain/date";
 import { Staff } from "../../../../domain/staff";
 import { Visit } from "../../../../domain/visit";
 import { Course } from "../../../../domain/course";
-import { ClassroomService } from "../../../../providers/classroomService";
 import { Classroom } from "../../../../domain/classroom";
 
 @Component({
@@ -90,6 +92,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   instructorId: number;
   instructorIdStr: string;
   instructor: Staff;
+  newVisitId: number;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -100,7 +103,9 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
     private visitService: VisitService,
     private staffService: StaffService,
     private courseService: CourseService,
-    private classroomService: ClassroomService
+    private classroomService: ClassroomService,
+    private emailService: EmailService,
+    private msgService: MsgService
   ) {
     this.submitted = false;
 
@@ -570,6 +575,8 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
 
       this.visitService.createVisit(endpoint, body).subscribe(
         response => {
+          this.newVisitId = response.visitId;
+
           this.msgs.push({
             severity: "info",
             summary: "Successfully Submitted!",
@@ -578,17 +585,67 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
 
           this.requestCVDisplay = false;
           let isBooked = "booked";
-          let endpoint = "/updateIsBooked";
-          let body = {
+          let endpointUpdateStatus = "/updateIsBooked";
+          let bodyUpdateStatus = {
             dateId: String(this.date.id),
             isBooked: isBooked
           };
 
           this.dateService
-            .updateIsBooked(endpoint, body)
+            .updateIsBooked(endpointUpdateStatus, bodyUpdateStatus)
             .subscribe(response => {
               console.log("update isBooked");
             });
+
+          // send email to instructor
+          let endpointSendEmailToInstructor = "/sendEmail";
+          let bodySendEmailToInstructor = {
+            visitId: String(this.newVisitId),
+            staffId: String(this.instructorId),
+            keyword: "submitted"
+          };
+
+          this.emailService
+            .sendEmail(endpointSendEmailToInstructor, bodySendEmailToInstructor)
+            .subscribe(response => {
+              console.log("send email to instructor");
+            });
+
+          // send email to visitor
+          let endpointSendEmailToVisitor = "/sendEmail";
+          let bodySendEmailToVisitor = {
+            visitId: String(this.newVisitId),
+            staffId: String(this.staffId),
+            keyword: "success"
+          };
+
+          this.emailService
+            .sendEmail(endpointSendEmailToVisitor, bodySendEmailToVisitor)
+            .subscribe(response => {
+              console.log("send email to visitor");
+            });
+
+          // send message notification to instructor
+          let endpointInstructorMsg = "/createSubmittedMessage";
+          let bodyInstructorMsg = {
+            visitId: String(this.newVisitId),
+            staffId: String(this.instructorId)
+          };
+
+          this.msgService
+            .createMessage(endpointInstructorMsg, bodyInstructorMsg)
+            .subscribe(response => {});
+
+          // send message notification to visitor
+          let endpointVisitorMsg = "/createSuccessMessage";
+          let bodyVisitorMsg = {
+            visitId: String(this.newVisitId),
+            staffId: String(this.staffId)
+          };
+
+          this.msgService
+            .createMessage(endpointVisitorMsg, bodyVisitorMsg)
+            .subscribe(response => {});
 
           setTimeout(function() {
             location.reload();

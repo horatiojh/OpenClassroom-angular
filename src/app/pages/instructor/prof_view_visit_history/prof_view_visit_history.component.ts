@@ -45,7 +45,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
   // for cancellation form dialog
   iMsgContent: string;
   iMsgTitle: string;
-  iMsgDate: string = "";
   iDisplay: boolean = false;
   iDialogVisitId: number;
   iVisit: Visit;
@@ -54,7 +53,6 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
   vMsgContent: string;
   vMsgTitle: string;
-  vMsgDate: string = "";
   vDisplay: boolean = false;
   vDialogVisitId: number;
   vVisit: Visit;
@@ -486,9 +484,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           .subscribe(response => {
             this.iStaff = response.staff;
 
-            let endpoint = "/createMessage";
+            let endpoint = "/createCancelledMessage";
             let body = {
-              messageDate: this.iMsgDate,
               content: this.iMsgContent,
               title: this.iMsgTitle,
               visitId: String(this.iDialogVisitId),
@@ -561,9 +558,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           .subscribe(response => {
             this.vStaff = response.staff;
 
-            let endpoint = "/createMessage";
+            let endpoint = "/createCancelledMessage";
             let body = {
-              messageDate: this.vMsgDate,
               content: this.vMsgContent,
               title: this.vMsgTitle,
               visitId: String(this.vDialogVisitId),

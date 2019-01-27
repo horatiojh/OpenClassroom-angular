@@ -63,6 +63,7 @@ import { IFeedbackService } from "../providers/iFeedbackService";
 import { TagService } from "../providers/tagService";
 import { RatingService } from "../providers/ratingService";
 import { LogService } from "src/providers/logService";
+import { EmailService } from "src/providers/emailService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -103,7 +104,7 @@ import { ModuleCardComponent } from "./pages/card/module_card/module_card.compon
 import { RequestDateCardComponent } from "./pages/card/request_date_card/request_date_card.component";
 import { RequestTimetableCardComponent } from "./pages/card/request_timetable_card/request_timetable_card.component";
 import { ProfRequestDateCardComponent } from "./pages/card/prof_request_date_card/prof_request_date_card.component";
-import { LogComponent } from './pages/admin/log/log.component';
+import { LogComponent } from "./pages/admin/log/log.component";
 
 @NgModule({
   declarations: [
@@ -204,7 +205,8 @@ import { LogComponent } from './pages/admin/log/log.component';
     IFeedbackService,
     TagService,
     RatingService,
-    LogService
+    LogService,
+    EmailService
   ],
   bootstrap: [AppComponent]
 })
