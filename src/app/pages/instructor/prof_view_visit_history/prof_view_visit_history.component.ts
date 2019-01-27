@@ -9,6 +9,7 @@ import { StaffService } from "../../../../providers/staffService";
 import { MsgService } from "../../../../providers/msgService";
 import { VFeedbackService } from "../../../../providers/vFeedbackService";
 import { IFeedbackService } from "../../../../providers/iFeedbackService";
+import { EmailService } from "src/providers/emailService";
 
 import { Visit } from "../../../../domain/visit";
 import { Staff } from "../../../../domain/staff";
@@ -134,7 +135,8 @@ export class ProfViewVisitHistoryComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private msgService: MsgService,
     private vFeedbackService: VFeedbackService,
-    private iFeedbackService: IFeedbackService
+    private iFeedbackService: IFeedbackService,
+    private emailService: EmailService
   ) {
     this.breadcrumbService.setItems([{ label: "" }]);
 
@@ -484,6 +486,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           .subscribe(response => {
             this.iStaff = response.staff;
 
+            // send message to visitor
             let endpoint = "/createCancelledMessage";
             let body = {
               content: this.iMsgContent,
@@ -512,6 +515,20 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     this.visitService.updateIStatus(iendpoint, ibody).subscribe(
       response => {
+        // send email to visitor
+        let endpointSendEmailToVisitor = "/sendEmail";
+        let bodySendEmailToVisitor = {
+          visitId: String(this.iDialogVisitId),
+          staffId: String(this.iStaffId),
+          keyword: "cancelledByInstructor"
+        };
+
+        this.emailService
+          .sendEmail(endpointSendEmailToVisitor, bodySendEmailToVisitor)
+          .subscribe(response => {
+            console.log("send email to visitor");
+          });
+
         let vendpoint = "/updateVStatus";
         let vbody = {
           visitId: String(this.iDialogVisitId),
@@ -558,6 +575,7 @@ export class ProfViewVisitHistoryComponent implements OnInit {
           .subscribe(response => {
             this.vStaff = response.staff;
 
+            // send message to instructor
             let endpoint = "/createCancelledMessage";
             let body = {
               content: this.vMsgContent,
@@ -586,6 +604,20 @@ export class ProfViewVisitHistoryComponent implements OnInit {
 
     this.visitService.updateIStatus(iendpoint, ibody).subscribe(
       response => {
+        // send email to instructor
+        let endpointSendEmailToInstructor = "/sendEmail";
+        let bodySendEmailToInstructor = {
+          visitId: String(this.vDialogVisitId),
+          staffId: String(this.vStaffId),
+          keyword: "cancelledByVisitor"
+        };
+
+        this.emailService
+          .sendEmail(endpointSendEmailToInstructor, bodySendEmailToInstructor)
+          .subscribe(response => {
+            console.log("send email to instructor");
+          });
+
         let vendpoint = "/updateVStatus";
         let vbody = {
           visitId: String(this.vDialogVisitId),

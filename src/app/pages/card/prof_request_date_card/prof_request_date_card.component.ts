@@ -162,10 +162,6 @@ export class ProfRequestDateCardComponent implements OnInit {
         dateId: String(this.date.id)
       };
 
-      console.log("visitor id: " + this.visitorId);
-      console.log("instructorId id: " + this.instructorId);
-      console.log("date id: " + this.date.id);
-
       this.visitService.createVisit(endpoint, body).subscribe(
         response => {
           this.newVisitId = response.visitId;
