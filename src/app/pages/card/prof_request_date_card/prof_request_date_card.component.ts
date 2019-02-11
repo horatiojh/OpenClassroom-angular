@@ -62,6 +62,7 @@ export class ProfRequestDateCardComponent implements OnInit {
   moduleCode: string;
   moduleTitle: string;
   newVisitId: number;
+  status: Boolean;
 
   constructor(
     private visitService: VisitService,
@@ -98,7 +99,7 @@ export class ProfRequestDateCardComponent implements OnInit {
   }
 
   showDialog(rowData) {
-    this.display = true;
+    this.msgs = [];
     this.dateId = rowData.id;
 
     this.dateService.getDateByDateId(this.dateId).subscribe(response => {
@@ -115,20 +116,33 @@ export class ProfRequestDateCardComponent implements OnInit {
         .getCourseByTimetableId(this.timetable.id)
         .subscribe(response => {
           this.course = response.course;
+          this.status = this.course.status;
 
-          this.moduleCode = this.course.moduleCode;
-          this.moduleGroup = this.course.moduleGroup;
-          this.moduleTitle = this.course.moduleTitle;
+          if (this.status == true) {
+            this.display = true;
 
-          this.instructorIdStr = this.course.instructorId;
-          this.instructorName = this.course.staffName;
+            this.moduleCode = this.course.moduleCode;
+            this.moduleGroup = this.course.moduleGroup;
+            this.moduleTitle = this.course.moduleTitle;
 
-          this.staffService
-            .getStaffByStaffIdStr(this.instructorIdStr)
-            .subscribe(response => {
-              this.instructor = response.staff;
-              this.instructorId = Number(this.instructor.id);
+            this.instructorIdStr = this.course.instructorId;
+            this.instructorName = this.course.staffName;
+
+            this.staffService
+              .getStaffByStaffIdStr(this.instructorIdStr)
+              .subscribe(response => {
+                this.instructor = response.staff;
+                this.instructorId = Number(this.instructor.id);
+              });
+          } else if (this.status == false) {
+            this.display = false;
+
+            this.msgs.push({
+              severity: "info",
+              summary: "The course is not available.",
+              detail: ""
             });
+          }
         });
     });
   }

@@ -52,6 +52,7 @@ export class ProfViewRequestCourseComponent implements OnInit {
   instructorId: number;
   instructorIdStr: string;
   instructor: Staff;
+  status: Boolean;
   newVisitId: number;
 
   // for css
@@ -222,13 +223,14 @@ export class ProfViewRequestCourseComponent implements OnInit {
   }
 
   showDialog(rowData) {
-    this.display = true;
+    this.msgs = [];
     this.timetableId = rowData.id;
 
     this.courseService
       .getCourseByTimetableId(this.timetableId)
       .subscribe(response => {
         this.course = response.course;
+        this.status = this.course.status;
 
         this.instructorIdStr = this.course.instructorId;
         this.staffService
@@ -237,45 +239,61 @@ export class ProfViewRequestCourseComponent implements OnInit {
             this.instructor = response.staff;
             this.instructorId = Number(this.instructor.id);
           });
+
+        if (this.status == false) {
+          this.display = false;
+
+          this.msgs.push({
+            severity: "info",
+            summary: "The course is not available.",
+            detail: ""
+          });
+        } else if (this.status == true) {
+          this.display = true;
+
+          if (this.dateStr == "") {
+            this.dateService
+              .getVacateDateByTimetableId(this.timetableId)
+              .subscribe(response => {
+                this.vacateDates = response.dates;
+
+                this.vacateDates = this.vacateDates.sort((a, b) =>
+                  a.dateStr.localeCompare(b.dateStr)
+                );
+
+                this.vacateDatesItems = [
+                  { label: "Please Select One", value: null }
+                ];
+                for (let i = 0; i < this.vacateDates.length; i++) {
+                  this.vacateDatesItems.push({
+                    label: this.vacateDates[i].dateStr,
+                    value: this.vacateDates[i].dateStr
+                  });
+                }
+              });
+          } else {
+            this.dateService
+              .getVacateDateByTimetableIdDateStr(this.timetableId, this.dateStr)
+              .subscribe(response => {
+                this.vacateDates = response.dates;
+
+                this.vacateDates = this.vacateDates.sort((a, b) =>
+                  a.dateStr.localeCompare(b.dateStr)
+                );
+
+                this.vacateDatesItems = [
+                  { label: "Please Select One", value: null }
+                ];
+                for (let i = 0; i < this.vacateDates.length; i++) {
+                  this.vacateDatesItems.push({
+                    label: this.vacateDates[i].dateStr,
+                    value: this.vacateDates[i].dateStr
+                  });
+                }
+              });
+          }
+        }
       });
-
-    if (this.dateStr == "") {
-      this.dateService
-        .getVacateDateByTimetableId(this.timetableId)
-        .subscribe(response => {
-          this.vacateDates = response.dates;
-
-          this.vacateDates = this.vacateDates.sort((a, b) =>
-            a.dateStr.localeCompare(b.dateStr)
-          );
-
-          this.vacateDatesItems = [{ label: "Please Select One", value: null }];
-          for (let i = 0; i < this.vacateDates.length; i++) {
-            this.vacateDatesItems.push({
-              label: this.vacateDates[i].dateStr,
-              value: this.vacateDates[i].dateStr
-            });
-          }
-        });
-    } else {
-      this.dateService
-        .getVacateDateByTimetableIdDateStr(this.timetableId, this.dateStr)
-        .subscribe(response => {
-          this.vacateDates = response.dates;
-
-          this.vacateDates = this.vacateDates.sort((a, b) =>
-            a.dateStr.localeCompare(b.dateStr)
-          );
-
-          this.vacateDatesItems = [{ label: "Please Select One", value: null }];
-          for (let i = 0; i < this.vacateDates.length; i++) {
-            this.vacateDatesItems.push({
-              label: this.vacateDates[i].dateStr,
-              value: this.vacateDates[i].dateStr
-            });
-          }
-        });
-    }
   }
 
   requestClassroomVisit(event) {

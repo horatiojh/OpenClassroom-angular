@@ -92,6 +92,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   instructorId: number;
   instructorIdStr: string;
   instructor: Staff;
+  courseStatus: Boolean;
   newVisitId: number;
 
   constructor(
@@ -137,6 +138,7 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
       .getCourseByCourseId(this.courseId)
       .subscribe(response => {
         this.course = response.course;
+        this.courseStatus = this.course.status;
 
         this.instructorIdStr = this.course.instructorId;
         this.staffService
@@ -514,17 +516,29 @@ export class ViewIndivCourseTimetableComponent implements OnInit {
   }
 
   showRequestCVDialog(rowData) {
-    this.requestCVDisplay = true;
+    this.msgs = [];
 
-    this.dateService.getDateByDateId(rowData.id).subscribe(response => {
-      this.date = response.date;
+    if (this.courseStatus == true) {
+      this.requestCVDisplay = true;
 
-      this.dialogDateTime = this.date.dateStr;
-      this.dialogStartTime = this.date.startTime;
-      this.dialogEndTime = this.date.endTime;
-      this.dialogWeekDay = this.date.weekDay;
-      this.dialogRoom = this.date.room;
-    });
+      this.dateService.getDateByDateId(rowData.id).subscribe(response => {
+        this.date = response.date;
+
+        this.dialogDateTime = this.date.dateStr;
+        this.dialogStartTime = this.date.startTime;
+        this.dialogEndTime = this.date.endTime;
+        this.dialogWeekDay = this.date.weekDay;
+        this.dialogRoom = this.date.room;
+      });
+    } else if (this.courseStatus == false) {
+      this.requestCVDisplay = false;
+
+      this.msgs.push({
+        severity: "info",
+        summary: "The course is not available.",
+        detail: ""
+      });
+    }
   }
 
   requestClassroomVisit(event) {
