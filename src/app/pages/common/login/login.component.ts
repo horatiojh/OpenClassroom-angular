@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { Staff } from "../../../../domain/staff";
 
 import { Api } from "../../../../providers/api";
+import { UserUsageService } from "src/providers/userUsageService";
 
 @Component({
   selector: "app-login",
@@ -19,7 +20,11 @@ export class LoginComponent implements OnInit {
   loginErrorMessage: string;
   staff: Staff;
 
-  constructor(private api: Api, private router: Router) {
+  constructor(
+    private api: Api,
+    private router: Router,
+    private userUsageService: UserUsageService
+  ) {
     this.isLogin = false;
     this.submitted = false;
     this.staffId = "";
@@ -46,6 +51,17 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem("sessionStaffRole", this.staff.staffRole);
           sessionStorage.setItem("sessionStaffId", this.staff.id.toString());
           sessionStorage.setItem("sessionStaffIdStr", this.staff.staffId);
+
+          let userUsageEndpoint = "/createUserUsage";
+          let userUsageBody = {
+            staffId: this.staff.staffId,
+            staffName: this.staff.staffName,
+            division: this.staff.division
+          };
+
+          this.userUsageService
+            .createUserUsage(userUsageEndpoint, userUsageBody)
+            .subscribe(response => {});
 
           if (this.staff.staffRole === "admin") {
             this.router.navigate(["/viewStaffInfo"]);

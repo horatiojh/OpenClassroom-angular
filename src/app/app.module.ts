@@ -64,6 +64,7 @@ import { TagService } from "../providers/tagService";
 import { RatingService } from "../providers/ratingService";
 import { LogService } from "src/providers/logService";
 import { EmailService } from "src/providers/emailService";
+import { UserUsageService } from "src/providers/userUsageService";
 
 import { AdminGuard } from "./guards/admin.guard";
 import { AuthGuard } from "./guards/auth.guard";
@@ -206,7 +207,8 @@ import { LogComponent } from "./pages/admin/log/log.component";
     TagService,
     RatingService,
     LogService,
-    EmailService
+    EmailService,
+    UserUsageService
   ],
   bootstrap: [AppComponent]
 })
