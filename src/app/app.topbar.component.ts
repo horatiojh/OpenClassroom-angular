@@ -132,7 +132,7 @@ export class AppTopbarComponent implements OnInit {
           this.numOfNewMsg = this.newMsgs.length;
         });
 
-      this.interval = setInterval(() => {
+      // this.interval = setInterval(() => {
         this.msgService
           .getUnreadMessagesByStaffId(this.staffId)
           .subscribe(response => {
@@ -145,17 +145,17 @@ export class AppTopbarComponent implements OnInit {
                 summary: "You have a new message",
                 detail: ""
               });
-              clearInterval(this.interval);
+              // clearInterval(this.interval);
             } else if (this.numOfNewMsg > 1) {
               this.notificationMsgs.push({
                 severity: "warn",
                 summary: "You have new messages",
                 detail: ""
               });
-              clearInterval(this.interval);
+              // clearInterval(this.interval);
             }
           });
-      }, 1000);
+      // }, 1000);
     }
   }
 
