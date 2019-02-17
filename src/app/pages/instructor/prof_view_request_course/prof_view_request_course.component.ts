@@ -108,13 +108,14 @@ export class ProfViewRequestCourseComponent implements OnInit {
   ngOnInit() {
     // for datatable
     this.cols = [
-      { field: "staffName", header: "Instructor", width: "13%" },
-      { field: "moduleTitle", header: "Module Title", width: "13%" },
+      { field: "staffName", header: "Instructor", width: "10%" },
+      { field: "moduleTitle", header: "Module Title", width: "11%" },
       { field: "moduleCode", header: "Code", width: "8%" },
       { field: "weekDay", header: "Day", width: "7%" },
       { field: "startTime", header: "Start", width: "7%" },
       { field: "endTime", header: "End", width: "7%" },
-      { field: "division", header: "Division", width: "10%" }
+      { field: "division", header: "Division", width: "10%" },
+      { field: "courseStatus", header: "Active", width: "8%" }
     ];
 
     // for search courses
@@ -159,6 +160,12 @@ export class ProfViewRequestCourseComponent implements OnInit {
               i
             ].course.moduleTitle;
             this.timetables[i].staffName = this.timetables[i].course.staffName;
+
+            if (this.timetables[i].course.status == true) {
+              this.timetables[i].courseStatus = "Y";
+            } else if (this.timetables[i].course.status == false) {
+              this.timetables[i].courseStatus = "N";
+            }
 
             let staffId = this.timetables[i].course.instructorId;
 
