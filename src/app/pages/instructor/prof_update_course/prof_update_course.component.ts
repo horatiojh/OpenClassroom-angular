@@ -91,6 +91,13 @@ export class ProfUpdateCourseComponent implements OnInit {
   }
 
   updateCourse(event) {
+    if (this.syllabus == "" || this.syllabus == undefined) {
+      this.syllabus = "";
+    }
+    if (this.blackoutDates == "" || this.blackoutDates == undefined) {
+      this.blackoutDates = "";
+    }
+
     let endpoint = "/updateCourse";
     let body = {
       id: String(this.courseId),
