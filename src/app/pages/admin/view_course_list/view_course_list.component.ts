@@ -154,6 +154,10 @@ export class ViewCourseListComponent implements OnInit {
   updateCourseInfo(rowData) {
     this.msgs = [];
 
+    if (this.newDescription == "" || this.newDescription == undefined) {
+      this.newDescription = "";
+    }
+
     let endpoint = "/updateCourseInfo";
     let body = {
       id: String(this.newId),
