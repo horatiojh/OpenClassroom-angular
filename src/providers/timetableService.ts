@@ -47,6 +47,13 @@ export class TimetableService {
     );
   }
 
+  updateTimetable(endpoint: string, body?: any): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + endpoint, body).pipe(
+      tap(resp => console.log(resp)),
+      catchError(this.handleErrorApi)
+    );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return Observable.throw(error);
