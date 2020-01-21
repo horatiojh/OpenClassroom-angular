@@ -1,6 +1,6 @@
 {
 	"/api": {
-		"target": "https://localhost:8080/OpenClassroom-war/api",
+		"target": "http://localhost:8080/OpenClassroom-war/api",
 		"secure": false,
 		"pathRewrite": {
 		  "^/api": ""
